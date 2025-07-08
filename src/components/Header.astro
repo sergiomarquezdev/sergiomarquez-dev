@@ -1,5 +1,8 @@
 ---
-
+import GitHubIcon from "./icons/GitHubIcon.astro";
+import LinkedInIcon from "./icons/LinkedInIcon.astro";
+import XIcon from "./icons/XIcon.astro";
+import EmailIcon from "./icons/EmailIcon.astro";
 ---
 
 <header
@@ -18,36 +21,40 @@
             </p>
         </div>
     </div>
-    <nav class="flex items-center gap-4">
+    <nav class="flex items-center gap-x-4">
         <a
             href="https://github.com/sergiomarquezdev"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
             class="text-secondary-text hover:text-primary-text transition-colors"
-            >GitHub</a
         >
+            <GitHubIcon class="w-6 h-6" />
+        </a>
         <a
             href="https://linkedin.com/in/sergio-marquez-perez/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
             class="text-secondary-text hover:text-primary-text transition-colors"
-            >LinkedIn</a
         >
+            <LinkedInIcon class="w-6 h-6" />
+        </a>
         <a
             href="https://x.com/smarquezdev"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X/Twitter"
             class="text-secondary-text hover:text-primary-text transition-colors"
-            >X</a
         >
+            <XIcon class="w-6 h-6" />
+        </a>
         <a
             href="mailto:contacto@sergiomarquez.dev"
             aria-label="Email"
             class="text-secondary-text hover:text-primary-text transition-colors"
-            >Email</a
         >
+            <EmailIcon class="w-6 h-6" />
+        </a>
     </nav>
 </header>

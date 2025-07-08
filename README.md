@@ -1,6 +1,6 @@
 # Personal Portfolio - sergiomarquez.dev
 
-This repository contains the source code for my personal portfolio website, built with Astro and Tailwind CSS. The design is minimalist, dark-mode-first, and inspired by [rasmic.xyz](https://www.rasmic.xyz/).
+This repository contains the source code for my personal portfolio website, built with Astro and Tailwind CSS. The design is minimalist, dark-mode-first.
 
 The project is deployed automatically to Cloudflare Pages on every push to the `main` branch.
 
