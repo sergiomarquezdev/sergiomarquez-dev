@@ -1,60 +1,58 @@
 ---
 import GitHubIcon from "./icons/GitHubIcon.astro";
 import LinkedInIcon from "./icons/LinkedInIcon.astro";
-import XIcon from "./icons/XIcon.astro";
 import EmailIcon from "./icons/EmailIcon.astro";
+import XIcon from "./icons/XIcon.astro";
 ---
 
-<header
-    class="flex flex-col md:flex-row items-start md:items-center justify-between py-8 gap-4"
->
-    <div class="flex items-center gap-4">
+<header class="flex justify-between items-center w-full">
+    <div class="flex items-center gap-3">
         <img
             src="/images/avatar.webp"
             alt="Sergio Márquez Pérez Avatar"
-            class="w-10 h-10 rounded-full"
+            class="w-10 h-10 rounded-full border border-white/10"
         />
         <div>
-            <h1 class="text-xl font-bold">Sergio Márquez Pérez</h1>
-            <p class="text-base text-secondary-text">
-                AI/ML & Backend Developer
-            </p>
+            <h2 class="text-sm font-medium">Sergio Márquez Pérez</h2>
+            <p class="text-xs text-secondary-text">AI/ML & Backend Developer</p>
         </div>
     </div>
-    <nav class="flex items-center gap-x-4">
+    <div class="flex items-center gap-3">
         <a
             href="https://github.com/sergiomarquezdev"
             target="_blank"
-            rel="noopener noreferrer"
             aria-label="GitHub"
-            class="text-secondary-text hover:text-primary-text transition-colors"
         >
-            <GitHubIcon class="w-6 h-6" />
+            <GitHubIcon
+                class="w-4 h-4 text-secondary-text hover:text-primary-text"
+            />
         </a>
         <a
-            href="https://linkedin.com/in/sergio-marquez-perez/"
+            href="https://www.linkedin.com/in/smarquezp/"
             target="_blank"
-            rel="noopener noreferrer"
             aria-label="LinkedIn"
-            class="text-secondary-text hover:text-primary-text transition-colors"
         >
-            <LinkedInIcon class="w-6 h-6" />
+            <LinkedInIcon
+                class="w-4 h-4 text-secondary-text hover:text-primary-text"
+            />
         </a>
         <a
-            href="https://x.com/smarquezdev"
+            href="https://twitter.com/smarquezp"
             target="_blank"
-            rel="noopener noreferrer"
             aria-label="X/Twitter"
-            class="text-secondary-text hover:text-primary-text transition-colors"
         >
-            <XIcon class="w-6 h-6" />
+            <XIcon
+                class="w-4 h-4 text-secondary-text hover:text-primary-text"
+            />
         </a>
         <a
-            href="mailto:contacto@sergiomarquez.dev"
+            href="mailto:smarquez@smarquez.dev"
+            target="_blank"
             aria-label="Email"
-            class="text-secondary-text hover:text-primary-text transition-colors"
         >
-            <EmailIcon class="w-6 h-6" />
+            <EmailIcon
+                class="w-4 h-4 text-secondary-text hover:text-primary-text"
+            />
         </a>
-    </nav>
+    </div>
 </header>
