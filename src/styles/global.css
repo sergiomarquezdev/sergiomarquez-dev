@@ -1,0 +1,22 @@
+/*
+  Use this file to define your custom CSS variables for colors, typography, etc.
+  This is a great place to apply global styles, and to define your design tokens.
+*/
+
+:root {
+    --background: rgb(10, 10, 10);
+    --primary-text: #EAEAEA;
+    --secondary-text: #A0A0A0;
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    /* Font Family */
+    --font-family-sans: 'Inter', sans-serif;
+    /* Example, will need to be imported */
+}
+
+body {
+    background-color: var(--background);
+    color: var(--primary-text);
+    font-family: var(--font-family-sans);
+    margin: 0;
+}
