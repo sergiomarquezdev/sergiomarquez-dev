@@ -1,3 +1,5 @@
+@import 'non.geist/sans';
+
 /*
   Use this file to define your custom CSS variables for colors, typography, etc.
   This is a great place to apply global styles, and to define your design tokens.
@@ -10,7 +12,7 @@
   --border-color: rgba(255, 255, 255, 0.1);
 
   /* Font Family */
-  --font-family-sans: 'Inter', sans-serif;
+  --font-family-sans: 'Geist Sans', sans-serif;
   /* Example, will need to be imported */
 }
 
