@@ -3,60 +3,139 @@ import GitHubIcon from "./icons/GitHubIcon.astro";
 import LinkedInIcon from "./icons/LinkedInIcon.astro";
 import EmailIcon from "./icons/EmailIcon.astro";
 import XIcon from "./icons/XIcon.astro";
+import YouTubeIcon from "./icons/YouTubeIcon.astro";
 ---
 
-<header class="flex justify-between items-center w-full">
-    <div class="flex items-center gap-3 flex-shrink-0">
-        <img
-            src="/images/avatar.webp"
-            alt="Sergio Márquez Pérez Avatar"
-            class="w-8 h-8 rounded-full border border-white/10"
-        />
-        <div class="flex flex-col flex-shrink-0">
-            <h2 class="text-sm font-medium leading-none">
-                Sergio Márquez Pérez
-            </h2>
-            <p class="text-xs text-secondary-text leading-none mt-0.5">
-                AI/ML & Backend Developer
-            </p>
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="text-section">
+                <h1 class="name">Sergio Márquez Pérez</h1>
+                <p class="title">Automation • AI/ML • Backend Developer</p>
+            </div>
+
+            <!-- COLUMNA DERECHA -->
+            <nav class="social-nav">
+                <a
+                    href="https://github.com/sergiomarquezdev"
+                    class="social-link"
+                    aria-label="GitHub"
+                >
+                    <GitHubIcon class="icon" />
+                </a>
+                <a
+                    href="https://linkedin.com/in/sergio-marquez-perez/"
+                    class="social-link"
+                    aria-label="LinkedIn"
+                >
+                    <LinkedInIcon class="icon" />
+                </a>
+                <a
+                    href="https://x.com/sergiomzdev"
+                    class="social-link"
+                    aria-label="X (Twitter)"
+                >
+                    <XIcon class="icon" />
+                </a>
+                <a
+                    href="https://www.youtube.com/@sergiomarquezdev"
+                    class="social-link"
+                    aria-label="YouTube"
+                >
+                    <YouTubeIcon class="icon" />
+                </a>
+                <a
+                    href="mailto:cntacto@sergiomarquez.dev"
+                    class="social-link"
+                    aria-label="Email"
+                >
+                    <EmailIcon class="icon" />
+                </a>
+            </nav>
         </div>
     </div>
-    <div class="flex items-center gap-3 flex-shrink-0">
-        <a
-            href="https://github.com/sergiomarquezdev"
-            target="_blank"
-            aria-label="GitHub"
-        >
-            <GitHubIcon
-                class="w-4 h-4 text-secondary-text hover:text-primary-text"
-            />
-        </a>
-        <a
-            href="https://www.linkedin.com/in/smarquezp/"
-            target="_blank"
-            aria-label="LinkedIn"
-        >
-            <LinkedInIcon
-                class="w-4 h-4 text-secondary-text hover:text-primary-text"
-            />
-        </a>
-        <a
-            href="https://twitter.com/smarquezp"
-            target="_blank"
-            aria-label="X/Twitter"
-        >
-            <XIcon
-                class="w-4 h-4 text-secondary-text hover:text-primary-text"
-            />
-        </a>
-        <a
-            href="mailto:smarquez@smarquez.dev"
-            target="_blank"
-            aria-label="Email"
-        >
-            <EmailIcon
-                class="w-4 h-4 text-secondary-text hover:text-primary-text"
-            />
-        </a>
-    </div>
 </header>
+
+<style>
+    .header {
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .container {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 1.5rem 0rem;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .text-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .name {
+        color: var(--primary-text);
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.2;
+        font-family: var(--font-family-sans);
+    }
+
+    .title {
+        color: var(--secondary-text);
+        font-size: 0.875rem;
+        margin: 0;
+        line-height: 1.2;
+        margin-top: 0.25rem;
+        font-family: var(--font-family-sans);
+    }
+
+    .social-nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .social-link {
+        color: var(--secondary-text);
+        transition: color 0.2s ease-in-out;
+        text-decoration: none;
+    }
+
+    .social-link:hover {
+        color: var(--primary-text);
+    }
+
+    .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+        .container {
+            padding: 1rem 1rem;
+        }
+
+        .social-nav {
+            gap: 0.75rem;
+        }
+
+        .name {
+            font-size: 1rem;
+        }
+
+        .title {
+            font-size: 0.8rem;
+        }
+    }
+</style>
