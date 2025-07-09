@@ -17,14 +17,15 @@ const { title, description } = Astro.props;
         <BaseHead title={title} description={description} />
     </head>
     <body>
+        <Header />
         <main>
-            <Header />
             <slot />
         </main>
         <style>
             main {
-                margin: auto;
-                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 1rem;
+                max-width: 768px;
             }
         </style>
     </body>
