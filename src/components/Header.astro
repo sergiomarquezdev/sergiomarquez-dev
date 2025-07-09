@@ -4,6 +4,7 @@ import LinkedInIcon from "./icons/LinkedInIcon.astro";
 import EmailIcon from "./icons/EmailIcon.astro";
 import XIcon from "./icons/XIcon.astro";
 import YouTubeIcon from "./icons/YouTubeIcon.astro";
+import WebsiteIcon from "./icons/WebsiteIcon.astro";
 ---
 
 <header class="header">
@@ -17,6 +18,18 @@ import YouTubeIcon from "./icons/YouTubeIcon.astro";
 
             <!-- COLUMNA DERECHA -->
             <nav class="social-nav">
+                <!-- Personal Website -->
+                <a
+                    href="https://sergiomarquez.dev"
+                    class="social-link"
+                    aria-label="Portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <WebsiteIcon class="icon" />
+                </a>
+
+                <!-- GitHub -->
                 <a
                     href="https://github.com/sergiomarquezdev"
                     class="social-link"
@@ -26,24 +39,8 @@ import YouTubeIcon from "./icons/YouTubeIcon.astro";
                 >
                     <GitHubIcon class="icon" />
                 </a>
-                <a
-                    href="https://linkedin.com/in/sergiomarquezdev/"
-                    class="social-link"
-                    aria-label="LinkedIn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <LinkedInIcon class="icon" />
-                </a>
-                <a
-                    href="https://x.com/sergiomzdev"
-                    class="social-link"
-                    aria-label="X (Twitter)"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <XIcon class="icon" />
-                </a>
+
+                <!-- YouTube -->
                 <a
                     href="https://www.youtube.com/@sergiomarquezdev"
                     class="social-link"
@@ -53,8 +50,32 @@ import YouTubeIcon from "./icons/YouTubeIcon.astro";
                 >
                     <YouTubeIcon class="icon" />
                 </a>
+
+                <!-- LinkedIn -->
                 <a
-                    href="mailto:contacto@sergiomarquez.dev"
+                    href="https://linkedin.com/in/sergio-marquez-perez/"
+                    class="social-link"
+                    aria-label="LinkedIn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <LinkedInIcon class="icon" />
+                </a>
+
+                <!-- Twitter/X -->
+                <a
+                    href="https://x.com/sergiomzdev"
+                    class="social-link"
+                    aria-label="X (Twitter)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <XIcon class="icon" />
+                </a>
+
+                <!-- Email -->
+                <a
+                    href="mailto:cntacto@sergiomarquez.dev"
                     class="social-link"
                     aria-label="Email"
                     target="_blank"
