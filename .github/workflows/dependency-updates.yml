@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       fix_type:
-        description: 'Type of fix to apply'
+        description: "Type of fix to apply"
         required: true
-        default: 'all'
+        default: "all"
         type: choice
         options:
           - all
@@ -17,7 +17,7 @@ on:
 
   schedule:
     # Run weekly maintenance on Sundays at 2 AM
-    - cron: '0 2 * * 0'
+    - cron: "0 2 * * 0"
 
 permissions:
   contents: write
@@ -40,7 +40,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: 📦 Install dependencies
         run: npm ci

@@ -20,7 +20,9 @@
   function checkCookieConsent() {
     // Check if Google CMP is active - Priority system
     if (isGoogleCMPActive()) {
-      console.log('🔍 Google CMP detected - hiding custom banner to avoid duplicates');
+      console.log(
+        "🔍 Google CMP detected - hiding custom banner to avoid duplicates"
+      );
       const banner = document.getElementById("cookie-banner");
       if (banner) {
         banner.style.display = "none";
@@ -33,7 +35,7 @@
     const banner = document.getElementById("cookie-banner");
 
     if (!consent && banner) {
-      console.log('📋 Showing custom cookie banner (Google CMP not active)');
+      console.log("📋 Showing custom cookie banner (Google CMP not active)");
       banner.style.display = "block";
     } else if (consent === "accepted") {
       loadAdSense();
@@ -42,9 +44,11 @@
 
   // Check if Google CMP is active to avoid banner conflicts
   function isGoogleCMPActive() {
-    return typeof window !== 'undefined' &&
-           typeof window.googlefc !== 'undefined' &&
-           window.googlefc.callbackQueue;
+    return (
+      typeof window !== "undefined" &&
+      typeof window.googlefc !== "undefined" &&
+      window.googlefc.callbackQueue
+    );
   }
 
   function acceptCookies() {
