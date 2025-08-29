@@ -1,9 +1,9 @@
-name: 🔍 Health Monitor & Alerts
+name: 🔍 Health Monitor & Alerts (Cloudflare Pages)
 
 on:
   schedule:
     # Run every 6 hours to monitor site health
-    - cron: '0 */6 * * *'
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -95,16 +95,22 @@ jobs:
             - [ ] Privacy page: https://sergiomarquez.dev/privacy
 
             ### 🛠️ Potential causes:
-            - Server downtime
+            - Cloudflare Pages deployment issue
             - DNS issues
-            - SSL certificate problems
-            - Cloudflare issues
+            - SSL certificate problems  
+            - Build failure in Cloudflare
 
             ### 🔧 Next steps:
-            1. Check Cloudflare dashboard
-            2. Verify DNS configuration
-            3. Run manual health checks
-            4. Check recent deployments
+            1. Check Cloudflare Pages dashboard
+            2. Verify latest deployment status
+            3. Check build logs in Cloudflare
+            4. Verify DNS configuration
+            5. Run manual health checks
+
+            ### 🌐 Cloudflare Pages Info:
+            - Auto-deploy from main branch
+            - Build command: \`npm run build\`
+            - Output directory: \`dist\`
 
             ---
             *This issue was automatically created by the health monitor workflow.*
@@ -129,7 +135,7 @@ jobs:
                 repo: context.repo.repo,
                 title: title,
                 body: body,
-                labels: ['bug', 'health-check', 'automated', 'high-priority']
+                labels: ['bug', 'health-check', 'automated', 'high-priority', 'cloudflare']
               });
               console.log('Created new health check issue');
             } else {
@@ -141,4 +147,5 @@ jobs:
         run: |
           echo "✅ Health monitoring completed successfully"
           echo "📊 All systems operational"
+          echo "🌐 Cloudflare Pages deployment healthy"
           echo "🕐 Next check in 6 hours"
