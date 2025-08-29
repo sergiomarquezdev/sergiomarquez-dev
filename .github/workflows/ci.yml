@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Permitir commits y push
+  contents: write # Permitir commits y push
 
 jobs:
   # 🧪 Testing & Quality Assurance
