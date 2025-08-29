@@ -43,8 +43,9 @@ The content is organized as follows:
 <directory_structure>
 .github/copilot-instructions.md
 .github/dependabot.yml
-.github/workflows/auto-fix.yml
 .github/workflows/ci.yml
+.github/workflows/dependency-updates.yml
+.github/workflows/deploy.yml
 .github/workflows/health-monitor.yml
 </directory_structure>
 
@@ -111,7 +112,246 @@ The specific responsibilities and actions for each role are as follows:
 - Read the file before you try to edit it.
 </file>
 
-<file path=".github/workflows/auto-fix.yml">
+<file path=".github/dependabot.yml">
+version: 2
+updates:
+  # Enable version updates for npm (excluding Tailwind CSS)
+  # Note: Tailwind CSS updates are manually managed due to Astro compatibility
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "sergiomarquezdev"
+    assignees:
+      - "sergiomarquezdev"
+    commit-message:
+      prefix: "📦"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automated"
+    ignore:
+      # Ignore Tailwind CSS updates due to potential Astro compatibility issues
+      - dependency-name: "tailwindcss"
+      - dependency-name: "autoprefixer"
+      # Ignore PostCSS related updates that might conflict with Tailwind
+      - dependency-name: "postcss"
+
+  # Enable security updates
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    target-branch: "main"
+    commit-message:
+      prefix: "🔒"
+      include: "scope"
+    labels:
+      - "security"
+      - "automated"
+      - "priority"
+
+  # GitHub Actions workflow updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "🚀"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "automated"
+</file>
+
+<file path=".github/workflows/deploy.yml">
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+</file>
+
+<file path=".github/workflows/health-monitor.yml">
+name: 🔍 Health Monitor & Alerts (Cloudflare Pages)
+
+on:
+  schedule:
+    # Run every 6 hours to monitor site health
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health-monitor:
+    name: 🏥 Continuous Health Monitor
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 🔍 Site availability check
+        id: health_check
+        run: |
+          echo "🔍 Checking site health..."
+
+          # Initialize counters
+          FAILED_CHECKS=0
+          TOTAL_CHECKS=0
+
+          # Function to check URL
+          check_url() {
+            local url=$1
+            local name=$2
+            TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+            if curl -f -s -o /dev/null --max-time 10 "$url"; then
+              echo "✅ $name: OK"
+              return 0
+            else
+              echo "❌ $name: FAILED"
+              FAILED_CHECKS=$((FAILED_CHECKS + 1))
+              return 1
+            fi
+          }
+
+          # Check main endpoints
+          check_url "https://sergiomarquez.dev" "Homepage"
+          check_url "https://sergiomarquez.dev/privacy" "Privacy Page"
+
+          # Set outputs for next steps
+          echo "failed_checks=$FAILED_CHECKS" >> $GITHUB_OUTPUT
+          echo "total_checks=$TOTAL_CHECKS" >> $GITHUB_OUTPUT
+
+          if [ "$FAILED_CHECKS" -gt 0 ]; then
+            echo "⚠️ Health check failed: $FAILED_CHECKS/$TOTAL_CHECKS checks failed"
+            exit 1
+          else
+            echo "✅ All health checks passed: $TOTAL_CHECKS/$TOTAL_CHECKS"
+          fi
+
+      - name: 📊 Performance monitoring
+        if: success()
+        run: |
+          echo "📊 Performance check..."
+
+          # Measure homepage load time
+          START_TIME=$(date +%s%N)
+          curl -f -s -o /dev/null "https://sergiomarquez.dev"
+          END_TIME=$(date +%s%N)
+          DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+
+          echo "⏱️ Homepage load time: ${DURATION}ms"
+
+          # Check if performance is acceptable
+          if [ "$DURATION" -gt 5000 ]; then
+            echo "⚠️ Performance degradation detected: ${DURATION}ms"
+            echo "PERFORMANCE_ISSUE=true" >> $GITHUB_ENV
+          else
+            echo "✅ Performance acceptable: ${DURATION}ms"
+          fi
+
+      - name: 🤖 Create issue for failures
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `🚨 Site Health Check Failed - ${new Date().toISOString().split('T')[0]}`;
+            const body = `
+            ## 🚨 Automated Health Check Failure
+
+            **Timestamp**: ${new Date().toISOString()}
+            **Failed Checks**: ${{ steps.health_check.outputs.failed_checks }}/${{ steps.health_check.outputs.total_checks }}
+
+            ### 🔍 What to check:
+            - [ ] Site accessibility: https://sergiomarquez.dev
+            - [ ] Privacy page: https://sergiomarquez.dev/privacy
+
+            ### 🛠️ Potential causes:
+            - Cloudflare Pages deployment issue
+            - DNS issues
+            - SSL certificate problems
+            - Build failure in Cloudflare
+
+            ### 🔧 Next steps:
+            1. Check Cloudflare Pages dashboard
+            2. Verify latest deployment status
+            3. Check build logs in Cloudflare
+            4. Verify DNS configuration
+            5. Run manual health checks
+
+            ### 🌐 Cloudflare Pages Info:
+            - Auto-deploy from main branch
+            - Build command: \`npm run build\`
+            - Output directory: \`dist\`
+
+            ---
+            *This issue was automatically created by the health monitor workflow.*
+            `;
+
+            // Check if similar issue already exists
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'health-check,automated'
+            });
+
+            const existingIssue = issues.find(issue =>
+              issue.title.includes('Site Health Check Failed') &&
+              issue.created_at > new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+            );
+
+            if (!existingIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['bug', 'health-check', 'automated', 'high-priority', 'cloudflare']
+              });
+              console.log('Created new health check issue');
+            } else {
+              console.log('Similar issue already exists, skipping creation');
+            }
+
+      - name: 📈 Log successful check
+        if: success()
+        run: |
+          echo "✅ Health monitoring completed successfully"
+          echo "📊 All systems operational"
+          echo "🌐 Cloudflare Pages deployment healthy"
+          echo "🕐 Next check in 6 hours"
+</file>
+
+<file path=".github/workflows/dependency-updates.yml">
 name: 🤖 Auto-Fix Common Issues
 
 on:
@@ -205,12 +445,14 @@ jobs:
       - name: 📦 Dependency updates
         if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'dependencies'
         run: |
-          echo "📦 Checking for minor dependency updates..."
+          echo "📦 Checking for dependency updates..."
 
           # This is a conservative approach - only patch updates
           # Major/minor updates should be handled by Dependabot PRs
+          # CRITICAL: Tailwind CSS excluded due to Astro compatibility
 
           echo "ℹ️ Dependency updates handled by Dependabot"
+          echo "ℹ️ Tailwind CSS updates excluded (Astro compatibility)"
           echo "ℹ️ Only security fixes applied automatically"
           echo "DEPS_UPDATED=false" >> $GITHUB_ENV
 
@@ -239,6 +481,7 @@ jobs:
 
             - 🧹 Applied ESLint and Prettier fixes
             - 🔒 Applied security updates if any
+            - ⚠️ Tailwind CSS excluded (Astro compatibility)
 
             Automated maintenance run on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
 
@@ -260,239 +503,48 @@ jobs:
           echo "🎯 Fix type: ${{ github.event.inputs.fix_type || 'scheduled' }}"
           echo ""
           echo "✅ Automated maintenance completed"
+          echo "⚠️ Tailwind CSS updates excluded (Astro compatibility)"
           echo "ℹ️ Check git log for any applied fixes"
-</file>
+          npm run validate
 
-<file path=".github/workflows/health-monitor.yml">
-name: 🔍 Health Monitor & Alerts
-
-on:
-  schedule:
-    # Run every 6 hours to monitor site health
-    - cron: '0 */6 * * *'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  issues: write
-
-jobs:
-  health-monitor:
-    name: 🏥 Continuous Health Monitor
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: 🔍 Site availability check
-        id: health_check
-        run: |
-          echo "🔍 Checking site health..."
-
-          # Initialize counters
-          FAILED_CHECKS=0
-          TOTAL_CHECKS=0
-
-          # Function to check URL
-          check_url() {
-            local url=$1
-            local name=$2
-            TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
-
-            if curl -f -s -o /dev/null --max-time 10 "$url"; then
-              echo "✅ $name: OK"
-              return 0
-            else
-              echo "❌ $name: FAILED"
-              FAILED_CHECKS=$((FAILED_CHECKS + 1))
-              return 1
-            fi
-          }
-
-          # Check main endpoints
-          check_url "https://blog.sergiomarquez.dev" "Homepage"
-          check_url "https://blog.sergiomarquez.dev/about" "About Page"
-          check_url "https://blog.sergiomarquez.dev/rss.xml" "RSS Feed"
-          check_url "https://blogapi.sergiomarquez.dev/api/posts" "API Endpoint"
-
-          # Set outputs for next steps
-          echo "failed_checks=$FAILED_CHECKS" >> $GITHUB_OUTPUT
-          echo "total_checks=$TOTAL_CHECKS" >> $GITHUB_OUTPUT
-
-          if [ "$FAILED_CHECKS" -gt 0 ]; then
-            echo "⚠️ Health check failed: $FAILED_CHECKS/$TOTAL_CHECKS checks failed"
-            exit 1
-          else
-            echo "✅ All health checks passed: $TOTAL_CHECKS/$TOTAL_CHECKS"
-          fi
-
-      - name: 📊 Performance monitoring
-        if: success()
-        run: |
-          echo "📊 Performance check..."
-
-          # Measure homepage load time
-          START_TIME=$(date +%s%N)
-          curl -f -s -o /dev/null "https://blog.sergiomarquez.dev"
-          END_TIME=$(date +%s%N)
-          DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
-
-          echo "⏱️ Homepage load time: ${DURATION}ms"
-
-          # Check if performance is acceptable
-          if [ "$DURATION" -gt 5000 ]; then
-            echo "⚠️ Performance degradation detected: ${DURATION}ms"
-            echo "PERFORMANCE_ISSUE=true" >> $GITHUB_ENV
-          else
-            echo "✅ Performance acceptable: ${DURATION}ms"
-          fi
-
-      - name: 🤖 Create issue for failures
-        if: failure()
-        uses: actions/github-script@v7
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
         with:
-          script: |
-            const title = `🚨 Site Health Check Failed - ${new Date().toISOString().split('T')[0]}`;
-            const body = `
-            ## 🚨 Automated Health Check Failure
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update dependencies"
+          title: "🔄 Weekly dependency updates"
+          body: |
+            Automated dependency updates.
 
-            **Timestamp**: ${new Date().toISOString()}
-            **Failed Checks**: ${{ steps.health_check.outputs.failed_checks }}/${{ steps.health_check.outputs.total_checks }}
+            - Dependencies updated to latest versions
+            - Security vulnerabilities fixed
+            - All tests passing
 
-            ### 🔍 What to check:
-            - [ ] Site accessibility: https://blog.sergiomarquez.dev
-            - [ ] API endpoint: https://blogapi.sergiomarquez.dev/api/posts
-            - [ ] RSS feed: https://blog.sergiomarquez.dev/rss.xml
-            - [ ] About page: https://blog.sergiomarquez.dev/about
-
-            ### 🛠️ Potential causes:
-            - Server downtime
-            - DNS issues
-            - SSL certificate problems
-            - API service unavailable
-
-            ### 🔧 Next steps:
-            1. Check Cloudflare dashboard
-            2. Verify API service status
-            3. Run manual health checks
-            4. Check recent deployments
-
-            ---
-            *This issue was automatically created by the health monitor workflow.*
-            `;
-
-            // Check if similar issue already exists
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: 'health-check,automated'
-            });
-
-            const existingIssue = issues.find(issue =>
-              issue.title.includes('Site Health Check Failed') &&
-              issue.created_at > new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
-            );
-
-            if (!existingIssue) {
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: title,
-                body: body,
-                labels: ['bug', 'health-check', 'automated', 'high-priority']
-              });
-              console.log('Created new health check issue');
-            } else {
-              console.log('Similar issue already exists, skipping creation');
-            }
-
-      - name: 📈 Log successful check
-        if: success()
-        run: |
-          echo "✅ Health monitoring completed successfully"
-          echo "📊 All systems operational"
-          echo "🕐 Next check in 6 hours"
-</file>
-
-<file path=".github/dependabot.yml">
-version: 2
-updates:
-  # Enable version updates for npm (excluding Tailwind CSS)
-  # Note: Tailwind CSS updates are manually managed due to Astro compatibility
-  # Enable version updates for npm
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-      day: 'monday'
-      time: '09:00'
-      timezone: 'Europe/Madrid'
-    open-pull-requests-limit: 5
-    reviewers:
-      - 'sergiomarquezdev'
-    assignees:
-      - 'sergiomarquezdev'
-    commit-message:
-      prefix: '📦'
-      include: 'scope'
-    labels:
-      - 'dependencies'
-      - 'automated'
-    ignore:
-      # Ignore Tailwind CSS updates due to potential Astro compatibility issues
-      - dependency-name: 'tailwindcss'
-      - dependency-name: 'autoprefixer'
-      # Ignore PostCSS related updates that might conflict with Tailwind
-      - dependency-name: 'postcss'
-
-  # Enable security updates
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'daily'
-    open-pull-requests-limit: 10
-    target-branch: 'main'
-    commit-message:
-      prefix: '🔒'
-      include: 'scope'
-    labels:
-      - 'security'
-      - 'automated'
-      - 'priority'
-
-  # GitHub Actions workflow updates
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'monthly'
-    commit-message:
-      prefix: '🚀'
-      include: 'scope'
-    labels:
-      - 'github-actions'
-      - 'automated'
+            Please review and merge if all checks pass.
+          branch: dependency-updates
+          delete-branch: true
 </file>
 
 <file path=".github/workflows/ci.yml">
-name: 🚀 CI/CD - Build, Test & Deploy
+name: 🚀 CI/CD - Build & Validate (Cloudflare Pages Deploy)
 
 on:
   push:
     branches:
       - main
     paths-ignore:
-      - '**.md'
-      - '.editorconfig'
-      - '.gitignore'
-      - 'docs/**'
+      - "**.md"
+      - ".editorconfig"
+      - ".gitignore"
+      - "docs/**"
   pull_request:
     branches:
       - main
     paths-ignore:
-      - '**.md'
-      - '.editorconfig'
-      - '.gitignore'
-      - 'docs/**'
+      - "**.md"
+      - ".editorconfig"
+      - ".gitignore"
+      - "docs/**"
   workflow_dispatch:
 
 permissions:
@@ -513,7 +565,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -548,9 +600,9 @@ jobs:
           npm ls --depth=0
           echo "✅ Dependencies validated!"
 
-  # 🏗️ Build & Deploy
-  build-and-deploy:
-    name: 🏗️ Build & Deploy
+  # 🏗️ Build Validation (Cloudflare handles actual deployment)
+  build-validation:
+    name: 🏗️ Build Validation
     runs-on: ubuntu-latest
     needs: test-and-validate
     timeout-minutes: 20
@@ -563,16 +615,17 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🏗️ Build Astro site with API integration
+      - name: 🏗️ Build Astro portfolio
         run: |
-          echo "🏗️ Building Astro site with 689+ posts..."
+          echo "🏗️ Building Astro portfolio..."
           npm run build
           echo "✅ Build completed successfully!"
+          echo "🌐 Deployment will be handled by Cloudflare Pages"
 
       - name: 📊 Verify build output & metrics
         run: |
@@ -585,25 +638,23 @@ jobs:
           HTML_COUNT=$(find dist/ -name "*.html" | wc -l)
           JS_COUNT=$(find dist/ -name "*.js" | wc -l)
           CSS_COUNT=$(find dist/ -name "*.css" | wc -l)
-          WEBP_COUNT=$(find dist/ -name "*.webp" | wc -l)
 
           echo "📄 HTML files: $HTML_COUNT"
           echo "📜 JS files: $JS_COUNT"
           echo "🎨 CSS files: $CSS_COUNT"
-          echo "🖼️ WebP images: $WEBP_COUNT"
 
           echo ""
-          echo "🎯 Expected metrics validation:"
-          if [ "$HTML_COUNT" -ge 750 ]; then
-            echo "✅ HTML pages: $HTML_COUNT (target: 750+)"
+          echo "🎯 Portfolio validation:"
+          if [ "$HTML_COUNT" -ge 5 ]; then
+            echo "✅ HTML pages: $HTML_COUNT (target: 5+)"
           else
-            echo "⚠️ HTML pages: $HTML_COUNT (expected: 750+)"
+            echo "⚠️ HTML pages: $HTML_COUNT (expected: 5+)"
           fi
 
           echo ""
-          echo "🔗 Deployment ready for:"
-          echo "   • Primary: https://blog.sergiomarquez.dev"
-          echo "   • API Source: https://blogapi.sergiomarquez.dev"
+          echo "🌐 Ready for Cloudflare Pages deployment"
+          echo "   • Auto-deploy on main branch push"
+          echo "   • Preview deploys on PRs"
 
       - name: 🧪 Test site preview
         run: |
@@ -618,84 +669,12 @@ jobs:
             echo "ℹ️ Preview test completed (timeout expected)"
           fi
 
-  # 🌐 Post-Deploy Verification & Health Checks
-  post-deploy-verification:
-    name: 🌐 Site Health Check
-    runs-on: ubuntu-latest
-    needs: build-and-deploy
-    timeout-minutes: 10
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: 🏥 Health check - Main site
-        run: |
-          echo "🏥 Checking site health..."
-
-          # Check if site is accessible
-          if curl -f -s -o /dev/null "https://blog.sergiomarquez.dev"; then
-            echo "✅ Main site is accessible"
-          else
-            echo "❌ Main site health check failed"
-            exit 1
-          fi
-
-          # Check API endpoint
-          if curl -f -s "https://blogapi.sergiomarquez.dev/api/posts" | grep -q "title"; then
-            echo "✅ API endpoint is responding correctly"
-          else
-            echo "⚠️ API endpoint check failed"
-          fi
-
-      - name: 🔍 Critical pages verification
-        run: |
-          echo "🔍 Verifying critical pages..."
-
-          # Check homepage
-          if curl -f -s "https://blog.sergiomarquez.dev" | grep -q "One Daily Blog"; then
-            echo "✅ Homepage loading correctly"
-          else
-            echo "❌ Homepage check failed"
-            exit 1
-          fi
-
-          # Check about page
-          if curl -f -s "https://blog.sergiomarquez.dev/about" | grep -q "About"; then
-            echo "✅ About page loading correctly"
-          else
-            echo "⚠️ About page check failed"
-          fi
-
-          # Check RSS feed
-          if curl -f -s "https://blog.sergiomarquez.dev/rss.xml" | grep -q "<rss"; then
-            echo "✅ RSS feed is valid"
-          else
-            echo "⚠️ RSS feed check failed"
-          fi
-
-      - name: 📊 Performance baseline check
-        run: |
-          echo "📊 Basic performance metrics..."
-
-          # Check page load time
-          START_TIME=$(date +%s%N)
-          curl -f -s -o /dev/null "https://blog.sergiomarquez.dev"
-          END_TIME=$(date +%s%N)
-          DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
-
-          echo "⏱️ Homepage load time: ${DURATION}ms"
-
-          if [ "$DURATION" -lt 2000 ]; then
-            echo "✅ Load time acceptable (${DURATION}ms < 2000ms)"
-          else
-            echo "⚠️ Load time high: ${DURATION}ms"
-          fi
-
   # 🤖 Auto-Fix Common Issues
   auto-fix-issues:
     name: 🤖 Auto-Fix & Dependencies
     runs-on: ubuntu-latest
     if: failure() && github.ref == 'refs/heads/main'
-    needs: [test-and-validate, build-and-deploy]
+    needs: [test-and-validate, build-validation]
     timeout-minutes: 15
 
     steps:
@@ -708,7 +687,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: 🔧 Auto-fix linting issues
         run: |
@@ -729,7 +708,8 @@ jobs:
 
             - Applied automatic linting fixes
             - Standardized code formatting
-            - Triggered by failed CI pipeline"
+            - Triggered by failed CI pipeline
+            - Cloudflare Pages will auto-deploy these fixes"
             git push
           fi
 
@@ -750,10 +730,21 @@ jobs:
               git commit -m "🔒 Security: Auto-update vulnerable dependencies
 
               - Fixed security vulnerabilities via npm audit fix
-              - Automated dependency security update"
+              - Automated dependency security update
+              - Cloudflare Pages will deploy these security fixes"
               git push
             fi
           fi
+  #
+  #   steps:
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: dist
+  #         path: dist/
+  #
+  #     - name: Deploy to hosting
+  #       run: echo "Deploy step would go here"
 </file>
 
 </files>

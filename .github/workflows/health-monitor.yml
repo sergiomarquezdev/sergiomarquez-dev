@@ -97,7 +97,7 @@ jobs:
             ### 🛠️ Potential causes:
             - Cloudflare Pages deployment issue
             - DNS issues
-            - SSL certificate problems  
+            - SSL certificate problems
             - Build failure in Cloudflare
 
             ### 🔧 Next steps:
