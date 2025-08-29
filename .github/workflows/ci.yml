@@ -5,18 +5,18 @@ on:
     branches:
       - main
     paths-ignore:
-      - "**.md"
-      - ".editorconfig"
-      - ".gitignore"
-      - "docs/**"
+      - '**.md'
+      - '.editorconfig'
+      - '.gitignore'
+      - 'docs/**'
   pull_request:
     branches:
       - main
     paths-ignore:
-      - "**.md"
-      - ".editorconfig"
-      - ".gitignore"
-      - "docs/**"
+      - '**.md'
+      - '.editorconfig'
+      - '.gitignore'
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: "npm"
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -87,7 +87,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: "npm"
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -160,7 +160,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22.x
-          cache: "npm"
+          cache: 'npm'
 
       - name: 🔧 Auto-fix linting issues
         run: |

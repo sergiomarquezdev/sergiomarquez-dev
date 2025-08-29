@@ -6,44 +6,44 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL("/og-image.svg", Astro.site);
+const socialImageURL = new URL('/og-image.svg', Astro.site);
 ---
 
-<meta charset="UTF-8" />
-<meta name="description" content={description} />
-<meta name="viewport" content="width=device-width" />
-<meta name="robots" content="index, follow" />
-<meta name="author" content="Sergio Márquez Pérez" />
-<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-<meta name="generator" content={Astro.generator} />
-<link rel="canonical" href={canonicalURL} />
+<meta charset='UTF-8' />
+<meta name='description' content={description} />
+<meta name='viewport' content='width=device-width' />
+<meta name='robots' content='index, follow' />
+<meta name='author' content='Sergio Márquez Pérez' />
+<link rel='icon' type='image/svg+xml' href='/favicon.ico' />
+<meta name='generator' content={Astro.generator} />
+<link rel='canonical' href={canonicalURL} />
 
 <!-- Google AdSense Verification -->
-<meta name="google-adsense-account" content="ca-pub-7569719493920591" />
+<meta name='google-adsense-account' content='ca-pub-7569719493920591' />
 
 <title>{title}</title>
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={socialImageURL} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:site_name" content="Sergio Márquez Pérez" />
+<meta property='og:type' content='website' />
+<meta property='og:url' content={Astro.url} />
+<meta property='og:title' content={title} />
+<meta property='og:description' content={description} />
+<meta property='og:image' content={socialImageURL} />
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='630' />
+<meta property='og:locale' content='en_US' />
+<meta property='og:site_name' content='Sergio Márquez Pérez' />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={socialImageURL} />
-<meta property="twitter:creator" content="@sergiomzdev" />
+<meta property='twitter:card' content='summary_large_image' />
+<meta property='twitter:url' content={Astro.url} />
+<meta property='twitter:title' content={title} />
+<meta property='twitter:description' content={description} />
+<meta property='twitter:image' content={socialImageURL} />
+<meta property='twitter:creator' content='@sergiomzdev' />
 
 <!-- Structured Data -->
-<script type="application/ld+json">
+<script type='application/ld+json' is:inline>
   {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -73,20 +73,18 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
 </script>
 
 <!-- Google Funding Choices (CMP) Script -->
-<script
-  async
-  src="https://fundingchoicesmessages.google.com/i/pub-7569719493920591?ers=1"
+<script async src='https://fundingchoicesmessages.google.com/i/pub-7569719493920591?ers=1' is:inline
 ></script>
 <script is:inline>
   (function () {
     function signalGooglefcPresent() {
-      if (!window.frames["googlefcPresent"]) {
+      if (!window.frames['googlefcPresent']) {
         if (document.body) {
-          const iframe = document.createElement("iframe");
+          const iframe = document.createElement('iframe');
           iframe.style =
-            "width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;";
-          iframe.style.display = "none";
-          iframe.name = "googlefcPresent";
+            'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+          iframe.style.display = 'none';
+          iframe.name = 'googlefcPresent';
           document.body.appendChild(iframe);
         } else {
           setTimeout(signalGooglefcPresent, 0);
@@ -105,12 +103,12 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
 
   // Function to load Google Analytics only with consent
   window.loadGoogleAnalyticsWithConsent = function () {
-    console.log("📊 Loading Google Analytics with consent...");
+    console.log('📊 Loading Google Analytics with consent...');
 
     // Load gtag script ONLY with consent
-    const gtagScript = document.createElement("script");
+    const gtagScript = document.createElement('script');
     gtagScript.async = true;
-    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-ZKQQ4ZXLKH";
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZKQQ4ZXLKH';
     document.head.appendChild(gtagScript);
 
     // Initialize gtag with GDPR compliance
@@ -120,21 +118,21 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
     }
     window.gtag = gtag;
 
-    gtag("js", new Date());
-    gtag("config", "G-ZKQQ4ZXLKH", {
+    gtag('js', new Date());
+    gtag('config', 'G-ZKQQ4ZXLKH', {
       page_title: document.title,
       page_location: window.location.href,
       anonymize_ip: true, // GDPR compliance
     });
 
-    console.log("✅ Google Analytics loaded with user consent");
+    console.log('✅ Google Analytics loaded with user consent');
     window.analyticsEnabled = true;
   };
 
   // Listen for Google CMP consent decisions
   window.googlefc.callbackQueue.push({
     CONSENT_MODE_DATA_READY: () => {
-      console.log("🔍 Google CMP consent data ready");
+      console.log('🔍 Google CMP consent data ready');
       const googleConsent = window.googlefc.getGoogleConsentModeValues();
 
       // Load Analytics ONLY if user consented
@@ -150,7 +148,7 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
           });
         }
       } else {
-        console.log("🚫 Analytics disabled - user did not consent");
+        console.log('🚫 Analytics disabled - user did not consent');
 
         // Sync rejection with our ConsentManager if exists
         if (window.consentManager) {

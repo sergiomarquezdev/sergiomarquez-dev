@@ -4,26 +4,36 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), sitemap()],
+  site: "https://sergiomarquez.dev",
+  output: "static", // Explicit SSG mode
 
   // Build optimizations
   build: {
-    inlineStylesheets: "auto",
+    format: "file", // Generate files instead of directories for better SEO
+    assets: "_astro", // Clean asset organization
+    inlineStylesheets: "auto", // Inline critical CSS automatically
   },
+
+  // Integrations with optimized configuration
+  integrations: [
+    sitemap({
+      changefreq: "monthly",
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+    tailwind({
+      // Apply Tailwind base styles
+      applyBaseStyles: false,
+    }),
+  ],
 
   // Compress HTML for better performance
   compressHTML: true,
 
-  // Static site generation (default for portfolios)
-  output: "static",
-
-  // Site configuration for sitemap and SEO
-  site: "https://sergiomarquez.dev",
-
-  // Markdown configuration
+  // Markdown configuration (if needed for future content)
   markdown: {
     shikiConfig: {
-      theme: "github-dark",
+      theme: "github-dark-dimmed",
       wrap: true,
     },
   },
@@ -32,6 +42,11 @@ export default defineConfig({
   vite: {
     build: {
       cssMinify: "lightningcss",
+      rollupOptions: {
+        output: {
+          assetFileNames: "assets/[name].[hash][extname]",
+        },
+      },
     },
   },
 });

@@ -2,15 +2,15 @@
 // CookieBanner.astro - Banner de consentimiento de cookies mínimo para AdSense
 ---
 
-<div id="cookie-banner" class="cookie-banner">
-  <div class="cookie-content">
-    <p class="cookie-text">
+<div id='cookie-banner' class='cookie-banner'>
+  <div class='cookie-content'>
+    <p class='cookie-text'>
       Este sitio utiliza cookies de Google AdSense para personalizar anuncios.
-      <a href="/privacy" class="privacy-link">Ver Política de Privacidad</a>
+      <a href='/privacy' class='privacy-link'>Ver Política de Privacidad</a>
     </p>
-    <div class="cookie-buttons">
-      <button id="accept-cookies" class="cookie-btn accept"> Aceptar </button>
-      <button id="reject-cookies" class="cookie-btn reject"> Rechazar </button>
+    <div class='cookie-buttons'>
+      <button id='accept-cookies' class='cookie-btn accept'> Aceptar </button>
+      <button id='reject-cookies' class='cookie-btn reject'> Rechazar </button>
     </div>
   </div>
 </div>
@@ -20,24 +20,22 @@
   function checkCookieConsent() {
     // Check if Google CMP is active - Priority system
     if (isGoogleCMPActive()) {
-      console.log(
-        "🔍 Google CMP detected - hiding custom banner to avoid duplicates"
-      );
-      const banner = document.getElementById("cookie-banner");
+      console.log('🔍 Google CMP detected - hiding custom banner to avoid duplicates');
+      const banner = document.getElementById('cookie-banner');
       if (banner) {
-        banner.style.display = "none";
+        banner.style.display = 'none';
       }
       return; // Don't show custom banner if Google CMP is present
     }
 
     // Only show custom banner if Google CMP is not active
-    const consent = localStorage.getItem("cookie-consent");
-    const banner = document.getElementById("cookie-banner");
+    const consent = localStorage.getItem('cookie-consent');
+    const banner = document.getElementById('cookie-banner');
 
     if (!consent && banner) {
-      console.log("📋 Showing custom cookie banner (Google CMP not active)");
-      banner.style.display = "block";
-    } else if (consent === "accepted") {
+      console.log('📋 Showing custom cookie banner (Google CMP not active)');
+      banner.style.display = 'block';
+    } else if (consent === 'accepted') {
       loadAdSense();
     }
   }
@@ -45,26 +43,26 @@
   // Check if Google CMP is active to avoid banner conflicts
   function isGoogleCMPActive() {
     return (
-      typeof window !== "undefined" &&
-      typeof window.googlefc !== "undefined" &&
+      typeof window !== 'undefined' &&
+      typeof window.googlefc !== 'undefined' &&
       window.googlefc.callbackQueue
     );
   }
 
   function acceptCookies() {
-    localStorage.setItem("cookie-consent", "accepted");
-    const banner = document.getElementById("cookie-banner");
+    localStorage.setItem('cookie-consent', 'accepted');
+    const banner = document.getElementById('cookie-banner');
     if (banner) {
-      banner.style.display = "none";
+      banner.style.display = 'none';
     }
     loadAdSense();
   }
 
   function rejectCookies() {
-    localStorage.setItem("cookie-consent", "rejected");
-    const banner = document.getElementById("cookie-banner");
+    localStorage.setItem('cookie-consent', 'rejected');
+    const banner = document.getElementById('cookie-banner');
     if (banner) {
-      banner.style.display = "none";
+      banner.style.display = 'none';
     }
   }
 
@@ -72,24 +70,24 @@
     // Solo cargar AdSense si el usuario ha dado consentimiento
     // @ts-ignore
     if (!window.adsbygoogle) {
-      const script = document.createElement("script");
+      const script = document.createElement('script');
       script.src =
-        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7569719493920591";
+        'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7569719493920591';
       script.async = true;
-      script.crossOrigin = "anonymous";
+      script.crossOrigin = 'anonymous';
       document.head.appendChild(script);
     }
   }
 
   // Event listeners
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     checkCookieConsent();
 
-    const acceptBtn = document.getElementById("accept-cookies");
-    const rejectBtn = document.getElementById("reject-cookies");
+    const acceptBtn = document.getElementById('accept-cookies');
+    const rejectBtn = document.getElementById('reject-cookies');
 
-    if (acceptBtn) acceptBtn.addEventListener("click", acceptCookies);
-    if (rejectBtn) rejectBtn.addEventListener("click", rejectCookies);
+    if (acceptBtn) acceptBtn.addEventListener('click', acceptCookies);
+    if (rejectBtn) rejectBtn.addEventListener('click', rejectCookies);
   });
 </script>
 

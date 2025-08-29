@@ -1,15 +1,28 @@
 {
   "semi": true,
-  "singleQuote": false,
+  "singleQuote": true,
   "tabWidth": 2,
+  "useTabs": false,
   "trailingComma": "es5",
-  "printWidth": 80,
+  "printWidth": 100,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": true,
+  "bracketSameLine": false,
   "plugins": ["prettier-plugin-astro"],
   "overrides": [
     {
       "files": "*.astro",
       "options": {
         "parser": "astro"
+      }
+    },
+    {
+      "files": ["*.json", "*.md"],
+      "options": {
+        "useTabs": false
       }
     }
   ]

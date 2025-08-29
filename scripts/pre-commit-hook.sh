@@ -38,7 +38,24 @@ if ! npm run type-check; then
 fi
 
 # Run ESLint (usando prettier como linter)
-print_status $YELLOW "🧹 Running code formatting check..."
+print_status $YELLOW "🧹 Running ESLint validation..."
+if ! npm run lint:eslint; then
+    print_status $YELLOW "⚠️ ESLint found issues. Attempting auto-fix..."
+    npm run lint:eslint:fix
+
+    # Check if auto-fix resolved all issues
+    if ! npm run lint:eslint; then
+        print_status $RED "❌ ESLint issues remain after auto-fix. Please resolve manually."
+        exit 1
+    else
+        print_status $GREEN "✅ ESLint issues auto-fixed successfully."
+        # Add the fixed files to the commit
+        git add .
+    fi
+fi
+
+# Run Prettier check
+print_status $YELLOW "💄 Checking code formatting..."
 if ! npm run format:check; then
     print_status $YELLOW "⚠️ Code formatting issues found. Auto-formatting..."
     npm run format
