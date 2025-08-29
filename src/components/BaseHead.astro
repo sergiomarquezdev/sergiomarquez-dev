@@ -5,13 +5,18 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL('/og-image.svg', Astro.site);
 ---
 
 <meta charset="UTF-8" />
 <meta name="description" content={description} />
 <meta name="viewport" content="width=device-width" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Sergio Márquez Pérez" />
 <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Google AdSense Verification -->
 <meta name="google-adsense-account" content="ca-pub-7569719493920591">
@@ -23,13 +28,39 @@ const { title, description } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content="/og-image.png" />
-<!-- Placeholder OG image -->
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Sergio Márquez Pérez" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content="/og-image.png" />
-<!-- Placeholder OG image -->
+<meta property="twitter:image" content={socialImageURL} />
+<meta property="twitter:creator" content="@sergiomzdev" />
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sergio Márquez Pérez",
+  "jobTitle": "AI/ML & Backend Developer", 
+  "description": "Automation and AI/ML developer passionate about building modern web applications and sharing knowledge",
+  "url": "https://sergiomarquez.dev",
+  "sameAs": [
+    "https://github.com/sergiomarquezdev",
+    "https://linkedin.com/in/sergio-marquez-perez/",
+    "https://x.com/sergiomzdev",
+    "https://www.youtube.com/@sergiomarquezdev"
+  ],
+  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Backend Development", "Automation", "Python", "TypeScript"],
+  "alumniOf": {
+    "@type": "EducationalOrganization", 
+    "name": "AI/ML & Backend Development"
+  }
+}
+</script>

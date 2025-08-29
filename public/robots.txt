@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://sergiomarquez.dev/sitemap-index.xml
+Sitemap: https://sergiomarquez.dev/sitemap-0.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

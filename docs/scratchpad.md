@@ -9,6 +9,7 @@
 ## Tareas Activas
 
 - [x] [Implementación AdSense Verification](./implementation-plan/adsense-verification.md) - **COMPLETADO** ✅
+- [x] [Portfolio Audit and Optimization](./implementation-plan/portfolio-audit.md) - **PLAN READY** �
 
 ## Lessons Learned
 

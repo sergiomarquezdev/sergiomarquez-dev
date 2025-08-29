@@ -1,0 +1,60 @@
+name: CI/CD Portfolio
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate & Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  # Optional: Deploy job (commented out for now)
+  # deploy:
+  #   name: Deploy to Production
+  #   needs: validate
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   
+  #   steps:
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: dist
+  #         path: dist/
+  #     
+  #     - name: Deploy to hosting
+  #       run: echo "Deploy step would go here"
