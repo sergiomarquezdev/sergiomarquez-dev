@@ -1,4 +1,4 @@
-@import 'non.geist';
+@import "non.geist";
 
 /*
   Use this file to define your custom CSS variables for colors, typography, etc.
@@ -7,12 +7,12 @@
 
 :root {
   --background: rgb(10, 10, 10);
-  --primary-text: #EAEAEA;
-  --secondary-text: #A0A0A0;
+  --primary-text: #eaeaea;
+  --secondary-text: #a0a0a0;
   --border-color: rgba(255, 255, 255, 0.1);
 
   /* Font Family */
-  --font-family-sans: 'Geist Variable', sans-serif;
+  --font-family-sans: "Geist Variable", sans-serif;
   /* Example, will need to be imported */
 }
 

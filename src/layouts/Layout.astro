@@ -5,8 +5,8 @@ import BaseHead from "../components/BaseHead.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
 }
 
 const { title, description } = Astro.props;
@@ -14,21 +14,21 @@ const { title, description } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead title={title} description={description} />
-    </head>
-    <body>
-        <Header />
-        <main>
-            <slot />
-        </main>
-        <CookieBanner />
-        <style>
-            main {
-                margin: 0 auto;
-                padding: 0 1rem;
-                max-width: 768px;
-            }
-        </style>
-    </body>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <CookieBanner />
+    <style>
+      main {
+        margin: 0 auto;
+        padding: 0 1rem;
+        max-width: 768px;
+      }
+    </style>
+  </body>
 </html>

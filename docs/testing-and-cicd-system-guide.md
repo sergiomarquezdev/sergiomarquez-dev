@@ -1,6 +1,7 @@
 # 🧪 Guía Completa del Sistema de Testing y CI/CD
 
 ## 🎯 Objetivo
+
 Documentar todo el sistema de testing, validación y CI/CD implementado en el proyecto One Daily Blog para replicarlo en otros proyectos Astro.
 
 ---
@@ -8,6 +9,7 @@ Documentar todo el sistema de testing, validación y CI/CD implementado en el pr
 ## 📋 Arquitectura General del Sistema
 
 ### 🏗️ **Estructura de Testing**
+
 ```
 proyecto/
 ├── .github/workflows/         # GitHub Actions
@@ -33,6 +35,7 @@ proyecto/
 **Propósito**: Validar código antes de cada commit localmente.
 
 **Validaciones que ejecuta**:
+
 1. ✅ **TypeScript**: `npm run type-check`
 2. ✅ **ESLint**: `npm run lint` (con auto-fix)
 3. ✅ **Prettier**: `npm run format:check` (con auto-format)
@@ -40,6 +43,7 @@ proyecto/
 5. ✅ **Build Test**: `npm run build`
 
 **Instalación**:
+
 ```bash
 # Automática via setup script
 npm run setup
@@ -50,6 +54,7 @@ chmod +x .git/hooks/pre-commit
 ```
 
 **Características**:
+
 - **Auto-fix**: Corrige automáticamente problemas de linting y formato
 - **Build validation**: Verifica que el proyecto compile correctamente
 - **Non-blocking security**: Auditoría de seguridad informa pero no bloquea
@@ -62,6 +67,7 @@ chmod +x .git/hooks/pre-commit
 ### **A) Workflow Principal** (`ci.yml`)
 
 **Triggers**:
+
 - Push a `main`
 - Pull Requests a `main`
 - Manual dispatch
@@ -70,44 +76,50 @@ chmod +x .git/hooks/pre-commit
 **Jobs**:
 
 #### **🔍 Job: test-and-validate**
+
 ```yaml
-- TypeScript validation    # npm run type-check
-- ESLint code quality     # npm run lint
-- Prettier formatting     # npm run format:check
-- Security audit          # npm audit --audit-level=moderate
-- Dependency validation   # npm ls --depth=0
+- TypeScript validation # npm run type-check
+- ESLint code quality # npm run lint
+- Prettier formatting # npm run format:check
+- Security audit # npm audit --audit-level=moderate
+- Dependency validation # npm ls --depth=0
 ```
 
 #### **🏗️ Job: build-and-deploy**
+
 ```yaml
-- Build Astro site        # npm run build
-- Verify build metrics    # Validar 750+ páginas HTML
-- Test site preview       # npm run preview (timeout 15s)
-- Deployment ready check  # Verificar estructura build
+- Build Astro site # npm run build
+- Verify build metrics # Validar 750+ páginas HTML
+- Test site preview # npm run preview (timeout 15s)
+- Deployment ready check # Verificar estructura build
 ```
 
 #### **🌐 Job: post-deploy-verification**
+
 ```yaml
-- Health check main site  # curl https://blog.sergiomarquez.dev
-- API endpoint check      # curl API + validate JSON
-- Critical pages verify   # Homepage, About, RSS
-- Performance baseline   # Measure load time (<2000ms)
+- Health check main site # curl https://blog.sergiomarquez.dev
+- API endpoint check # curl API + validate JSON
+- Critical pages verify # Homepage, About, RSS
+- Performance baseline # Measure load time (<2000ms)
 ```
 
 #### **🤖 Job: auto-fix-issues** (si falla CI)
+
 ```yaml
 - Auto-fix linting issues # npm run lint:fix
-- Update dependencies     # npm audit fix --force
-- Auto-commit fixes       # git commit + push
+- Update dependencies # npm audit fix --force
+- Auto-commit fixes # git commit + push
 ```
 
 ### **B) Auto-Fix Workflow** (`auto-fix.yml`)
 
 **Triggers**:
+
 - Manual dispatch (con opciones)
 - Programado semanal (Domingos 2 AM)
 
 **Tipos de fix disponibles**:
+
 - `all`: Todos los fixes
 - `linting`: Solo ESLint/Prettier
 - `dependencies`: Updates de dependencias
@@ -115,6 +127,7 @@ chmod +x .git/hooks/pre-commit
 - `security`: Solo seguridad
 
 **Proceso**:
+
 1. Ejecuta fixes según tipo seleccionado
 2. Verifica que fixes no rompan build
 3. Commitea cambios automáticamente
@@ -123,15 +136,18 @@ chmod +x .git/hooks/pre-commit
 ### **C) Health Monitor** (`health-monitor.yml`)
 
 **Triggers**:
+
 - Programado cada 6 horas
 - Manual dispatch
 
 **Monitoreo**:
+
 - **Availability**: Homepage, About, RSS, API
 - **Performance**: Load time measurement
 - **Auto-issue creation**: Crea issues automáticamente si falla
 
 **Endpoints monitoreados**:
+
 ```bash
 - https://blog.sergiomarquez.dev         # Homepage
 - https://blog.sergiomarquez.dev/about   # About page
@@ -146,12 +162,14 @@ chmod +x .git/hooks/pre-commit
 ### **ESLint Config** (`eslint.config.js`)
 
 **Características**:
+
 - Configuración moderna (ESLint 9+)
 - Soporte para JavaScript, TypeScript y Astro
 - Reglas personalizadas para calidad de código
 - Globals para Node.js y Browser
 
 **Reglas clave**:
+
 ```javascript
 'no-console': 'warn',           // Warn en console.log
 'no-debugger': 'error',         // Error en debugger
@@ -185,18 +203,22 @@ chmod +x .git/hooks/pre-commit
 ## 🧪 **4. Testing Setup**
 
 ### **Framework de Testing**
+
 - **Vitest**: Test runner moderno y rápido
 - **jsdom**: DOM testing environment
 - **Test utilities**: Mocks y helpers reutilizables
 
 ### **Estructura de Tests**
+
 ```typescript
 // src/test/test-utils.ts - Utilities
-export const mockPost: DbPost = { /* mock data */ };
+export const mockPost: DbPost = {
+  /* mock data */
+};
 
 // src/test/api.test.ts - API tests
-describe('API functions', () => {
-  test('should fetch posts correctly', async () => {
+describe("API functions", () => {
+  test("should fetch posts correctly", async () => {
     // Test implementation
   });
 });
@@ -207,6 +229,7 @@ describe('API functions', () => {
 ## 🚀 **5. Implementación en Nuevo Proyecto**
 
 ### **Paso 1: Copiar Archivos Base**
+
 ```bash
 # Crear estructura
 mkdir -p .github/workflows scripts src/test
@@ -224,6 +247,7 @@ cp eslint.config.js package.json ./
 ### **Paso 2: Personalizar Configuración**
 
 **En workflows YAML**:
+
 ```yaml
 # Cambiar URLs en health checks
 - https://tu-sitio.com
@@ -234,12 +258,14 @@ if [ "$HTML_COUNT" -ge 50 ]; then  # Tu número esperado
 ```
 
 **En scripts**:
+
 ```bash
 # Personalizar comandos específicos del proyecto
 npm run your-build-command
 ```
 
 ### **Paso 3: Actualizar package.json**
+
 ```json
 {
   "scripts": {
@@ -266,6 +292,7 @@ npm run your-build-command
 ```
 
 ### **Paso 4: Configurar Entorno**
+
 ```bash
 # Instalar dependencias
 npm install
@@ -282,18 +309,21 @@ npm run validate
 ## 🎯 **6. Beneficios del Sistema**
 
 ### **Para Desarrolladores**:
+
 - ✅ **Feedback inmediato**: Pre-commit hook detecta problemas al instante
 - ✅ **Auto-corrección**: Muchos problemas se arreglan automáticamente
 - ✅ **Consistencia**: Formato y estilo uniformes
 - ✅ **Calidad**: TypeScript + ESLint garantizan código robusto
 
 ### **Para Producción**:
+
 - ✅ **Reliability**: Health monitoring 24/7
 - ✅ **Quick recovery**: Auto-fixes para problemas comunes
 - ✅ **Performance tracking**: Métricas de rendimiento automáticas
 - ✅ **Issue management**: Creación automática de issues en fallos
 
 ### **Para CI/CD**:
+
 - ✅ **Pipeline robusto**: Múltiples validaciones en paralelo
 - ✅ **Self-healing**: Capacidad de auto-reparación
 - ✅ **Comprehensive**: Cubre testing, build, deploy y monitoring

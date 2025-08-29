@@ -1,12 +1,12 @@
 ---
 interface Props {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
 }
 
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL('/og-image.svg', Astro.site);
+const socialImageURL = new URL("/og-image.svg", Astro.site);
 ---
 
 <meta charset="UTF-8" />
@@ -19,7 +19,7 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Google AdSense Verification -->
-<meta name="google-adsense-account" content="ca-pub-7569719493920591">
+<meta name="google-adsense-account" content="ca-pub-7569719493920591" />
 
 <title>{title}</title>
 
@@ -44,23 +44,30 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
 
 <!-- Structured Data -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Sergio Márquez Pérez",
-  "jobTitle": "AI/ML & Backend Developer", 
-  "description": "Automation and AI/ML developer passionate about building modern web applications and sharing knowledge",
-  "url": "https://sergiomarquez.dev",
-  "sameAs": [
-    "https://github.com/sergiomarquezdev",
-    "https://linkedin.com/in/sergio-marquez-perez/",
-    "https://x.com/sergiomzdev",
-    "https://www.youtube.com/@sergiomarquezdev"
-  ],
-  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Backend Development", "Automation", "Python", "TypeScript"],
-  "alumniOf": {
-    "@type": "EducationalOrganization", 
-    "name": "AI/ML & Backend Development"
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sergio Márquez Pérez",
+    "jobTitle": "AI/ML & Backend Developer",
+    "description": "Automation and AI/ML developer passionate about building modern web applications and sharing knowledge",
+    "url": "https://sergiomarquez.dev",
+    "sameAs": [
+      "https://github.com/sergiomarquezdev",
+      "https://linkedin.com/in/sergio-marquez-perez/",
+      "https://x.com/sergiomzdev",
+      "https://www.youtube.com/@sergiomarquezdev"
+    ],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Backend Development",
+      "Automation",
+      "Python",
+      "TypeScript"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "AI/ML & Backend Development"
+    }
   }
-}
 </script>

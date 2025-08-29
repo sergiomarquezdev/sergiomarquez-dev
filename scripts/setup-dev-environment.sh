@@ -37,5 +37,5 @@ npm run validate
 print_status "Development environment setup complete! 🎉"
 print_info "You can now use:"
 print_info "  npm run dev     - Start development server"
-print_info "  npm run build   - Build for production"  
+print_info "  npm run build   - Build for production"
 print_info "  npm run validate - Run all validations"

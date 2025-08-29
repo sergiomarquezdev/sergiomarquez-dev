@@ -51,7 +51,6 @@ El usuario necesita verific## Executor's Feedback or Assistance Requests
 ### Fase 1: Preparación y Estructura Base
 
 - [x] **1.1** Revisar estructura actual del proyecto Astro
-
   - _Success criteria_: Entender el layout base y componentes principales
   - _Estimated time_: 15 minutos
   - _Completed_: ✅ Estructura analizada - Layout.astro usa BaseHead.astro para meta tags
@@ -64,7 +63,6 @@ El usuario necesita verific## Executor's Feedback or Assistance Requests
 ### Fase 2: Implementación de Verificación AdSense
 
 - [x] **2.1** Implementar etiqueta meta de verificación en layout base
-
   - _Success criteria_: Etiqueta meta presente en todas las páginas del sitio
   - _Estimated time_: 15 minutos
   - _Completed_: ✅ Meta tag añadida a BaseHead.astro
@@ -77,7 +75,6 @@ El usuario necesita verific## Executor's Feedback or Assistance Requests
 ### Fase 3: Testing y Verificación
 
 - [x] **3.1** Verificar implementación local
-
   - _Success criteria_: Todo funciona correctamente en desarrollo
   - _Estimated time_: 15 minutos
   - _Completed_: ✅ Servidor local funcionando en http://localhost:4321
