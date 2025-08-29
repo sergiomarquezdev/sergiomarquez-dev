@@ -16,10 +16,12 @@ declare global {
     // Analytics functions
     loadGoogleAnalyticsWithConsent?: () => void;
     analyticsEnabled?: boolean;
+    // eslint-disable-next-line no-unused-vars
     gtag?: (...args: any[]) => void;
     dataLayer?: any[];
     // Consent Manager (for synchronization)
     consentManager?: {
+      // eslint-disable-next-line no-unused-vars
       syncFromExternalCMP: (settings: any) => void;
     };
     // AdSense

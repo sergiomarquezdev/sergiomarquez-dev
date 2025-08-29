@@ -76,6 +76,22 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
 <script async src='https://fundingchoicesmessages.google.com/i/pub-7569719493920591?ers=1' is:inline
 ></script>
 <script is:inline>
+  // Google CMP Configuration
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.controlledMessagingFunction =
+    window.googlefc.controlledMessagingFunction ||
+    function (message) {
+      window.googlefc.callbackQueue.push(message);
+    };
+
+  // Debugging: Log CMP initialization
+  console.log('🔍 Google CMP initialized', {
+    googlefc: !!window.googlefc,
+    queue: window.googlefc.callbackQueue.length,
+  });
+
+  // Signal Google CMP presence
   (function () {
     function signalGooglefcPresent() {
       if (!window.frames['googlefcPresent']) {
@@ -86,6 +102,7 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
           iframe.style.display = 'none';
           iframe.name = 'googlefcPresent';
           document.body.appendChild(iframe);
+          console.log('🔍 Google CMP iframe created');
         } else {
           setTimeout(signalGooglefcPresent, 0);
         }
@@ -97,9 +114,33 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
 
 <!-- Google CMP Integration + Analytics (GDPR Compliant) -->
 <script is:inline>
-  // Google CMP Integration for GDPR Compliance
-  window.googlefc = window.googlefc || {};
-  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  // Google CMP Callback Configuration
+  window.googlefc.callbackQueue.push({
+    CONSENT_DATA_READY: function () {
+      console.log('🔍 Google CMP consent data ready');
+      console.log('🔍 Consent status:', window.googlefc.getConsentStatus?.());
+
+      // Check if user has given consent
+      const consentStatus = window.googlefc.getConsentStatus?.();
+      if (consentStatus && consentStatus.gdprApplies && consentStatus.gdprConsentString) {
+        console.log('✅ User consented - loading Analytics');
+        window.loadGoogleAnalyticsWithConsent?.();
+      } else {
+        console.log('❌ Analytics disabled - user did not consent');
+      }
+    },
+  });
+
+  // Debug: Force show CMP for testing (remove in production)
+  setTimeout(() => {
+    if (window.googlefc && typeof window.googlefc.showRevocationMessage === 'function') {
+      console.log(
+        '🔍 Google CMP available - can show manually with: window.googlefc.showRevocationMessage()'
+      );
+    } else {
+      console.log('⚠️ Google CMP showRevocationMessage not available');
+    }
+  }, 3000);
 
   // Function to load Google Analytics only with consent
   window.loadGoogleAnalyticsWithConsent = function () {
@@ -139,8 +180,9 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
       if (googleConsent.analyticsStoragePurposeConsentStatus === 1) {
         // GRANTED
         window.loadGoogleAnalyticsWithConsent();
+        console.log('✅ Analytics loaded - user consented');
 
-        // Sync with our ConsentManager if exists
+        // Sync with our consent manager
         if (window.consentManager) {
           window.consentManager.syncFromExternalCMP({
             analytics: true,
@@ -148,9 +190,10 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
           });
         }
       } else {
-        console.log('🚫 Analytics disabled - user did not consent');
+        // DENIED
+        console.log('❌ Analytics disabled - user did not consent');
 
-        // Sync rejection with our ConsentManager if exists
+        // Sync with our consent manager
         if (window.consentManager) {
           window.consentManager.syncFromExternalCMP({
             analytics: false,
@@ -159,5 +202,46 @@ const socialImageURL = new URL('/og-image.svg', Astro.site);
         }
       }
     },
+  });
+
+  // CMP Debugging and Testing Functions
+  window.debugGoogleCMP = function () {
+    console.log('🔍 Google CMP Debug Info:');
+    console.log('- GoogleFC Object:', window.googlefc);
+    console.log('- Callback Queue Length:', window.googlefc?.callbackQueue?.length);
+    console.log(
+      '- Show Revocation Available:',
+      typeof window.googlefc?.showRevocationMessage === 'function'
+    );
+
+    // Try to get consent status
+    try {
+      const status = window.googlefc?.getConsentStatus?.();
+      console.log('- Consent Status:', status);
+    } catch (e) {
+      console.log('- Consent Status Error:', e.message);
+    }
+  };
+
+  // Test function to manually trigger CMP
+  window.testGoogleCMP = function () {
+    if (window.googlefc && typeof window.googlefc.showRevocationMessage === 'function') {
+      console.log('🧪 Forcing Google CMP modal...');
+      window.googlefc.showRevocationMessage();
+    } else {
+      console.log('❌ Google CMP showRevocationMessage not available');
+      console.log('ℹ️ This might be because:');
+      console.log("  1. Your location doesn't require consent (not in EU/California)");
+      console.log('  2. You already gave consent recently');
+      console.log('  3. AdSense setup is incomplete');
+    }
+  };
+
+  // Auto-run debug after page load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      console.log('🔍 Auto-running Google CMP debug...');
+      window.debugGoogleCMP?.();
+    }, 5000);
   });
 </script>
