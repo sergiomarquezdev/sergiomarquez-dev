@@ -71,3 +71,88 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
     }
   }
 </script>
+
+<!-- Google Funding Choices (CMP) Script -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-7569719493920591?ers=1"></script>
+<script is:inline>
+	(function() {
+		function signalGooglefcPresent() {
+			if (!window.frames['googlefcPresent']) {
+				if (document.body) {
+					const iframe = document.createElement('iframe');
+					iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+					iframe.style.display = 'none';
+					iframe.name = 'googlefcPresent';
+					document.body.appendChild(iframe);
+				} else {
+					setTimeout(signalGooglefcPresent, 0);
+				}
+			}
+		}
+		signalGooglefcPresent();
+	})();
+</script>
+
+<!-- Google CMP Integration + Analytics (GDPR Compliant) -->
+<script is:inline>
+	// Google CMP Integration for GDPR Compliance
+	window.googlefc = window.googlefc || {};
+	window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+
+	// Function to load Google Analytics only with consent
+	window.loadGoogleAnalyticsWithConsent = function() {
+		console.log('📊 Loading Google Analytics with consent...');
+
+		// Load gtag script ONLY with consent
+		const gtagScript = document.createElement('script');
+		gtagScript.async = true;
+		gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZKQQ4ZXLKH';
+		document.head.appendChild(gtagScript);
+
+		// Initialize gtag with GDPR compliance
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { window.dataLayer.push(arguments); }
+		window.gtag = gtag;
+
+		gtag('js', new Date());
+		gtag('config', 'G-ZKQQ4ZXLKH', {
+			page_title: document.title,
+			page_location: window.location.href,
+			anonymize_ip: true, // GDPR compliance
+		});
+
+		console.log('✅ Google Analytics loaded with user consent');
+		window.analyticsEnabled = true;
+	};
+
+	// Listen for Google CMP consent decisions
+	window.googlefc.callbackQueue.push({
+		'CONSENT_MODE_DATA_READY': () => {
+			console.log('🔍 Google CMP consent data ready');
+			const googleConsent = window.googlefc.getGoogleConsentModeValues();
+
+			// Load Analytics ONLY if user consented
+			if (googleConsent.analyticsStoragePurposeConsentStatus === 1) { // GRANTED
+				window.loadGoogleAnalyticsWithConsent();
+
+				// Sync with our ConsentManager if exists
+				if (window.consentManager) {
+					window.consentManager.syncFromExternalCMP({
+						analytics: true,
+						advertising: googleConsent.adStoragePurposeConsentStatus === 1
+					});
+				}
+			} else {
+				console.log('🚫 Analytics disabled - user did not consent');
+
+				// Sync rejection with our ConsentManager if exists
+				if (window.consentManager) {
+					window.consentManager.syncFromExternalCMP({
+						analytics: false,
+						advertising: googleConsent.adStoragePurposeConsentStatus === 1
+					});
+				}
+			}
+		}
+	});
+</script>
