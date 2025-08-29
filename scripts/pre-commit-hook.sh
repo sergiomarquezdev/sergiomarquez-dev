@@ -1,8 +1,9 @@
 #!/bin/sh
-# Pre-commit hook for portfolio project
-# Lightweight validation without over-engineering
+# Pre-commit hook for sergiomarquez.dev portfolio
+# Place this file in .git/hooks/pre-commit and make it executable
+# chmod +x .git/hooks/pre-commit
 
-echo "🔍 Running pre-commit validations..."
+echo "🔍 Running pre-commit validation for sergiomarquez.dev..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -12,53 +13,56 @@ NC='\033[0m' # No Color
 
 # Function to print colored output
 print_status() {
-    echo "${GREEN}✅ $1${NC}"
+    local color=$1
+    local message=$2
+    echo -e "${color}${message}${NC}"
 }
 
-print_warning() {
-    echo "${YELLOW}⚠️  $1${NC}"
-}
-
-print_error() {
-    echo "${RED}❌ $1${NC}"
-}
-
-# 1. TypeScript Check
-echo "🔍 Checking TypeScript..."
-if npm run type-check; then
-    print_status "TypeScript check passed"
-else
-    print_error "TypeScript check failed"
+# Check if npm is available
+if ! command -v npm &> /dev/null; then
+    print_status $RED "❌ npm not found. Please install Node.js and npm."
     exit 1
 fi
 
-# 2. Prettier format check
-echo "🎨 Checking code formatting..."
-if npm run format:check; then
-    print_status "Code formatting is correct"
-else
-    print_warning "Formatting issues found. Auto-fixing..."
+# Install dependencies if needed
+if [ ! -d "node_modules" ]; then
+    print_status $YELLOW "📦 Installing dependencies..."
+    npm ci
+fi
+
+# Run TypeScript check
+print_status $YELLOW "🔍 Running TypeScript validation..."
+if ! npm run type-check; then
+    print_status $RED "❌ TypeScript validation failed. Please fix the errors before committing."
+    exit 1
+fi
+
+# Run ESLint (usando prettier como linter)
+print_status $YELLOW "🧹 Running code formatting check..."
+if ! npm run format:check; then
+    print_status $YELLOW "⚠️ Code formatting issues found. Auto-formatting..."
     npm run format
+
+    # Add the formatted files to the commit
     git add .
-    print_status "Code formatted and staged"
+    print_status $GREEN "✅ Code formatting applied."
 fi
 
-# 3. Build test
-echo "🏗️  Testing build..."
-if npm run build; then
-    print_status "Build successful"
-else
-    print_error "Build failed"
+# Security audit (non-blocking, just warning)
+print_status $YELLOW "🔒 Running security audit..."
+if ! npm audit --audit-level=moderate; then
+    print_status $YELLOW "⚠️ Security vulnerabilities found. Consider running 'npm audit fix'."
+    print_status $YELLOW "ℹ️ This is not blocking the commit, but should be addressed."
+fi
+
+# Build test (quick validation)
+print_status $YELLOW "🏗️ Testing build process..."
+if ! npm run build; then
+    print_status $RED "❌ Build failed. Please fix the build errors before committing."
     exit 1
 fi
 
-# 4. Security audit (non-blocking)
-echo "🔒 Running security audit..."
-if npm audit --audit-level=high; then
-    print_status "No high severity vulnerabilities found"
-else
-    print_warning "Security vulnerabilities detected. Please review after commit."
-fi
+print_status $GREEN "✅ All pre-commit checks passed!"
+print_status $GREEN "🚀 Proceeding with commit..."
 
-print_status "All pre-commit checks passed! ✨"
 exit 0
