@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import BaseHead from "../components/BaseHead.astro";
+import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
     title: string;
@@ -21,6 +22,7 @@ const { title, description } = Astro.props;
         <main>
             <slot />
         </main>
+        <CookieBanner />
         <style>
             main {
                 margin: 0 auto;
