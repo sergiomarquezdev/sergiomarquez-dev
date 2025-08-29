@@ -50,6 +50,10 @@
 - [2025-08-29] **Sistema anti-duplicación**: CookieBanner detecta Google CMP para evitar conflictos
 - [2025-08-29] **TypeScript declarations**: Agregadas para window.googlefc y funciones de Analytics
 - [2025-08-29] **CRÍTICO**: Analytics ahora carga SOLO con consentimiento explícito (GDPR compliant)
+- [2025-08-29] **TAILWIND CSS ASTRO LIMITATION**: Tailwind 4.x NO es compatible con Astro - mantener 3.x
+- [2025-08-29] **Dependabot exclusions**: tailwindcss, autoprefixer, postcss excluidos de auto-updates
+- [2025-08-29] **GitHub workflows**: Implementados workflows enterprise del blog (health monitor, auto-fix)
+- [2025-08-29] **Security audits**: Integrados en CI/CD para prevenir vulnerabilidades
 
 ## Notas de Proyecto - FINALIZADO ✅
 

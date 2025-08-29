@@ -1,0 +1,55 @@
+version: 2
+updates:
+  # Enable version updates for npm (excluding Tailwind CSS)
+  # Note: Tailwind CSS updates are manually managed due to Astro compatibility
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Europe/Madrid'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'sergiomarquezdev'
+    assignees:
+      - 'sergiomarquezdev'
+    commit-message:
+      prefix: '📦'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'automated'
+    ignore:
+      # Ignore Tailwind CSS updates due to potential Astro compatibility issues
+      - dependency-name: 'tailwindcss'
+      - dependency-name: 'autoprefixer'
+      # Ignore PostCSS related updates that might conflict with Tailwind
+      - dependency-name: 'postcss'
+
+  # Enable security updates
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    open-pull-requests-limit: 10
+    target-branch: 'main'
+    commit-message:
+      prefix: '🔒'
+      include: 'scope'
+    labels:
+      - 'security'
+      - 'automated'
+      - 'priority'
+
+  # GitHub Actions workflow updates
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    commit-message:
+      prefix: '🚀'
+      include: 'scope'
+    labels:
+      - 'github-actions'
+      - 'automated'

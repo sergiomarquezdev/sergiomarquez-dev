@@ -1,33 +1,156 @@
-name: Dependency Updates
+name: 🤖 Auto-Fix Common Issues
 
 on:
-  schedule:
-    # Run every Sunday at 2 AM UTC
-    - cron: "0 2 * * 0"
   workflow_dispatch:
+    inputs:
+      fix_type:
+        description: 'Type of fix to apply'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - linting
+          - dependencies
+          - formatting
+          - security
+
+  schedule:
+    # Run weekly maintenance on Sundays at 2 AM
+    - cron: '0 2 * * 0'
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
-  update-dependencies:
-    name: Update Dependencies
+  auto-fix:
+    name: 🔧 Automated Maintenance
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: 📥 Checkout code
+        uses: actions/checkout@v5.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-      - name: Update dependencies
-        run: |
-          npm update
-          npm audit fix --force || true
+      - name: ⚙️ Set up Node.js 22.x
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: 22.x
+          cache: 'npm'
 
-      - name: Test after updates
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧹 Auto-fix linting and formatting
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'linting' || github.event.inputs.fix_type == 'formatting'
         run: |
+          echo "🧹 Running auto-fix for linting and formatting..."
+
+          # Save current state
+          git stash push -m "Pre-autofix state" || true
+
+          # Apply fixes
+          npm run lint:fix || true
+          npm run format || true
+
+          # Check for changes
+          if ! git diff --quiet; then
+            echo "✅ Applied auto-fixes"
+            echo "LINTING_FIXED=true" >> $GITHUB_ENV
+          else
+            echo "ℹ️ No linting issues to fix"
+            echo "LINTING_FIXED=false" >> $GITHUB_ENV
+          fi
+
+      - name: 🔒 Security updates
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'security'
+        run: |
+          echo "🔒 Checking for security updates..."
+
+          # Check for vulnerabilities
+          if npm audit --audit-level=moderate; then
+            echo "✅ No security vulnerabilities found"
+            echo "SECURITY_FIXED=false" >> $GITHUB_ENV
+          else
+            echo "🔧 Applying security fixes..."
+            npm audit fix --force || true
+
+            if ! git diff --quiet package*.json; then
+              echo "✅ Applied security updates"
+              echo "SECURITY_FIXED=true" >> $GITHUB_ENV
+            else
+              echo "ℹ️ No automatic security fixes available"
+              echo "SECURITY_FIXED=false" >> $GITHUB_ENV
+            fi
+          fi
+
+      - name: 📦 Dependency updates
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'dependencies'
+        run: |
+          echo "📦 Checking for dependency updates..."
+
+          # This is a conservative approach - only patch updates
+          # Major/minor updates should be handled by Dependabot PRs
+          # CRITICAL: Tailwind CSS excluded due to Astro compatibility
+
+          echo "ℹ️ Dependency updates handled by Dependabot"
+          echo "ℹ️ Tailwind CSS updates excluded (Astro compatibility)"
+          echo "ℹ️ Only security fixes applied automatically"
+          echo "DEPS_UPDATED=false" >> $GITHUB_ENV
+
+      - name: 🧪 Verify fixes don't break anything
+        run: |
+          echo "🧪 Testing that fixes don't break the build..."
+
+          # Run full validation
+          npm run validate
+          npm run build
+
+          echo "✅ All fixes verified successfully"
+
+      - name: 📝 Create commit with fixes
+        run: |
+          echo "📝 Checking if commits are needed..."
+
+          if ! git diff --quiet; then
+            echo "📝 Committing automated fixes..."
+
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action Auto-Fix Bot"
+
+            # Prepare commit message
+            COMMIT_MSG="🤖 Automated maintenance fixes
+
+            - 🧹 Applied ESLint and Prettier fixes
+            - 🔒 Applied security updates if any
+            - ⚠️ Tailwind CSS excluded (Astro compatibility)
+
+            Automated maintenance run on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+
+            git add .
+            git commit -m "$COMMIT_MSG"
+            git push origin main
+
+            echo "✅ Fixes committed and pushed successfully"
+          else
+            echo "ℹ️ No changes to commit"
+          fi
+
+      - name: 📊 Summary report
+        if: always()
+        run: |
+          echo "📊 Auto-fix Summary Report"
+          echo "=========================="
+          echo "🕐 Run time: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "🎯 Fix type: ${{ github.event.inputs.fix_type || 'scheduled' }}"
+          echo ""
+          echo "✅ Automated maintenance completed"
+          echo "⚠️ Tailwind CSS updates excluded (Astro compatibility)"
+          echo "ℹ️ Check git log for any applied fixes"
           npm run validate
 
       - name: Create Pull Request
