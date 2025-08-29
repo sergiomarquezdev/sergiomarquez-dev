@@ -279,7 +279,7 @@ This is a personal portfolio, but if you find bugs or have suggestions:
 
 ## 📞 **Contact**
 
-**Sergio Márquez Pérez**  
+**Sergio Márquez Pérez**
 _AI/ML & Backend Developer_
 
 - 🌐 **Website**: [sergiomarquez.dev](https://sergiomarquez.dev)
