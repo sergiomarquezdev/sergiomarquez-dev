@@ -80,7 +80,7 @@ jobs:
 
       - name: 🤖 Create issue for failures
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v7.0.1
         with:
           script: |
             const title = `🚨 Site Health Check Failed - ${new Date().toISOString().split('T')[0]}`;
