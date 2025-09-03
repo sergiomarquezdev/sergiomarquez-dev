@@ -32,37 +32,26 @@ fi
 
 # Run TypeScript check
 print_status $YELLOW "🔍 Running TypeScript validation..."
-if ! npm run type-check; then
+if ! bun run type-check; then
     print_status $RED "❌ TypeScript validation failed. Please fix the errors before committing."
     exit 1
 fi
 
-# Run ESLint (usando prettier como linter)
-print_status $YELLOW "🧹 Running ESLint validation..."
-if ! npm run lint:eslint; then
-    print_status $YELLOW "⚠️ ESLint found issues. Attempting auto-fix..."
-    npm run lint:eslint:fix
+# Run Biome linting and formatting
+print_status $YELLOW "🧹 Running Biome validation..."
+if ! bun run lint; then
+    print_status $YELLOW "⚠️ Biome found issues. Attempting auto-fix..."
+    bun run lint:fix
 
     # Check if auto-fix resolved all issues
-    if ! npm run lint:eslint; then
-        print_status $RED "❌ ESLint issues remain after auto-fix. Please resolve manually."
+    if ! bun run lint; then
+        print_status $RED "❌ Biome issues remain after auto-fix. Please resolve manually."
         exit 1
     else
-        print_status $GREEN "✅ ESLint issues auto-fixed successfully."
+        print_status $GREEN "✅ Biome issues auto-fixed successfully."
         # Add the fixed files to the commit
         git add .
     fi
-fi
-
-# Run Prettier check
-print_status $YELLOW "💄 Checking code formatting..."
-if ! npm run format:check; then
-    print_status $YELLOW "⚠️ Code formatting issues found. Auto-formatting..."
-    npm run format
-
-    # Add the formatted files to the commit
-    git add .
-    print_status $GREEN "✅ Code formatting applied."
 fi
 
 # Security audit (non-blocking, just warning)
@@ -74,7 +63,7 @@ fi
 
 # Build test (quick validation)
 print_status $YELLOW "🏗️ Testing build process..."
-if ! npm run build; then
+if ! bun run build; then
     print_status $RED "❌ Build failed. Please fix the build errors before committing."
     exit 1
 fi

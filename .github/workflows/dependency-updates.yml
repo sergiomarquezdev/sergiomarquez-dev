@@ -124,7 +124,7 @@ jobs:
             # Prepare commit message
             COMMIT_MSG="🤖 Automated maintenance fixes
 
-            - 🧹 Applied ESLint and Prettier fixes
+            - 🧹 Applied Biome fixes (formatting and linting)
             - 🔒 Applied security updates if any
             - ⚠️ Tailwind CSS excluded (Astro compatibility)
 

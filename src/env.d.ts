@@ -16,12 +16,12 @@ declare global {
     // Analytics functions
     loadGoogleAnalyticsWithConsent?: () => void;
     analyticsEnabled?: boolean;
-    // eslint-disable-next-line no-unused-vars
+    // biome-ignore lint/suspicious/noExplicitAny: Google Analytics requires any type
     gtag?: (...args: any[]) => void;
     dataLayer?: any[];
     // Consent Manager (for synchronization)
     consentManager?: {
-      // eslint-disable-next-line no-unused-vars
+      // biome-ignore lint/suspicious/noExplicitAny: External CMP settings type unknown
       syncFromExternalCMP: (settings: any) => void;
     };
     // AdSense

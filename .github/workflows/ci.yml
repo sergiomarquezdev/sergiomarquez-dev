@@ -174,7 +174,7 @@ jobs:
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action Auto-Fix"
             git add .
-            git commit -m "🤖 Auto-fix: ESLint and Prettier formatting
+            git commit -m "🤖 Auto-fix: Biome formatting and linting"
 
             - Applied automatic linting fixes
             - Standardized code formatting

@@ -5,12 +5,14 @@
 Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos de configuración y documentación que aún referencian las herramientas anteriores (npm, ESLint, Prettier). Esto puede causar confusión y problemas de mantenimiento.
 
 **Objetivos:**
+
 - Limpiar archivos innecesarios del proyecto
 - Actualizar todos los archivos de CI/CD para reflejar el nuevo stack (Bun + Biome)
 - Asegurar consistencia en toda la documentación
 - Mantener solo los archivos esenciales para el funcionamiento
 
 **Beneficios esperados:**
+
 - Proyecto más limpio y mantenible
 - Documentación consistente
 - Workflows de CI/CD actualizados
@@ -35,6 +37,7 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
 ## High-level Task Breakdown
 
 ### Fase 1: Auditoría y Análisis ✅ COMPLETADA
+
 - [x] **1.1** Auditar todos los archivos de CI/CD (.github/workflows/)
   - Revisar referencias a npm, ESLint, Prettier
   - Identificar comandos desactualizados
@@ -51,6 +54,7 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
   - **Criterio de éxito**: Lista de archivos de documentación a actualizar ✅
 
 ### Fase 2: Actualización de CI/CD ✅ COMPLETADA
+
 - [x] **2.1** Actualizar health-monitor.yml
   - Cambiar referencias de npm a bun
   - Actualizar comandos de build
@@ -67,6 +71,7 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
   - **Criterio de éxito**: Workflow de dependencias actualizado ✅
 
 ### Fase 3: Limpieza de Archivos ✅ COMPLETADA
+
 - [x] **3.1** Eliminar archivos de configuración obsoletos
   - Remover .eslintrc, .prettierrc si existen
   - Limpiar archivos temporales
@@ -78,6 +83,7 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
   - **Criterio de éxito**: Scripts actualizados y funcionando ✅
 
 ### Fase 4: Verificación y Documentación ✅ COMPLETADA
+
 - [x] **4.1** Verificar funcionamiento completo
   - Probar todos los workflows localmente
   - Verificar que el build funcione
@@ -91,9 +97,10 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
 ## Project Status Board
 
 ### Completado ✅
+
 - [x] Auditoría completa de archivos CI/CD
 - [x] Auditoría de archivos de configuración
-- [x] Auditoría de documentación  
+- [x] Auditoría de documentación
 - [x] Actualización de health-monitor.yml
 - [x] Actualización de ci.yml
 - [x] Actualización de dependency-updates.yml
@@ -102,10 +109,12 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
 - [x] Documentación final
 
 ### En Progreso
-*Ninguna tarea en progreso*
+
+_Ninguna tarea en progreso_
 
 ### Pendiente
-*Todas las tareas completadas*
+
+_Todas las tareas completadas_
 
 ## Current Status / Progress Tracking
 
@@ -116,11 +125,13 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
 ### ✅ RESUMEN DE LOGROS:
 
 **Archivos CI/CD actualizados (3 archivos):**
+
 1. **health-monitor.yml**: Referencias npm → bun en documentación
 2. **ci.yml**: Setup completo migrado de Node.js+npm a Bun, referencias ESLint/Prettier → Biome
 3. **dependency-updates.yml**: Workflow completo actualizado a Bun, manteniendo npm audit para seguridad
 
 **Cambios específicos realizados:**
+
 - ✅ Reemplazados todos los `npm ci` y `npm run` por `bun install` y `bun run`
 - ✅ Actualizados todos los setup de Node.js por setup de Bun
 - ✅ Cambiadas referencias de ESLint/Prettier a Biome en nombres y comentarios
@@ -129,6 +140,7 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
 - ✅ Confirmado que package.json tiene scripts actualizados
 
 **Estado del proyecto:**
+
 - ✅ Proyecto compila correctamente
 - ✅ Biome funciona correctamente (advertencias esperadas de Astro)
 - ✅ Cambios commiteados en git
@@ -143,17 +155,20 @@ Después de la migración exitosa a Bun y Biome, el proyecto contiene archivos d
 La limpieza del proyecto se ha completado con éxito. Se actualizaron los 3 archivos de CI/CD identificados para usar Bun en lugar de npm, y se verificó que no existen archivos obsoletos en el proyecto.
 
 **Logros principales:**
+
 1. **Consistencia completa**: Todos los workflows ahora reflejan el stack moderno (Bun + Biome)
-2. **Performance mejorado**: CI/CD será más rápido con Bun 
+2. **Performance mejorado**: CI/CD será más rápido con Bun
 3. **Mantenibilidad**: Eliminadas todas las referencias inconsistentes
 4. **Verificación exitosa**: Proyecto funciona correctamente después de los cambios
 
 **Archivos actualizados:**
+
 - `.github/workflows/health-monitor.yml` (referencias npm → bun)
-- `.github/workflows/ci.yml` (migración completa Node.js+npm → Bun+Biome)  
+- `.github/workflows/ci.yml` (migración completa Node.js+npm → Bun+Biome)
 - `.github/workflows/dependency-updates.yml` (workflow actualizado a Bun)
 
 **Estado final:**
+
 - ✅ Todos los objetivos del plan cumplidos
 - ✅ No se encontraron archivos obsoletos para eliminar
 - ✅ Proyecto completamente limpio y consistente

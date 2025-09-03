@@ -24,7 +24,7 @@ This repository contains the source code for my **professional portfolio website
 ### 🛠️ **Developer Experience**
 
 - **Type Safety**: Full TypeScript integration with strict checking
-- **Code Quality**: Automated formatting with Prettier
+- **Code Quality**: Ultra-fast unified linting and formatting with Biome
 - **Pre-commit Validation**: Quality checks before every commit
 - **Hot Reload**: Fast development with Astro's dev server
 
@@ -259,7 +259,7 @@ This is a personal portfolio, but if you find bugs or have suggestions:
 1. **Fork the repository**
 2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
 3. **Make your changes** (following our quality standards)
-4. **Run validation**: `npm run validate`
+4. **Run validation**: `bun run validate`
 5. **Commit your changes**: `git commit -m 'feat: add amazing feature'`
 6. **Push to branch**: `git push origin feature/amazing-feature`
 7. **Open a Pull Request**

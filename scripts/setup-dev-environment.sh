@@ -24,7 +24,7 @@ fi
 
 # Install dependencies
 print_status $YELLOW "📦 Installing dependencies..."
-npm ci
+bun install
 
 # Setup pre-commit hook
 print_status $YELLOW "🔧 Setting up pre-commit hook..."
@@ -39,17 +39,17 @@ print_status $GREEN "✅ Pre-commit hook installed"
 
 # Run initial validation
 print_status $YELLOW "🔍 Running initial validation..."
-npm run validate
+bun run validate
 
 if [ $? -eq 0 ]; then
     print_status $GREEN "✅ Initial validation passed"
 else
     print_status $YELLOW "⚠️ Validation issues found. Attempting auto-fix..."
-    npm run lint:fix
-    npm run format
+    bun run lint:fix
+    bun run format
 
     print_status $YELLOW "🔍 Re-running validation..."
-    npm run validate
+    bun run validate
 
     if [ $? -eq 0 ]; then
         print_status $GREEN "✅ Issues fixed successfully"
@@ -61,7 +61,7 @@ fi
 
 # Test build
 print_status $YELLOW "🏗️ Testing build process..."
-npm run build
+bun run build
 
 if [ $? -eq 0 ]; then
     print_status $GREEN "✅ Build test successful"
@@ -73,12 +73,12 @@ fi
 print_status $GREEN "🎉 Development environment setup complete!"
 echo ""
 print_status $GREEN "✅ Available commands:"
-echo "  • npm run dev          - Start development server"
-echo "  • npm run build        - Build for production"
-echo "  • npm run preview      - Preview production build"
-echo "  • npm run validate     - Run all quality checks"
-echo "  • npm run lint:fix     - Auto-fix linting issues"
-echo "  • npm run format       - Auto-format code"
+echo "  • bun run dev          - Start development server"
+echo "  • bun run build        - Build for production"
+echo "  • bun run preview      - Preview production build"
+echo "  • bun run validate     - Run all quality checks"
+echo "  • bun run lint:fix     - Auto-fix linting issues"
+echo "  • bun run format       - Auto-format code"
 echo ""
 print_status $GREEN "🤖 Automated features configured:"
 echo "  • Pre-commit validation hooks"
@@ -93,4 +93,4 @@ print_status $YELLOW "💡 Tips:"
 echo "  • Pre-commit hook will auto-fix most issues"
 echo "  • GitHub Actions will validate all changes"
 echo "  • Health monitor will alert if site goes down"
-echo "  • Run 'npm run validate' before major commits"
+echo "  • Run 'bun run validate' before major commits"
