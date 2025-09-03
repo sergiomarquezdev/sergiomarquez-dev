@@ -36,14 +36,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: ⚙️ Set up Node.js 22.x
-        uses: actions/setup-node@v4.4.0
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22.x
-          cache: 'npm'
+          bun-version: latest
 
       - name: 📦 Install dependencies
-        run: npm ci
+        run: bun install
 
       - name: 🧹 Auto-fix linting and formatting
         if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'linting' || github.event.inputs.fix_type == 'formatting'
@@ -54,8 +53,8 @@ jobs:
           git stash push -m "Pre-autofix state" || true
 
           # Apply fixes
-          npm run lint:fix || true
-          npm run format || true
+          bun run lint:fix || true
+          bun run format || true
 
           # Check for changes
           if ! git diff --quiet; then
@@ -107,8 +106,8 @@ jobs:
           echo "🧪 Testing that fixes don't break the build..."
 
           # Run full validation
-          npm run validate
-          npm run build
+          bun run validate
+          bun run build
 
           echo "✅ All fixes verified successfully"
 
@@ -151,7 +150,7 @@ jobs:
           echo "✅ Automated maintenance completed"
           echo "⚠️ Tailwind CSS updates excluded (Astro compatibility)"
           echo "ℹ️ Check git log for any applied fixes"
-          npm run validate
+          bun run validate
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5

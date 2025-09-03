@@ -109,7 +109,7 @@ jobs:
 
             ### 🌐 Cloudflare Pages Info:
             - Auto-deploy from main branch
-            - Build command: \`npm run build\`
+            - Build command: \`bun run build\`
             - Output directory: \`dist\`
 
             ---
