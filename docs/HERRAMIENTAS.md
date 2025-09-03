@@ -5,6 +5,7 @@
 Bun ha reemplazado a npm como package manager del proyecto, proporcionando instalaciones 17x más rápidas.
 
 ### Comandos principales:
+
 ```bash
 # Instalar dependencias
 bun install
@@ -12,7 +13,7 @@ bun install
 # Agregar nueva dependencia
 bun add <package>
 
-# Agregar dependencia de desarrollo  
+# Agregar dependencia de desarrollo
 bun add -D <package>
 
 # Remover dependencia
@@ -27,6 +28,7 @@ bun run <script-name>
 Biome ha reemplazado a ESLint + Prettier, proporcionando linting y formateo 35x más rápido en una sola herramienta.
 
 ### Comandos principales:
+
 ```bash
 # Verificar código (lint + format check)
 bun run lint
@@ -42,7 +44,9 @@ bun run format:check
 ```
 
 ### Configuración
+
 La configuración está en `biome.json` y incluye:
+
 - Compatibilidad 97% con Prettier
 - Reglas de linting recomendadas
 - Organización automática de imports
@@ -69,7 +73,7 @@ bun run type-check
 ## 🔧 Beneficios Obtenidos
 
 - ⚡ **Instalaciones ultra-rápidas**: Bun vs npm (17x mejora)
-- 🎨 **Formateo ultra-rápido**: Biome vs Prettier (35x mejora)  
+- 🎨 **Formateo ultra-rápido**: Biome vs Prettier (35x mejora)
 - 🔍 **Linting ultra-rápido**: Biome vs ESLint (significativamente más rápido)
 - 📦 **Configuración simplificada**: Un archivo vs múltiples archivos de config
 - 🛠️ **Herramientas unificadas**: Una herramienta en lugar de múltiples
@@ -84,7 +88,7 @@ bun run type-check
 ## 🔄 Migración Completada
 
 - ✅ ESLint → Biome
-- ✅ Prettier → Biome  
+- ✅ Prettier → Biome
 - ✅ npm → Bun
 - ✅ Configuraciones múltiples → Configuración unificada
 - ✅ Dependencias obsoletas removidas
