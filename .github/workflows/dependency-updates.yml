@@ -70,12 +70,13 @@ jobs:
         run: |
           echo "🔒 Checking for security updates..."
 
-          # Check for vulnerabilities
+          # Check for vulnerabilities - using npm audit as Bun doesn't have equivalent
           if npm audit --audit-level=moderate; then
             echo "✅ No security vulnerabilities found"
             echo "SECURITY_FIXED=false" >> $GITHUB_ENV
           else
             echo "🔧 Applying security fixes..."
+            # Using npm audit fix for security patches - Bun manages same package-lock.json
             npm audit fix --force || true
 
             if ! git diff --quiet package*.json; then

@@ -62,12 +62,14 @@ jobs:
       - name: 🔍 Security audit
         run: |
           echo "🔍 Running security audit..."
+          # Using npm audit as Bun doesn't have equivalent security audit yet
           npm audit --audit-level=moderate
           echo "✅ Security audit completed!"
 
       - name: 📦 Dependency validation
         run: |
           echo "📦 Validating dependencies..."
+          # Using npm ls for compatibility - Bun manages the same package-lock.json
           npm ls --depth=0
           echo "✅ Dependencies validated!"
 
@@ -187,11 +189,12 @@ jobs:
         run: |
           echo "🔄 Checking for dependency updates..."
 
-          # Check for security vulnerabilities
+          # Check for security vulnerabilities - using npm audit as Bun doesn't have equivalent
           if npm audit --audit-level=moderate; then
             echo "✅ No critical security issues"
           else
             echo "🔧 Attempting to fix security issues..."
+            # Using npm audit fix for security patches - Bun manages same package-lock.json
             npm audit fix --force || true
 
             if ! git diff --quiet package*.json; then
@@ -199,7 +202,7 @@ jobs:
               git add package*.json
               git commit -m "🔒 Security: Auto-update vulnerable dependencies
 
-              - Fixed security vulnerabilities via npm audit fix
+              - Fixed security vulnerabilities via npm audit fix (Bun compatible)
               - Automated dependency security update
               - Cloudflare Pages will deploy these security fixes"
               git push

@@ -18,16 +18,16 @@ print_status() {
     echo -e "${color}${message}${NC}"
 }
 
-# Check if npm is available
-if ! command -v npm &> /dev/null; then
-    print_status $RED "❌ npm not found. Please install Node.js and npm."
+# Check if bun is available
+if ! command -v bun &> /dev/null; then
+    print_status $RED "❌ bun not found. Please install Bun package manager."
     exit 1
 fi
 
 # Install dependencies if needed
 if [ ! -d "node_modules" ]; then
     print_status $YELLOW "📦 Installing dependencies..."
-    npm ci
+    bun install
 fi
 
 # Run TypeScript check
@@ -54,10 +54,10 @@ if ! bun run lint; then
     fi
 fi
 
-# Security audit (non-blocking, just warning)
+# Security audit (non-blocking, just warning) - using npm as Bun doesn't have audit yet
 print_status $YELLOW "🔒 Running security audit..."
 if ! npm audit --audit-level=moderate; then
-    print_status $YELLOW "⚠️ Security vulnerabilities found. Consider running 'npm audit fix'."
+    print_status $YELLOW "⚠️ Security vulnerabilities found. Consider running 'npm audit fix' (Bun compatible)."
     print_status $YELLOW "ℹ️ This is not blocking the commit, but should be addressed."
 fi
 
