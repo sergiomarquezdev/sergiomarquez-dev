@@ -41,15 +41,15 @@ This repository contains the source code for my **professional portfolio website
 
 ### **Frontend**
 
-- **[Astro 5.13.4](https://astro.build/)** - Static site generator with server-side rendering
+- **[Astro 5.13.5](https://astro.build/)** - Static site generator with server-side rendering
 - **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Non.geist](https://vercel.com/font/sans)** - Modern typography
 
 ### **Quality Assurance**
 
-- **[Prettier](https://prettier.io/)** - Code formatting
-- **[ESLint](https://eslint.org/)** - Code quality analysis
+- **[Biome](https://biomejs.dev/)** - Ultra-fast unified linter and formatter (35x faster than ESLint/Prettier)
+- **[Bun](https://bun.sh/)** - Lightning-fast package manager and runtime (17x faster than npm)
 - **[Astro Check](https://docs.astro.build/en/reference/cli-reference/#astro-check)** - TypeScript validation
 - **Pre-commit Hooks** - Automated validation
 
@@ -103,7 +103,7 @@ sergiomarquez-dev/
 ├── astro.config.mjs          # Astro configuration with optimizations
 ├── tailwind.config.mjs       # Tailwind CSS configuration
 ├── tsconfig.json            # TypeScript configuration
-├── .prettierrc              # Code formatting rules
+├── biome.json               # Biome linting and formatting configuration
 └── package.json             # Dependencies and scripts
 ```
 
@@ -114,7 +114,7 @@ sergiomarquez-dev/
 ### **Prerequisites**
 
 - **Node.js 20+** (LTS recommended)
-- **npm** or **yarn** package manager
+- **[Bun](https://bun.sh/)** package manager (recommended) or **npm**
 
 ### **Installation**
 
@@ -128,7 +128,7 @@ sergiomarquez-dev/
 2. **Setup development environment:**
 
    ```bash
-   npm run setup
+   bun run setup
    ```
 
    This will:
@@ -140,7 +140,7 @@ sergiomarquez-dev/
 3. **Start development server:**
 
    ```bash
-   npm run dev
+   bun run dev
    ```
 
    - Site available at: `http://localhost:4321`
@@ -153,26 +153,25 @@ sergiomarquez-dev/
 ### **Development**
 
 ```bash
-npm run dev          # Start development server with hot reload
-npm run build        # Build optimized production version
-npm run preview      # Preview production build locally
+bun run dev          # Start development server with hot reload
+bun run build        # Build optimized production version
+bun run preview      # Preview production build locally
 ```
 
 ### **Quality Assurance**
 
 ```bash
-npm run validate     # Run complete validation pipeline
-npm run type-check   # TypeScript validation with Astro
-npm run format       # Format code with Prettier
-npm run format:check # Check code formatting (CI-friendly)
-npm run lint         # Alias for format:check
-npm run lint:fix     # Alias for format
+bun run validate     # Run complete validation pipeline
+bun run type-check   # TypeScript validation with Astro
+bun run lint         # Check code quality and formatting with Biome
+bun run format       # Format code with Biome
+bun run lint:fix     # Fix auto-fixable issues with Biome
 ```
 
 ### **Development Environment**
 
 ```bash
-npm run setup        # Complete development environment setup
+bun run setup        # Complete development environment setup
 ```
 
 ---
@@ -203,8 +202,8 @@ Every code change goes through multiple validation layers:
 ### **Code Standards**
 
 - **TypeScript**: Strict mode enabled for maximum type safety
-- **Formatting**: Prettier with custom configuration for Astro
-- **Linting**: ESLint rules for code quality
+- **Code Quality**: Biome for unified linting and formatting
+- **Performance**: Ultra-fast tooling with Bun and Biome
 - **Commits**: Descriptive conventional commit messages
 
 ### **Performance Standards**
