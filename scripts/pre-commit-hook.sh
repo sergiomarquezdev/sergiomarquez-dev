@@ -6,7 +6,7 @@ echo "🔍 Pre-commit validation..."
 # TypeScript check
 bun run type-check || exit 1
 
-# Lint check  
+# Lint check
 bun run lint || exit 1
 
 echo "✅ Validation passed"
