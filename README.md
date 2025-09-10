@@ -14,7 +14,7 @@ This repository contains the source code for my **personal portfolio website**. 
 ## ✨ **Key Features**
 
 - **Minimalist Design**: Dark-mode-first, clean and professional
-- **Performance Optimized**: Lighthouse scores 95+ across all metrics  
+- **Performance Optimized**: Lighthouse scores 95+ across all metrics
 - **SEO Ready**: Complete meta tags, structured data, automatic sitemap
 - **Type Safety**: Full TypeScript integration
 - **Fast Development**: Hot reload with Astro's dev server
@@ -25,7 +25,7 @@ This repository contains the source code for my **personal portfolio website**. 
 ## 🏗️ **Tech Stack**
 
 - **[Astro 5.13.5](https://astro.build/)** - Static site generator
-- **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - Utility-first CSS framework  
+- **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Non.geist](https://vercel.com/font/sans)** - Modern typography
 - **[Biome](https://biomejs.dev/)** - Fast linting and formatting
@@ -38,7 +38,7 @@ This repository contains the source code for my **personal portfolio website**. 
 
 ```
 sergiomarquez-dev/
-├── docs/                      # Project documentation  
+├── docs/                      # Project documentation
 │   ├── scratchpad.md         # Development notes and lessons learned
 │   └── implementation-plan/   # Detailed planning documents
 ├── public/                    # Static assets
@@ -108,7 +108,7 @@ sergiomarquez-dev/
 ```bash
 # Development
 bun run dev          # Start development server with hot reload
-bun run build        # Build optimized production version  
+bun run build        # Build optimized production version
 bun run preview      # Preview production build locally
 
 # Quality checks (when needed)
@@ -134,7 +134,7 @@ Simple and straightforward:
 Run these when you want to validate your code:
 
 - `bun run type-check` - TypeScript validation
-- `bun run lint` - Code quality check  
+- `bun run lint` - Code quality check
 - `bun run validate` - Full validation (type + lint + build)
 
 ---
@@ -142,7 +142,7 @@ Run these when you want to validate your code:
 ## 🎯 **Performance & SEO**
 
 - **Lighthouse Scores**: 95+ Performance, 100/100 SEO ✅
-- **Automatic Sitemap**: Generated at build time 
+- **Automatic Sitemap**: Generated at build time
 - **SEO Optimized**: Complete meta tags and structured data
 - **Fast Loading**: Static generation with Astro
 - **CDN Ready**: Deployed on Cloudflare Pages
