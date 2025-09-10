@@ -1,12 +1,11 @@
 # 🚀 Sergio Márquez Pérez - Personal Portfolio
 
-> **Enterprise-grade portfolio built with modern web technologies and automated quality assurance**
+> **Simple, fast personal portfolio built with modern web technologies**
 
-[![CI/CD Status](https://github.com/sergiomarquezdev/sergiomarquez-dev/workflows/CI%2FCD%20Portfolio/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions)
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 
-This repository contains the source code for my **professional portfolio website**, featuring a **modern tech stack** with **automated quality assurance**, **performance optimization**, and **enterprise-grade CI/CD pipeline**.
+This repository contains the source code for my **personal portfolio website**. Built with **Astro** and **Tailwind CSS** following the **KISS principle** (Keep It Simple, Stupid).
 
 🌐 **Live Site**: [sergiomarquez.dev](https://sergiomarquez.dev)
 
@@ -14,58 +13,24 @@ This repository contains the source code for my **professional portfolio website
 
 ## ✨ **Key Features**
 
-### 🎯 **Professional Portfolio**
-
 - **Minimalist Design**: Dark-mode-first, clean and professional
-- **Performance Optimized**: Lighthouse scores 95+ across all metrics
+- **Performance Optimized**: Lighthouse scores 95+ across all metrics  
 - **SEO Ready**: Complete meta tags, structured data, automatic sitemap
-- **Social Sharing**: Custom OG images and Twitter Cards
-
-### 🛠️ **Developer Experience**
-
-- **Type Safety**: Full TypeScript integration with strict checking
-- **Code Quality**: Ultra-fast unified linting and formatting with Biome
-- **Pre-commit Validation**: Quality checks before every commit
-- **Hot Reload**: Fast development with Astro's dev server
-
-### 🤖 **Automation & CI/CD**
-
-- **Automated Testing**: Build validation, type checking, format checking
-- **Dependency Management**: Weekly automatic updates with testing
-- **Quality Gates**: No broken code reaches production
-- **Performance Monitoring**: Lighthouse CI integration
+- **Type Safety**: Full TypeScript integration
+- **Fast Development**: Hot reload with Astro's dev server
+- **Simple Deployment**: Automatic deployment via Cloudflare Pages
 
 ---
 
 ## 🏗️ **Tech Stack**
 
-### **Frontend**
-
-- **[Astro 5.13.5](https://astro.build/)** - Static site generator with server-side rendering
-- **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Astro 5.13.5](https://astro.build/)** - Static site generator
+- **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - Utility-first CSS framework  
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Non.geist](https://vercel.com/font/sans)** - Modern typography
-
-### **Quality Assurance**
-
-- **[Biome](https://biomejs.dev/)** - Ultra-fast unified linter and formatter (35x faster than ESLint/Prettier)
-- **[Bun](https://bun.sh/)** - Lightning-fast package manager and runtime (17x faster than npm)
-- **[Astro Check](https://docs.astro.build/en/reference/cli-reference/#astro-check)** - TypeScript validation
-- **Pre-commit Hooks** - Automated validation
-
-### **CI/CD & Automation**
-
-- **[GitHub Actions](https://github.com/features/actions)** - Continuous integration
-- **[Dependabot](https://docs.github.com/en/code-security/dependabot)** - Dependency updates
+- **[Biome](https://biomejs.dev/)** - Fast linting and formatting
+- **[Bun](https://bun.sh/)** - Fast package manager
 - **[Cloudflare Pages](https://pages.cloudflare.com/)** - Deployment platform
-- **Automated workflows** - Testing, validation, deployment
-
-### **SEO & Performance**
-
-- **Automatic Sitemap** - Generated with @astrojs/sitemap
-- **Structured Data** - Schema.org implementation
-- **Open Graph** - Social media optimization
-- **Performance Optimization** - Compressed assets, optimized builds
 
 ---
 
@@ -73,19 +38,15 @@ This repository contains the source code for my **professional portfolio website
 
 ```
 sergiomarquez-dev/
-├── .github/workflows/          # GitHub Actions CI/CD
-│   ├── ci.yml                 # Main validation pipeline
-│   └── dependency-updates.yml # Automated dependency management
-├── docs/                      # Project documentation
+├── docs/                      # Project documentation  
 │   ├── scratchpad.md         # Development notes and lessons learned
 │   └── implementation-plan/   # Detailed planning documents
 ├── public/                    # Static assets
 │   ├── favicon.ico           # Site favicon
 │   ├── robots.txt            # Search engine directives
 │   └── og-image.svg          # Custom Open Graph image
-├── scripts/                   # Development automation
-│   ├── pre-commit-hook.sh    # Quality validation before commits
-│   └── setup-dev-environment.sh # Development setup automation
+├── scripts/                   # Simple development helpers
+│   └── pre-commit-hook.sh    # Basic quality validation
 ├── src/
 │   ├── components/           # Reusable Astro components
 │   │   ├── BaseHead.astro   # SEO and meta tags
@@ -100,10 +61,10 @@ sergiomarquez-dev/
 │   │   └── [redirects]/     # Social media redirects
 │   └── styles/              # Global styling
 │       └── global.css       # CSS variables and base styles
-├── astro.config.mjs          # Astro configuration with optimizations
+├── astro.config.mjs          # Astro configuration
 ├── tailwind.config.mjs       # Tailwind CSS configuration
 ├── tsconfig.json            # TypeScript configuration
-├── biome.json               # Biome linting and formatting configuration
+├── biome.json               # Simple Biome configuration
 └── package.json             # Dependencies and scripts
 ```
 
@@ -125,18 +86,11 @@ sergiomarquez-dev/
    cd sergiomarquez-dev
    ```
 
-2. **Setup development environment:**
+2. **Install dependencies:**
 
    ```bash
-   bun run setup
+   bun install
    ```
-
-   This will:
-
-   - Install all dependencies
-   - Setup pre-commit hooks
-   - Validate the installation
-   - Run initial quality checks
 
 3. **Start development server:**
 
@@ -151,131 +105,53 @@ sergiomarquez-dev/
 
 ## 📜 **Available Scripts**
 
-### **Development**
-
 ```bash
+# Development
 bun run dev          # Start development server with hot reload
-bun run build        # Build optimized production version
+bun run build        # Build optimized production version  
 bun run preview      # Preview production build locally
-```
 
-### **Quality Assurance**
-
-```bash
-bun run validate     # Run complete validation pipeline
+# Quality checks (when needed)
 bun run type-check   # TypeScript validation with Astro
-bun run lint         # Check code quality and formatting with Biome
-bun run format       # Format code with Biome
+bun run lint         # Check code quality with Biome
 bun run lint:fix     # Fix auto-fixable issues with Biome
-```
-
-### **Development Environment**
-
-```bash
-bun run setup        # Complete development environment setup
+bun run validate     # Run type-check + lint + build
 ```
 
 ---
 
 ## 🔧 **Development Workflow**
 
-### **Quality Gates**
+Simple and straightforward:
 
-Every code change goes through multiple validation layers:
+1. **Make changes** to your code
+2. **Test locally** with `bun run dev`
+3. **Commit changes** - basic pre-commit validation runs automatically
+4. **Push to main** - Cloudflare Pages deploys automatically
 
-1. **Pre-commit Hook** (automatic):
+### **Optional Quality Checks**
 
-   - ✅ TypeScript type checking
-   - ✅ Code formatting validation
-   - ✅ Build verification
-   - ⚠️ Security audit (non-blocking)
+Run these when you want to validate your code:
 
-2. **CI/CD Pipeline** (GitHub Actions):
-
-   - ✅ Cross-platform testing (Ubuntu)
-   - ✅ Dependency validation
-   - ✅ Production build testing
-   - ✅ Artifact generation
-
-3. **Automated Maintenance**:
-   - 🔄 Weekly dependency updates (Sundays 2 AM UTC)
-   - 🔄 Security patch automation
-   - 🔄 Auto-testing of updates
-
-### **Code Standards**
-
-- **TypeScript**: Strict mode enabled for maximum type safety
-- **Code Quality**: Biome for unified linting and formatting
-- **Performance**: Ultra-fast tooling with Bun and Biome
-- **Commits**: Descriptive conventional commit messages
-
-### **Performance Standards**
-
-- **Lighthouse Performance**: 95+ score required
-- **Lighthouse SEO**: 100/100 score required
-- **Bundle Size**: Optimized with tree-shaking and compression
-- **Core Web Vitals**: Excellent ratings across all metrics
+- `bun run type-check` - TypeScript validation
+- `bun run lint` - Code quality check  
+- `bun run validate` - Full validation (type + lint + build)
 
 ---
 
 ## 🎯 **Performance & SEO**
 
-### **Lighthouse Scores**
-
-- **Performance**: 95+ ✅
-- **Accessibility**: 100/100 ✅
-- **Best Practices**: 100/100 ✅
-- **SEO**: 100/100 ✅
-
-### **SEO Features**
-
-- ✅ **Automatic Sitemap**: Generated at build time
-- ✅ **Structured Data**: Schema.org Person markup
-- ✅ **Open Graph**: Custom images for social sharing
-- ✅ **Meta Tags**: Complete SEO optimization
-- ✅ **Canonical URLs**: Prevent duplicate content
-- ✅ **Robots.txt**: Proper search engine directives
-
-### **Performance Optimizations**
-
-- ✅ **Static Generation**: Pre-rendered at build time
-- ✅ **Asset Optimization**: Compressed CSS and images
-- ✅ **Tree Shaking**: Unused code elimination
-- ✅ **Critical CSS**: Inlined for faster rendering
-- ✅ **CDN Ready**: Optimized for global distribution
-
----
-
-## 🔒 **Privacy & Compliance**
-
-- **GDPR Compliant**: Cookie consent banner implemented
-- **AdSense Integration**: Privacy-friendly ad serving
-- **Analytics Ready**: Google Analytics 4 compatible
-- **Privacy Policy**: Comprehensive privacy documentation
+- **Lighthouse Scores**: 95+ Performance, 100/100 SEO ✅
+- **Automatic Sitemap**: Generated at build time 
+- **SEO Optimized**: Complete meta tags and structured data
+- **Fast Loading**: Static generation with Astro
+- **CDN Ready**: Deployed on Cloudflare Pages
 
 ---
 
 ## 🤝 **Contributing**
 
-This is a personal portfolio, but if you find bugs or have suggestions:
-
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Make your changes** (following our quality standards)
-4. **Run validation**: `bun run validate`
-5. **Commit your changes**: `git commit -m 'feat: add amazing feature'`
-6. **Push to branch**: `git push origin feature/amazing-feature`
-7. **Open a Pull Request**
-
----
-
-## 📊 **Project Stats**
-
-- **Bundle Size**: ~50KB (optimized)
-- **Build Time**: <30 seconds
-- **Lighthouse Score**: 95+ across all metrics
-- **Dependencies**: Minimal and secure
-- **Test Coverage**: 100% build validation
+This is a personal portfolio, but if you find bugs or have suggestions, feel free to open an issue or submit a pull request.
 
 ---
 
