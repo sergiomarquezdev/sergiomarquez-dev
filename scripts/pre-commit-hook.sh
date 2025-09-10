@@ -1,53 +1,15 @@
 #!/bin/sh
-# Pre-commit hook for sergiomarquez.dev portfolio
-# Place this file in .git/hooks/pre-commit and make it executable
-# chmod +x .git/hooks/pre-commit
+# Simple pre-commit hook for sergiomarquez.dev
 
-echo "🔍 Running pre-commit validation for sergiomarquez.dev..."
+echo "🔍 Pre-commit validation..."
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# TypeScript check
+bun run type-check || exit 1
 
-# Function to print colored output
-print_status() {
-    local color=$1
-    local message=$2
-    echo -e "${color}${message}${NC}"
-}
+# Lint check  
+bun run lint || exit 1
 
-# Check if bun is available
-if ! command -v bun &> /dev/null; then
-    print_status $RED "❌ bun not found. Please install Bun package manager."
-    exit 1
-fi
-
-# Install dependencies if needed
-if [ ! -d "node_modules" ]; then
-    print_status $YELLOW "📦 Installing dependencies..."
-    bun install
-fi
-
-# Run TypeScript check
-print_status $YELLOW "🔍 Running TypeScript validation..."
-if ! bun run type-check; then
-    print_status $RED "❌ TypeScript validation failed. Please fix the errors before committing."
-    exit 1
-fi
-
-# Run Biome linting and formatting
-print_status $YELLOW "🧹 Running Biome validation..."
-if ! bun run lint; then
-    print_status $YELLOW "⚠️ Biome found issues. Attempting auto-fix..."
-    bun run lint:fix
-
-    # Check if auto-fix resolved all issues
-    if ! bun run lint; then
-        print_status $RED "❌ Biome issues remain after auto-fix. Please resolve manually."
-        exit 1
-    else
+echo "✅ Validation passed"
         print_status $GREEN "✅ Biome issues auto-fixed successfully."
         # Add the fixed files to the commit
         git add .

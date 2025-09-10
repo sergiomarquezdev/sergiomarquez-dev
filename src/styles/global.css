@@ -1,4 +1,4 @@
-@import 'non.geist';
+@import "non.geist";
 
 /*
   Use this file to define your custom CSS variables for colors, typography, etc.
@@ -6,29 +6,29 @@
 */
 
 :root {
-  --background: rgb(10, 10, 10);
-  --primary-text: #eaeaea;
-  --secondary-text: #a0a0a0;
-  --border-color: rgba(255, 255, 255, 0.1);
+	--background: rgb(10, 10, 10);
+	--primary-text: #eaeaea;
+	--secondary-text: #a0a0a0;
+	--border-color: rgba(255, 255, 255, 0.1);
 
-  /* Font Family */
-  --font-family-sans: 'Geist Variable', sans-serif;
-  /* Example, will need to be imported */
+	/* Font Family */
+	--font-family-sans: "Geist Variable", sans-serif;
+	/* Example, will need to be imported */
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--primary-text);
-  font-family: var(--font-family-sans);
-  margin: 0;
+	background-color: var(--background);
+	color: var(--primary-text);
+	font-family: var(--font-family-sans);
+	margin: 0;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.2s ease-in-out;
 }
