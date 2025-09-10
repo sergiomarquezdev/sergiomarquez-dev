@@ -1,8 +1,5 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
-  "files": {
-    "includes": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.mjs", "**/*.cjs"]
-  },
   "formatter": {
     "enabled": true,
     "indentWidth": 2,
@@ -13,5 +10,22 @@
     "rules": {
       "recommended": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          }
+        }
+      }
+    }
+  ]
 }
