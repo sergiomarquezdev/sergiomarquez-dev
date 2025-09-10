@@ -132,6 +132,7 @@ sergiomarquez-dev/
    ```
 
    This will:
+
    - Install all dependencies
    - Setup pre-commit hooks
    - Validate the installation
@@ -183,12 +184,14 @@ bun run setup        # Complete development environment setup
 Every code change goes through multiple validation layers:
 
 1. **Pre-commit Hook** (automatic):
+
    - ✅ TypeScript type checking
    - ✅ Code formatting validation
    - ✅ Build verification
    - ⚠️ Security audit (non-blocking)
 
 2. **CI/CD Pipeline** (GitHub Actions):
+
    - ✅ Cross-platform testing (Ubuntu)
    - ✅ Dependency validation
    - ✅ Production build testing
@@ -282,7 +285,7 @@ This is a personal portfolio, but if you find bugs or have suggestions:
 _AI/ML & Backend Developer_
 
 - 🌐 **Website**: [sergiomarquez.dev](https://sergiomarquez.dev)
-- 📧 **Email**: [cntacto@sergiomarquez.dev](mailto:cntacto@sergiomarquez.dev)
+- 📧 **Email**: [sergiomarqueztech@gmail.com](mailto:sergiomarqueztech@gmail.com)
 - 💼 **LinkedIn**: [sergio-marquez-perez](https://linkedin.com/in/sergio-marquez-perez/)
 - 🐙 **GitHub**: [sergiomarquezdev](https://github.com/sergiomarquezdev)
 - 🐦 **X/Twitter**: [@sergiomzdev](https://x.com/sergiomzdev)
