@@ -51,13 +51,11 @@ sergiomarquez-dev/
 │   ├── components/           # Reusable Astro components
 │   │   ├── BaseHead.astro   # SEO and meta tags
 │   │   ├── Header.astro     # Site navigation
-│   │   ├── CookieBanner.astro # GDPR cookie consent
 │   │   └── icons/           # SVG icon components
 │   ├── layouts/             # Page layout templates
 │   │   └── Layout.astro     # Main layout wrapper
 │   ├── pages/               # Site pages (file-based routing)
 │   │   ├── index.astro      # Homepage
-│   │   ├── privacy.astro    # Privacy policy
 │   │   └── [redirects]/     # Social media redirects
 │   └── styles/              # Global styling
 │       └── global.css       # CSS variables and base styles

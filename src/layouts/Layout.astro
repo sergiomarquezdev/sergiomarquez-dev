@@ -1,6 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import CookieBanner from "../components/CookieBanner.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 
@@ -22,7 +21,6 @@ const { title, description } = Astro.props;
     <main>
       <slot />
     </main>
-    <CookieBanner />
     <style>
       main {
         margin: 0 auto;
