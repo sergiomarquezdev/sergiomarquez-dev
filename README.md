@@ -160,10 +160,10 @@ _AI/ML & Backend Developer_
 
 - 🌐 **Website**: [sergiomarquez.dev](https://sergiomarquez.dev)
 - 📧 **Email**: [sergiomarqueztech@gmail.com](mailto:sergiomarqueztech@gmail.com)
-- 💼 **LinkedIn**: [sergio-marquez-perez](https://linkedin.com/in/sergio-marquez-perez/)
+- 💼 **LinkedIn**: [sergiomarquezp](https://www.linkedin.com/in/sergiomarquezp/)
 - 🐙 **GitHub**: [sergiomarquezdev](https://github.com/sergiomarquezdev)
-- 🐦 **X/Twitter**: [@sergiomzdev](https://x.com/sergiomzdev)
-- 📺 **YouTube**: [@sergiomarquezdev](https://www.youtube.com/@sergiomarquezdev)
+- 🐦 **X/Twitter**: [@sergiomarquezp_](https://x.com/sergiomarquezp_)
+- 📺 **YouTube**: [@sergiomarquezp](https://www.youtube.com/@sergiomarquezp)
 
 ---
 
