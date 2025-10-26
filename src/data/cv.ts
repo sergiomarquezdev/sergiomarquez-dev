@@ -13,10 +13,6 @@ export type CvData = {
 		urls: Record<string, string>;
 		summary: string;
 	};
-	technologies: Array<{
-		title: string;
-		summary: string;
-	}>;
 	experience: Array<{
 		company: string;
 		role: string;

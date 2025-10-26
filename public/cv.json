@@ -12,24 +12,6 @@
     },
     "summary": "I build LLM-powered backends in Python: FastAPI APIs, RAG pipelines, and pragmatic automations with n8n. Focused on shipping reliable, production-ready services."
   },
-  "technologies": [
-    {
-      "title": "AI & Automation",
-      "summary": "Agent-first assistants, retrieval workflows, and guided automations that scale across teams."
-    },
-    {
-      "title": "Backend Services",
-      "summary": "Python APIs with FastAPI, background workers, and resilient integration layers."
-    },
-    {
-      "title": "Data & Storage",
-      "summary": "Operational data models mixing document, relational, and vector stores for LLM context."
-    },
-    {
-      "title": "Delivery & Reliability",
-      "summary": "Continuous delivery, observability, and containerized infrastructure to keep features shipping."
-    }
-  ],
   "experience": [
     {
       "company": "VITALY",

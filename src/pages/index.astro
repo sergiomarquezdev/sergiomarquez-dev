@@ -3,7 +3,6 @@ import About from "../components/About.astro";
 import Certifications from "../components/Certifications.astro";
 import Experience from "../components/Experience.astro";
 import Projects from "../components/Projects.astro";
-import Technologies from "../components/Technologies.astro";
 import { cv } from "../data/cv";
 import Layout from "../layouts/Layout.astro";
 
@@ -13,12 +12,11 @@ const seo = {
 		"Portfolio of Sergio Márquez, a Python AI & Backend Developer focused on FastAPI services, LLM integrations, and pragmatic automations.",
 };
 
-const { basics, technologies, experience, projects, certifications } = cv;
+const { basics, experience, projects, certifications } = cv;
 ---
 
 <Layout title={seo.title} description={seo.description}>
   <About basics={basics} />
-  <Technologies technologies={technologies} />
   <Experience experience={experience} />
   <Projects projects={projects} />
   <Certifications certifications={certifications} />
