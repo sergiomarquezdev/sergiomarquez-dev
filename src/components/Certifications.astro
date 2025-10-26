@@ -1,0 +1,104 @@
+---
+import type { CvData } from "../data/cv";
+import LinkIcon from "./icons/LinkIcon.astro";
+
+interface Props {
+  certifications: CvData["certifications"];
+}
+
+const { certifications } = Astro.props as Props;
+---
+
+<section class="certifications">
+  <h2 class="title">Certifications</h2>
+  <ul class="list">
+    {certifications.map((cert) => (
+      <li class="item">
+        <div>
+          <p class="name">{cert.name}</p>
+          <p class="issuer">{cert.issuer} - {cert.date}</p>
+        </div>
+        {cert.url && (
+          <a href={cert.url} target="_blank" rel="noopener noreferrer">
+            <LinkIcon class="link-icon" />
+            View
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .certifications {
+    padding: 2rem 0 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .name {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .issuer {
+    margin: 0.3rem 0 0 0;
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+  }
+
+  .item a {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    border-bottom: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .item a:hover {
+    border-color: var(--secondary-text);
+  }
+
+  .link-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  @media (max-width: 640px) {
+    .item {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.1rem 1.25rem;
+    }
+  }
+</style>

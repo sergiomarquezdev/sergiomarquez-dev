@@ -1,16 +1,25 @@
 ---
-import Blog from "../components/Blog.astro";
-import Intro from "../components/Intro.astro";
+import About from "../components/About.astro";
+import Technologies from "../components/Technologies.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Certifications from "../components/Certifications.astro";
 import Layout from "../layouts/Layout.astro";
+import { cv } from "../data/cv";
 
 const seo = {
-	title: "Sergio Márquez Pérez - AI/ML & Backend Developer",
-	description:
-		"Personal portfolio of Sergio Márquez Pérez, an AI/ML and Backend Developer passionate about building modern web applications and sharing knowledge.",
+  title: "Sergio Márquez - Python AI Developer",
+  description:
+    "Portfolio of Sergio Márquez, a Python AI & Backend Developer focused on FastAPI services, LLM integrations, and pragmatic automations.",
 };
+
+const { basics, technologies, experience, projects, certifications } = cv;
 ---
 
 <Layout title={seo.title} description={seo.description}>
-  <Intro />
-  <Blog />
+  <About basics={basics} />
+  <Technologies technologies={technologies} />
+  <Experience experience={experience} />
+  <Projects projects={projects} />
+  <Certifications certifications={certifications} />
 </Layout>
