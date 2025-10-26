@@ -5,7 +5,11 @@
       "Bash(bun run build:*)",
       "Bash(bun run type-check:*)",
       "WebSearch",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(bun run validate:*)",
+      "Bash(bun install:*)",
+      "Bash(bun run lint:fix:*)",
+      "Bash(bun run format)"
     ],
     "deny": [],
     "ask": []

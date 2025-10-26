@@ -1,34 +1,34 @@
 ---
+import { cv } from "../data/cv";
 import EmailIcon from "./icons/EmailIcon.astro";
 import GitHubIcon from "./icons/GitHubIcon.astro";
 import LinkedInIcon from "./icons/LinkedInIcon.astro";
 import XIcon from "./icons/XIcon.astro";
 import YouTubeIcon from "./icons/YouTubeIcon.astro";
-import { cv } from "../data/cv";
 
 const { basics } = cv;
 
 const links = [
-  {
-    href: basics.urls.linkedin,
-    label: "LinkedIn",
-    Icon: LinkedInIcon,
-  },
-  {
-    href: basics.urls.github,
-    label: "GitHub",
-    Icon: GitHubIcon,
-  },
-  {
-    href: basics.urls.youtube,
-    label: "YouTube",
-    Icon: YouTubeIcon,
-  },
-  {
-    href: basics.urls.x,
-    label: "X (Twitter)",
-    Icon: XIcon,
-  }
+	{
+		href: basics.urls.linkedin,
+		label: "LinkedIn",
+		Icon: LinkedInIcon,
+	},
+	{
+		href: basics.urls.github,
+		label: "GitHub",
+		Icon: GitHubIcon,
+	},
+	{
+		href: basics.urls.youtube,
+		label: "YouTube",
+		Icon: YouTubeIcon,
+	},
+	{
+		href: basics.urls.x,
+		label: "X (Twitter)",
+		Icon: XIcon,
+	},
 ];
 
 const socialLinks = links.filter(Boolean);
