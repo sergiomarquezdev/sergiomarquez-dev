@@ -1,181 +1,166 @@
-# 🚀 Sergio Márquez Pérez - Personal Portfolio
+# 🚀 Sergio Márquez - Personal Portfolio
 
-> **Simple, fast personal portfolio built with modern web technologies**
+> **Minimal, content-driven portfolio built with Astro and Tailwind CSS**
 
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 
-This repository contains the source code for my **personal portfolio website**. Built with **Astro** and **Tailwind CSS** following the **KISS principle** (Keep It Simple, Stupid).
+This repository contains the source code for my **personal portfolio website**. It is a lightweight Astro build that reads profile data from `public/cv.json`, keeping the UI and content in sync while staying true to a minimalist look.
 
 🌐 **Live Site**: [sergiomarquez.dev](https://sergiomarquez.dev)
 
 ---
 
-## ✨ **Key Features**
+## ✨ Key Features
 
-- **Minimalist Design**: Dark-mode-first, clean and professional
-- **Performance Optimized**: Lighthouse scores 95+ across all metrics
-- **SEO Ready**: Complete meta tags, structured data, automatic sitemap
-- **Type Safety**: Full TypeScript integration
-- **Fast Development**: Hot reload with Astro's dev server
-- **Simple Deployment**: Automatic deployment via Cloudflare Pages
-
----
-
-## 🏗️ **Tech Stack**
-
-- **[Astro 5.13.5](https://astro.build/)** - Static site generator
-- **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
-- **[Non.geist](https://vercel.com/font/sans)** - Modern typography
-- **[Biome](https://biomejs.dev/)** - Fast linting and formatting
-- **[Bun](https://bun.sh/)** - Fast package manager
-- **[Cloudflare Pages](https://pages.cloudflare.com/)** - Deployment platform
+- **Data-driven content**: Portfolio sections (about, experience, projects, certifications) are rendered straight from `public/cv.json`.
+- **Minimalist design**: Dark-mode-first layout with deliberate typography and spacing.
+- **Performance ready**: Lighthouse scores 95+ on every metric.
+- **SEO friendly**: Comprehensive meta tags, structured data, and auto-generated sitemap.
+- **Type safe**: Astro + TypeScript with shared types in `src/data/cv.ts`.
+- **Simple deployment**: Cloudflare Pages handles builds straight from `main`.
 
 ---
 
-## 📁 **Project Structure**
+## 🧰 Tech Stack
+
+- **[Astro 5.15.1](https://astro.build/)** – Static site generator
+- **[Tailwind CSS 4.1.16](https://tailwindcss.com/)** – Utility-first CSS framework
+- **[TypeScript](https://www.typescriptlang.org/)** – Type-safe JavaScript
+- **[non.geist](https://vercel.com/font/sans)** – Modern typography
+- **[Biome](https://biomejs.dev/)** – Fast linting and formatting
+- **[Bun](https://bun.sh/)** – Preferred package manager
+- **[Cloudflare Pages](https://pages.cloudflare.com/)** – Hosting & CDN
+
+---
+
+## 📁 Project Structure
 
 ```
 sergiomarquez-dev/
-├── docs/                      # Project documentation
-│   ├── scratchpad.md         # Development notes and lessons learned
-│   └── implementation-plan/   # Detailed planning documents
-├── public/                    # Static assets
-│   ├── favicon.ico           # Site favicon
-│   ├── robots.txt            # Search engine directives
-│   └── og-image.svg          # Custom Open Graph image
-├── scripts/                   # Simple development helpers
-│   └── pre-commit-hook.sh    # Basic quality validation
+├── docs/                     # Project docs & migration notes
+│   └── scratchpad.md
+├── public/                   # Static assets served as-is
+│   ├── cv.json               # Portfolio data source
+│   ├── favicon.ico
+│   ├── og-image.svg
+│   └── robots.txt
+├── scripts/                  # Auxiliary development scripts
+│   └── pre-commit-hook.sh
 ├── src/
-│   ├── components/           # Reusable Astro components
-│   │   ├── BaseHead.astro   # SEO and meta tags
-│   │   ├── Header.astro     # Site navigation
-│   │   └── icons/           # SVG icon components
-│   ├── layouts/             # Page layout templates
-│   │   └── Layout.astro     # Main layout wrapper
-│   ├── pages/               # Site pages (file-based routing)
-│   │   ├── index.astro      # Homepage
-│   │   └── [redirects]/     # Social media redirects
-│   └── styles/              # Global styling
-│       └── global.css       # CSS variables and base styles
+│   ├── components/
+│   │   ├── About.astro       # Intro section powered by cv.json
+│   │   ├── Certifications.astro
+│   │   ├── Experience.astro
+│   │   ├── Header.astro      # Social links & branding
+│   │   ├── Projects.astro
+│   │   ├── Technologies.astro
+│   │   └── icons/            # SVG icon components
+│   ├── data/
+│   │   └── cv.ts             # Typed loader for public/cv.json
+│   ├── layouts/
+│   │   └── Layout.astro      # Base layout wrapper
+│   └── pages/
+│       └── index.astro       # Home page using data-driven sections
+├── CLAUDE.md                 # Claude Code guidance file
 ├── astro.config.mjs          # Astro configuration
-├── tailwind.config.mjs       # Tailwind CSS configuration
-├── tsconfig.json            # TypeScript configuration
-├── biome.json               # Simple Biome configuration
-└── package.json             # Dependencies and scripts
+├── tailwind.config.ts        # Tailwind CSS configuration
+├── tsconfig.json             # TypeScript configuration
+├── biome.json                # Biome lint/format config
+└── package.json              # Scripts and dependencies
 ```
 
 ---
 
-## 🚀 **Quick Start**
+## ⚙️ Quick Start
 
-### **Prerequisites**
+### Prerequisites
 
 - **Node.js 20+** (LTS recommended)
-- **[Bun](https://bun.sh/)** package manager (recommended) or **npm**
+- **[Bun](https://bun.sh/)** (recommended) or **npm**
 
-### **Installation**
+### Installation
 
-1. **Clone the repository:**
+1. **Clone the repository**
 
    ```bash
    git clone https://github.com/sergiomarquezdev/sergiomarquez-dev.git
    cd sergiomarquez-dev
    ```
 
-2. **Install dependencies:**
+2. **Install dependencies**
 
    ```bash
    bun install
    ```
 
-3. **Start development server:**
+3. **Start the development server**
 
    ```bash
    bun run dev
    ```
 
-   - Site available at: `http://localhost:4321`
+   - Local URL: `http://localhost:4321`
    - Hot reload enabled for instant feedback
 
 ---
 
-## 📜 **Available Scripts**
+## 📜 Available Scripts
 
 ```bash
 # Development
 bun run dev          # Start development server with hot reload
-bun run build        # Build optimized production version
+bun run build        # Create production build
 bun run preview      # Preview production build locally
 
-# Quality checks (when needed)
+# Quality checks
 bun run type-check   # TypeScript validation with Astro
-bun run lint         # Check code quality with Biome
-bun run lint:fix     # Fix auto-fixable issues with Biome
-bun run validate     # Run type-check + lint + build
+bun run lint         # Biome linting
+bun run lint:fix     # Auto-fix linting issues
+bun run validate     # type-check + lint + build
 ```
 
 ---
 
-## 🔧 **Development Workflow**
+## 🧪 Development Workflow
 
-Simple and straightforward:
+1. Update content in `public/cv.json` or tweak components.
+2. Test locally with `bun run dev`.
+3. Commit changes (pre-commit hook runs basic validation).
+4. Push to `main` – Cloudflare Pages builds and deploys automatically.
 
-1. **Make changes** to your code
-2. **Test locally** with `bun run dev`
-3. **Commit changes** - basic pre-commit validation runs automatically
-4. **Push to main** - Cloudflare Pages deploys automatically
+### Optional Checks
 
-### **Optional Quality Checks**
-
-Run these when you want to validate your code:
-
-- `bun run type-check` - TypeScript validation
-- `bun run lint` - Code quality check
-- `bun run validate` - Full validation (type + lint + build)
+- `bun run type-check` – ensure TypeScript types are clean.
+- `bun run lint` – run Biome linting.
+- `bun run validate` – run full pipeline before committing larger changes.
 
 ---
 
-## 🎯 **Performance & SEO**
+## 📈 Performance & SEO
 
-- **Lighthouse Scores**: 95+ Performance, 100/100 SEO ✅
-- **Automatic Sitemap**: Generated at build time
-- **SEO Optimized**: Complete meta tags and structured data
-- **Fast Loading**: Static generation with Astro
-- **CDN Ready**: Deployed on Cloudflare Pages
-
----
-
-## 🤝 **Contributing**
-
-This is a personal portfolio, but if you find bugs or have suggestions, feel free to open an issue or submit a pull request.
+- **Lighthouse**: 95+ performance, 100/100 SEO
+- **Sitemap**: Generated automatically via `@astrojs/sitemap`
+- **Structured data**: Provided through `BaseHead.astro`
+- **Fast delivery**: Static output served from Cloudflare Pages
 
 ---
 
-## 📞 **Contact**
+## 📬 Contact
 
-**Sergio Márquez Pérez**
-_AI/ML & Backend Developer_
+**Sergio Márquez**
+_Python AI Developer — FastAPI, LLMs, RAG_
 
 - 🌐 **Website**: [sergiomarquez.dev](https://sergiomarquez.dev)
-- 📧 **Email**: [sergiomarqueztech@gmail.com](mailto:sergiomarqueztech@gmail.com)
+- ✉️ **Email**: [contacto@sergiomarquez.dev](mailto:contacto@sergiomarquez.dev)
 - 💼 **LinkedIn**: [sergiomarquezp](https://www.linkedin.com/in/sergiomarquezp/)
-- 🐙 **GitHub**: [sergiomarquezdev](https://github.com/sergiomarquezdev)
-- 🐦 **X/Twitter**: [@sergiomarquezp_](https://x.com/sergiomarquezp_)
+- 💻 **GitHub**: [sergiomarquezdev](https://github.com/sergiomarquezdev)
+- 🐦 **X (Twitter)**: [@sergiomarquezp\_](https://x.com/sergiomarquezp_)
 - 📺 **YouTube**: [@sergiomarquezp](https://www.youtube.com/@sergiomarquezp)
 
 ---
 
-## 📄 **License**
-
-This project is for personal portfolio use. Feel free to use the **structure and configuration** as inspiration for your own projects, but please don't copy the content directly.
-
----
-
 <div align="center">
-
-**Built with ❤️ using modern web technologies**
 
 [![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
