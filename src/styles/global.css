@@ -33,3 +33,49 @@ a {
 	text-decoration: none;
 	transition: color 0.2s ease-in-out;
 }
+
+@media print {
+
+	/* Hide non-essential elements */
+	header,
+	footer,
+	nav,
+	.no-print {
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		display: none !important;
+	}
+
+	/* Reset colors for printing */
+	body {
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		background-color: white !important;
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		color: black !important;
+		font-size: 12pt;
+	}
+
+	/* Ensure links are readable */
+	a {
+		text-decoration: underline;
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		color: black !important;
+	}
+
+	/* Layout adjustments */
+	main {
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		max-width: 100% !important;
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		margin: 0 !important;
+		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		padding: 0 !important;
+	}
+
+	/* Avoid breaking elements across pages */
+	article,
+	section,
+	h2,
+	h3 {
+		break-inside: avoid;
+	}
+}

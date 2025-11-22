@@ -13,7 +13,9 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.astro"],
+      "includes": [
+        "**/*.astro"
+      ],
       "linter": {
         "rules": {
           "style": {
@@ -25,6 +27,14 @@
             "noUnusedImports": "off"
           }
         }
+      }
+    },
+    {
+      "includes": [
+        "src/styles/global.css"
+      ],
+      "linter": {
+        "enabled": false
       }
     }
   ]

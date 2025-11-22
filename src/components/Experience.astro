@@ -8,7 +8,7 @@ interface Props {
 const { experience } = Astro.props as Props;
 ---
 
-<section class="experience">
+<section class="experience" aria-label="Work Experience">
   <h2 class="title">Experience</h2>
   <div class="roles">
     {experience.map((role) => (

@@ -17,15 +17,15 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.15.1",
+    "astro": "^5.16.0",
     "lightningcss": "^1.30.2",
     "non.geist": "^1.0.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.5",
-    "@biomejs/biome": "^2.3.0",
-    "@tailwindcss/vite": "^4.1.16",
-    "tailwindcss": "^4.1.16",
+    "@biomejs/biome": "^2.3.7",
+    "@tailwindcss/vite": "^4.1.17",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"
   }
 }
