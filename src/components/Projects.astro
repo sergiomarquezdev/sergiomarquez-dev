@@ -29,7 +29,7 @@ const { projects } = Astro.props as Props;
             <li>{tech}</li>
           ))}
         </ul>
-        {project.github && (
+        {project.github && !project.private && (
           <div class="links">
             {project.github.map((repo) => (
               <a href={repo} target="_blank" rel="noopener noreferrer">

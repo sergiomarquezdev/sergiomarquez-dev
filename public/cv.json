@@ -51,7 +51,8 @@
       "github": [
         "https://github.com/sergiomarquezdev/one-daily-blog",
         "https://github.com/sergiomarquezdev/one-daily-blog-backend"
-      ]
+      ],
+      "private": true
     }
   ],
   "certifications": [
