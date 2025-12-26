@@ -2,94 +2,52 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-This is a data-driven personal portfolio website built with Astro and Tailwind CSS. The entire site content is sourced from `public/cv.json`, making it straightforward to update and maintain without touching component code.
-
-## Development Commands
+## Commands
 
 ```bash
-# Development server with hot reload
-bun run dev              # Starts at http://localhost:4321
+# Development
+bun run dev          # Start dev server at localhost:4321
+bun run build        # Production build
+bun run preview      # Preview production build
 
-# Production build
-bun run build            # Static site generation to dist/
-
-# Preview production build
-bun run preview
-
-# Quality checks
-bun run type-check       # Astro + TypeScript validation
-bun run lint             # Biome linting (read-only)
-bun run lint:fix         # Auto-fix linting issues
-bun run format           # Format code with Biome
-bun run format:check     # Check formatting without changes
-
-# Full validation pipeline
-bun run validate         # Runs type-check + lint + build
+# Quality
+bun run type-check   # TypeScript validation (astro check)
+bun run lint         # Biome linting
+bun run lint:fix     # Auto-fix lint issues
+bun run format       # Biome formatting
+bun run validate     # Full pipeline: type-check + lint + build
 ```
-
-**Important:** This project uses **Bun** as the package manager. Use `bun install` for dependencies, not npm or yarn.
 
 ## Architecture
 
-### Data-Driven Content Flow
+**Data-driven portfolio**: All content flows from `public/cv.json` through typed loader `src/data/cv.ts` into Astro components.
 
-1. **Source of truth:** `public/cv.json` contains all portfolio data (profile, experience, projects, certifications)
-2. **Type-safe loader:** `src/data/cv.ts` reads `cv.json` at build time and provides TypeScript types via `CvData` interface
-3. **Component rendering:** All `.astro` components in `src/components/` consume typed data props from the loader
-4. **Single page composition:** `src/pages/index.astro` imports cv data and passes slices to each section component
-
-**Key principle:** To update site content, edit `public/cv.json`. To change layout or styling, edit the corresponding Astro component.
-
-### Build Configuration
-
-- **SSG mode:** Astro outputs static HTML/CSS/JS (no server runtime)
-- **CSS optimization:** Uses LightningCSS for minification (configured in `astro.config.mjs` vite settings)
-- **Asset handling:** Assets stored in `_astro/` directory with hashed filenames
-- **SEO:** Sitemap auto-generated via `@astrojs/sitemap` integration, comprehensive meta tags in `BaseHead.astro`
-
-### Linting & Formatting
-
-- **Tool:** Biome (configured in `biome.json`)
-- **Line width:** 100 characters
-- **Astro overrides:** `useConst`, `useImportType`, `noUnusedVariables`, and `noUnusedImports` rules disabled for `.astro` files (necessary due to Astro's component structure)
-
-## Multi-Agent Workflow (Optional)
-
-If using the GitHub Copilot instructions workflow, this project follows a **Planner/Executor** pattern:
-
-- **Planner mode:** Creates implementation plans in `/docs/implementation-plan/` and maintains `/docs/scratchpad.md`
-- **Executor mode:** Implements tasks one at a time, updates status boards, and documents lessons learned
-- **Discipline:** TDD where applicable, run tests after each vertical slice, update documentation continuously, pause to reflect on blockers
-
-**Note:** This workflow is optional and managed via `.github/copilot-instructions.md`. Claude Code users can ignore unless explicitly working with that pattern.
-
-## Component Structure
-
-Each section component (About, Technologies, Experience, Projects, Certifications) follows the same pattern:
-
-```typescript
-// Import cv data
-import { cv } from "../data/cv";
-const { sectionData } = cv;
-
-// Pass to component
-<SectionComponent data={sectionData} />
+```
+public/cv.json (content source)
+       ↓
+src/data/cv.ts (typed loader with CvData type)
+       ↓
+src/pages/index.astro (destructures cv into sections)
+       ↓
+src/components/{About,Experience,Projects,Certifications}.astro
 ```
 
-Components use Tailwind utility classes for styling. The design is dark-mode-first with a minimalist aesthetic.
+**Styling**: Tailwind CSS 4 via Vite plugin. Design tokens in `src/styles/global.css` as CSS variables (--background, --primary-text, etc.), extended in `tailwind.config.ts`.
 
-## Deployment
+**Redirect pages**: `src/pages/{github,linkedin,twitter,x,youtube,yt}/index.astro` are simple redirects to social profiles.
 
-- **Platform:** Cloudflare Pages
-- **Trigger:** Automatic deployment on push to `main` branch
-- **Build command:** `bun run build`
-- **Output directory:** `dist/`
+## Key Files
 
-## Important Notes
+- `public/cv.json` - Edit here to update portfolio content
+- `src/data/cv.ts` - TypeScript types for CV structure (CvData)
+- `src/layouts/Layout.astro` - Base layout with BaseHead and Header
+- `astro.config.mjs` - Static output, sitemap, LightningCSS minification
 
-- Astro components use the `.astro` extension and combine HTML-like templating with a TypeScript frontmatter section
-- All content changes should go through `public/cv.json` to maintain data-driven architecture
-- The cv.json schema is enforced by the `CvData` type in `src/data/cv.ts` - update both if adding new fields
-- Biome handles both linting and formatting - no need for separate Prettier/ESLint
+## Stack
+
+- Astro 5 (static SSG)
+- Tailwind CSS 4 (Vite plugin)
+- TypeScript
+- Biome (lint/format)
+- Bun (package manager)
+- Cloudflare Pages (deployment)
