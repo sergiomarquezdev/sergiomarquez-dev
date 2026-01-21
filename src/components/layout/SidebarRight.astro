@@ -1,0 +1,68 @@
+---
+interface Props {
+	email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<aside class="sidebar-right">
+  <div class="email-container">
+    <a href={`mailto:${email}`} class="email-link">
+      {email}
+    </a>
+    <div class="email-line" />
+  </div>
+</aside>
+
+<style>
+  .sidebar-right {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .sidebar-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 0;
+      right: 2rem;
+      width: 40px;
+      height: auto;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .sidebar-right {
+      right: calc((100vw - 1280px) / 2 + 2rem);
+    }
+  }
+
+  .email-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .email-link {
+    writing-mode: vertical-rl;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--secondary-text);
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .email-link:hover {
+    color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .email-line {
+    width: 1px;
+    height: 6rem;
+    background-color: var(--secondary-text);
+  }
+</style>

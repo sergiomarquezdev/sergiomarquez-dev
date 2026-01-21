@@ -1,0 +1,60 @@
+---
+
+---
+
+<div class="spotlight" aria-hidden="true" />
+
+<script>
+  function initSpotlight() {
+    const spotlight = document.querySelector<HTMLElement>('.spotlight');
+    if (!spotlight) return;
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      spotlight.style.display = 'none';
+      return;
+    }
+
+    // Check for touch device
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      spotlight.style.display = 'none';
+      return;
+    }
+
+    function handleMouseMove(e: MouseEvent) {
+      if (spotlight) {
+        spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+        spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+      }
+    }
+
+    document.addEventListener('mousemove', handleMouseMove);
+  }
+
+  // Run on initial load and after view transitions
+  document.addEventListener('astro:page-load', initSpotlight);
+  initSpotlight();
+</script>
+
+<style>
+  .spotlight {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--spotlight-color),
+      transparent 40%
+    );
+    opacity: 0.8;
+  }
+
+  @media (max-width: 1024px) {
+    .spotlight {
+      display: none;
+    }
+  }
+</style>

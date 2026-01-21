@@ -1,0 +1,93 @@
+---
+import type { CvData } from "../../data/cv";
+import GitHubActivity from "../GitHubActivity.astro";
+import Navigation from "./Navigation.astro";
+import SocialLinks from "./SocialLinks.astro";
+
+interface Props {
+	basics: CvData["basics"];
+}
+
+const { basics } = Astro.props;
+---
+
+<header class="sidebar-left">
+  <div class="sidebar-content">
+    <div class="header-section">
+      <h1 class="name">
+        <a href="/">{basics.name}</a>
+      </h1>
+      <h2 class="tagline">{basics.tagline}</h2>
+      <GitHubActivity />
+    </div>
+
+    <Navigation />
+
+    <div class="footer-section">
+      <SocialLinks urls={basics.urls} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .sidebar-left {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .sidebar-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+      padding: 6rem 0;
+      width: 42%;
+      flex-shrink: 0;
+    }
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1rem;
+  }
+
+  .header-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .name {
+    margin: 0;
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .name a {
+    color: var(--primary-text);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .name a:hover {
+    color: var(--accent);
+  }
+
+  .tagline {
+    margin: 0.75rem 0 0 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--secondary-text);
+    line-height: 1.4;
+  }
+
+  .footer-section {
+    margin-top: auto;
+  }
+</style>

@@ -7,17 +7,52 @@ import { cv } from "../data/cv";
 import Layout from "../layouts/Layout.astro";
 
 const seo = {
-	title: "Sergio Márquez - Python AI Developer",
+	title: "Sergio Marquez - Python AI Developer",
 	description:
-		"Portfolio of Sergio Márquez, a Python AI & Backend Developer focused on FastAPI services, LLM integrations, and pragmatic automations.",
+		"Portfolio of Sergio Marquez, a Python AI & Backend Developer focused on FastAPI services, LLM integrations, and pragmatic automations.",
 };
 
 const { basics, experience, projects, certifications } = cv;
 ---
 
 <Layout title={seo.title} description={seo.description}>
-  <About basics={basics} />
-  <Experience experience={experience} />
-  <Projects projects={projects} />
-  <Certifications certifications={certifications} />
+  <div class="sections">
+    <section id="about" class="section animate-fade-up">
+      <About basics={basics} />
+    </section>
+
+    <section id="experience" class="section animate-fade-up delay-100">
+      <Experience experience={experience} />
+    </section>
+
+    <section id="projects" class="section animate-fade-up delay-200">
+      <Projects projects={projects} />
+    </section>
+
+    <section id="certifications" class="section animate-fade-up delay-300">
+      <Certifications certifications={certifications} />
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .section {
+    scroll-margin-top: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .sections {
+      gap: 6rem;
+    }
+
+    .section {
+      scroll-margin-top: 6rem;
+    }
+  }
+</style>

@@ -1,6 +1,10 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
+import MainContent from "../components/layout/MainContent.astro";
+import SidebarLeft from "../components/layout/SidebarLeft.astro";
+import SidebarRight from "../components/layout/SidebarRight.astro";
+import Spotlight from "../components/Spotlight.astro";
+import { cv } from "../data/cv";
 import "../styles/global.css";
 
 interface Props {
@@ -9,6 +13,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const { basics } = cv;
 ---
 
 <!doctype html>
@@ -18,15 +23,98 @@ const { title, description } = Astro.props;
     <link rel="manifest" href="/manifest.webmanifest" />
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
+    <Spotlight />
+
+    <!-- Mobile Header (visible < 1024px) -->
+    <header class="mobile-header">
+      <div class="mobile-header-content">
+        <h1 class="mobile-name">
+          <a href="/">{basics.name}</a>
+        </h1>
+        <p class="mobile-tagline">{basics.tagline}</p>
+      </div>
+    </header>
+
+    <div class="layout-container">
+      <div class="layout-wrapper">
+        <SidebarLeft basics={basics} />
+        <MainContent>
+          <slot />
+        </MainContent>
+      </div>
+    </div>
+
+    <SidebarRight email={basics.email} />
+
     <style>
-      main {
+      .layout-container {
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      .layout-wrapper {
+        display: block;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
+      }
+
+      @media (min-width: 1024px) {
+        .layout-wrapper {
+          display: flex;
+          gap: 1rem;
+          padding: 0 3rem;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .layout-wrapper {
+          padding: 0 4rem;
+        }
+      }
+
+      @media (min-width: 1536px) {
+        .layout-wrapper {
+          padding: 0 6rem;
+        }
+      }
+
+      .mobile-header {
+        display: block;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      @media (min-width: 1024px) {
+        .mobile-header {
+          display: none;
+        }
+      }
+
+      .mobile-header-content {
         max-width: 768px;
+        margin: 0 auto;
+      }
+
+      .mobile-name {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .mobile-name a {
+        color: var(--primary-text);
+      }
+
+      .mobile-name a:hover {
+        color: var(--accent);
+      }
+
+      .mobile-tagline {
+        margin: 0.25rem 0 0 0;
+        font-size: 0.9rem;
+        color: var(--secondary-text);
       }
     </style>
   </body>

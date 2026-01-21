@@ -1,0 +1,63 @@
+---
+import GitHubIcon from "../icons/GitHubIcon.astro";
+import LinkedInIcon from "../icons/LinkedInIcon.astro";
+import XIcon from "../icons/XIcon.astro";
+import YouTubeIcon from "../icons/YouTubeIcon.astro";
+
+interface Props {
+	urls: Record<string, string>;
+}
+
+const { urls } = Astro.props;
+
+const links = [
+	{ href: urls.github, label: "GitHub", Icon: GitHubIcon },
+	{ href: urls.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
+	{ href: urls.youtube, label: "YouTube", Icon: YouTubeIcon },
+	{ href: urls.x, label: "X (Twitter)", Icon: XIcon },
+].filter((link) => link.href);
+---
+
+<ul class="social-links">
+  {links.map(({ href, label, Icon }) => (
+    <li>
+      <a
+        href={href}
+        class="social-link"
+        aria-label={label}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon class="icon" />
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .social-link {
+    color: var(--secondary-text);
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>

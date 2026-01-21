@@ -1,0 +1,62 @@
+---
+import { getLatestCommit } from "../data/github";
+
+const commit = await getLatestCommit();
+---
+
+{commit && (
+  <div class="github-activity">
+    <span class="status-dot" aria-hidden="true" />
+    <span class="activity-text">
+      <code class="sha">{commit.sha}</code>
+      <span class="separator">-</span>
+      <span class="message">{commit.message}</span>
+    </span>
+  </div>
+)}
+
+<style>
+  .github-activity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--tertiary-text);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .activity-text {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    overflow: hidden;
+  }
+
+  .sha {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: var(--accent);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .separator {
+    color: var(--tertiary-text);
+    flex-shrink: 0;
+  }
+
+  .message {
+    color: var(--secondary-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

@@ -5,46 +5,29 @@ interface Props {
 	basics: CvData["basics"];
 }
 
-const { basics } = Astro.props as Props;
+const { basics } = Astro.props;
 ---
 
-<section class="about">
+<div class="about">
   <p class="summary">{basics.summary}</p>
-  <a class="email" href={`mailto:${basics.email}`}>Let’s build together →</a>
-</section>
+</div>
 
 <style>
   .about {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 2rem 0;
   }
 
   .summary {
     margin: 0;
     color: var(--secondary-text);
     font-size: 1rem;
-    line-height: 1.6;
-    font-family: var(--font-family-sans);
+    line-height: 1.75;
   }
 
-  .email {
-    align-self: flex-start;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--primary-text);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.1rem;
-  }
-
-  .email:hover {
-    color: var(--secondary-text);
-  }
-
-  @media (max-width: 640px) {
-    .summary {
-      font-size: 0.95rem;
-    }
+  .summary::selection {
+    background-color: var(--accent-muted);
+    color: var(--accent);
   }
 </style>

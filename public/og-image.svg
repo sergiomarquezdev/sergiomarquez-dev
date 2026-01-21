@@ -3,7 +3,7 @@
 # This file indicates that an OG image should be created with dimensions 1200x630px
 #
 # Content should include:
-# - Sergio Márquez Pérez
+# - Sergio Márquez
 # - AI/ML & Backend Developer
 # - Dark theme consistent with site design
 # - Minimalist professional design
@@ -18,7 +18,7 @@
   <!-- Main text -->
   <text x="600" y="280" font-family="Arial, sans-serif" font-size="64" font-weight="600"
         text-anchor="middle" fill="#EAEAEA">
-    Sergio Márquez Pérez
+    Sergio Márquez
   </text>
 
   <!-- Subtitle -->
