@@ -17,12 +17,13 @@ const { basics } = cv;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='en' style="color-scheme: dark">
   <head>
     <BaseHead title={title} description={description} />
     <link rel="manifest" href="/manifest.webmanifest" />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <Spotlight />
 
     <!-- Mobile Header (visible < 1024px) -->
@@ -47,6 +48,22 @@ const { basics } = cv;
     <SidebarRight email={basics.email} />
 
     <style>
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        padding: 0.5rem 1rem;
+        background: var(--accent);
+        color: var(--background);
+        font-weight: 600;
+        z-index: 100;
+        transition: top 0.2s ease-in-out;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
       .layout-container {
         width: 100%;
         min-height: 100vh;

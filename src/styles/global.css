@@ -121,15 +121,6 @@ a {
 	}
 }
 
-@keyframes nav-expand {
-	from {
-		width: 2rem;
-	}
-	to {
-		width: 4rem;
-	}
-}
-
 /* Animation classes */
 .animate-fade-up {
 	animation: fade-up 0.6s ease-out forwards;

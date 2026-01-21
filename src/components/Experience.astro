@@ -13,7 +13,7 @@ const MAX_HIGHLIGHTS = 3;
   <h2 class="section-title">Experience</h2>
   <div class="roles">
     {experience.map((role) => (
-      <a href="#" class="role-card" aria-label={`${role.role} at ${role.company}`}>
+      <div class="role-card">
         <header class="role-header">
           <span class="role-period">{role.period}</span>
           <div class="role-info">
@@ -30,7 +30,7 @@ const MAX_HIGHLIGHTS = 3;
             </ul>
           </div>
         </header>
-      </a>
+      </div>
     ))}
   </div>
 </div>
