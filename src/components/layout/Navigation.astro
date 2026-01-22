@@ -32,34 +32,101 @@ const navItems: NavItem[] = [
 
     if (navLinks.length === 0 || sections.length === 0) return;
 
-    const observerOptions: IntersectionObserverInit = {
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0
-    };
+    const sectionsArray = Array.from(sections);
+    let currentActive: string | null = null;
+    let clickLockUntil = 0;
 
-    function setActiveLink(sectionId: string) {
+    function setActiveLink(sectionId: string, fromClick = false) {
+      if (currentActive === sectionId) return;
+      currentActive = sectionId;
       navLinks.forEach(link => {
         const isActive = link.dataset.section === sectionId;
         link.classList.toggle('active', isActive);
       });
+      if (fromClick) {
+        clickLockUntil = Date.now() + 800;
+      }
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveLink(entry.target.id);
+    function updateActiveSection() {
+      if (Date.now() < clickLockUntil) return;
+
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Near the top of the page - activate first section
+      if (scrollY < viewportHeight * 0.25) {
+        setActiveLink(sectionsArray[0].id);
+        return;
+      }
+
+      // Near the bottom of the page - activate last section
+      if (scrollY + viewportHeight >= documentHeight - 100) {
+        setActiveLink(sectionsArray[sectionsArray.length - 1].id);
+        return;
+      }
+
+      // Find section whose top is closest to viewport top (with offset)
+      const targetLine = viewportHeight * 0.2;
+      let bestSection: string | null = null;
+      let bestScore = -Infinity;
+
+      sectionsArray.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        // Skip if section is not visible
+        if (rect.bottom < 0 || rect.top > viewportHeight) return;
+
+        // Score based on how much of the section is in the upper portion of viewport
+        // Prefer sections whose top is at or above the target line
+        let score = 0;
+        if (rect.top <= targetLine) {
+          score = 1000 - Math.abs(rect.top);
+        } else {
+          score = -rect.top;
+        }
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestSection = section.id;
         }
       });
-    }, observerOptions);
 
-    sections.forEach(section => observer.observe(section));
+      if (bestSection) {
+        setActiveLink(bestSection);
+      }
+    }
+
+    // Throttled scroll handler
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Handle nav link clicks - lock active state briefly
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const sectionId = link.dataset.section;
+        if (sectionId) {
+          setActiveLink(sectionId, true);
+        }
+      });
+    });
 
     // Set initial active state
     const hash = window.location.hash.slice(1);
     if (hash && document.getElementById(hash)) {
-      setActiveLink(hash);
-    } else if (sections[0]) {
-      setActiveLink(sections[0].id);
+      setActiveLink(hash, true);
+    } else {
+      updateActiveSection();
     }
   }
 
