@@ -56,13 +56,13 @@
   "projects": [
     {
       "name": "One dAIly Blog",
-      "headline": "Daily auto-generated blog powered by Gemini.",
+      "headline": "Autonomous AI-powered blog generating daily Python content with Gemini and OpenAI.",
       "stack": [
-        "Angular",
+        "Astro",
         "Node.js",
         "Gemini",
-        "PostgreSQL",
-        "Tailwind"
+        "OpenAI",
+        "PostgreSQL"
       ],
       "url": "https://blog.sergiomarquez.dev",
       "github": [
