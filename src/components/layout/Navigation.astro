@@ -178,7 +178,7 @@ const navItems: NavItem[] = [
   }
 
   .nav-link:hover .nav-indicator {
-    transform: scaleX(2);
+    transform: scaleX(1);
     background-color: var(--primary-text);
   }
 
@@ -187,14 +187,15 @@ const navItems: NavItem[] = [
   }
 
   .nav-link.active .nav-indicator {
-    transform: scaleX(2);
+    transform: scaleX(1);
     background-color: var(--accent);
   }
 
   .nav-indicator {
-    width: 2rem;
+    width: 4rem;
     height: 1px;
     background-color: var(--tertiary-text);
+    transform: scaleX(0.5);
     transform-origin: left center;
     transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
   }
