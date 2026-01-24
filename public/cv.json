@@ -70,6 +70,65 @@
         "https://github.com/sergiomarquezdev/one-daily-blog-backend"
       ],
       "private": true
+    },
+    {
+      "name": "AI Photo Transformer",
+      "headline": "Multi-stage AI pipeline for cinematic photo transformations using Gemini and Seedream 4.",
+      "stack": [
+        "FastAPI",
+        "Python",
+        "Gemini",
+        "Replicate",
+        "Supabase",
+        "HTMX"
+      ],
+      "github": [
+        "https://github.com/sergiomarquezdev/altoke_image_gen"
+      ],
+      "private": true
+    },
+    {
+      "name": "Video Transcriber & AI Summarizer",
+      "headline": "CUDA-accelerated transcription with Whisper and AI-powered summaries via Gemini.",
+      "stack": [
+        "Python",
+        "Whisper",
+        "Gemini",
+        "PyTorch",
+        "CUDA"
+      ],
+      "github": [
+        "https://github.com/sergiomarquezdev/yt-transcriber"
+      ],
+      "private": true
+    },
+    {
+      "name": "Gesture-Controlled Digital Whiteboard",
+      "headline": "Real-time hand tracking whiteboard using computer vision and MediaPipe.",
+      "stack": [
+        "Python",
+        "OpenCV",
+        "MediaPipe"
+      ],
+      "url": "https://github.com/sergiomarquezdev/pizarra-digital-python",
+      "github": [
+        "https://github.com/sergiomarquezdev/pizarra-digital-python"
+      ],
+      "private": false
+    },
+    {
+      "name": "Acestream Docker Engine",
+      "headline": "Containerized streaming solution with automated setup for Ubuntu environments.",
+      "stack": [
+        "Docker",
+        "Shell",
+        "Ubuntu"
+      ],
+      "url": "https://github.com/sergiomarquezdev/acestream-docker-home",
+      "github": [
+        "https://github.com/sergiomarquezdev/acestream-docker-home"
+      ],
+      "private": false
     }
   ],
   "certifications": [
