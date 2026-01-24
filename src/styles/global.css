@@ -155,8 +155,24 @@ a {
 
 /* Focus styles for accessibility */
 :focus-visible {
-	outline: 2px solid var(--accent);
+	outline: 3px solid var(--accent);
 	outline-offset: 2px;
+}
+
+/* Typography utilities per baseline UI guidelines */
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
+}
+
+/* Tabular numbers for dates and numeric data */
+.tabular-nums {
+	font-variant-numeric: tabular-nums;
 }
 
 /* Print styles */

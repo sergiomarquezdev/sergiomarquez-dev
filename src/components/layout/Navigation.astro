@@ -42,6 +42,11 @@ const navItems: NavItem[] = [
       navLinks.forEach(link => {
         const isActive = link.dataset.section === sectionId;
         link.classList.toggle('active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
       });
       if (fromClick) {
         clickLockUntil = Date.now() + 800;
@@ -173,7 +178,7 @@ const navItems: NavItem[] = [
   }
 
   .nav-link:hover .nav-indicator {
-    width: 4rem;
+    transform: scaleX(2);
     background-color: var(--primary-text);
   }
 
@@ -182,7 +187,7 @@ const navItems: NavItem[] = [
   }
 
   .nav-link.active .nav-indicator {
-    width: 4rem;
+    transform: scaleX(2);
     background-color: var(--accent);
   }
 
@@ -190,7 +195,8 @@ const navItems: NavItem[] = [
     width: 2rem;
     height: 1px;
     background-color: var(--tertiary-text);
-    transition: width 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transform-origin: left center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
   }
 
   .nav-text {

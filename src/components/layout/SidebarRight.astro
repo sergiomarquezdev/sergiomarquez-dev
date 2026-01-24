@@ -8,7 +8,7 @@ const { email } = Astro.props;
 
 <aside class="sidebar-right">
   <div class="email-container">
-    <a href={`mailto:${email}`} class="email-link">
+    <a href={`mailto:${email}`} class="email-link" aria-label="Send email to Sergio Márquez">
       {email}
     </a>
     <div class="email-line" />

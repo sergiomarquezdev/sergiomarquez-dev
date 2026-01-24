@@ -12,7 +12,7 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
 <meta charset='UTF-8' />
 <meta name='description' content={description} />
 <meta name='viewport' content='width=device-width' />
-<meta name='theme-color' content='#0a0a0a' />
+<meta name='theme-color' content='#0f172a' />
 <meta name='robots' content='index, follow' />
 <meta name='author' content='Sergio Márquez' />
 <link rel='icon' type='image/svg+xml' href='/favicon.ico' />
@@ -29,16 +29,17 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
 <meta property='og:image' content={socialImageURL} />
 <meta property='og:image:width' content='1200' />
 <meta property='og:image:height' content='630' />
+<meta property='og:image:alt' content='Sergio Márquez - AI & Backend Developer portfolio' />
 <meta property='og:locale' content='en_US' />
 <meta property='og:site_name' content='Sergio Márquez' />
 
 <!-- Twitter -->
-<meta property='twitter:card' content='summary_large_image' />
-<meta property='twitter:url' content={Astro.url} />
-<meta property='twitter:title' content={title} />
-<meta property='twitter:description' content={description} />
-<meta property='twitter:image' content={socialImageURL} />
-<meta property='twitter:creator' content='@sergiomarquezp_' />
+<meta name='twitter:card' content='summary_large_image' />
+<meta name='twitter:url' content={Astro.url} />
+<meta name='twitter:title' content={title} />
+<meta name='twitter:description' content={description} />
+<meta name='twitter:image' content={socialImageURL} />
+<meta name='twitter:creator' content='@sergiomarquezp_' />
 
 <!-- Structured Data -->
 <script type='application/ld+json' is:inline>
@@ -46,29 +47,30 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Sergio Márquez",
-    "jobTitle": "AI/ML & Backend Developer",
-    "description": "Automation and AI/ML developer passionate about building modern web applications and sharing knowledge",
+    "jobTitle": "AI/ML Developer",
+    "description": "Backend Developer transitioned into AI/ML, specializing in Python, FastAPI, RAG pipelines, and agentic architectures",
     "url": "https://sergiomarquez.dev",
+    "email": "contacto@sergiomarquez.dev",
     "sameAs": [
       "https://github.com/sergiomarquezdev",
       "https://www.linkedin.com/in/sergiomarquezp/",
       "https://x.com/sergiomarquezp_",
-      "https://www.youtube.com/@sergiomarquezp",
-      "https://www.instagram.com/sergiomarquezp_/",
-      "https://www.tiktok.com/@sergiomarquezp_"
+      "https://www.youtube.com/@sergiomarquezp"
     ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "VITALY"
+    },
     "knowsAbout": [
       "Artificial Intelligence",
       "Machine Learning",
       "Backend Development",
-      "Automation",
       "Python",
-      "TypeScript"
-    ],
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "AI/ML & Backend Development"
-    }
+      "FastAPI",
+      "RAG Pipelines",
+      "LLMs",
+      "Google Cloud Platform"
+    ]
   }
 </script>
 
