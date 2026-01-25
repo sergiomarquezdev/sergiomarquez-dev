@@ -89,7 +89,7 @@
     },
     {
       "name": "Video Transcriber & AI Summarizer",
-      "headline": "CUDA-accelerated transcription with Whisper and AI-powered summaries via Gemini.",
+      "headline": "CLI for CUDA-accelerated transcription with Whisper, multi-provider AI summaries, and LinkedIn/Twitter content generation.",
       "stack": [
         "Python",
         "Whisper",
@@ -100,7 +100,7 @@
       "github": [
         "https://github.com/sergiomarquezdev/yt-transcriber"
       ],
-      "private": true
+      "private": false
     },
     {
       "name": "Gesture-Controlled Digital Whiteboard",
