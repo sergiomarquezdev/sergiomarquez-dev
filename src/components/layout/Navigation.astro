@@ -26,7 +26,13 @@ const navItems: NavItem[] = [
 </nav>
 
 <script>
+  let navController: AbortController | null = null;
+
   function initNavigation() {
+    navController?.abort();
+    navController = new AbortController();
+    const { signal } = navController;
+
     const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
     const sections = document.querySelectorAll<HTMLElement>('section[id]');
 
@@ -114,7 +120,7 @@ const navItems: NavItem[] = [
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
 
     // Handle nav link clicks - lock active state briefly
     navLinks.forEach(link => {
@@ -123,7 +129,7 @@ const navItems: NavItem[] = [
         if (sectionId) {
           setActiveLink(sectionId, true);
         }
-      });
+      }, { signal });
     });
 
     // Set initial active state

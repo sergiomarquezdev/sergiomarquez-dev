@@ -13,7 +13,7 @@ const MAX_HIGHLIGHTS = 3;
   <h2 class="section-title">Experience</h2>
   <div class="roles">
     {experience.map((role) => (
-      <div class="role-card">
+      <div class="role-card card-interactive">
         <header class="role-header">
           <span class="role-period">{role.period}</span>
           <div class="role-info">
@@ -42,21 +42,6 @@ const MAX_HIGHLIGHTS = 3;
     gap: 1.5rem;
   }
 
-  .section-title {
-    margin: 0;
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--primary-text);
-  }
-
-  @media (min-width: 1024px) {
-    .section-title {
-      display: none;
-    }
-  }
-
   .roles {
     display: flex;
     flex-direction: column;
@@ -64,16 +49,8 @@ const MAX_HIGHLIGHTS = 3;
   }
 
   .role-card {
-    display: block;
     padding: 1rem 1.5rem;
-    margin: 0 -1.5rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s ease-in-out;
     cursor: default;
-  }
-
-  .role-card:hover {
-    background-color: var(--accent-muted);
   }
 
   .role-header {

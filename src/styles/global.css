@@ -146,11 +146,33 @@ a {
 .delay-300 {
 	animation-delay: 300ms;
 }
-.delay-400 {
-	animation-delay: 400ms;
+
+/* Shared section title (hidden on desktop where sidebar nav is visible) */
+.section-title {
+	margin: 0;
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--primary-text);
 }
-.delay-500 {
-	animation-delay: 500ms;
+
+@media (min-width: 1024px) {
+	.section-title {
+		display: none;
+	}
+}
+
+/* Shared card interactive hover pattern */
+.card-interactive {
+	display: block;
+	margin: 0 -1.5rem;
+	border-radius: 0.5rem;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.card-interactive:hover {
+	background-color: var(--accent-muted);
 }
 
 /* Focus styles for accessibility */

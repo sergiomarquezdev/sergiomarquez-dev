@@ -16,7 +16,7 @@ const { certifications } = Astro.props;
       <li>
         <a
           href={cert.url || '#'}
-          class="cert-card"
+          class="cert-card card-interactive"
           target={cert.url ? "_blank" : undefined}
           rel={cert.url ? "noopener noreferrer" : undefined}
           aria-label={`View ${cert.name} certificate`}
@@ -45,21 +45,6 @@ const { certifications } = Astro.props;
     gap: 1.5rem;
   }
 
-  .section-title {
-    margin: 0;
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--primary-text);
-  }
-
-  @media (min-width: 1024px) {
-    .section-title {
-      display: none;
-    }
-  }
-
   .cert-list {
     margin: 0;
     padding: 0;
@@ -70,16 +55,8 @@ const { certifications } = Astro.props;
   }
 
   .cert-card {
-    display: block;
     padding: 0.75rem 1.5rem;
-    margin: 0 -1.5rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s ease-in-out;
     cursor: pointer;
-  }
-
-  .cert-card:hover {
-    background-color: var(--accent-muted);
   }
 
   .cert-content {

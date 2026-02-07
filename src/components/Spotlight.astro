@@ -5,7 +5,13 @@
 <div class="spotlight" aria-hidden="true" />
 
 <script>
+  let spotlightController: AbortController | null = null;
+
   function initSpotlight() {
+    // Clean up previous listener
+    spotlightController?.abort();
+    spotlightController = new AbortController();
+
     const spotlight = document.querySelector<HTMLElement>('.spotlight');
     if (!spotlight) return;
 
@@ -30,7 +36,7 @@
       }
     }
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove, { signal: spotlightController.signal });
   }
 
   // Run on initial load and after view transitions

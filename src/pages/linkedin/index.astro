@@ -1,8 +1,10 @@
 ---
+import { cv } from "../../data/cv";
+
 return new Response(null, {
 	status: 301,
 	headers: {
-		Location: "https://www.linkedin.com/in/sergiomarquezp/",
+		Location: cv.basics.urls.linkedin,
 	},
 });
 ---
