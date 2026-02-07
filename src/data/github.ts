@@ -27,6 +27,7 @@ export async function getLatestCommit(): Promise<GitHubCommit | null> {
 				Accept: "application/vnd.github.v3+json",
 				"User-Agent": "sergiomarquez-portfolio",
 			},
+			signal: AbortSignal.timeout(5000),
 		});
 
 		if (!response.ok) {
