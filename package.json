@@ -16,7 +16,7 @@
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"validate": "bun run type-check && bun run lint && bun run test && bun run build",
-		"prepare": "husky"
+		"prepare": "husky || true"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.6.0",
