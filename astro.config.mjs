@@ -26,14 +26,6 @@ export default defineConfig({
   // Compress HTML for better performance
   compressHTML: true,
 
-  // Markdown configuration (if needed for future content)
-  markdown: {
-    shikiConfig: {
-      theme: "github-dark-dimmed",
-      wrap: true,
-    },
-  },
-
   // Vite optimizations
   vite: {
     plugins: [tailwindcss()],
