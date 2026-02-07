@@ -1,4 +1,6 @@
 ---
+import { cv } from "../data/cv";
+
 interface Props {
 	title: string;
 	description: string;
@@ -7,6 +9,36 @@ interface Props {
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/og-image.svg", Astro.site);
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: cv.basics.name,
+	jobTitle: cv.experience[0].role,
+	description: cv.basics.summary,
+	url: cv.basics.urls.site,
+	email: cv.basics.email,
+	sameAs: [
+		cv.basics.urls.github,
+		cv.basics.urls.linkedin,
+		cv.basics.urls.x,
+		cv.basics.urls.youtube,
+	],
+	worksFor: {
+		"@type": "Organization",
+		name: cv.experience[0].company,
+	},
+	knowsAbout: [
+		"Artificial Intelligence",
+		"Machine Learning",
+		"Backend Development",
+		"Python",
+		"FastAPI",
+		"RAG Pipelines",
+		"LLMs",
+		"Google Cloud Platform",
+	],
+};
 ---
 
 <meta charset='UTF-8' />
@@ -15,7 +47,7 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
 <meta name='theme-color' content='#0f172a' />
 <meta name='robots' content='index, follow' />
 <meta name='author' content='Sergio Márquez' />
-<link rel='icon' type='image/svg+xml' href='/favicon.ico' />
+<link rel='icon' type='image/x-icon' href='/favicon.ico' />
 <meta name='generator' content={Astro.generator} />
 <link rel='canonical' href={canonicalURL} />
 
@@ -42,36 +74,6 @@ const socialImageURL = new URL("/og-image.svg", Astro.site);
 <meta name='twitter:creator' content='@sergiomarquezp_' />
 
 <!-- Structured Data -->
-<script type='application/ld+json' is:inline>
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sergio Márquez",
-    "jobTitle": "AI/ML Developer",
-    "description": "Backend Developer transitioned into AI/ML, specializing in Python, FastAPI, RAG pipelines, and agentic architectures",
-    "url": "https://sergiomarquez.dev",
-    "email": "contacto@sergiomarquez.dev",
-    "sameAs": [
-      "https://github.com/sergiomarquezdev",
-      "https://www.linkedin.com/in/sergiomarquezp/",
-      "https://x.com/sergiomarquezp_",
-      "https://www.youtube.com/@sergiomarquezp"
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "VITALY"
-    },
-    "knowsAbout": [
-      "Artificial Intelligence",
-      "Machine Learning",
-      "Backend Development",
-      "Python",
-      "FastAPI",
-      "RAG Pipelines",
-      "LLMs",
-      "Google Cloud Platform"
-    ]
-  }
-</script>
+<script type='application/ld+json' is:inline set:html={JSON.stringify(structuredData)} />
 
 
