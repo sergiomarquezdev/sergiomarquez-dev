@@ -1,31 +1,45 @@
 {
-  "name": "sergiomarquez-web",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "type-check": "astro check",
-    "lint": "biome check src/",
-    "lint:fix": "biome check src/ --write",
-    "format": "biome format src/ --write",
-    "format:check": "biome format src/",
-    "validate": "bun run type-check && bun run lint && bun run build"
-  },
-  "dependencies": {
-    "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.16.0",
-    "lightningcss": "^1.30.2",
-    "non.geist": "^1.0.4"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.5",
-    "@biomejs/biome": "^2.3.7",
-    "@tailwindcss/vite": "^4.1.17",
-    "tailwindcss": "^4.1.17",
-    "typescript": "^5.9.3"
-  }
+	"name": "sergiomarquez-web",
+	"type": "module",
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"type-check": "astro check",
+		"lint": "biome check src/",
+		"lint:fix": "biome check src/ --write",
+		"format": "biome format src/ --write",
+		"format:check": "biome format src/",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"validate": "bun run type-check && bun run lint && bun run test && bun run build",
+		"prepare": "husky"
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "^3.6.0",
+		"astro": "^5.16.0",
+		"lightningcss": "^1.30.2",
+		"non.geist": "^1.0.4"
+	},
+	"lint-staged": {
+		"*.{ts,js,json,css}": [
+			"biome check --write"
+		],
+		"*.astro": [
+			"biome check --write"
+		]
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.5",
+		"@biomejs/biome": "^2.3.7",
+		"@tailwindcss/vite": "^4.1.17",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"tailwindcss": "^4.1.17",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.18"
+	}
 }
