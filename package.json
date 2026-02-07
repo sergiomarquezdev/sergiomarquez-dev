@@ -25,10 +25,10 @@
 		"non.geist": "^1.0.4"
 	},
 	"lint-staged": {
-		"*.{ts,js,json,css}": [
+		"src/**/*.{ts,js,json,css}": [
 			"biome check --write"
 		],
-		"*.astro": [
+		"src/**/*.astro": [
 			"biome check --write"
 		]
 	},
