@@ -38,15 +38,13 @@ This repository contains the source code for my **personal portfolio website**. 
 
 ```
 sergiomarquez-dev/
-├── docs/                     # Project docs & migration notes
-│   └── scratchpad.md
+├── .husky/                   # Git hooks (pre-commit via lint-staged)
+├── .vscode/                  # Shared VS Code settings & extensions
 ├── public/                   # Static assets served as-is
 │   ├── cv.json               # Portfolio data source
 │   ├── favicon.ico
 │   ├── og-image.svg
 │   └── robots.txt
-├── scripts/                  # Auxiliary development scripts
-│   └── pre-commit-hook.sh
 ├── src/
 │   ├── components/
 │   │   ├── About.astro       # Intro section powered by cv.json
