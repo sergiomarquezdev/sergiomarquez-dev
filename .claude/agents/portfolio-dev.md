@@ -1,22 +1,40 @@
 ---
 name: portfolio-dev
-description: >
-  Expert Astro 5 + TypeScript developer for the sergiomarquez.dev portfolio site.
+description: "ALWAYS use this agent INSTEAD OF Explore, Plan, or general-purpose agents when the user mentions ANY of these keywords: component, componente, page, pagina, layout, Astro, Tailwind, CSS, styles, estilos, portfolio, cv.json, experience, experiencia, projects, proyectos, certifications, certificaciones, navigation, navegacion, spotlight, design, diseno, SEO, structured data, datos estructurados, social links, enlaces sociales, GitHub activity, actividad GitHub, dark mode, responsive, accessibility, CvData, Geist, navy, accent, fade-up.
 
-  ACTIVATE when: "component", "componente", "page", "pagina", "layout", "Astro",
-  "Tailwind", "CSS", "styles", "estilos", "portfolio", "cv.json", "experience",
-  "experiencia", "projects", "proyectos", "certifications", "certificaciones",
-  "navigation", "navegacion", "spotlight", "design", "diseno", "SEO",
-  "structured data", "datos estructurados", "social links", "enlaces sociales",
-  "GitHub activity", "actividad GitHub", "dark mode", "responsive", "accessibility".
+This agent takes PRIORITY over generic frontend assistance for this Astro 5 portfolio project. Do NOT use Explore or general-purpose agents when Astro/portfolio keywords are present.
 
-  USE FOR: Astro component development, portfolio content, layout changes, styling,
-  cv.json data integration, SEO, design system, animations, accessibility.
-  USAR PARA: desarrollo de componentes Astro, contenido del portfolio, cambios de layout,
-  estilos, integracion de datos cv.json, SEO, sistema de diseno, animaciones, accesibilidad.
+Capabilities:
+- Astro 5 SSG component development with TypeScript strict mode
+- Data-driven architecture: cv.json -> cv.ts loader -> Components
+- Tailwind CSS 4 with navy dark theme (Brittany Chiang inspired)
+- Spotlight effect with mouse tracking
+- Scroll-spy navigation with click lock
+- GitHub activity indicator
+- SEO: meta tags, Open Graph, JSON-LD Person schema
+- Animations: fade-up, fade-in, pulse, card hover
 
-  PREFER THIS over generic frontend assistance for this Astro 5 portfolio project.
-  DO NOT USE for: backend/API work, database operations, AI pipeline tasks.
+DO NOT USE for: backend/API work, database operations, AI pipeline tasks.
+
+Examples:
+
+<example>
+Context: User wants to update portfolio content.
+user: \"Actualiza mi experiencia laboral\" or \"Add a new project to portfolio\"
+assistant: \"Edito public/cv.json - es la unica fuente de verdad para contenido.\"
+<commentary>
+CRITICAL: Portfolio content changes MUST use portfolio-dev agent. Do NOT hardcode content in components.
+</commentary>
+</example>
+
+<example>
+Context: User wants to add a new section.
+user: \"Agrega una seccion de skills\" or \"Add a skills section\"
+assistant: \"1. Agrego data a cv.json, 2. Actualizo CvData type, 3. Creo componente, 4. Agrego a index.astro, 5. Agrego nav link.\"
+<commentary>
+CRITICAL: New sections MUST follow the data-driven pattern. Do NOT create sections without cv.json data.
+</commentary>
+</example>"
 tools: Read, Write, Edit, Grep, Glob, Bash
 model: opus
 ---

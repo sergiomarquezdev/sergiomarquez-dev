@@ -1,16 +1,40 @@
 ---
 name: portfolio-guide
-description: >
-  Architecture and conventions guide for the sergiomarquez.dev portfolio site.
+description: "ALWAYS consult this skill BEFORE implementing features when the user mentions ANY of these keywords: architecture, arquitectura, structure, estructura, conventions, convenciones, how does, como funciona, where is, donde esta, data flow, flujo de datos, cv.json, add section, nueva seccion, deployment, despliegue, testing, design system, sistema de diseno, new component, nuevo componente, update content, actualizar contenido, folder, carpeta, file location, ubicacion de archivo, design tokens, Cloudflare Pages, CI/CD, bun, lockfile.
 
-  ACTIVATE when: "architecture", "arquitectura", "structure", "estructura",
-  "conventions", "convenciones", "how does", "como funciona", "where is", "donde esta",
-  "data flow", "flujo de datos", "cv.json", "add section", "nueva seccion",
-  "deployment", "despliegue", "testing", "design system", "sistema de diseno",
-  "new component", "nuevo componente", "update content", "actualizar contenido".
+This skill takes PRIORITY over guessing project structure. Do NOT implement features without understanding the data-driven architecture first.
 
-  USE FOR: understanding architecture, finding files, following conventions, updating content.
-  USAR PARA: entender arquitectura, encontrar archivos, seguir convenciones, actualizar contenido.
+Capabilities:
+- Content update guide (cv.json paths for each section)
+- New section checklist (6 steps: JSON -> type -> component -> page -> nav -> test)
+- Social redirect pattern
+- Layout structure (three-column desktop, single-column mobile)
+- File conventions (components, layout, icons, data, tests, pages, styles)
+- Design tokens (navy theme: background, primary-text, secondary-text, accent)
+- CI/CD pipeline (GitHub Actions + Cloudflare Pages)
+- Key gotchas (dual lockfile, path alias, Biome LF, Lighthouse targets)
+
+DO NOT USE for: actual implementation (use portfolio-dev), backend changes.
+
+Examples:
+
+<example>
+Context: User asks where to update content.
+user: \"Donde cambio mi titulo?\" or \"Where do I update my job title?\"
+assistant: \"Consulto portfolio-guide: basics.label en public/cv.json -> se renderiza en SidebarLeft.astro.\"
+<commentary>
+CRITICAL: Content location questions MUST consult portfolio-guide skill. Do NOT guess JSON paths.
+</commentary>
+</example>
+
+<example>
+Context: User asks about deployment.
+user: \"Como funciona el deploy?\" or \"How does deployment work?\"
+assistant: \"Segun portfolio-guide: Push to main -> GitHub Actions (CI) -> Cloudflare Pages (deploy con npm ci).\"
+<commentary>
+CRITICAL: Deployment questions MUST consult portfolio-guide skill. Do NOT improvise CI/CD steps.
+</commentary>
+</example>"
 ---
 
 # sergiomarquez.dev Portfolio Guide
