@@ -1,10 +1,18 @@
 ---
 name: portfolio-guide
-description: "ALWAYS consult this skill BEFORE implementing features when the user mentions ANY of these keywords: architecture, arquitectura, structure, estructura, conventions, convenciones, how does, como funciona, where is, donde esta, data flow, flujo de datos, cv.json, add section, nueva seccion, deployment, despliegue, testing, design system, sistema de diseno, new component, nuevo componente, update content, actualizar contenido, folder, carpeta, file location, ubicacion de archivo, design tokens, Cloudflare Pages, CI/CD, bun, lockfile.
+description: Architecture guide for portfolio with cv.json content paths, design tokens, CI/CD pipeline, and file conventions
+---
 
-This skill takes PRIORITY over guessing project structure. Do NOT implement features without understanding the data-driven architecture first.
+# sergiomarquez.dev Portfolio Guide
 
-Capabilities:
+## When to Use This Skill
+
+Use when the user mentions: architecture, arquitectura, structure, estructura, conventions, convenciones, how does, como funciona, where is, donde esta, data flow, flujo de datos, cv.json, add section, nueva seccion, deployment, despliegue, testing, design system, sistema de diseno, new component, nuevo componente, update content, actualizar contenido, folder, carpeta, file location, ubicacion de archivo, design tokens, Cloudflare Pages, CI/CD, bun, lockfile.
+
+This skill takes PRIORITY over guessing project structure. Consult before implementing features.
+
+## Capabilities
+
 - Content update guide (cv.json paths for each section)
 - New section checklist (6 steps: JSON -> type -> component -> page -> nav -> test)
 - Social redirect pattern
@@ -15,29 +23,6 @@ Capabilities:
 - Key gotchas (dual lockfile, path alias, Biome LF, Lighthouse targets)
 
 DO NOT USE for: actual implementation (use portfolio-dev), backend changes.
-
-Examples:
-
-<example>
-Context: User asks where to update content.
-user: \"Donde cambio mi titulo?\" or \"Where do I update my job title?\"
-assistant: \"Consulto portfolio-guide: basics.label en public/cv.json -> se renderiza en SidebarLeft.astro.\"
-<commentary>
-CRITICAL: Content location questions MUST consult portfolio-guide skill. Do NOT guess JSON paths.
-</commentary>
-</example>
-
-<example>
-Context: User asks about deployment.
-user: \"Como funciona el deploy?\" or \"How does deployment work?\"
-assistant: \"Segun portfolio-guide: Push to main -> GitHub Actions (CI) -> Cloudflare Pages (deploy con npm ci).\"
-<commentary>
-CRITICAL: Deployment questions MUST consult portfolio-guide skill. Do NOT improvise CI/CD steps.
-</commentary>
-</example>"
----
-
-# sergiomarquez.dev Portfolio Guide
 
 Single-page portfolio site. All content driven by `public/cv.json`.
 
