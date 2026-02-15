@@ -28,7 +28,7 @@ const { certifications } = Astro.props;
             </h3>
             <p class="cert-meta">
               {cert.issuer}
-              <span class="cert-separator">-</span>
+              <span class="cert-separator">&ndash;</span>
               {cert.date}
             </p>
           </div>
@@ -96,7 +96,7 @@ const { certifications } = Astro.props;
     margin: 0;
     font-size: 0.8rem;
     color: var(--tertiary-text);
-    font-variant-numeric: tabular-nums;
+    font-variant-numeric: lining-nums tabular-nums;
   }
 
   .cert-separator {

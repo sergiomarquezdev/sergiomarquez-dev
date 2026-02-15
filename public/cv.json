@@ -16,14 +16,14 @@
     {
       "company": "VITALY",
       "role": "AI/ML Developer",
-      "period": "May 2025 - Present",
+      "period": "May 2025 – Present",
       "summary": "Backend engineer applying AI to real products and internal tooling, combining backend, data, and automation.",
       "highlights": [
         "Developed APIs and services in Python/FastAPI for data processing and system integration.",
         "Built ingestion and processing pipelines (documents, video) including transcription and validations.",
         "Implemented AI capabilities with LLMs: RAG, embeddings, and vector search integrated into production middleware.",
         "Evolution of AI assistants: managing memory/sessions, stability improvements, and post-deployment fine-tuning.",
-        "Automated RAG ingestion via n8n + Python (Sheets -> MongoDB + Pinecone) with hash dedupe; saved ~8-10 hours per setup.",
+        "Automated RAG ingestion via n8n + Python (Sheets -> MongoDB + Pinecone) with hash dedupe; saved ~8–10 hours per setup.",
         "Improved document validation pass rate from 70% to 90% using a GPT+Claude+Gemini ensemble and OCR tuning.",
         "Migrated chat to an agentic architecture (Google ADK) with LiteLLM; ~15% lower latency and ~35% lower infra cost.",
         "Stack: Python, FastAPI, n8n, GCP, MongoDB, BigQuery/Firestore, Pinecone, Docker, GitLab CI/CD, OpenTelemetry."
@@ -32,7 +32,7 @@
     {
       "company": "VITALY",
       "role": "Full-Stack Developer",
-      "period": "Jun 2021 - May 2025",
+      "period": "Jun 2021 – May 2025",
       "summary": "Focused on backend specialization (Java/Spring) while owning cloud/data integrations and frontend support.",
       "highlights": [
         "Strategic Middleware APIs: Designed and developed Spring-based middleware to optimize frontend/external services communication.",
@@ -45,7 +45,7 @@
     {
       "company": "VITALY",
       "role": "Intern Developer",
-      "period": "Apr 2021 - Jun 2021",
+      "period": "Apr 2021 – Jun 2021",
       "summary": "Intensive training and first contact with professional web development environments.",
       "highlights": [
         "Received intensive training in Java Spring, Angular, Docker, and Kubernetes.",
