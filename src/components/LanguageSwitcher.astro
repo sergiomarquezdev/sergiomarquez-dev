@@ -15,9 +15,11 @@ const ariaLabel = t(locale, "lang.switchLabel");
   function initLangSwitch() {
     document.querySelectorAll('[data-lang-switch]').forEach(link => {
       link.addEventListener('click', () => {
-        const href = (link as HTMLAnchorElement).href;
-        const isEnglish = href.includes('/en');
-        localStorage.setItem('preferred-locale', isEnglish ? 'en' : 'es');
+        try {
+          const href = (link as HTMLAnchorElement).href;
+          const isEnglish = href.includes('/en');
+          localStorage.setItem('preferred-locale', isEnglish ? 'en' : 'es');
+        } catch { /* Private browsing or storage unavailable */ }
       });
     });
   }

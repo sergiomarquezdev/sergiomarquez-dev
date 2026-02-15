@@ -32,16 +32,7 @@ const structuredData = {
 		"@type": "Organization",
 		name: cv.experience[0].company,
 	},
-	knowsAbout: [
-		"Artificial Intelligence",
-		"Machine Learning",
-		"Backend Development",
-		"Python",
-		"FastAPI",
-		"RAG Pipelines",
-		"LLMs",
-		"Google Cloud Platform",
-	],
+	knowsAbout: t(locale, "structured.knowsAbout").split(","),
 };
 ---
 
@@ -64,7 +55,7 @@ const structuredData = {
 
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content='website' />
-<meta property='og:url' content={Astro.url} />
+<meta property='og:url' content={canonicalURL} />
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
 <meta property='og:image' content={socialImageURL} />
@@ -76,7 +67,7 @@ const structuredData = {
 
 <!-- Twitter -->
 <meta name='twitter:card' content='summary_large_image' />
-<meta name='twitter:url' content={Astro.url} />
+<meta name='twitter:url' content={canonicalURL} />
 <meta name='twitter:title' content={title} />
 <meta name='twitter:description' content={description} />
 <meta name='twitter:image' content={socialImageURL} />

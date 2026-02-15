@@ -29,6 +29,10 @@ export default defineConfig({
       changefreq: "monthly",
       priority: 0.7,
       lastmod: new Date(),
+      i18n: {
+        defaultLocale: "es",
+        locales: { es: "es", en: "en" },
+      },
     }),
   ],
 

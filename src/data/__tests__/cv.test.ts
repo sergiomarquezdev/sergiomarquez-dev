@@ -69,4 +69,16 @@ describe("cv data loader", () => {
 		expect(esData.basics.name).toBe(enData.basics.name);
 		expect(esData.basics.email).toBe(enData.basics.email);
 	});
+
+	it("has structural parity between locales", () => {
+		const esData = getCv("es");
+		const enData = getCv("en");
+		expect(esData.experience.length).toBe(enData.experience.length);
+		expect(esData.projects.length).toBe(enData.projects.length);
+		expect(esData.certifications.length).toBe(enData.certifications.length);
+		// Verify highlight counts match per experience entry
+		for (let i = 0; i < esData.experience.length; i++) {
+			expect(esData.experience[i].highlights.length).toBe(enData.experience[i].highlights.length);
+		}
+	});
 });

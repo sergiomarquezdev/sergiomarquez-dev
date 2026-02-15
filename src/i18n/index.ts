@@ -16,8 +16,11 @@ const ui = {
 			"Portfolio de Sergio Marquez, desarrollador Python especializado en IA y Backend con FastAPI, integraciones LLM y automatizaciones pragmáticas.",
 		"skip.main": "Ir al contenido principal",
 		"aria.sendEmail": "Enviar email a Sergio Márquez",
+		"aria.mainNav": "Navegación principal",
 		"aria.viewProject": "Ver proyecto",
 		"aria.viewCert": "Ver certificado",
+		"structured.knowsAbout":
+			"Inteligencia Artificial,Aprendizaje Automático,Desarrollo Backend,Python,FastAPI,Pipelines RAG,LLMs,Google Cloud Platform",
 		"og.locale": "es_ES",
 		"og.imageAlt": "Sergio Márquez - Portfolio de Desarrollador IA & Backend",
 		"lang.switch": "EN",
@@ -36,8 +39,11 @@ const ui = {
 			"Portfolio of Sergio Marquez, a Python AI & Backend Developer focused on FastAPI services, LLM integrations, and pragmatic automations.",
 		"skip.main": "Skip to main content",
 		"aria.sendEmail": "Send email to Sergio Márquez",
+		"aria.mainNav": "Main navigation",
 		"aria.viewProject": "View project",
 		"aria.viewCert": "View certificate",
+		"structured.knowsAbout":
+			"Artificial Intelligence,Machine Learning,Backend Development,Python,FastAPI,RAG Pipelines,LLMs,Google Cloud Platform",
 		"og.locale": "en_US",
 		"og.imageAlt": "Sergio Márquez - AI & Backend Developer portfolio",
 		"lang.switch": "ES",
