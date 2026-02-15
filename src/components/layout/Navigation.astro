@@ -1,14 +1,18 @@
 ---
+import { getLocale, t } from "../../i18n/index";
+
+const locale = getLocale(Astro.currentLocale);
+
 interface NavItem {
 	id: string;
 	label: string;
 }
 
 const navItems: NavItem[] = [
-	{ id: "about", label: "About" },
-	{ id: "experience", label: "Experience" },
-	{ id: "projects", label: "Projects" },
-	{ id: "certifications", label: "Certifications" },
+	{ id: "about", label: t(locale, "nav.about") },
+	{ id: "experience", label: t(locale, "nav.experience") },
+	{ id: "projects", label: t(locale, "nav.projects") },
+	{ id: "certifications", label: t(locale, "nav.certifications") },
 ];
 ---
 

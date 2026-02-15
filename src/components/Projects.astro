@@ -1,5 +1,6 @@
 ---
 import type { CvData } from "../data/cv";
+import { getLocale, t } from "../i18n/index";
 import LinkIcon from "./icons/LinkIcon.astro";
 
 interface Props {
@@ -7,10 +8,11 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 ---
 
 <div class="projects">
-  <h2 class="section-title">Projects</h2>
+  <h2 class="section-title">{t(locale, "section.projects")}</h2>
   <div class="project-list">
     {projects.map((project) => (
       <a
@@ -18,7 +20,7 @@ const { projects } = Astro.props;
         class="project-card card-interactive"
         target={project.url || (project.github && !project.private) ? "_blank" : undefined}
         rel={project.url || (project.github && !project.private) ? "noopener noreferrer" : undefined}
-        aria-label={`View ${project.name} project`}
+        aria-label={`${t(locale, "aria.viewProject")} ${project.name}`}
       >
         <div class="project-content">
           <h3 class="project-name">

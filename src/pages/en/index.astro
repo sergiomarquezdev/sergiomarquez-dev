@@ -1,11 +1,11 @@
 ---
-import About from "../components/About.astro";
-import Certifications from "../components/Certifications.astro";
-import Experience from "../components/Experience.astro";
-import Projects from "../components/Projects.astro";
-import { getCv } from "../data/cv";
-import { getLocale, t } from "../i18n/index";
-import Layout from "../layouts/Layout.astro";
+import About from "../../components/About.astro";
+import Certifications from "../../components/Certifications.astro";
+import Experience from "../../components/Experience.astro";
+import Projects from "../../components/Projects.astro";
+import { getCv } from "../../data/cv";
+import { getLocale, t } from "../../i18n/index";
+import Layout from "../../layouts/Layout.astro";
 
 const locale = getLocale(Astro.currentLocale);
 const cv = getCv(locale);

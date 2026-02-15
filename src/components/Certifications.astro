@@ -1,5 +1,6 @@
 ---
 import type { CvData } from "../data/cv";
+import { getLocale, t } from "../i18n/index";
 import LinkIcon from "./icons/LinkIcon.astro";
 
 interface Props {
@@ -7,10 +8,11 @@ interface Props {
 }
 
 const { certifications } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 ---
 
 <div class="certifications">
-  <h2 class="section-title">Certifications</h2>
+  <h2 class="section-title">{t(locale, "section.certifications")}</h2>
   <ul class="cert-list">
     {certifications.map((cert) => (
       <li>
@@ -19,7 +21,7 @@ const { certifications } = Astro.props;
           class="cert-card card-interactive"
           target={cert.url ? "_blank" : undefined}
           rel={cert.url ? "noopener noreferrer" : undefined}
-          aria-label={`View ${cert.name} certificate`}
+          aria-label={`${t(locale, "aria.viewCert")} ${cert.name}`}
         >
           <div class="cert-content">
             <h3 class="cert-name">

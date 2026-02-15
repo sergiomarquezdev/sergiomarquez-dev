@@ -1,55 +1,72 @@
 import { describe, expect, it } from "vitest";
-import { cv } from "../cv";
+import { type CvData, cv, getCv } from "../cv";
+
+function validateCvStructure(data: CvData) {
+	expect(data).toBeDefined();
+	expect(typeof data).toBe("object");
+
+	// basics
+	expect(data.basics).toBeDefined();
+	expect(data.basics.name).toBeDefined();
+	expect(typeof data.basics.name).toBe("string");
+	expect(data.basics.name.length).toBeGreaterThan(0);
+	expect(data.basics.tagline).toBeDefined();
+	expect(data.basics.email).toBeDefined();
+	expect(data.basics.urls).toBeDefined();
+	expect(data.basics.summary).toBeDefined();
+
+	// experience
+	expect(Array.isArray(data.experience)).toBe(true);
+	expect(data.experience.length).toBeGreaterThan(0);
+	for (const entry of data.experience) {
+		expect(entry.company).toBeDefined();
+		expect(entry.role).toBeDefined();
+		expect(entry.period).toBeDefined();
+		expect(entry.summary).toBeDefined();
+		expect(Array.isArray(entry.highlights)).toBe(true);
+	}
+
+	// projects
+	expect(Array.isArray(data.projects)).toBe(true);
+	expect(data.projects.length).toBeGreaterThan(0);
+	for (const project of data.projects) {
+		expect(project.name).toBeDefined();
+		expect(project.headline).toBeDefined();
+		expect(Array.isArray(project.stack)).toBe(true);
+	}
+
+	// certifications
+	expect(Array.isArray(data.certifications)).toBe(true);
+}
 
 describe("cv data loader", () => {
-	it("loads cv object successfully", () => {
-		expect(cv).toBeDefined();
-		expect(typeof cv).toBe("object");
+	it("loads default cv (es) successfully", () => {
+		validateCvStructure(cv);
 	});
 
-	it("has basics with a name", () => {
-		expect(cv.basics).toBeDefined();
-		expect(cv.basics.name).toBeDefined();
-		expect(typeof cv.basics.name).toBe("string");
-		expect(cv.basics.name.length).toBeGreaterThan(0);
+	it("loads Spanish cv via getCv", () => {
+		const esData = getCv("es");
+		validateCvStructure(esData);
 	});
 
-	it("has basics with tagline, email, urls, and summary", () => {
-		expect(cv.basics.tagline).toBeDefined();
-		expect(cv.basics.email).toBeDefined();
-		expect(cv.basics.urls).toBeDefined();
-		expect(cv.basics.summary).toBeDefined();
+	it("loads English cv via getCv", () => {
+		const enData = getCv("en");
+		validateCvStructure(enData);
 	});
 
-	it("has experience as a non-empty array", () => {
-		expect(Array.isArray(cv.experience)).toBe(true);
-		expect(cv.experience.length).toBeGreaterThan(0);
+	it("returns same data for default cv and getCv('es')", () => {
+		const esData = getCv("es");
+		expect(cv.basics.name).toBe(esData.basics.name);
+		expect(cv.basics.email).toBe(esData.basics.email);
 	});
 
-	it("has experience entries with required fields", () => {
-		for (const entry of cv.experience) {
-			expect(entry.company).toBeDefined();
-			expect(entry.role).toBeDefined();
-			expect(entry.period).toBeDefined();
-			expect(entry.summary).toBeDefined();
-			expect(Array.isArray(entry.highlights)).toBe(true);
-		}
-	});
-
-	it("has projects as a non-empty array", () => {
-		expect(Array.isArray(cv.projects)).toBe(true);
-		expect(cv.projects.length).toBeGreaterThan(0);
-	});
-
-	it("has project entries with required fields", () => {
-		for (const project of cv.projects) {
-			expect(project.name).toBeDefined();
-			expect(project.headline).toBeDefined();
-			expect(Array.isArray(project.stack)).toBe(true);
-		}
-	});
-
-	it("has certifications as an array", () => {
-		expect(Array.isArray(cv.certifications)).toBe(true);
+	it("has different content between locales", () => {
+		const esData = getCv("es");
+		const enData = getCv("en");
+		// Tagline should differ between locales
+		expect(esData.basics.tagline).not.toBe(enData.basics.tagline);
+		// But name and email stay the same
+		expect(esData.basics.name).toBe(enData.basics.name);
+		expect(esData.basics.email).toBe(enData.basics.email);
 	});
 });
