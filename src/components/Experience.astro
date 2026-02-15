@@ -19,7 +19,7 @@ const MAX_HIGHLIGHTS = 3;
           <div class="role-info">
             <h3 class="role-title">
               {role.role}
-              <span class="role-separator">-</span>
+              <span class="role-separator">&ndash;</span>
               <span class="role-company">{role.company}</span>
             </h3>
             <p class="role-summary">{role.summary}</p>
@@ -73,7 +73,7 @@ const MAX_HIGHLIGHTS = 3;
     text-transform: uppercase;
     color: var(--tertiary-text);
     padding-top: 0.25rem;
-    font-variant-numeric: tabular-nums;
+    font-variant-numeric: lining-nums tabular-nums;
   }
 
   .role-info {

@@ -32,6 +32,23 @@
 
 	/* Font Family */
 	--font-family-sans: "Geist Variable", system-ui, sans-serif;
+
+	/* Typography — Modular Scale (Major Third, ratio 1.25) */
+	--scale-ratio: 1.25;
+	--text-xs: 0.8rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.25rem;
+	--text-xl: 1.563rem;
+	--text-2xl: 1.953rem;
+	--text-3xl: 2.441rem;
+
+	/* Vertical Rhythm */
+	--base-lh: 1.5;
+	--rhythm: calc(1rem * var(--base-lh)); /* 1.5rem = 24px at 16px base */
+
+	/* Measure — ideal line length for prose readability */
+	--measure: 66ch;
 }
 
 html {
@@ -57,7 +74,12 @@ body {
 	color: var(--primary-text);
 	font-family: var(--font-family-sans);
 	margin: 0;
-	line-height: 1.6;
+	line-height: var(--base-lh);
+	font-kerning: auto;
+	font-variant-ligatures: common-ligatures;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
 }
 
 a {
@@ -186,15 +208,17 @@ h1,
 h2,
 h3 {
 	text-wrap: balance;
+	font-variant-numeric: lining-nums;
 }
 
 p {
 	text-wrap: pretty;
+	hanging-punctuation: first allow-end;
 }
 
-/* Tabular numbers for dates and numeric data */
+/* Tabular lining numbers for dates and numeric data */
 .tabular-nums {
-	font-variant-numeric: tabular-nums;
+	font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* Print styles */
@@ -215,6 +239,7 @@ p {
 		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
 		color: black !important;
 		font-size: 12pt;
+		line-height: 1.4;
 	}
 
 	a {
@@ -232,10 +257,16 @@ p {
 		padding: 0 !important;
 	}
 
+	p {
+		widows: 3;
+		orphans: 3;
+	}
+
 	article,
 	section,
 	h2,
 	h3 {
 		break-inside: avoid;
+		page-break-after: avoid;
 	}
 }
