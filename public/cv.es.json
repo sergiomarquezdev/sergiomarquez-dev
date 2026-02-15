@@ -1,0 +1,148 @@
+{
+  "basics": {
+    "name": "Sergio Márquez",
+    "tagline": "Desarrollador IA & Backend | Python, FastAPI, LLMs",
+    "email": "contacto@sergiomarquez.dev",
+    "urls": {
+      "site": "https://sergiomarquez.dev",
+      "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
+      "github": "https://github.com/sergiomarquezdev",
+      "x": "https://x.com/sergiomarquezp_",
+      "youtube": "https://www.youtube.com/@sergiomarquezp"
+    },
+    "summary": "Desarrollador Backend reconvertido a IA/ML. Tras varios años desarrollando con Java y Spring, he evolucionado hacia la aplicación de un enfoque de ingeniería (APIs, datos, arquitectura y producción) a soluciones de IA usando Python y FastAPI. Me especializo en construir servicios que transforman necesidades de negocio en funcionalidades mantenibles, incorporando pipelines RAG, búsqueda semántica y arquitecturas agénticas. Me centro en que el 'cómo funciona' sea tan sólido como el 'qué hace' mediante automatización y prácticas de ingeniería robustas."
+  },
+  "experience": [
+    {
+      "company": "VITALY",
+      "role": "Desarrollador IA/ML",
+      "period": "May 2025 – Presente",
+      "summary": "Ingeniero backend aplicando IA a productos reales y herramientas internas, combinando backend, datos y automatización.",
+      "highlights": [
+        "Desarrollo de APIs y servicios en Python/FastAPI para procesamiento de datos e integración de sistemas.",
+        "Construcción de pipelines de ingesta y procesamiento (documentos, vídeo) incluyendo transcripción y validaciones.",
+        "Implementación de capacidades de IA con LLMs: RAG, embeddings y búsqueda vectorial integrados en middleware productivo.",
+        "Evolución de asistentes IA: gestión de memoria/sesiones, mejoras de estabilidad y ajuste fino post-despliegue.",
+        "Automatización de ingesta RAG vía n8n + Python (Sheets -> MongoDB + Pinecone) con deduplicación por hash; ahorro de ~8-10 horas por configuración.",
+        "Mejora de la tasa de validación de documentos del 70% al 90% usando un ensemble GPT+Claude+Gemini y ajuste de OCR.",
+        "Migración del chat a arquitectura agéntica (Google ADK) con LiteLLM; ~15% menos latencia y ~35% menos coste de infraestructura.",
+        "Stack: Python, FastAPI, n8n, GCP, MongoDB, BigQuery/Firestore, Pinecone, Docker, GitLab CI/CD, OpenTelemetry."
+      ]
+    },
+    {
+      "company": "VITALY",
+      "role": "Desarrollador Full-Stack",
+      "period": "Jun 2021 – May 2025",
+      "summary": "Enfocado en especialización backend (Java/Spring) con responsabilidad sobre integraciones cloud/datos y soporte frontend.",
+      "highlights": [
+        "APIs Middleware Estratégicas: Diseño y desarrollo de middleware basado en Spring para optimizar la comunicación entre frontend y servicios externos.",
+        "Migración y Optimización a GKE: Lideré la migración a Google Kubernetes Engine, automatizando la entrega continua y optimizando despliegues.",
+        "Integración de Datos Post-Fusión: Participación activa en la integración de datos tras la fusión Preving/Cualtis, realizando mapeo y adaptación de aplicaciones.",
+        "Experiencia Internacional (Dublín, 2022): 3 meses trabajando en remoto desde Irlanda, mejorando fluidez en inglés y adaptabilidad en entornos globales.",
+        "Stack: Java, Spring Framework, Angular, Docker, Kubernetes, GCP, GitLab CI/CD."
+      ]
+    },
+    {
+      "company": "VITALY",
+      "role": "Desarrollador en Prácticas",
+      "period": "Abr 2021 – Jun 2021",
+      "summary": "Formación intensiva y primer contacto con entornos profesionales de desarrollo web.",
+      "highlights": [
+        "Formación intensiva en Java Spring, Angular, Docker y Kubernetes.",
+        "Participación en equipos de desarrollo ágil, contribuyendo a proyectos reales y aprendiendo ciclos de vida completos del software."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "One dAIly Blog",
+      "headline": "Blog autónomo con IA que genera contenido diario sobre Python con Gemini y OpenAI.",
+      "stack": [
+        "Astro",
+        "Node.js",
+        "Gemini",
+        "OpenAI",
+        "PostgreSQL"
+      ],
+      "url": "https://blog.sergiomarquez.dev",
+      "github": [
+        "https://github.com/sergiomarquezdev/one-daily-blog",
+        "https://github.com/sergiomarquezdev/one-daily-blog-backend"
+      ],
+      "private": true
+    },
+    {
+      "name": "AI Photo Transformer",
+      "headline": "Pipeline de IA multietapa para transformaciones fotográficas cinematográficas usando Gemini y Seedream 4.",
+      "stack": [
+        "FastAPI",
+        "Python",
+        "Gemini",
+        "Replicate",
+        "Supabase",
+        "HTMX"
+      ],
+      "github": [
+        "https://github.com/sergiomarquezdev/altoke_image_gen"
+      ],
+      "private": true
+    },
+    {
+      "name": "Video Transcriber & AI Summarizer",
+      "headline": "CLI para transcripción acelerada por CUDA con Whisper, resúmenes IA multi-proveedor y generación de contenido para LinkedIn/Twitter.",
+      "stack": [
+        "Python",
+        "Whisper",
+        "Gemini",
+        "PyTorch",
+        "CUDA"
+      ],
+      "github": [
+        "https://github.com/sergiomarquezdev/yt-transcriber"
+      ],
+      "private": false
+    },
+    {
+      "name": "Gesture-Controlled Digital Whiteboard",
+      "headline": "Pizarra digital con seguimiento de manos en tiempo real usando visión por computador y MediaPipe.",
+      "stack": [
+        "Python",
+        "OpenCV",
+        "MediaPipe"
+      ],
+      "url": "https://github.com/sergiomarquezdev/pizarra-digital-python",
+      "github": [
+        "https://github.com/sergiomarquezdev/pizarra-digital-python"
+      ],
+      "private": false
+    },
+    {
+      "name": "Acestream Docker Engine",
+      "headline": "Solución de streaming containerizada con configuración automatizada para entornos Ubuntu.",
+      "stack": [
+        "Docker",
+        "Shell",
+        "Ubuntu"
+      ],
+      "url": "https://github.com/sergiomarquezdev/acestream-docker-home",
+      "github": [
+        "https://github.com/sergiomarquezdev/acestream-docker-home"
+      ],
+      "private": false
+    }
+  ],
+  "certifications": [
+    {
+      "name": "EF SET English Certificate 76/100 (C2 Proficient)",
+      "issuer": "EF SET",
+      "date": "2024-01-03",
+      "url": "https://www.efset.org/cert/Sp9SYB"
+    },
+    {
+      "name": "Master en Frameworks Javascript: Aprende Angular, React, Vue",
+      "issuer": "Udemy",
+      "date": "2023",
+      "url": "https://www.udemy.com/certificate/UC-873b8fa3-dd9a-40a3-8185-073a5e6df250/"
+    }
+  ]
+}

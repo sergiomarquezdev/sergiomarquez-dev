@@ -1,9 +1,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { defaultLocale, type Locale, locales } from "../i18n/index";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
-const cvPath = join(currentDir, "../../public/cv.json");
 
 export type CvData = {
 	basics: {
@@ -36,7 +36,20 @@ export type CvData = {
 	}>;
 };
 
-// Read synchronously since Astro evaluates this at build time only
-const cvRaw = readFileSync(cvPath, "utf8");
+function loadCv(locale: Locale): CvData {
+	const cvPath = join(currentDir, `../../public/cv.${locale}.json`);
+	return JSON.parse(readFileSync(cvPath, "utf8"));
+}
 
-export const cv: CvData = JSON.parse(cvRaw);
+// Pre-load all locales at build time
+const cvCache = Object.fromEntries(locales.map((locale) => [locale, loadCv(locale)])) as Record<
+	Locale,
+	CvData
+>;
+
+export function getCv(locale: Locale): CvData {
+	return cvCache[locale];
+}
+
+// Default export for backward compatibility (redirect pages, tests)
+export const cv: CvData = cvCache[defaultLocale];

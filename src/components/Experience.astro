@@ -1,16 +1,18 @@
 ---
 import type { CvData } from "../data/cv";
+import { getLocale, t } from "../i18n/index";
 
 interface Props {
 	experience: CvData["experience"];
 }
 
 const { experience } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 const MAX_HIGHLIGHTS = 3;
 ---
 
 <div class="experience">
-  <h2 class="section-title">Experience</h2>
+  <h2 class="section-title">{t(locale, "section.experience")}</h2>
   <div class="roles">
     {experience.map((role) => (
       <div class="role-card card-interactive">

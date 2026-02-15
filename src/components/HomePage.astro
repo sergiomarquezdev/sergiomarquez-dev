@@ -1,0 +1,53 @@
+---
+import type { CvData } from "../data/cv";
+import About from "./About.astro";
+import Certifications from "./Certifications.astro";
+import Experience from "./Experience.astro";
+import Projects from "./Projects.astro";
+
+interface Props {
+	cv: CvData;
+}
+
+const { basics, experience, projects, certifications } = Astro.props.cv;
+---
+
+<div class="sections">
+  <section id="about" class="section animate-fade-up">
+    <About basics={basics} />
+  </section>
+
+  <section id="experience" class="section animate-fade-up delay-100">
+    <Experience experience={experience} />
+  </section>
+
+  <section id="projects" class="section animate-fade-up delay-200">
+    <Projects projects={projects} />
+  </section>
+
+  <section id="certifications" class="section animate-fade-up delay-300">
+    <Certifications certifications={certifications} />
+  </section>
+</div>
+
+<style>
+  .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .section {
+    scroll-margin-top: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .sections {
+      gap: 6rem;
+    }
+
+    .section {
+      scroll-margin-top: 6rem;
+    }
+  }
+</style>

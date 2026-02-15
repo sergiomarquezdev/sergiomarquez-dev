@@ -1,6 +1,8 @@
 ---
 import type { CvData } from "../../data/cv";
+import { getLocale } from "../../i18n/index";
 import GitHubActivity from "../GitHubActivity.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
 import Navigation from "./Navigation.astro";
 import SocialLinks from "./SocialLinks.astro";
 
@@ -9,13 +11,15 @@ interface Props {
 }
 
 const { basics } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const homeHref = locale === "en" ? "/en/" : "/";
 ---
 
 <header class="sidebar-left">
   <div class="sidebar-content">
     <div class="header-section">
       <h1 class="name">
-        <a href="/">{basics.name}</a>
+        <a href={homeHref}>{basics.name}</a>
       </h1>
       <h2 class="tagline">{basics.tagline}</h2>
       <GitHubActivity />
@@ -24,7 +28,10 @@ const { basics } = Astro.props;
     <Navigation />
 
     <div class="footer-section">
-      <SocialLinks urls={basics.urls} />
+      <div class="footer-row">
+        <SocialLinks urls={basics.urls} />
+        <LanguageSwitcher />
+      </div>
     </div>
   </div>
 </header>
@@ -89,5 +96,11 @@ const { basics } = Astro.props;
 
   .footer-section {
     margin-top: auto;
+  }
+
+  .footer-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 </style>

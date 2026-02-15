@@ -1,0 +1,44 @@
+---
+import { getLocale, t } from "../i18n/index";
+
+const locale = getLocale(Astro.currentLocale);
+const targetHref = locale === "es" ? "/en/" : "/";
+const label = t(locale, "lang.switch");
+const ariaLabel = t(locale, "lang.switchLabel");
+---
+
+<a href={targetHref} class="lang-switch" aria-label={ariaLabel} data-lang-switch>
+  {label}
+</a>
+
+<script>
+  function initLangSwitch() {
+    document.querySelectorAll('[data-lang-switch]').forEach(link => {
+      link.addEventListener('click', () => {
+        try {
+          const href = (link as HTMLAnchorElement).href;
+          const isEnglish = href.includes('/en');
+          localStorage.setItem('preferred-locale', isEnglish ? 'en' : 'es');
+        } catch { /* Private browsing or storage unavailable */ }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initLangSwitch);
+  initLangSwitch();
+</script>
+
+<style>
+  .lang-switch {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tertiary-text);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .lang-switch:hover {
+    color: var(--accent);
+  }
+</style>

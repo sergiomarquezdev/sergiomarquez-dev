@@ -1,14 +1,17 @@
 ---
+import { getLocale, t } from "../../i18n/index";
+
 interface Props {
 	email: string;
 }
 
 const { email } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 ---
 
 <aside class="sidebar-right">
   <div class="email-container">
-    <a href={`mailto:${email}`} class="email-link" aria-label="Send email to Sergio Márquez">
+    <a href={`mailto:${email}`} class="email-link" aria-label={t(locale, "aria.sendEmail")}>
       {email}
     </a>
     <div class="email-line" />

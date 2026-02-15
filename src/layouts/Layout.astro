@@ -1,10 +1,12 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import MainContent from "../components/layout/MainContent.astro";
 import SidebarLeft from "../components/layout/SidebarLeft.astro";
 import SidebarRight from "../components/layout/SidebarRight.astro";
 import Spotlight from "../components/Spotlight.astro";
-import { cv } from "../data/cv";
+import { getCv } from "../data/cv";
+import { getLocale, t } from "../i18n/index";
 import "../styles/global.css";
 
 interface Props {
@@ -13,25 +15,48 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const { basics } = cv;
+const locale = getLocale(Astro.currentLocale);
+const { basics } = getCv(locale);
+const homeHref = locale === "en" ? "/en/" : "/";
 ---
 
 <!doctype html>
-<html lang='en' style="color-scheme: dark">
+<html lang={locale} style="color-scheme: dark">
   <head>
     <BaseHead title={title} description={description} />
     <link rel="manifest" href="/manifest.webmanifest" />
+    <!-- Language detection: redirect English speakers on first visit -->
+    <script is:inline>
+      (function() {
+        try {
+          var KEY = 'preferred-locale';
+          if (localStorage.getItem(KEY)) return;
+          var path = window.location.pathname;
+          var isEn = path.startsWith('/en');
+          var lang = navigator.language || '';
+          if (lang.startsWith('en') && !isEn) {
+            localStorage.setItem(KEY, 'en');
+            window.location.replace('/en/');
+          } else {
+            localStorage.setItem(KEY, isEn ? 'en' : 'es');
+          }
+        } catch (e) { /* Private browsing or storage unavailable */ }
+      })();
+    </script>
   </head>
   <body>
-    <a href="#main" class="skip-link">Skip to main content</a>
+    <a href="#main" class="skip-link">{t(locale, "skip.main")}</a>
     <Spotlight />
 
     <!-- Mobile Header (visible < 1024px) -->
     <header class="mobile-header">
       <div class="mobile-header-content">
-        <h1 class="mobile-name">
-          <a href="/">{basics.name}</a>
-        </h1>
+        <div class="mobile-header-top">
+          <h1 class="mobile-name">
+            <a href={homeHref}>{basics.name}</a>
+          </h1>
+          <LanguageSwitcher />
+        </div>
         <p class="mobile-tagline">{basics.tagline}</p>
       </div>
     </header>
@@ -111,6 +136,13 @@ const { basics } = cv;
       .mobile-header-content {
         max-width: 768px;
         margin: 0 auto;
+      }
+
+      .mobile-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
       }
 
       .mobile-name {

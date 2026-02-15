@@ -7,6 +7,15 @@ export default defineConfig({
   site: "https://sergiomarquez.dev",
   output: "static", // Explicit SSG mode
 
+  // Internationalization
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: false, // / = es, /en/ = en
+    },
+  },
+
   // Build optimizations
   build: {
     format: "file", // Generate files instead of directories for better SEO
@@ -20,6 +29,10 @@ export default defineConfig({
       changefreq: "monthly",
       priority: 0.7,
       lastmod: new Date(),
+      i18n: {
+        defaultLocale: "es",
+        locales: { es: "es", en: "en" },
+      },
     }),
   ],
 
