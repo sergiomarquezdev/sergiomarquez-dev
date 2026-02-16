@@ -1,7 +1,7 @@
 ---
 name: portfolio-dev
 description: Astro 5 portfolio with cv.json data-driven architecture, Tailwind CSS 4, spotlight effect, and scroll-spy navigation
-tools: Read, Write, Edit, Grep, Glob, Bash
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash"]
 model: opus
 ---
 
