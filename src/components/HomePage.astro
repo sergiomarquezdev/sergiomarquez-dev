@@ -3,6 +3,7 @@ import type { CvData } from "../data/cv";
 import About from "./About.astro";
 import Certifications from "./Certifications.astro";
 import Experience from "./Experience.astro";
+import Footer from "./layout/Footer.astro";
 import Projects from "./Projects.astro";
 
 interface Props {
@@ -30,6 +31,8 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
   </section>
 </div>
 
+<Footer email={basics.email} />
+
 <style>
   .sections {
     display: flex;
@@ -41,6 +44,11 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
     scroll-margin-top: 2rem;
   }
 
+  .section + .section {
+    border-top: 1px solid var(--border-color);
+    padding-top: 4rem;
+  }
+
   @media (min-width: 1024px) {
     .sections {
       gap: 6rem;
@@ -48,6 +56,10 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
 
     .section {
       scroll-margin-top: 6rem;
+    }
+
+    .section + .section {
+      padding-top: 6rem;
     }
   }
 </style>

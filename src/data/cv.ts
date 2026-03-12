@@ -27,6 +27,7 @@ export type CvData = {
 		url?: string;
 		github?: string[];
 		private?: boolean;
+		image?: string;
 	}>;
 	certifications: Array<{
 		name: string;

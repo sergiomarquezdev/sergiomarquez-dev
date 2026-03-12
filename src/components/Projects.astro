@@ -2,6 +2,7 @@
 import type { CvData } from "../data/cv";
 import { getLocale, t } from "../i18n/index";
 import LinkIcon from "./icons/LinkIcon.astro";
+import LockIcon from "./icons/LockIcon.astro";
 
 interface Props {
 	projects: CvData["projects"];
@@ -9,35 +10,74 @@ interface Props {
 
 const { projects } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
+
+function getProjectHref(project: CvData["projects"][number]): string | undefined {
+	if (project.url) return project.url;
+	if (project.github && !project.private) return project.github[0];
+	return undefined;
+}
+
+function getProjectImage(project: CvData["projects"][number]): string | undefined {
+	if (project.image) return project.image;
+	const githubUrls = project.github;
+	if (!githubUrls || githubUrls.length === 0) return undefined;
+	const match = githubUrls[0].match(/github\.com\/([^/]+)\/([^/]+)/);
+	if (!match) return undefined;
+	return `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}`;
+}
 ---
 
 <div class="projects">
   <h2 class="section-title">{t(locale, "section.projects")}</h2>
   <div class="project-list">
-    {projects.map((project) => (
-      <a
-        href={project.url || (project.github && !project.private ? project.github[0] : '#')}
-        class="project-card card-interactive"
-        target={project.url || (project.github && !project.private) ? "_blank" : undefined}
-        rel={project.url || (project.github && !project.private) ? "noopener noreferrer" : undefined}
-        aria-label={`${t(locale, "aria.viewProject")} ${project.name}`}
-      >
-        <div class="project-content">
-          <h3 class="project-name">
-            {project.name}
-            {(project.url || (project.github && !project.private)) && (
-              <LinkIcon class="link-icon" />
-            )}
-          </h3>
-          <p class="project-headline">{project.headline}</p>
-          <ul class="project-stack">
-            {project.stack.map((tech) => (
-              <li>{tech}</li>
-            ))}
-          </ul>
-        </div>
-      </a>
-    ))}
+    {projects.map((project) => {
+      const href = getProjectHref(project);
+      const ogImage = getProjectImage(project);
+      const Tag = href ? "a" : "div";
+      return (
+        <Tag
+          href={href}
+          class:list={["project-card", "card-interactive", { "project-card--private": !href }]}
+          target={href ? "_blank" : undefined}
+          rel={href ? "noopener noreferrer" : undefined}
+          aria-label={href ? `${t(locale, "aria.viewProject")} ${project.name}` : undefined}
+        >
+          {ogImage && !project.private ? (
+            <div class="project-thumbnail">
+              <img
+                src={ogImage}
+                alt=""
+                width="480"
+                height="252"
+                loading="lazy"
+                decoding="async"
+                class="project-og-image"
+              />
+            </div>
+          ) : (
+            <div class="project-thumbnail project-thumbnail--placeholder">
+              <div class="placeholder-gradient" />
+            </div>
+          )}
+          <div class="project-content">
+            <h3 class="project-name">
+              {project.name}
+              {href ? (
+                <LinkIcon class="link-icon" />
+              ) : project.private ? (
+                <LockIcon class="lock-icon" />
+              ) : null}
+            </h3>
+            <p class="project-headline">{project.headline}</p>
+            <ul class="project-stack">
+              {project.stack.map((tech) => (
+                <li>{tech}</li>
+              ))}
+            </ul>
+          </div>
+        </Tag>
+      );
+    })}
   </div>
 </div>
 
@@ -59,6 +99,35 @@ const locale = getLocale(Astro.currentLocale);
     cursor: pointer;
   }
 
+  .project-card--private {
+    cursor: default;
+  }
+
+  .project-thumbnail {
+    border-radius: 0.375rem;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    aspect-ratio: 1.91 / 1;
+  }
+
+  .project-og-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-color);
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .project-thumbnail--placeholder .placeholder-gradient {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-lighter));
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-color);
+  }
+
   .project-content {
     display: flex;
     flex-direction: column;
@@ -76,7 +145,7 @@ const locale = getLocale(Astro.currentLocale);
     transition: color 0.2s ease-in-out;
   }
 
-  .project-card:hover .project-name {
+  .project-card:not(.project-card--private):hover .project-name {
     color: var(--accent);
   }
 
@@ -88,6 +157,12 @@ const locale = getLocale(Astro.currentLocale);
 
   .project-card:hover .link-icon {
     transform: translate(2px, -2px);
+  }
+
+  .lock-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    color: var(--tertiary-text);
   }
 
   .project-headline {

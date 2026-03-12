@@ -25,6 +25,8 @@ const ui = {
 		"og.imageAlt": "Sergio Márquez - Portfolio de Desarrollador IA & Backend",
 		"lang.switch": "EN",
 		"lang.switchLabel": "Switch to English",
+		"footer.cta": "Interesado en trabajar juntos?",
+		"footer.contact": "Hablemos",
 	},
 	en: {
 		"nav.about": "About",
@@ -48,6 +50,8 @@ const ui = {
 		"og.imageAlt": "Sergio Márquez - AI & Backend Developer portfolio",
 		"lang.switch": "ES",
 		"lang.switchLabel": "Cambiar a español",
+		"footer.cta": "Interested in working together?",
+		"footer.contact": "Let's talk",
 	},
 } as const;
 
@@ -60,4 +64,15 @@ export function t(locale: Locale, key: TranslationKey): string {
 export function getLocale(astroLocale: string | undefined): Locale {
 	if (astroLocale === "en") return "en";
 	return defaultLocale;
+}
+
+export function formatDate(dateStr: string, locale: Locale): string {
+	// Dates like "2023" (year only) stay as-is
+	if (/^\d{4}$/.test(dateStr)) return dateStr;
+	const date = new Date(dateStr);
+	if (Number.isNaN(date.getTime())) return dateStr;
+	return new Intl.DateTimeFormat(locale === "es" ? "es-ES" : "en-US", {
+		year: "numeric",
+		month: "long",
+	}).format(date);
 }

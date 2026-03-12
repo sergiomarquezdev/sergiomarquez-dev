@@ -1,15 +1,33 @@
 ---
 import type { CvData } from "../data/cv";
+import { getLocale } from "../i18n/index";
 
 interface Props {
 	basics: CvData["basics"];
 }
 
 const { basics } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+
+const heroLine =
+	locale === "es"
+		? "Construyendo soluciones de IA que funcionan en produccion."
+		: "Building AI-powered solutions that work in production.";
+
+const keywords = ["IA/ML", "AI/ML", "Python", "FastAPI", "RAG", "LLM", "backend", "Backend"];
+
+function highlightKeywords(text: string, words: string[]): string {
+	const escaped = words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+	const pattern = new RegExp(`\\b(${escaped.join("|")})\\b`, "gi");
+	return text.replace(pattern, '<span class="keyword">$1</span>');
+}
+
+const highlightedSummary = highlightKeywords(basics.summary, keywords);
 ---
 
 <div class="about">
-  <p class="summary">{basics.summary}</p>
+  <p class="hero-line">{heroLine}</p>
+  <p class="summary" set:html={highlightedSummary} />
 </div>
 
 <style>
@@ -19,12 +37,25 @@ const { basics } = Astro.props;
     gap: 1rem;
   }
 
+  .hero-line {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--primary-text);
+    line-height: 1.4;
+  }
+
   .summary {
     margin: 0;
     max-width: var(--measure);
     color: var(--secondary-text);
     font-size: 1rem;
     line-height: 1.75;
+  }
+
+  .summary :global(.keyword) {
+    color: var(--accent);
+    font-weight: 500;
   }
 
   .summary::selection {

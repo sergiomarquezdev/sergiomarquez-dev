@@ -197,6 +197,10 @@ a {
 	background-color: var(--accent-muted);
 }
 
+.card-interactive:active {
+	background-color: var(--accent-hover);
+}
+
 /* Focus styles for accessibility */
 :focus-visible {
 	outline: 3px solid var(--accent);

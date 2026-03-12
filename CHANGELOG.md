@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Mobile bottom navigation bar with scroll-spy, icon + label items, and safe-area support
+- Footer component with CTA and copyright (i18n)
+- Timeline visual in experience section with animated dot for current role
+- Project thumbnails using GitHub OG images with lazy loading and fallback placeholders
+- Hero line in About section with keyword highlighting
+- Section separators (border-top) between content sections
+- Lock icon badge for private projects (replaces dead `href="#"` links)
+- `formatDate` i18n helper using `Intl.DateTimeFormat` for certification dates
+- Touch feedback on interactive cards (`:active` state)
+- Tablet breakpoint (768px) with social links in header and wider content padding
+- Navigation icons: UserIcon, BriefcaseIcon, CodeIcon, AwardIcon, LockIcon
+- `image` optional field in project type for manual thumbnail override
+
+### Changed
+
+- Language switcher redesigned with border, larger font, and secondary-text color
+- Social links touch targets increased to 44x44px minimum
+- Projects render as `<div>` (not `<a>`) when private/no URL, removing dead links
 - Internationalization (i18n) with Spanish (default) and English locales
 - Language switcher component with automatic locale detection on first visit
 - Hreflang alternate links (ES, EN, x-default) for SEO

@@ -39,3 +39,10 @@ Thumbs.db
 
 # Windows reserved filename artifacts
 nul
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Test screenshots
+test-*.png
+*-fullpage.png

@@ -1,6 +1,6 @@
 ---
 import type { CvData } from "../data/cv";
-import { getLocale, t } from "../i18n/index";
+import { formatDate, getLocale, t } from "../i18n/index";
 import LinkIcon from "./icons/LinkIcon.astro";
 
 interface Props {
@@ -31,7 +31,7 @@ const locale = getLocale(Astro.currentLocale);
             <p class="cert-meta">
               {cert.issuer}
               <span class="cert-separator">&ndash;</span>
-              {cert.date}
+              {formatDate(cert.date, locale)}
             </p>
           </div>
         </a>

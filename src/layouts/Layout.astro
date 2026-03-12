@@ -2,8 +2,10 @@
 import BaseHead from "../components/BaseHead.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import MainContent from "../components/layout/MainContent.astro";
+import MobileNav from "../components/layout/MobileNav.astro";
 import SidebarLeft from "../components/layout/SidebarLeft.astro";
 import SidebarRight from "../components/layout/SidebarRight.astro";
+import SocialLinks from "../components/layout/SocialLinks.astro";
 import Spotlight from "../components/Spotlight.astro";
 import { getCv } from "../data/cv";
 import { getLocale, t } from "../i18n/index";
@@ -48,14 +50,19 @@ const homeHref = locale === "en" ? "/en/" : "/";
     <a href="#main" class="skip-link">{t(locale, "skip.main")}</a>
     <Spotlight />
 
-    <!-- Mobile Header (visible < 1024px) -->
+    <!-- Mobile/Tablet Header (visible < 1024px) -->
     <header class="mobile-header">
       <div class="mobile-header-content">
         <div class="mobile-header-top">
           <h1 class="mobile-name">
             <a href={homeHref}>{basics.name}</a>
           </h1>
-          <LanguageSwitcher />
+          <div class="mobile-header-actions">
+            <div class="tablet-social">
+              <SocialLinks urls={basics.urls} />
+            </div>
+            <LanguageSwitcher />
+          </div>
         </div>
         <p class="mobile-tagline">{basics.tagline}</p>
       </div>
@@ -71,6 +78,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
     </div>
 
     <SidebarRight email={basics.email} />
+    <MobileNav />
 
     <style>
       .skip-link {
@@ -136,6 +144,22 @@ const homeHref = locale === "en" ? "/en/" : "/";
       .mobile-header-content {
         max-width: 768px;
         margin: 0 auto;
+      }
+
+      .mobile-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .tablet-social {
+        display: none;
+      }
+
+      @media (min-width: 768px) {
+        .tablet-social {
+          display: block;
+        }
       }
 
       .mobile-header-top {

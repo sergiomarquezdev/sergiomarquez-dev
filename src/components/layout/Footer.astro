@@ -1,0 +1,53 @@
+---
+import { getLocale, t } from "../../i18n/index";
+
+const locale = getLocale(Astro.currentLocale);
+
+interface Props {
+	email: string;
+}
+
+const { email } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <p class="footer-cta">
+    {t(locale, "footer.cta")}
+    <a href={`mailto:${email}`} class="footer-email">{t(locale, "footer.contact")}</a>
+  </p>
+  <p class="footer-copyright">
+    &copy; {year} Sergio Márquez
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+  }
+
+  .footer-cta {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+  }
+
+  .footer-email {
+    color: var(--accent);
+    font-weight: 500;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .footer-email:hover {
+    opacity: 0.8;
+  }
+
+  .footer-copyright {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--tertiary-text);
+  }
+</style>

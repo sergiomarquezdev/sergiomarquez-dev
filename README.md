@@ -17,8 +17,13 @@ Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 - **Bilingual (i18n)**: Full Spanish and English support with automatic locale detection, language switcher, and hreflang tags.
 - **Data-driven content**: Portfolio sections (about, experience, projects, certifications) rendered from `public/cv.{es,en}.json`.
 - **Sidebar layout**: Sticky left sidebar with navigation and social links, right sidebar with email. Mobile-responsive header fallback.
+- **Mobile bottom navigation**: Sticky bottom nav bar with icons, scroll-spy, and safe-area support for notch devices.
+- **Tablet layout**: Intermediate breakpoint (768px) with social links in header and wider content padding.
 - **Spotlight effect**: Cursor-tracking radial gradient that follows mouse movement.
-- **Scroll-spy navigation**: Active section highlighting in sidebar nav based on scroll position.
+- **Scroll-spy navigation**: Active section highlighting in sidebar nav and mobile bottom nav based on scroll position.
+- **Timeline experience**: Vertical timeline with animated dot for current role.
+- **Project thumbnails**: Automatic GitHub OG images with lazy loading and gradient fallback for private repos.
+- **Footer CTA**: Bilingual call-to-action with email link and copyright.
 - **GitHub activity widget**: Live latest commit display fetched from GitHub Events API at build time.
 - **Accessibility**: Skip links, ARIA labels, keyboard navigation, `prefers-reduced-motion` support, print styles.
 - **SEO**: Canonical URLs, hreflang alternates, JSON-LD structured data, Open Graph/Twitter cards, sitemap, PWA manifest.
@@ -70,9 +75,11 @@ sergiomarquez-dev/
 │   │   ├── LanguageSwitcher.astro
 │   │   ├── Projects.astro
 │   │   ├── Spotlight.astro      # Cursor-tracking spotlight effect
-│   │   ├── icons/               # SVG icon components
+│   │   ├── icons/               # SVG icon components (Link, Lock, User, Briefcase, Code, Award, GitHub, etc.)
 │   │   └── layout/              # Layout sub-components
+│   │       ├── Footer.astro     # CTA + copyright footer
 │   │       ├── MainContent.astro
+│   │       ├── MobileNav.astro  # Bottom nav bar with scroll-spy
 │   │       ├── Navigation.astro # Scroll-spy sidebar nav
 │   │       ├── SidebarLeft.astro
 │   │       ├── SidebarRight.astro
