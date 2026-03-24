@@ -27,7 +27,8 @@ const structuredData = {
 		cv.basics.urls.linkedin,
 		cv.basics.urls.x,
 		cv.basics.urls.youtube,
-	],
+		cv.basics.urls.blog,
+	].filter(Boolean),
 	worksFor: {
 		"@type": "Organization",
 		name: cv.experience[0].company,

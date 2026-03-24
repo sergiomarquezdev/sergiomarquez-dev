@@ -1,13 +1,17 @@
 ---
+import type { CvData } from "../../data/cv";
 import { getLocale, t } from "../../i18n/index";
+import SocialLinks from "./SocialLinks.astro";
 
 const locale = getLocale(Astro.currentLocale);
 
 interface Props {
 	email: string;
+	name: string;
+	urls: CvData["basics"]["urls"];
 }
 
-const { email } = Astro.props;
+const { email, name, urls } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -16,8 +20,11 @@ const year = new Date().getFullYear();
     {t(locale, "footer.cta")}
     <a href={`mailto:${email}`} class="footer-email">{t(locale, "footer.contact")}</a>
   </p>
+  <div class="footer-social">
+    <SocialLinks urls={urls} />
+  </div>
   <p class="footer-copyright">
-    &copy; {year} Sergio Márquez
+    &copy; {year} {name}
   </p>
 </footer>
 
@@ -43,6 +50,12 @@ const year = new Date().getFullYear();
 
   .footer-email:hover {
     opacity: 0.8;
+  }
+
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
   }
 
   .footer-copyright {

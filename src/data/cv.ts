@@ -10,7 +10,14 @@ export type CvData = {
 		name: string;
 		tagline: string;
 		email: string;
-		urls: Record<string, string>;
+		urls: {
+			site: string;
+			linkedin: string;
+			github: string;
+			x: string;
+			youtube: string;
+			blog?: string;
+		};
 		summary: string;
 	};
 	experience: Array<{

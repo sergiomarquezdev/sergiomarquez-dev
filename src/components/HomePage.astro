@@ -31,7 +31,7 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
   </section>
 </div>
 
-<Footer email={basics.email} />
+<Footer email={basics.email} name={basics.name} urls={basics.urls} />
 
 <style>
   .sections {

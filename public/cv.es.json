@@ -8,7 +8,8 @@
       "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
       "github": "https://github.com/sergiomarquezdev",
       "x": "https://x.com/sergiomarquezp_",
-      "youtube": "https://www.youtube.com/@sergiomarquezp"
+      "youtube": "https://www.youtube.com/@sergiomarquezp",
+      "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "Desarrollador Backend reconvertido a IA/ML. Tras varios años desarrollando con Java y Spring, he evolucionado hacia la aplicación de un enfoque de ingeniería (APIs, datos, arquitectura y producción) a soluciones de IA usando Python y FastAPI. Me especializo en construir servicios que transforman necesidades de negocio en funcionalidades mantenibles, incorporando pipelines RAG, búsqueda semántica y arquitecturas agénticas. Me centro en que el 'cómo funciona' sea tan sólido como el 'qué hace' mediante automatización y prácticas de ingeniería robustas."
   },
