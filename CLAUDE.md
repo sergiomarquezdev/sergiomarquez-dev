@@ -4,9 +4,9 @@ Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` thr
 
 ## Rules
 
-- MUST run `bun run validate` before considering any task complete (runs type-check + lint + test + build)
-- MUST keep both lockfiles in sync: after adding/removing dependencies with `bun`, also run `npm install --package-lock-only` to update `package-lock.json`. Cloudflare Pages uses `npm ci`
-- MUST keep `|| true` in `"prepare": "husky || true"`. Without it, CI environments fail during `npm ci`
+- MUST run `pnpm run validate` before considering any task complete (runs type-check + lint + test + build)
+- Uses pnpm. Run `pnpm install` after dependency changes. Cloudflare Pages is configured to use pnpm
+- MUST keep `|| true` in `"prepare": "husky || true"`. Without it, CI environments fail
 - NEVER use `!` non-null assertions. Biome flags `noNonNullAssertion`. Use type narrowing or `assertDefined()` helpers
 - MUST update documentation (README.md, CHANGELOG.md, docs/) when adding/removing features, changing data flow, or modifying project structure
 

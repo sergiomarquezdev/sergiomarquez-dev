@@ -15,7 +15,7 @@
 		"format:check": "biome format src/",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"validate": "bun run type-check && bun run lint && bun run test && bun run build",
+		"validate": "pnpm run type-check && pnpm run lint && pnpm run test && pnpm run build",
 		"prepare": "husky || true"
 	},
 	"dependencies": {
