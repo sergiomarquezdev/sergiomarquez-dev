@@ -4,28 +4,30 @@ import { getLocale, t } from "../../i18n/index";
 const locale = getLocale(Astro.currentLocale);
 
 interface NavItem {
-	id: string;
-	label: string;
+  id: string;
+  label: string;
 }
 
 const navItems: NavItem[] = [
-	{ id: "about", label: t(locale, "nav.about") },
-	{ id: "experience", label: t(locale, "nav.experience") },
-	{ id: "projects", label: t(locale, "nav.projects") },
-	{ id: "certifications", label: t(locale, "nav.certifications") },
+  { id: "about", label: t(locale, "nav.about") },
+  { id: "experience", label: t(locale, "nav.experience") },
+  { id: "projects", label: t(locale, "nav.projects") },
+  { id: "certifications", label: t(locale, "nav.certifications") },
 ];
 ---
 
 <nav class="navigation" aria-label={t(locale, "aria.mainNav")}>
   <ul class="nav-list">
-    {navItems.map((item) => (
-      <li>
-        <a href={`#${item.id}`} class="nav-link" data-section={item.id}>
-          <span class="nav-indicator" />
-          <span class="nav-text">{item.label}</span>
-        </a>
-      </li>
-    ))}
+    {
+      navItems.map((item) => (
+        <li>
+          <a href={`#${item.id}`} class="nav-link" data-section={item.id}>
+            <span class="nav-indicator" />
+            <span class="nav-text">{item.label}</span>
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>
 
@@ -37,8 +39,8 @@ const navItems: NavItem[] = [
     navController = new AbortController();
     const { signal } = navController;
 
-    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
-    const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-link");
+    const sections = document.querySelectorAll<HTMLElement>("section[id]");
 
     if (navLinks.length === 0 || sections.length === 0) return;
 
@@ -49,13 +51,13 @@ const navItems: NavItem[] = [
     function setActiveLink(sectionId: string, fromClick = false) {
       if (currentActive === sectionId) return;
       currentActive = sectionId;
-      navLinks.forEach(link => {
+      navLinks.forEach((link) => {
         const isActive = link.dataset.section === sectionId;
-        link.classList.toggle('active', isActive);
+        link.classList.toggle("active", isActive);
         if (isActive) {
-          link.setAttribute('aria-current', 'true');
+          link.setAttribute("aria-current", "true");
         } else {
-          link.removeAttribute('aria-current');
+          link.removeAttribute("aria-current");
         }
       });
       if (fromClick) {
@@ -87,7 +89,7 @@ const navItems: NavItem[] = [
       let bestSection: string | null = null;
       let bestScore = -Infinity;
 
-      sectionsArray.forEach(section => {
+      sectionsArray.forEach((section) => {
         const rect = section.getBoundingClientRect();
         // Skip if section is not visible
         if (rect.bottom < 0 || rect.top > viewportHeight) return;
@@ -124,16 +126,20 @@ const navItems: NavItem[] = [
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true, signal });
+    window.addEventListener("scroll", onScroll, { passive: true, signal });
 
     // Handle nav link clicks - lock active state briefly
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        const sectionId = link.dataset.section;
-        if (sectionId) {
-          setActiveLink(sectionId, true);
-        }
-      }, { signal });
+    navLinks.forEach((link) => {
+      link.addEventListener(
+        "click",
+        () => {
+          const sectionId = link.dataset.section;
+          if (sectionId) {
+            setActiveLink(sectionId, true);
+          }
+        },
+        { signal },
+      );
     });
 
     // Set initial active state
@@ -146,7 +152,7 @@ const navItems: NavItem[] = [
   }
 
   // Run on initial load and after view transitions
-  document.addEventListener('astro:page-load', initNavigation);
+  document.addEventListener("astro:page-load", initNavigation);
   initNavigation();
 </script>
 
@@ -207,7 +213,9 @@ const navItems: NavItem[] = [
     background-color: var(--tertiary-text);
     transform: scaleX(0.5);
     transform-origin: left center;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transition:
+      transform 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
   }
 
   .nav-text {

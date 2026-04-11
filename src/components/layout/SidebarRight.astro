@@ -2,7 +2,7 @@
 import { getLocale, t } from "../../i18n/index";
 
 interface Props {
-	email: string;
+  email: string;
 }
 
 const { email } = Astro.props;
@@ -11,10 +11,14 @@ const locale = getLocale(Astro.currentLocale);
 
 <aside class="sidebar-right">
   <div class="email-container">
-    <a href={`mailto:${email}`} class="email-link" aria-label={t(locale, "aria.sendEmail")}>
+    <a
+      href={`mailto:${email}`}
+      class="email-link"
+      aria-label={t(locale, "aria.sendEmail")}
+    >
       {email}
     </a>
-    <div class="email-line" />
+    <div class="email-line"></div>
   </div>
 </aside>
 
@@ -55,7 +59,9 @@ const locale = getLocale(Astro.currentLocale);
     font-weight: 400;
     letter-spacing: 0.1em;
     color: var(--secondary-text);
-    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transition:
+      color 0.2s ease-in-out,
+      transform 0.2s ease-in-out;
   }
 
   .email-link:hover {

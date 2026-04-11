@@ -8,6 +8,9 @@ const locale = getLocale(Astro.currentLocale);
 const cv = getCv(locale);
 ---
 
-<Layout title={t(locale, "seo.title")} description={t(locale, "seo.description")}>
+<Layout
+  title={t(locale, "seo.title")}
+  description={t(locale, "seo.description")}
+>
   <HomePage cv={cv} />
 </Layout>
