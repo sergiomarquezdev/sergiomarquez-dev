@@ -16,7 +16,7 @@ export type CvData = {
 			github: string;
 			x: string;
 			youtube: string;
-			tiktok?: string;
+			tiktok: string;
 			blog?: string;
 		};
 		summary: string;
