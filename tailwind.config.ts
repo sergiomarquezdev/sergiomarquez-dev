@@ -13,8 +13,8 @@ export default {
         accent: "var(--accent)",
         "accent-muted": "var(--accent-muted)",
         "accent-hover": "var(--accent-hover)",
-        "navy-light": "var(--navy-light)",
-        "navy-lighter": "var(--navy-lighter)",
+        surface: "var(--surface)",
+        "surface-alt": "var(--surface-alt)",
       },
       fontFamily: {
         sans: "var(--font-family-sans)",

@@ -4,8 +4,8 @@
     "description": "Portfolio of Sergio Márquez, Python AI Developer.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#0f172a",
-    "theme_color": "#0f172a",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF",
     "icons": [
         {
             "src": "/favicon.ico",

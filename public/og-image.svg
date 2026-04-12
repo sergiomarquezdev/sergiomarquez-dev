@@ -5,7 +5,7 @@
 # Content should include:
 # - Sergio Márquez
 # - AI/ML & Backend Developer
-# - Dark theme consistent with site design
+# - Light theme consistent with site design
 # - Minimalist professional design
 #
 # For now, we'll create a simple SVG that can be converted to PNG
@@ -13,29 +13,29 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <!-- Background -->
-  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect width="1200" height="630" fill="#FFFFFF"/>
 
   <!-- Main text -->
   <text x="600" y="280" font-family="Arial, sans-serif" font-size="64" font-weight="600"
-        text-anchor="middle" fill="#EAEAEA">
+        text-anchor="middle" fill="#0F172A">
     Sergio Márquez
   </text>
 
   <!-- Subtitle -->
   <text x="600" y="340" font-family="Arial, sans-serif" font-size="32"
-        text-anchor="middle" fill="#A0A0A0">
+        text-anchor="middle" fill="#475569">
     AI/ML &amp; Backend Developer
   </text>
 
   <!-- Bottom text -->
   <text x="600" y="450" font-family="Arial, sans-serif" font-size="24"
-        text-anchor="middle" fill="#A0A0A0">
+        text-anchor="middle" fill="#475569">
     sergiomarquez.dev
   </text>
 
   <!-- Decorative elements -->
-  <circle cx="150" cy="150" r="3" fill="#A0A0A0" opacity="0.5"/>
-  <circle cx="1050" cy="480" r="3" fill="#A0A0A0" opacity="0.5"/>
-  <circle cx="100" cy="500" r="2" fill="#A0A0A0" opacity="0.3"/>
-  <circle cx="1100" cy="150" r="2" fill="#A0A0A0" opacity="0.3"/>
+  <circle cx="150" cy="150" r="3" fill="#2563EB" opacity="0.5"/>
+  <circle cx="1050" cy="480" r="3" fill="#2563EB" opacity="0.5"/>
+  <circle cx="100" cy="500" r="2" fill="#2563EB" opacity="0.3"/>
+  <circle cx="1100" cy="150" r="2" fill="#2563EB" opacity="0.3"/>
 </svg>

@@ -2,31 +2,30 @@
 @import "non.geist";
 
 /*
-  Design System - Brittany Chiang inspired
-  Navy dark with teal accent
+  Design System - Light professional theme — blue accent
 */
 
 :root {
-	/* Background - Navy oscuro */
-	--background: #0f172a;
+	/* Background */
+	--background: #ffffff;
 
 	/* Text hierarchy */
-	--primary-text: #e2e8f0;
-	--secondary-text: #94a3b8;
-	--tertiary-text: #64748b;
+	--primary-text: #0f172a;
+	--secondary-text: #475569;
+	--tertiary-text: #94a3b8;
 
-	/* Accent - Teal/Cyan caracteristico */
-	--accent: #64ffda;
-	--accent-muted: rgba(100, 255, 218, 0.1);
-	--accent-hover: rgba(100, 255, 218, 0.15);
+	/* Accent - Blue profesional */
+	--accent: #2563eb;
+	--accent-muted: rgba(37, 99, 235, 0.08);
+	--accent-hover: rgba(37, 99, 235, 0.12);
 
 	/* Depth layers */
-	--navy-light: #1e293b;
-	--navy-lighter: #334155;
-	--border-color: rgba(255, 255, 255, 0.1);
+	--surface: #f1f5f9;
+	--surface-alt: #e2e8f0;
+	--border-color: rgba(0, 0, 0, 0.08);
 
 	/* Spotlight */
-	--spotlight-color: rgba(100, 255, 218, 0.15);
+	--spotlight-color: rgba(37, 99, 235, 0.04);
 	--mouse-x: 50%;
 	--mouse-y: 50%;
 
@@ -104,7 +103,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--navy-lighter);
+	background: var(--surface-alt);
 	border-radius: 4px;
 }
 
