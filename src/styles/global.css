@@ -1,5 +1,12 @@
 @import "tailwindcss";
-@import "non.geist";
+
+@font-face {
+	font-family: "Geist Variable";
+	src: url("/fonts/Geist-var.woff2") format("woff2");
+	font-weight: 100 900;
+	font-display: swap;
+	font-synthesis: none;
+}
 
 /*
   Design System - Light professional theme — blue accent
@@ -12,7 +19,7 @@
 	/* Text hierarchy */
 	--primary-text: #0f172a;
 	--secondary-text: #475569;
-	--tertiary-text: #94a3b8;
+	--tertiary-text: #64748b;
 
 	/* Accent - Blue profesional */
 	--accent: #2563eb;
@@ -198,6 +205,19 @@ a {
 
 .card-interactive:active {
 	background-color: var(--accent-hover);
+}
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }
 
 /* Focus styles for accessibility */

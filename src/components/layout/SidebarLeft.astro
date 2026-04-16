@@ -18,9 +18,14 @@ const homeHref = locale === "en" ? "/en/" : "/";
 <header class="sidebar-left">
   <div class="sidebar-content">
     <div class="header-section">
-      <h1 class="name">
-        <a href={homeHref}>{basics.name}</a>
-      </h1>
+      <div class="name-row">
+        <a href={homeHref} class="logo-link" aria-hidden="true" tabindex="-1">
+          <img src="/icon-192.png" alt="" class="logo-mark" width="44" height="44" />
+        </a>
+        <h1 class="name">
+          <a href={homeHref}>{basics.name}</a>
+        </h1>
+      </div>
       <h2 class="tagline">{basics.tagline}</h2>
       <GitHubActivity />
     </div>
@@ -69,6 +74,17 @@ const homeHref = locale === "en" ? "/en/" : "/";
     gap: 0.25rem;
   }
 
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .logo-link {
+    display: flex;
+    flex-shrink: 0;
+  }
+
   .name {
     margin: 0;
     font-size: 2.75rem;
@@ -84,6 +100,14 @@ const homeHref = locale === "en" ? "/en/" : "/";
 
   .name a:hover {
     color: var(--accent);
+  }
+
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
   }
 
   .tagline {

@@ -1,6 +1,6 @@
 ---
 import type { CvData } from "../data/cv";
-import { getLocale } from "../i18n/index";
+import { getLocale, t } from "../i18n/index";
 
 interface Props {
 	basics: CvData["basics"];
@@ -26,6 +26,7 @@ const highlightedSummary = highlightKeywords(basics.summary, keywords);
 ---
 
 <div class="about">
+  <h2 id="heading-about" class="sr-only">{t(locale, "nav.about")}</h2>
   <p class="hero-line">{heroLine}</p>
   <p class="summary" set:html={highlightedSummary} />
 </div>

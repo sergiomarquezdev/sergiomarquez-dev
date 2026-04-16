@@ -12,31 +12,34 @@ const locale = getLocale(Astro.currentLocale);
 ---
 
 <div class="certifications">
-  <h2 class="section-title">{t(locale, "section.certifications")}</h2>
+  <h2 id="heading-certifications" class="section-title">{t(locale, "section.certifications")}</h2>
   <ul class="cert-list">
-    {certifications.map((cert) => (
-      <li>
-        <a
-          href={cert.url || '#'}
-          class="cert-card card-interactive"
-          target={cert.url ? "_blank" : undefined}
-          rel={cert.url ? "noopener noreferrer" : undefined}
-          aria-label={`${t(locale, "aria.viewCert")} ${cert.name}`}
-        >
-          <div class="cert-content">
-            <h3 class="cert-name">
-              {cert.name}
-              {cert.url && <LinkIcon class="link-icon" />}
-            </h3>
-            <p class="cert-meta">
-              {cert.issuer}
-              <span class="cert-separator">&ndash;</span>
-              {formatDate(cert.date, locale)}
-            </p>
-          </div>
-        </a>
-      </li>
-    ))}
+    {certifications.map((cert) => {
+      const Tag = cert.url ? "a" : "div";
+      return (
+        <li>
+          <Tag
+            href={cert.url || undefined}
+            class:list={["cert-card", "card-interactive", { "cert-card--no-link": !cert.url }]}
+            target={cert.url ? "_blank" : undefined}
+            rel={cert.url ? "noopener noreferrer" : undefined}
+            aria-label={cert.url ? `${t(locale, "aria.viewCert")} ${cert.name}` : undefined}
+          >
+            <div class="cert-content">
+              <h3 class="cert-name">
+                {cert.name}
+                {cert.url && <LinkIcon class="link-icon" />}
+              </h3>
+              <p class="cert-meta">
+                {cert.issuer}
+                <span class="cert-separator">&ndash;</span>
+                {formatDate(cert.date, locale)}
+              </p>
+            </div>
+          </Tag>
+        </li>
+      );
+    })}
   </ul>
 </div>
 
@@ -59,6 +62,10 @@ const locale = getLocale(Astro.currentLocale);
   .cert-card {
     padding: 0.75rem 1.5rem;
     cursor: pointer;
+  }
+
+  .cert-card--no-link {
+    cursor: default;
   }
 
   .cert-content {

@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Custom 404 page (`src/pages/404.astro`) with branded layout, ES/EN message, and home CTA
+- `og-image.png` (1200×630) replacing the SVG placeholder for proper social media previews
+- PWA icons `icon-192.png` and `icon-512.png` for installable app support
+- `og:image:type` meta tag in BaseHead for correct MIME declaration
+- Font preload `<link rel="preload">` for Geist Variable with static `/fonts/Geist-var.woff2`
+- `sr-only` utility class in global.css for screen-reader-only content
+- Visually-hidden `<h2 id="heading-about">` in About section for landmark accessibility
+- `aria-labelledby` on all four page sections pointing to their respective headings
+- `aria.mobileNav` i18n key ("Navegación móvil" / "Mobile navigation") to distinguish from desktop nav
+- IntersectionObserver-driven section animations — fade-up fires when section enters viewport
 - Mobile bottom navigation bar with scroll-spy, icon + label items, and safe-area support
 - Footer component with CTA and copyright (i18n)
 - Timeline visual in experience section with animated dot for current role
@@ -23,6 +33,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- `--tertiary-text` color changed from `#94a3b8` to `#64748b` (WCAG AA compliant, ~5:1 contrast)
+- Certifications now render as `<div>` when no URL present, removing `href="#"` dead links
+- `heading-experience`, `heading-projects`, `heading-certifications` IDs added to section `<h2>` elements
+- Mobile nav `aria-label` changed to `aria.mobileNav` (previously shared label with desktop nav)
+- Mobile nav label font-size increased from 10px to 11px for legibility
+- Project OG images now use `alt={project.name}` instead of empty `alt=""`
+- `@import "non.geist"` replaced with explicit `@font-face` pointing to `/fonts/Geist-var.woff2`
+- `manifest.webmanifest` updated with PNG icons and corrected `theme_color` to accent blue
+- Static `animate-fade-up` classes on sections replaced with IntersectionObserver
 - Language switcher redesigned with border, larger font, and secondary-text color
 - Social links touch targets increased to 44x44px minimum
 - Projects render as `<div>` (not `<a>`) when private/no URL, removing dead links
@@ -42,9 +61,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Skip-to-content link and ARIA labels for accessibility
 - `prefers-reduced-motion` support disabling animations
 - Architecture documentation (`docs/ARCHITECTURE.md`)
-
-### Changed
-
 - Layout redesigned from single-column with header to sidebar architecture
 - Portfolio data split from single `cv.json` into locale-specific `cv.es.json` and `cv.en.json`
 - Data loader updated with locale-aware cache (`getCv(locale)`)

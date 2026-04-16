@@ -14,19 +14,19 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
 ---
 
 <div class="sections">
-  <section id="about" class="section animate-fade-up">
+  <section id="about" class="section" data-observe aria-labelledby="heading-about">
     <About basics={basics} />
   </section>
 
-  <section id="experience" class="section animate-fade-up delay-100">
+  <section id="experience" class="section" data-observe aria-labelledby="heading-experience">
     <Experience experience={experience} />
   </section>
 
-  <section id="projects" class="section animate-fade-up delay-200">
+  <section id="projects" class="section" data-observe aria-labelledby="heading-projects">
     <Projects projects={projects} />
   </section>
 
-  <section id="certifications" class="section animate-fade-up delay-300">
+  <section id="certifications" class="section" data-observe aria-labelledby="heading-certifications">
     <Certifications certifications={certifications} />
   </section>
 </div>
@@ -49,6 +49,12 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
     padding-top: 4rem;
   }
 
+  /* Sections hidden until animated by IntersectionObserver */
+  .section[data-observe]:not(.animate-fade-up) {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
   @media (min-width: 1024px) {
     .sections {
       gap: 6rem;
@@ -63,3 +69,39 @@ const { basics, experience, projects, certifications } = Astro.props.cv;
     }
   }
 </style>
+
+<script>
+  function initAnimations() {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const sections =
+      document.querySelectorAll<HTMLElement>(".section[data-observe]");
+
+    if (prefersReducedMotion) {
+      sections.forEach((s) => {
+        s.style.opacity = "1";
+        s.style.transform = "none";
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-up");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  }
+
+  document.addEventListener("astro:page-load", initAnimations);
+  initAnimations();
+</script>

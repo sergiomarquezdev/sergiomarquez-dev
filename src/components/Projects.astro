@@ -28,7 +28,7 @@ function getProjectImage(project: CvData["projects"][number]): string | undefine
 ---
 
 <div class="projects">
-  <h2 class="section-title">{t(locale, "section.projects")}</h2>
+  <h2 id="heading-projects" class="section-title">{t(locale, "section.projects")}</h2>
   <div class="project-list">
     {projects.map((project) => {
       const href = getProjectHref(project);
@@ -46,7 +46,7 @@ function getProjectImage(project: CvData["projects"][number]): string | undefine
             <div class="project-thumbnail">
               <img
                 src={ogImage}
-                alt=""
+                alt={project.name}
                 width="480"
                 height="252"
                 loading="lazy"

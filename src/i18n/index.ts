@@ -17,6 +17,7 @@ const ui = {
 		"skip.main": "Ir al contenido principal",
 		"aria.sendEmail": "Enviar email a Sergio Márquez",
 		"aria.mainNav": "Navegación principal",
+		"aria.mobileNav": "Navegación móvil",
 		"aria.viewProject": "Ver proyecto",
 		"aria.viewCert": "Ver certificado",
 		"structured.knowsAbout":
@@ -42,6 +43,7 @@ const ui = {
 		"skip.main": "Skip to main content",
 		"aria.sendEmail": "Send email to Sergio Márquez",
 		"aria.mainNav": "Main navigation",
+		"aria.mobileNav": "Mobile navigation",
 		"aria.viewProject": "View project",
 		"aria.viewCert": "View certificate",
 		"structured.knowsAbout":

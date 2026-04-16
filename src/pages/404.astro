@@ -1,0 +1,80 @@
+---
+import { getLocale } from "../i18n/index";
+import Layout from "../layouts/Layout.astro";
+
+const locale = getLocale(Astro.currentLocale);
+
+const content = {
+	es: {
+		title: "Página no encontrada | Sergio Márquez",
+		description: "Esta página no existe.",
+		heading: "404",
+		message: "Esta página no existe o fue movida.",
+		cta: "Volver al inicio",
+	},
+	en: {
+		title: "Page not found | Sergio Márquez",
+		description: "This page does not exist.",
+		heading: "404",
+		message: "This page does not exist or has been moved.",
+		cta: "Back to home",
+	},
+}[locale];
+
+const homeHref = locale === "en" ? "/en/" : "/";
+---
+
+<Layout title={content.title} description={content.description}>
+  <div class="not-found">
+    <p class="code">{content.heading}</p>
+    <p class="message">{content.message}</p>
+    <a href={homeHref} class="home-link">{content.cta}</a>
+  </div>
+</Layout>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 4rem 0;
+  }
+
+  .code {
+    margin: 0;
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.15;
+  }
+
+  .message {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--primary-text);
+    max-width: 40ch;
+    line-height: 1.4;
+  }
+
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.375rem;
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  }
+
+  .home-link:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-muted);
+  }
+</style>

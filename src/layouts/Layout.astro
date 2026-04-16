@@ -54,9 +54,14 @@ const homeHref = locale === "en" ? "/en/" : "/";
     <header class="mobile-header">
       <div class="mobile-header-content">
         <div class="mobile-header-top">
-          <h1 class="mobile-name">
-            <a href={homeHref}>{basics.name}</a>
-          </h1>
+          <div class="mobile-name-row">
+            <a href={homeHref} class="mobile-logo-link" aria-hidden="true" tabindex="-1">
+              <img src="/icon-192.png" alt="" class="mobile-logo-mark" width="36" height="36" />
+            </a>
+            <h1 class="mobile-name">
+              <a href={homeHref}>{basics.name}</a>
+            </h1>
+          </div>
           <div class="mobile-header-actions">
             <div class="tablet-social">
               <SocialLinks urls={basics.urls} />
@@ -167,6 +172,25 @@ const homeHref = locale === "en" ? "/en/" : "/";
         align-items: center;
         justify-content: space-between;
         gap: 0.5rem;
+      }
+
+      .mobile-name-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .mobile-logo-link {
+        display: flex;
+        flex-shrink: 0;
+      }
+
+      .mobile-logo-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+        flex-shrink: 0;
       }
 
       .mobile-name {

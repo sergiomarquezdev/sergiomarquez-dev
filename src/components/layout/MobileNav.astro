@@ -15,7 +15,7 @@ const navItems = [
 ];
 ---
 
-<nav class="mobile-nav" aria-label={t(locale, "aria.mainNav")}>
+<nav class="mobile-nav" aria-label={t(locale, "aria.mobileNav")}>
   {navItems.map(({ id, label, Icon }) => (
     <a href={`#${id}`} class="mobile-nav-item" data-mobile-section={id}>
       <Icon class="mobile-nav-icon" />
@@ -177,7 +177,7 @@ const navItems = [
   }
 
   .mobile-nav-label {
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.02em;
     text-transform: uppercase;
