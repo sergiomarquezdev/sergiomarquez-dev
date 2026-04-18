@@ -33,6 +33,7 @@ Thumbs.db
 *.sw?
 .cursor/
 .cursorrules
+.claude/
 
 # Coverage directory used by tools like istanbul
 /coverage

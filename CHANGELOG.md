@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - `--tertiary-text` color changed from `#94a3b8` to `#64748b` (WCAG AA compliant, ~5:1 contrast)
+- `--tertiary-text` color changed from `#64748b` to `#52606d` (~6.4:1 contrast — previous value sat at the 4.5:1 boundary and Lighthouse/axe-core flagged `.role-period`, `.cert-meta`, `.footer-copyright`)
 - Certifications now render as `<div>` when no URL present, removing `href="#"` dead links
 - `heading-experience`, `heading-projects`, `heading-certifications` IDs added to section `<h2>` elements
 - Mobile nav `aria-label` changed to `aria.mobileNav` (previously shared label with desktop nav)
