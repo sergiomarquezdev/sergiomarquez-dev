@@ -1,33 +1,48 @@
 # Sergio Marquez - Personal Portfolio
 
-> **Minimal, bilingual (ES/EN) portfolio built with Astro and Tailwind CSS**
+> **Bilingual (ES/EN) portfolio with "AI Engineer" personal brand — built with Astro and Tailwind CSS**
 
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 [![CI](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml)
 
-This repository contains the source code for my **personal portfolio website**. It is a lightweight Astro build that reads profile data from locale-specific JSON files (`public/cv.es.json`, `public/cv.en.json`), keeping the UI and content in sync while staying true to a minimalist look.
+Source code for my **personal portfolio**, positioned as an applied AI engineer with a backend-of-truth track record. Built with Astro 5 (SSG) + Tailwind v4, fully driven by `public/cv.{es,en}.json`.
 
 Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 
 ---
 
+## Design system
+
+Dark theme with lime (`#A3E635`) accent — distinctive in a sea of blue AI sites. Three-font typography system:
+
+| Role | Family | Use |
+|---|---|---|
+| Display | **Instrument Serif** | Hero headline, section titles |
+| Body / UI | **Geist Variable** | Paragraphs, navigation, labels |
+| Mono | **JetBrains Mono Variable** | KPIs, eyebrows (`// Section`), code, dates, stack chips |
+
+All design tokens are CSS custom properties in [`src/styles/global.css`](./src/styles/global.css). Backwards-compat aliases preserved (`--background`, `--primary-text`, etc.) so legacy components keep working during migration.
+
+---
+
 ## Key Features
 
-- **Bilingual (i18n)**: Full Spanish and English support with automatic locale detection, language switcher, and hreflang tags.
-- **Data-driven content**: Portfolio sections (about, experience, projects, certifications) rendered from `public/cv.{es,en}.json`.
-- **Sidebar layout**: Sticky left sidebar with navigation and social links, right sidebar with email. Mobile-responsive header fallback.
-- **Mobile bottom navigation**: Sticky bottom nav bar with icons, scroll-spy, and safe-area support for notch devices.
-- **Tablet layout**: Intermediate breakpoint (768px) with social links in header and wider content padding.
-- **Spotlight effect**: Cursor-tracking radial gradient that follows mouse movement.
-- **Scroll-spy navigation**: Active section highlighting in sidebar nav and mobile bottom nav based on scroll position.
-- **Timeline experience**: Vertical timeline with animated dot for current role.
-- **Project thumbnails**: Automatic GitHub OG images with lazy loading and gradient fallback for private repos.
-- **Footer CTA**: Bilingual call-to-action with email link and copyright.
-- **GitHub activity widget**: Live latest commit display fetched from GitHub Events API at build time.
-- **Accessibility**: Skip links, ARIA labels, keyboard navigation, `prefers-reduced-motion` support, print styles.
-- **SEO**: Canonical URLs, hreflang alternates, JSON-LD structured data, Open Graph/Twitter cards, sitemap, PWA manifest.
-- **Vanity redirect URLs**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog` redirect to external profiles.
+- **Bilingual (i18n)**: Full ES/EN support with automatic locale detection, language switcher and hreflang tags.
+- **Data-driven content**: All sections rendered from `public/cv.{es,en}.json`. Optional brand fields (`metrics`, `kpis`, `headline`, `writing`, `featured`) are validated for parity in tests.
+- **Hero section**: Serif headline, animated `DotGrid` canvas (vanilla, <1KB, respects `prefers-reduced-motion`), stack chips and dual CTAs.
+- **Impact Bar**: Four production metrics in mono lime — cost, validation rate, time saved, latency. Pulled from `cv.metrics`.
+- **Cases (replaces flat Experience timeline)**: Each work entry is a card with KPI badges front-and-center, headline in serif and arrow-marker bullets.
+- **Projects**: Featured project gets a large card with KPI and lime accent border; secondary projects in a responsive grid.
+- **Writing & Presence**: Consolidated grid of blog + social channels (YouTube, LinkedIn, X, TikTok, blog) with platform icon, handle and one-line description.
+- **CTA Footer**: Full-width "¿Llevamos IA a producción?" — serif headline + lime button + socials.
+- **Sidebar layout** (desktop): Sticky left sidebar with name (serif), tagline, GitHub activity, scroll-spy navigation and social links. Right sidebar shows vertical email.
+- **Mobile bottom nav**: Sticky bar with icons, scroll-spy and safe-area support.
+- **Spotlight effect**: Subtle cursor-tracking radial gradient.
+- **GitHub activity widget**: Latest commit fetched at build time from GitHub Events API.
+- **Accessibility**: Skip links, ARIA labels, keyboard nav, `prefers-reduced-motion` support, focus-visible with lime outline.
+- **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap, PWA manifest.
+- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok` → external profiles.
 - **Performance**: Lighthouse 95+ on every metric. Static output, compressed HTML, CSS minification via lightningcss.
 
 ---
