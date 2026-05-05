@@ -181,7 +181,7 @@ const navItems: NavItem[] = [
     align-items: center;
     gap: 1rem;
     padding: 0.25rem 0;
-    color: var(--secondary-text);
+    color: var(--text-tertiary);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -190,16 +190,16 @@ const navItems: NavItem[] = [
   }
 
   .nav-link:hover {
-    color: var(--primary-text);
+    color: var(--text-secondary);
   }
 
   .nav-link:hover .nav-indicator {
     transform: scaleX(1);
-    background-color: var(--primary-text);
+    background-color: var(--text-secondary);
   }
 
   .nav-link.active {
-    color: var(--accent);
+    color: var(--text-primary);
   }
 
   .nav-link.active .nav-indicator {
@@ -210,7 +210,7 @@ const navItems: NavItem[] = [
   .nav-indicator {
     width: 4rem;
     height: 1px;
-    background-color: var(--tertiary-text);
+    background-color: var(--text-tertiary);
     transform: scaleX(0.5);
     transform-origin: left center;
     transition:

@@ -140,10 +140,10 @@ const navItems = [
     left: 0;
     right: 0;
     z-index: 40;
-    background-color: color-mix(in srgb, var(--background) 92%, transparent);
+    background-color: var(--bg-elevated);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
     padding: 0.5rem 0;
     padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
   }
@@ -160,7 +160,7 @@ const navItems = [
     align-items: center;
     gap: 0.25rem;
     padding: 0.25rem 0.75rem;
-    color: var(--tertiary-text);
+    color: var(--text-tertiary);
     transition: color 0.2s ease-in-out;
     min-width: 44px;
     min-height: 44px;

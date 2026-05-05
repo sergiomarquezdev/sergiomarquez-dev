@@ -22,7 +22,7 @@ const commit = await getLatestCommit();
     gap: 0.5rem;
     margin-top: 1rem;
     font-size: 0.75rem;
-    color: var(--tertiary-text);
+    color: var(--text-tertiary);
     min-width: 0;
   }
 
@@ -43,19 +43,19 @@ const commit = await getLatestCommit();
   }
 
   .sha {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: var(--font-mono);
     color: var(--accent);
     font-size: 0.7rem;
     flex-shrink: 0;
   }
 
   .separator {
-    color: var(--tertiary-text);
+    color: var(--text-tertiary);
     flex-shrink: 0;
   }
 
   .message {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
