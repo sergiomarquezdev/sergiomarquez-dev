@@ -109,7 +109,11 @@ const homeHref = locale === "en" ? "/en/" : "/";
         display: block;
         max-width: 1280px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        /* No horizontal padding on mobile/tablet — MainContent already
+           applies its own padding. Adding it here caused double horizontal
+           padding (visible as a "shifted right" footer with cropped right
+           edge). Desktop reintroduces padding because the sidebar lives
+           inside the wrapper and needs breathing room from the viewport. */
       }
 
       @media (min-width: 1024px) {
