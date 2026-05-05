@@ -10,9 +10,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
 	{ id: "about", label: t(locale, "nav.about") },
-	{ id: "experience", label: t(locale, "nav.experience") },
+	{ id: "cases", label: t(locale, "nav.cases") },
 	{ id: "projects", label: t(locale, "nav.projects") },
+	{ id: "writing", label: t(locale, "nav.writing") },
 	{ id: "certifications", label: t(locale, "nav.certifications") },
+	{ id: "contact", label: t(locale, "nav.contact") },
 ];
 ---
 
@@ -40,7 +42,14 @@ const navItems: NavItem[] = [
     const { signal } = navController;
 
     const navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-link");
-    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    // Collect target elements by the IDs declared in nav links so we also
+    // pick up the contact footer (which is a <footer> rather than <section>).
+    const targetIds = Array.from(navLinks)
+      .map((l) => l.dataset.section)
+      .filter((id): id is string => !!id);
+    const sections = targetIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
     if (navLinks.length === 0 || sections.length === 0) return;
 

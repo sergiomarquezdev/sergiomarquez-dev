@@ -1,17 +1,19 @@
 ---
 import { getLocale, t } from "../../i18n/index";
-import AwardIcon from "../icons/AwardIcon.astro";
+import BlogIcon from "../icons/BlogIcon.astro";
 import BriefcaseIcon from "../icons/BriefcaseIcon.astro";
 import CodeIcon from "../icons/CodeIcon.astro";
+import MailIcon from "../icons/MailIcon.astro";
 import UserIcon from "../icons/UserIcon.astro";
 
 const locale = getLocale(Astro.currentLocale);
 
 const navItems = [
 	{ id: "about", label: t(locale, "nav.about"), Icon: UserIcon },
-	{ id: "experience", label: t(locale, "nav.experience"), Icon: BriefcaseIcon },
+	{ id: "cases", label: t(locale, "nav.cases"), Icon: BriefcaseIcon },
 	{ id: "projects", label: t(locale, "nav.projects"), Icon: CodeIcon },
-	{ id: "certifications", label: t(locale, "nav.certifications"), Icon: AwardIcon },
+	{ id: "writing", label: t(locale, "nav.writing"), Icon: BlogIcon },
+	{ id: "contact", label: t(locale, "nav.contact"), Icon: MailIcon },
 ];
 ---
 
@@ -33,7 +35,14 @@ const navItems = [
     const { signal } = mobileNavController;
 
     const navItems = document.querySelectorAll<HTMLAnchorElement>('.mobile-nav-item');
-    const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    // Resolve targets by the IDs declared in nav items (matches sections AND
+    // the contact <footer>) so scroll-spy also activates the contact link.
+    const targetIds = Array.from(navItems)
+      .map((i) => i.dataset.mobileSection)
+      .filter((id): id is string => !!id);
+    const sections = targetIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
     if (navItems.length === 0 || sections.length === 0) return;
 
@@ -159,12 +168,13 @@ const navItems = [
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0.5rem;
     color: var(--text-tertiary);
     transition: color 0.2s ease-in-out;
     min-width: 44px;
     min-height: 44px;
     justify-content: center;
+    flex: 1 1 auto;
   }
 
   .mobile-nav-item.active {
