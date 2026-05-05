@@ -5,6 +5,33 @@ import { defaultLocale, type Locale, locales } from "../i18n/index";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
+export interface CvMetric {
+	value: string;
+	label: string;
+	context?: string;
+}
+
+export interface CvKpi {
+	value: string;
+	label: string;
+}
+
+export interface CvStatus {
+	available: boolean;
+	label: string;
+}
+
+export interface CvWritingChannel {
+	platform: "blog" | "youtube" | "linkedin" | "x" | "tiktok";
+	handle: string;
+	description: string;
+}
+
+export interface CvWriting {
+	blogUrl: string;
+	channels: CvWritingChannel[];
+}
+
 export type CvData = {
 	basics: {
 		name: string;
@@ -20,6 +47,9 @@ export type CvData = {
 			blog?: string;
 		};
 		summary: string;
+		headline?: string;
+		stackChips?: string[];
+		status?: CvStatus;
 	};
 	experience: Array<{
 		company: string;
@@ -27,6 +57,8 @@ export type CvData = {
 		period: string;
 		summary: string;
 		highlights: string[];
+		headline?: string;
+		kpis?: CvKpi[];
 	}>;
 	projects: Array<{
 		name: string;
@@ -36,6 +68,8 @@ export type CvData = {
 		github?: string[];
 		private?: boolean;
 		image?: string;
+		featured?: boolean;
+		kpi?: CvKpi;
 	}>;
 	certifications: Array<{
 		name: string;
@@ -43,6 +77,8 @@ export type CvData = {
 		date: string;
 		url?: string;
 	}>;
+	metrics?: CvMetric[];
+	writing?: CvWriting;
 };
 
 function loadCv(locale: Locale): CvData {
