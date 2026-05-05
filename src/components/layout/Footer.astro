@@ -84,4 +84,13 @@ const eyebrow = locale === "en" ? "// Contact" : "// Contacto";
     color: var(--text-tertiary);
     margin-top: 1.5rem;
   }
+  /* On desktop the SidebarLeft already shows persistent socials and the
+     LanguageSwitcher next to them, and the contact CTA carries the email
+     button. Hiding socials + copyright here removes the duplication. */
+  @media (min-width: 1024px) {
+    .cta-footer__socials,
+    .cta-footer__copy {
+      display: none;
+    }
+  }
 </style>
