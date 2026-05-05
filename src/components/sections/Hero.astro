@@ -3,7 +3,6 @@ import type { CvData } from "../../data/cv";
 import type { Locale } from "../../i18n";
 import DotGrid from "../ui/DotGrid.astro";
 import StackChip from "../ui/StackChip.astro";
-import StatusBadge from "../ui/StatusBadge.astro";
 
 interface Props {
 	basics: CvData["basics"];
@@ -23,11 +22,6 @@ const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
 <section class="hero" aria-labelledby="hero-headline">
   <DotGrid />
   <div class="hero__inner">
-    {basics.status && (
-      <div class="hero__status">
-        <StatusBadge available={basics.status.available} label={basics.status.label} />
-      </div>
-    )}
     <p class="hero__eyebrow">{eyebrow}</p>
     <h1 id="hero-headline" class="hero__headline">{headline}</h1>
     {sub && <p class="hero__sub">{sub}</p>}
@@ -46,15 +40,17 @@ const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
 <style>
   .hero {
     position: relative;
-    padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 5rem);
+    padding: 0 0 clamp(3rem, 6vw, 5rem);
     isolation: isolate;
-    overflow: hidden;
+    /* overflow visible so the DotGrid canvas can bleed beyond hero edges
+       and the radial mask fades fully without showing rectangular corners */
   }
   .hero::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-muted), transparent 70%);
+    inset: -10% -20% auto -20%;
+    height: 80%;
+    background: radial-gradient(ellipse 70% 60% at 50% 30%, var(--accent-muted), transparent 70%);
     pointer-events: none;
     z-index: -1;
   }
@@ -65,8 +61,8 @@ const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
     flex-direction: column;
     gap: 1.5rem;
     max-width: 56rem;
+    padding-top: clamp(1.5rem, 4vw, 3rem);
   }
-  .hero__status { margin-bottom: 0.5rem; }
   .hero__eyebrow {
     font-family: var(--font-mono);
     font-size: 0.8125rem;

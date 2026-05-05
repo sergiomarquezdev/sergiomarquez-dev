@@ -81,8 +81,10 @@
 
     resize();
     window.addEventListener("resize", resize);
-    canvas.addEventListener("pointermove", onMove);
-    canvas.addEventListener("pointerleave", onLeave);
+    // Listen on window so proximity still works even though the canvas
+    // is pointer-events: none (clicks pass through to content above)
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerleave", onLeave);
     raf = requestAnimationFrame(draw);
   }
 
@@ -92,14 +94,19 @@
 
 <style>
   .dotgrid {
+    /* Bleed beyond container so the radial mask fades to transparent
+       on all sides before reaching the visible viewport edge.
+       This eliminates the visible rectangular corners of the canvas. */
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: auto;
-    opacity: 0.9;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    top: -25%;
+    left: -30%;
+    width: 160%;
+    height: 150%;
+    pointer-events: none;
+    opacity: 0.85;
+    mask-image: radial-gradient(ellipse 55% 50% at 50% 45%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 45%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 45%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 45%, transparent 80%);
+    z-index: 0;
   }
   @media (max-width: 1023px) {
     .dotgrid { display: none; }

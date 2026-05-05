@@ -12,6 +12,7 @@ const { project, locale } = Astro.props;
 const href = project.url ?? (project.private ? null : project.github?.[0]);
 const isExternal = !!href && !href.startsWith("/");
 const visit = locale === "en" ? "Visit project" : "Ver proyecto";
+const featuredLabel = locale === "en" ? "// Featured project" : "// Proyecto destacado";
 const Tag = href ? "a" : "div";
 ---
 <Tag
@@ -19,7 +20,7 @@ const Tag = href ? "a" : "div";
   {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
 >
   <div class="featured__body">
-    <p class="featured__eyebrow">// Featured project</p>
+    <p class="featured__eyebrow">{featuredLabel}</p>
     <h3 class="featured__name">
       {project.name}
       {project.private && <LockIcon class="featured__lock" />}

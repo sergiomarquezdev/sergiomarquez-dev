@@ -16,10 +16,11 @@ const sub =
 		? "Open to backend + AI roles, freelance projects, and collaborations."
 		: "Abierto a roles backend + IA, proyectos freelance y colaboraciones.";
 const cta = locale === "en" ? "Email me" : "Escríbeme";
+const eyebrow = locale === "en" ? "// Contact" : "// Contacto";
 ---
 <footer class="cta-footer">
   <div class="cta-footer__inner">
-    <p class="cta-footer__eyebrow">// Contact</p>
+    <p class="cta-footer__eyebrow">{eyebrow}</p>
     <h2 class="cta-footer__headline">{headline}</h2>
     <p class="cta-footer__sub">{sub}</p>
     <a class="cta-footer__btn" href={`mailto:${email}`}>{cta} →</a>
