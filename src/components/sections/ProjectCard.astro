@@ -1,0 +1,67 @@
+---
+import type { CvData } from "../../data/cv";
+import LockIcon from "../icons/LockIcon.astro";
+import StackChip from "../ui/StackChip.astro";
+
+interface Props {
+	project: CvData["projects"][number];
+}
+const { project } = Astro.props;
+const href = project.url ?? (project.private ? null : project.github?.[0]);
+const Tag = href ? "a" : "div";
+---
+<Tag
+  class={`pcard ${href ? "pcard--linked" : ""}`}
+  {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+  <h4 class="pcard__name">
+    {project.name}
+    {project.private && <LockIcon class="pcard__lock" />}
+  </h4>
+  <p class="pcard__headline">{project.headline}</p>
+  <ul class="pcard__stack" aria-label="Stack">
+    {project.stack.slice(0, 5).map((s) => <li><StackChip label={s} /></li>)}
+  </ul>
+</Tag>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0.875rem;
+    background-color: var(--bg-elevated);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 200ms ease, transform 200ms ease;
+  }
+  .pcard--linked:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .pcard__name {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1.2;
+  }
+  .pcard__lock { width: 1rem; height: 1rem; color: var(--text-tertiary); }
+  .pcard__headline {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .pcard__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+  }
+</style>

@@ -1,66 +1,49 @@
 ---
 import type { CvData } from "../data/cv";
-import { getLocale, t } from "../i18n/index";
+import { getLocale } from "../i18n";
 
 interface Props {
 	basics: CvData["basics"];
 }
-
 const { basics } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-
-const heroLine =
-	locale === "es"
-		? "Construyendo soluciones de IA que funcionan en produccion."
-		: "Building AI-powered solutions that work in production.";
-
-const keywords = ["IA/ML", "AI/ML", "Python", "FastAPI", "RAG", "LLM", "backend", "Backend"];
-
-function highlightKeywords(text: string, words: string[]): string {
-	const escaped = words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-	const pattern = new RegExp(`\\b(${escaped.join("|")})\\b`, "gi");
-	return text.replace(pattern, '<span class="keyword">$1</span>');
-}
-
-const highlightedSummary = highlightKeywords(basics.summary, keywords);
+const eyebrow = locale === "en" ? "// About" : "// Sobre mí";
+const title = locale === "en" ? "Backend engineer turned AI builder" : "Backend reconvertido a IA";
 ---
-
-<div class="about">
-  <h2 id="heading-about" class="sr-only">{t(locale, "nav.about")}</h2>
-  <p class="hero-line">{heroLine}</p>
-  <p class="summary" set:html={highlightedSummary} />
-</div>
+<section class="about" aria-labelledby="about-title">
+  <header class="about__head">
+    <p class="about__eyebrow">{eyebrow}</p>
+    <h2 id="about-title" class="about__title">{title}</h2>
+  </header>
+  <p class="about__body">{basics.summary}</p>
+</section>
 
 <style>
   .about {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    max-width: 56rem;
   }
-
-  .hero-line {
+  .about__head { margin-bottom: 1.5rem; }
+  .about__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--accent-text);
+    margin: 0 0 0.5rem;
+  }
+  .about__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--text-primary);
     margin: 0;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--primary-text);
-    line-height: 1.4;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
   }
-
-  .summary {
+  .about__body {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--text-secondary);
     margin: 0;
-    max-width: var(--measure);
-    color: var(--secondary-text);
-    font-size: 1rem;
-    line-height: 1.75;
-  }
-
-  .summary :global(.keyword) {
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  .summary::selection {
-    background-color: var(--accent-muted);
-    color: var(--accent);
   }
 </style>

@@ -1,0 +1,46 @@
+---
+import type { CvMetric } from "../../data/cv";
+import type { Locale } from "../../i18n";
+import MetricKpi from "../ui/MetricKpi.astro";
+
+interface Props {
+	metrics: CvMetric[];
+	locale: Locale;
+}
+const { metrics, locale } = Astro.props;
+const title = locale === "en" ? "// Impact in production" : "// Impacto en producción";
+---
+<section class="impact" aria-labelledby="impact-title">
+  <p id="impact-title" class="impact__title">{title}</p>
+  <ul class="impact__grid">
+    {metrics.map((m) => (
+      <li class="impact__item">
+        <MetricKpi value={m.value} label={m.label} context={m.context} size="md" />
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .impact {
+    padding: clamp(2rem, 4vw, 3rem) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .impact__title {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .impact__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .impact__item { min-width: 0; }
+</style>

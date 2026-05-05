@@ -6,7 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Complete portfolio redesign** with "AI Engineer" personal brand identity.
+- Migrated from light minimalist theme to dark theme with lime accent (`#A3E635`).
+- New typography system: **Instrument Serif** (display headlines), **Geist Variable** (body), **JetBrains Mono Variable** (metrics, code, mono labels).
+- Recomposed home structure: Hero → Impact Bar → About → Cases (replaces flat Experience timeline) → Projects → Writing & Presence → Certifications → CTA Footer.
+- `Footer.astro` rebuilt as a full-width CTA section with serif headline and lime button.
+- `About`, `Certifications`, sidebars, navigation, mobile nav, language switcher, GitHub activity, spotlight and base layout adapted to the new dark theme and typography system.
+
 ### Added
+
+- `Hero.astro` section with serif headline, eyebrow `// Ingeniería IA · Backend · Automatización`, stack chips and primary/ghost CTA buttons.
+- Decorative animated `DotGrid.astro` canvas in hero — pure vanilla, ~1KB, respects `prefers-reduced-motion`, hidden below 1024px, bleeds beyond hero with radial mask to avoid hard rectangular edges.
+- `ImpactBar.astro` showing four production metrics in mono lime (cost, validation, savings, latency).
+- `CaseStudy.astro` + `CasesGrid.astro` replacing the flat experience timeline. Each case shows headline, KPIs front-and-center and contextual bullets with `→` lime markers.
+- `FeaturedProject.astro` for the lead project (One dAIly Blog) with prominent KPI badge and accent-bordered card.
+- `ProjectCard.astro` + `ProjectsSection.astro` for secondary projects in a responsive grid.
+- `Writing.astro` consolidating blog and social channels with handle + description per platform.
+- UI primitives in `src/components/ui/`: `MetricKpi`, `StackChip`, `StatusBadge`, `DotGrid`.
+- New optional CV fields: `metrics`, `basics.headline`, `basics.stackChips`, `basics.status`, `experience[].headline`, `experience[].kpis`, `projects[].featured`, `projects[].kpi`, `writing` block. All optional in `CvData` to preserve backwards compatibility.
+- Test in `cv.test.ts` verifying parity of new optional brand fields between locales.
+- Spec and plan documents under `plans/` documenting the redesign rationale and execution steps.
+
+### Removed
+
+- Old `Experience.astro` and `Projects.astro` components (replaced by sections under `src/components/sections/`).
+
+### Added (pre-redesign)
 
 - Custom 404 page (`src/pages/404.astro`) with branded layout, ES/EN message, and home CTA
 - `og-image.png` (1200×630) replacing the SVG placeholder for proper social media previews

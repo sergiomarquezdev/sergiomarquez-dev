@@ -1,0 +1,48 @@
+---
+interface Props {
+	available: boolean;
+	label: string;
+}
+const { available, label } = Astro.props;
+---
+<div class={`status ${available ? "status--available" : ""}`}>
+  <span class="status__dot" aria-hidden="true"></span>
+  <span class="status__label">{label}</span>
+</div>
+
+<style>
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .status__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background-color: var(--text-tertiary);
+  }
+  .status--available .status__dot {
+    background-color: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent-glow);
+    animation: status-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .status--available .status__label {
+    color: var(--text-primary);
+  }
+  @keyframes status-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+    50% { box-shadow: 0 0 0 6px transparent; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .status--available .status__dot { animation: none; }
+  }
+</style>

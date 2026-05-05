@@ -10,9 +10,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
 	{ id: "about", label: t(locale, "nav.about") },
-	{ id: "experience", label: t(locale, "nav.experience") },
+	{ id: "cases", label: t(locale, "nav.cases") },
 	{ id: "projects", label: t(locale, "nav.projects") },
+	{ id: "writing", label: t(locale, "nav.writing") },
 	{ id: "certifications", label: t(locale, "nav.certifications") },
+	{ id: "contact", label: t(locale, "nav.contact") },
 ];
 ---
 
@@ -40,7 +42,14 @@ const navItems: NavItem[] = [
     const { signal } = navController;
 
     const navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-link");
-    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    // Collect target elements by the IDs declared in nav links so we also
+    // pick up the contact footer (which is a <footer> rather than <section>).
+    const targetIds = Array.from(navLinks)
+      .map((l) => l.dataset.section)
+      .filter((id): id is string => !!id);
+    const sections = targetIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
     if (navLinks.length === 0 || sections.length === 0) return;
 
@@ -181,7 +190,7 @@ const navItems: NavItem[] = [
     align-items: center;
     gap: 1rem;
     padding: 0.25rem 0;
-    color: var(--secondary-text);
+    color: var(--text-tertiary);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -190,16 +199,16 @@ const navItems: NavItem[] = [
   }
 
   .nav-link:hover {
-    color: var(--primary-text);
+    color: var(--text-secondary);
   }
 
   .nav-link:hover .nav-indicator {
     transform: scaleX(1);
-    background-color: var(--primary-text);
+    background-color: var(--text-secondary);
   }
 
   .nav-link.active {
-    color: var(--accent);
+    color: var(--text-primary);
   }
 
   .nav-link.active .nav-indicator {
@@ -210,7 +219,7 @@ const navItems: NavItem[] = [
   .nav-indicator {
     width: 4rem;
     height: 1px;
-    background-color: var(--tertiary-text);
+    background-color: var(--text-tertiary);
     transform: scaleX(0.5);
     transform-origin: left center;
     transition:

@@ -6,8 +6,11 @@ const ui = {
 	es: {
 		"nav.about": "Sobre mí",
 		"nav.experience": "Experiencia",
+		"nav.cases": "Experiencia",
 		"nav.projects": "Proyectos",
+		"nav.writing": "Blog",
 		"nav.certifications": "Certificaciones",
+		"nav.contact": "Contacto",
 		"section.experience": "Experiencia",
 		"section.projects": "Proyectos",
 		"section.certifications": "Certificaciones",
@@ -32,8 +35,11 @@ const ui = {
 	en: {
 		"nav.about": "About",
 		"nav.experience": "Experience",
+		"nav.cases": "Experience",
 		"nav.projects": "Projects",
+		"nav.writing": "Blog",
 		"nav.certifications": "Certifications",
+		"nav.contact": "Contact",
 		"section.experience": "Experience",
 		"section.projects": "Projects",
 		"section.certifications": "Certifications",

@@ -12,7 +12,13 @@
       "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "Backend Developer transitioned into AI/ML. After several years developing with Java and Spring, I've moved towards applying an engineering-first approach (APIs, data, architecture, and production) to AI solutions using Python and FastAPI. I specialize in building services that transform business needs into maintainable features, incorporating RAG pipelines, semantic search, and agentic architectures. I focus on making the 'how it works' as solid as the 'what it does' through automation and robust engineering practices."
+    "summary": "Backend Developer transitioned into AI/ML. After several years developing with Java and Spring, I've moved towards applying an engineering-first approach (APIs, data, architecture, and production) to AI solutions using Python and FastAPI. I specialize in building services that transform business needs into maintainable features, incorporating RAG pipelines, semantic search, and agentic architectures. I focus on making the 'how it works' as solid as the 'what it does' through automation and robust engineering practices.",
+    "headline": "I ship AI to production with metrics, not demos.",
+    "stackChips": ["Python", "FastAPI", "LLMs", "RAG", "n8n", "GCP"],
+    "status": {
+      "available": true,
+      "label": "Available for new opportunities"
+    }
   },
   "experience": [
     {
@@ -29,6 +35,12 @@
         "Improved document validation pass rate from 70% to 90% using a GPT+Claude+Gemini ensemble and OCR tuning.",
         "Migrated chat to an agentic architecture (Google ADK) with LiteLLM; ~15% lower latency and ~35% lower infra cost.",
         "Stack: Python, FastAPI, n8n, GCP, MongoDB, BigQuery/Firestore, Pinecone, Docker, GitLab CI/CD, OpenTelemetry."
+      ],
+      "headline": "Applied AI engineer with production backend: RAG, agents, and automation with real metrics.",
+      "kpis": [
+        { "value": "−35%", "label": "infra cost" },
+        { "value": "+20pp", "label": "validation" },
+        { "value": "8–10h", "label": "/config" }
       ]
     },
     {
@@ -42,6 +54,11 @@
         "Post-Merger Data Integration: Actively participated in the data integration after the Preving/Cualtis merger, performing mapping and application adaptation.",
         "International Experience (Dublin, 2022): Spent 3 months working remotely from Ireland, improving English fluency and adaptability in global environments.",
         "Stack: Java, Spring Framework, Angular, Docker, Kubernetes, GCP, GitLab CI/CD."
+      ],
+      "headline": "Java/Spring backend leading GKE migration and CI/CD.",
+      "kpis": [
+        { "value": "GKE", "label": "led migration" },
+        { "value": "3 meses", "label": "Dublin 2022" }
       ]
     },
     {
@@ -71,7 +88,9 @@
         "https://github.com/sergiomarquezdev/one-daily-blog",
         "https://github.com/sergiomarquezdev/one-daily-blog-backend"
       ],
-      "private": true
+      "private": true,
+      "featured": true,
+      "kpi": { "value": "1/día", "label": "autonomous post" }
     },
     {
       "name": "AI Photo Transformer",
@@ -87,7 +106,9 @@
       "github": [
         "https://github.com/sergiomarquezdev/altoke_image_gen"
       ],
-      "private": true
+      "private": true,
+      "featured": false,
+      "kpi": { "value": "Multi-IA", "label": "pipeline" }
     },
     {
       "name": "Video Transcriber & AI Summarizer",
@@ -133,6 +154,58 @@
       "private": false
     }
   ],
+  "metrics": [
+    {
+      "value": "−35%",
+      "label": "infrastructure cost",
+      "context": "Chat migration to agentic architecture with Google ADK + LiteLLM"
+    },
+    {
+      "value": "70 → 90%",
+      "label": "document validation",
+      "context": "GPT + Claude + Gemini ensemble with tuned OCR"
+    },
+    {
+      "value": "8–10h",
+      "label": "saved per setup",
+      "context": "RAG ingestion automation with n8n + Python (Sheets → MongoDB + Pinecone)"
+    },
+    {
+      "value": "−15%",
+      "label": "chat latency",
+      "context": "Migration to Google ADK with LiteLLM"
+    }
+  ],
+  "writing": {
+    "blogUrl": "https://blog.sergiomarquez.dev",
+    "channels": [
+      {
+        "platform": "blog",
+        "handle": "blog.sergiomarquez.dev",
+        "description": "Technical notes on applied AI and production backend"
+      },
+      {
+        "platform": "youtube",
+        "handle": "@sergiomarquezp",
+        "description": "Tutorials and practical AI case studies"
+      },
+      {
+        "platform": "linkedin",
+        "handle": "in/sergiomarquezp",
+        "description": "Reflections on AI engineering"
+      },
+      {
+        "platform": "x",
+        "handle": "@sergiomarquezp_",
+        "description": "Short notes and daily discoveries"
+      },
+      {
+        "platform": "tiktok",
+        "handle": "@sergiomarquezp_",
+        "description": "Short AI pills"
+      }
+    ]
+  },
   "certifications": [
     {
       "name": "EF SET English Certificate 76/100 (C2 Proficient)",

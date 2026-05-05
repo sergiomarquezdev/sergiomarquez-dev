@@ -4,7 +4,6 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import MainContent from "../components/layout/MainContent.astro";
 import MobileNav from "../components/layout/MobileNav.astro";
 import SidebarLeft from "../components/layout/SidebarLeft.astro";
-import SidebarRight from "../components/layout/SidebarRight.astro";
 import SocialLinks from "../components/layout/SocialLinks.astro";
 import Spotlight from "../components/Spotlight.astro";
 import { getCv } from "../data/cv";
@@ -23,7 +22,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
 ---
 
 <!doctype html>
-<html lang={locale} style="color-scheme: light">
+<html lang={locale} style="color-scheme: dark">
   <head>
     <BaseHead title={title} description={description} />
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -82,7 +81,6 @@ const homeHref = locale === "en" ? "/en/" : "/";
       </div>
     </div>
 
-    <SidebarRight email={basics.email} />
     <MobileNav />
 
     <style>
@@ -92,7 +90,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
         left: 0;
         padding: 0.5rem 1rem;
         background: var(--accent);
-        color: var(--background);
+        color: var(--bg);
         font-weight: 600;
         z-index: 100;
         transition: top 0.2s ease-in-out;
@@ -111,7 +109,11 @@ const homeHref = locale === "en" ? "/en/" : "/";
         display: block;
         max-width: 1280px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        /* No horizontal padding on mobile/tablet — MainContent already
+           applies its own padding. Adding it here caused double horizontal
+           padding (visible as a "shifted right" footer with cropped right
+           edge). Desktop reintroduces padding because the sidebar lives
+           inside the wrapper and needs breathing room from the viewport. */
       }
 
       @media (min-width: 1024px) {
@@ -137,7 +139,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
       .mobile-header {
         display: block;
         padding: 1.5rem;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border);
       }
 
       @media (min-width: 1024px) {
@@ -189,19 +191,20 @@ const homeHref = locale === "en" ? "/en/" : "/";
         width: 36px;
         height: 36px;
         border-radius: 0.5rem;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border);
         flex-shrink: 0;
       }
 
       .mobile-name {
         margin: 0;
+        font-family: var(--font-serif);
         font-size: 1.5rem;
-        font-weight: 700;
+        font-weight: 400;
         letter-spacing: -0.02em;
       }
 
       .mobile-name a {
-        color: var(--primary-text);
+        color: var(--text-primary);
       }
 
       .mobile-name a:hover {
@@ -211,7 +214,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
       .mobile-tagline {
         margin: 0.25rem 0 0 0;
         font-size: 0.9rem;
-        color: var(--secondary-text);
+        color: var(--text-secondary);
       }
     </style>
   </body>

@@ -1,0 +1,96 @@
+---
+import type { CvData } from "../../data/cv";
+import LockIcon from "../icons/LockIcon.astro";
+import MetricKpi from "../ui/MetricKpi.astro";
+import StackChip from "../ui/StackChip.astro";
+
+interface Props {
+	project: CvData["projects"][number];
+	locale: "es" | "en";
+}
+const { project, locale } = Astro.props;
+const href = project.url ?? (project.private ? null : project.github?.[0]);
+const isExternal = !!href && !href.startsWith("/");
+const visit = locale === "en" ? "Visit project" : "Ver proyecto";
+const featuredLabel = locale === "en" ? "// Featured project" : "// Proyecto destacado";
+const Tag = href ? "a" : "div";
+---
+<Tag
+  class={`featured ${href ? "featured--linked" : ""}`}
+  {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+  <div class="featured__body">
+    <p class="featured__eyebrow">{featuredLabel}</p>
+    <h3 class="featured__name">
+      {project.name}
+      {project.private && <LockIcon class="featured__lock" />}
+    </h3>
+    <p class="featured__headline">{project.headline}</p>
+    {project.kpi && (
+      <div class="featured__kpi">
+        <MetricKpi value={project.kpi.value} label={project.kpi.label} size="lg" />
+      </div>
+    )}
+    <ul class="featured__stack" aria-label="Stack">
+      {project.stack.map((s) => <li><StackChip label={s} /></li>)}
+    </ul>
+    {href && <span class="featured__cta">{visit} →</span>}
+  </div>
+</Tag>
+
+<style>
+  .featured {
+    display: block;
+    padding: clamp(2rem, 4vw, 3rem);
+    border: 1px solid var(--border-accent);
+    border-radius: 1.25rem;
+    background:
+      radial-gradient(ellipse at top right, var(--accent-muted), transparent 60%),
+      var(--bg-elevated);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 200ms ease, transform 200ms ease;
+  }
+  .featured--linked:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .featured__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-text);
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .featured__name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.875rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .featured__lock { width: 1.25rem; height: 1.25rem; color: var(--text-tertiary); }
+  .featured__headline {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem;
+    max-width: 36rem;
+  }
+  .featured__kpi { margin-bottom: 1.5rem; }
+  .featured__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+  }
+  .featured__cta {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent);
+  }
+</style>

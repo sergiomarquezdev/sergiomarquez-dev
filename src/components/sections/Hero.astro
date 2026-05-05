@@ -1,0 +1,134 @@
+---
+import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
+import DotGrid from "../ui/DotGrid.astro";
+import StackChip from "../ui/StackChip.astro";
+
+interface Props {
+	basics: CvData["basics"];
+	locale: Locale;
+}
+const { basics, locale } = Astro.props;
+const headline = basics.headline ?? basics.tagline;
+const stack = basics.stackChips ?? [];
+const eyebrow =
+	locale === "en"
+		? "// AI Engineer · Backend · Automation"
+		: "// Ingeniería IA · Backend · Automatización";
+const sub = basics.summary;
+const ctaPrimary = locale === "en" ? "Let's talk" : "Hablemos";
+const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
+---
+<section class="hero" aria-labelledby="hero-headline">
+  <DotGrid />
+  <div class="hero__inner">
+    <p class="hero__eyebrow">{eyebrow}</p>
+    <h1 id="hero-headline" class="hero__headline">{headline}</h1>
+    {sub && <p class="hero__sub">{sub}</p>}
+    {stack.length > 0 && (
+      <ul class="hero__stack" aria-label="Stack">
+        {stack.map((s) => <li><StackChip label={s} /></li>)}
+      </ul>
+    )}
+    <div class="hero__ctas">
+      <a class="btn btn--primary" href={`mailto:${basics.email}`}>{ctaPrimary} →</a>
+      <a class="btn btn--ghost" href="#cases">{ctaSecondary} ↓</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 0 0 clamp(3rem, 6vw, 5rem);
+    isolation: isolate;
+    /* overflow visible so the DotGrid canvas can bleed beyond hero edges
+       and the radial mask fades fully without showing rectangular corners */
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -10% -20% auto -20%;
+    height: 80%;
+    background: radial-gradient(ellipse 70% 60% at 50% 30%, var(--accent-muted), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 56rem;
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+  .hero__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--accent-text);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .hero__headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .hero__sub {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 42rem;
+  }
+  .hero__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 200ms ease;
+    border: 1px solid transparent;
+  }
+  .btn--primary {
+    background-color: var(--accent);
+    color: #0A0A0B;
+  }
+  .btn--primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+  .btn--ghost {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+    background-color: transparent;
+  }
+  .btn--ghost:hover {
+    background-color: var(--bg-elevated);
+    border-color: var(--text-secondary);
+  }
+</style>

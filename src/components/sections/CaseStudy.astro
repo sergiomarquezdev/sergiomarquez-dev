@@ -1,0 +1,120 @@
+---
+import type { CvData } from "../../data/cv";
+import MetricKpi from "../ui/MetricKpi.astro";
+
+interface Props {
+	entry: CvData["experience"][number];
+	index: number;
+}
+const { entry, index } = Astro.props;
+const isLatest = index === 0;
+const period = entry.period;
+const isCurrent = /presente|present/i.test(period);
+---
+<article class={`case ${isLatest ? "case--featured" : ""}`}>
+  <header class="case__head">
+    <div class="case__meta">
+      <span class="case__company">{entry.company}</span>
+      <span class="case__sep">·</span>
+      <span class="case__role">{entry.role}</span>
+      {isCurrent && <span class="case__live" aria-label="actual">●</span>}
+    </div>
+    <span class="case__period">{period}</span>
+  </header>
+  {entry.headline && <p class="case__headline">{entry.headline}</p>}
+  {entry.kpis && entry.kpis.length > 0 && (
+    <ul class="case__kpis">
+      {entry.kpis.map((k) => (
+        <li><MetricKpi value={k.value} label={k.label} size={isLatest ? "md" : "sm"} /></li>
+      ))}
+    </ul>
+  )}
+  {entry.highlights && entry.highlights.length > 0 && (
+    <ul class="case__bullets">
+      {entry.highlights.slice(0, isLatest ? 4 : 3).map((h) => <li>{h}</li>)}
+    </ul>
+  )}
+</article>
+
+<style>
+  .case {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background-color: var(--bg-elevated);
+    transition: border-color 200ms ease, transform 200ms ease;
+  }
+  .case:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .case--featured { border-color: var(--border-accent); background-color: var(--bg-elevated); }
+  .case__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .case__meta {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .case__company { color: var(--text-primary); font-weight: 500; }
+  .case__sep { color: var(--text-tertiary); }
+  .case__live {
+    color: var(--accent);
+    font-size: 0.625rem;
+    animation: status-pulse 2.4s ease-in-out infinite;
+  }
+  .case__period {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+  }
+  .case__headline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin: 0 0 1.25rem;
+  }
+  .case--featured .case__headline {
+    font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  }
+  .case__kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0 0 1rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .case__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+  .case__bullets li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+  .case__bullets li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+</style>

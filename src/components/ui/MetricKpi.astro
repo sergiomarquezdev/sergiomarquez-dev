@@ -1,0 +1,46 @@
+---
+interface Props {
+	value: string;
+	label: string;
+	context?: string;
+	size?: "sm" | "md" | "lg";
+}
+const { value, label, context, size = "md" } = Astro.props;
+---
+<div class={`kpi kpi--${size}`}>
+  <div class="kpi__value tabular-nums">{value}</div>
+  <div class="kpi__label">{label}</div>
+  {context && <div class="kpi__context">{context}</div>}
+</div>
+
+<style>
+  .kpi {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .kpi__value {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .kpi--sm .kpi__value { font-size: var(--text-2xl); }
+  .kpi--md .kpi__value { font-size: var(--text-4xl); }
+  .kpi--lg .kpi__value { font-size: var(--text-5xl); }
+  .kpi__label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: lowercase;
+    letter-spacing: 0.01em;
+  }
+  .kpi__context {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    margin-top: 0.25rem;
+  }
+</style>

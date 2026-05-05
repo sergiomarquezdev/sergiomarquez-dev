@@ -1,0 +1,67 @@
+---
+import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
+import FeaturedProject from "./FeaturedProject.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+	projects: CvData["projects"];
+	locale: Locale;
+}
+const { projects, locale } = Astro.props;
+const featured = projects.find((p) => p.featured) ?? projects[0];
+const rest = projects.filter((p) => p !== featured);
+const eyebrow = locale === "en" ? "// Projects" : "// Proyectos";
+const title = locale === "en" ? "Things I've built" : "Cosas que he construido";
+const moreLabel = locale === "en" ? "More on GitHub" : "Más en GitHub";
+const githubUrl = "https://github.com/sergiomarquezdev";
+---
+<section id="projects" class="psection" aria-labelledby="projects-title">
+  <header class="psection__head">
+    <p class="psection__eyebrow">{eyebrow}</p>
+    <h2 id="projects-title" class="psection__title">{title}</h2>
+  </header>
+  {featured && <FeaturedProject project={featured} locale={locale} />}
+  {rest.length > 0 && (
+    <div class="psection__grid">
+      {rest.map((p) => <ProjectCard project={p} />)}
+    </div>
+  )}
+  <a class="psection__more" href={githubUrl} target="_blank" rel="noopener noreferrer">
+    {moreLabel} →
+  </a>
+</section>
+
+<style>
+  .psection { padding: clamp(3rem, 6vw, 5rem) 0; display: flex; flex-direction: column; gap: 1.25rem; }
+  .psection__head { margin-bottom: 0.5rem; }
+  .psection__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--accent-text);
+    margin: 0 0 0.5rem;
+  }
+  .psection__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .psection__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .psection__more {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.5rem 0;
+  }
+  .psection__more:hover { color: var(--accent-hover); }
+</style>

@@ -81,4 +81,20 @@ describe("cv data loader", () => {
 			expect(esData.experience[i].highlights.length).toBe(enData.experience[i].highlights.length);
 		}
 	});
+
+	it("optional brand fields exist in both locales when present", () => {
+		const es = getCv("es");
+		const en = getCv("en");
+		expect(!!es.metrics).toBe(!!en.metrics);
+		expect(!!es.writing).toBe(!!en.writing);
+		expect(!!es.basics.headline).toBe(!!en.basics.headline);
+		expect(!!es.basics.stackChips).toBe(!!en.basics.stackChips);
+		expect(!!es.basics.status).toBe(!!en.basics.status);
+		if (es.metrics && en.metrics) {
+			expect(es.metrics.length).toBe(en.metrics.length);
+		}
+		if (es.writing && en.writing) {
+			expect(es.writing.channels.length).toBe(en.writing.channels.length);
+		}
+	});
 });

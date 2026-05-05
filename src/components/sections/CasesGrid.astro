@@ -1,0 +1,48 @@
+---
+import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
+import CaseStudy from "./CaseStudy.astro";
+
+interface Props {
+	experience: CvData["experience"];
+	locale: Locale;
+}
+const { experience, locale } = Astro.props;
+const title = locale === "en" ? "Cases in production" : "Casos en producción";
+const eyebrow = locale === "en" ? "// Experience" : "// Experiencia";
+---
+<section id="cases" class="cases" aria-labelledby="cases-title">
+  <header class="cases__head">
+    <p class="cases__eyebrow">{eyebrow}</p>
+    <h2 id="cases-title" class="cases__title">{title}</h2>
+  </header>
+  <div class="cases__grid">
+    {experience.map((entry, i) => <CaseStudy entry={entry} index={i} />)}
+  </div>
+</section>
+
+<style>
+  .cases { padding: clamp(3rem, 6vw, 5rem) 0; }
+  .cases__head { margin-bottom: 2rem; }
+  .cases__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--accent-text);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .cases__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .cases__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+</style>
