@@ -1,10 +1,10 @@
 ---
 import type { CvData } from "../../data/cv";
-import StackChip from "../ui/StackChip.astro";
 import LockIcon from "../icons/LockIcon.astro";
+import StackChip from "../ui/StackChip.astro";
 
 interface Props {
-  project: CvData["projects"][number];
+	project: CvData["projects"][number];
 }
 const { project } = Astro.props;
 const href = project.url ?? (project.private ? null : project.github?.[0]);

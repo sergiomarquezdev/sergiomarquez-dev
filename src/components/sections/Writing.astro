@@ -2,33 +2,33 @@
 import type { CvWriting } from "../../data/cv";
 import type { Locale } from "../../i18n";
 import BlogIcon from "../icons/BlogIcon.astro";
-import YouTubeIcon from "../icons/YouTubeIcon.astro";
 import LinkedInIcon from "../icons/LinkedInIcon.astro";
-import XIcon from "../icons/XIcon.astro";
 import TikTokIcon from "../icons/TikTokIcon.astro";
+import XIcon from "../icons/XIcon.astro";
+import YouTubeIcon from "../icons/YouTubeIcon.astro";
 
 interface Props {
-  writing: CvWriting;
-  locale: Locale;
+	writing: CvWriting;
+	locale: Locale;
 }
 const { writing, locale } = Astro.props;
 const eyebrow = locale === "en" ? "// Writing & presence" : "// Escritura y presencia";
 const title = locale === "en" ? "Where I share what I learn" : "Donde comparto lo que aprendo";
 
 const iconMap = {
-  blog: BlogIcon,
-  youtube: YouTubeIcon,
-  linkedin: LinkedInIcon,
-  x: XIcon,
-  tiktok: TikTokIcon,
+	blog: BlogIcon,
+	youtube: YouTubeIcon,
+	linkedin: LinkedInIcon,
+	x: XIcon,
+	tiktok: TikTokIcon,
 };
 
 const urlMap = {
-  blog: writing.blogUrl,
-  youtube: "https://www.youtube.com/@sergiomarquezp",
-  linkedin: "https://www.linkedin.com/in/sergiomarquezp/",
-  x: "https://x.com/sergiomarquezp_",
-  tiktok: "https://www.tiktok.com/@sergiomarquezp_",
+	blog: writing.blogUrl,
+	youtube: "https://www.youtube.com/@sergiomarquezp",
+	linkedin: "https://www.linkedin.com/in/sergiomarquezp/",
+	x: "https://x.com/sergiomarquezp_",
+	tiktok: "https://www.tiktok.com/@sergiomarquezp_",
 };
 ---
 <section id="writing" class="writing" aria-labelledby="writing-title">

@@ -1,11 +1,11 @@
 ---
 import type { CvData } from "../../data/cv";
-import CaseStudy from "./CaseStudy.astro";
 import type { Locale } from "../../i18n";
+import CaseStudy from "./CaseStudy.astro";
 
 interface Props {
-  experience: CvData["experience"];
-  locale: Locale;
+	experience: CvData["experience"];
+	locale: Locale;
 }
 const { experience, locale } = Astro.props;
 const title = locale === "en" ? "Cases in production" : "Casos en producción";

@@ -4,16 +4,17 @@ import { getLocale } from "../../i18n";
 import SocialLinks from "./SocialLinks.astro";
 
 interface Props {
-  email: string;
-  name: string;
-  urls: CvData["basics"]["urls"];
+	email: string;
+	name: string;
+	urls: CvData["basics"]["urls"];
 }
 const { email, name, urls } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const headline = locale === "en" ? "Want to ship AI to production?" : "¿Llevamos IA a producción?";
-const sub = locale === "en"
-  ? "Open to backend + AI roles, freelance projects, and collaborations."
-  : "Abierto a roles backend + IA, proyectos freelance y colaboraciones.";
+const sub =
+	locale === "en"
+		? "Open to backend + AI roles, freelance projects, and collaborations."
+		: "Abierto a roles backend + IA, proyectos freelance y colaboraciones.";
 const cta = locale === "en" ? "Email me" : "Escríbeme";
 ---
 <footer class="cta-footer">

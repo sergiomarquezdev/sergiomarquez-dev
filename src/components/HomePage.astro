@@ -1,17 +1,17 @@
 ---
 import type { CvData } from "../data/cv";
 import { getLocale } from "../i18n";
-import Hero from "./sections/Hero.astro";
-import ImpactBar from "./sections/ImpactBar.astro";
 import About from "./About.astro";
-import CasesGrid from "./sections/CasesGrid.astro";
-import ProjectsSection from "./sections/ProjectsSection.astro";
-import Writing from "./sections/Writing.astro";
 import Certifications from "./Certifications.astro";
 import Footer from "./layout/Footer.astro";
+import CasesGrid from "./sections/CasesGrid.astro";
+import Hero from "./sections/Hero.astro";
+import ImpactBar from "./sections/ImpactBar.astro";
+import ProjectsSection from "./sections/ProjectsSection.astro";
+import Writing from "./sections/Writing.astro";
 
 interface Props {
-  cv: CvData;
+	cv: CvData;
 }
 const { cv } = Astro.props;
 const locale = getLocale(Astro.currentLocale);

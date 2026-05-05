@@ -16,65 +16,66 @@
 */
 
 :root {
-  /* Backgrounds */
-  --bg: #0A0A0B;
-  --bg-elevated: #111113;
-  --bg-subtle: #1A1A1D;
-  --bg-overlay: rgba(10, 10, 11, 0.8);
+	/* Backgrounds */
+	--bg: #0a0a0b;
+	--bg-elevated: #111113;
+	--bg-subtle: #1a1a1d;
+	--bg-overlay: rgba(10, 10, 11, 0.8);
 
-  /* Text */
-  --text-primary: #F5F5F7;
-  --text-secondary: #A1A1AA;
-  --text-tertiary: #71717A;
+	/* Text */
+	--text-primary: #f5f5f7;
+	--text-secondary: #a1a1aa;
+	--text-tertiary: #71717a;
 
-  /* Borders */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --border-accent: rgba(163, 230, 53, 0.4);
+	/* Borders */
+	--border: rgba(255, 255, 255, 0.08);
+	--border-strong: rgba(255, 255, 255, 0.16);
+	--border-accent: rgba(163, 230, 53, 0.4);
 
-  /* Accent (lime) */
-  --accent: #A3E635;
-  --accent-hover: #BEF264;
-  --accent-muted: rgba(163, 230, 53, 0.10);
-  --accent-glow: rgba(163, 230, 53, 0.18);
-  --accent-text: #BEF264;
+	/* Accent (lime) */
+	--accent: #a3e635;
+	--accent-hover: #bef264;
+	--accent-muted: rgba(163, 230, 53, 0.1);
+	--accent-glow: rgba(163, 230, 53, 0.18);
+	--accent-text: #bef264;
 
-  /* Backwards-compat aliases (will be removed once migration done) */
-  --background: var(--bg);
-  --primary-text: var(--text-primary);
-  --secondary-text: var(--text-secondary);
-  --tertiary-text: var(--text-tertiary);
-  --border-color: var(--border);
-  --surface: var(--bg-elevated);
-  --surface-alt: var(--bg-subtle);
-  --spotlight-color: var(--accent-muted);
+	/* Backwards-compat aliases (will be removed once migration done) */
+	--background: var(--bg);
+	--primary-text: var(--text-primary);
+	--secondary-text: var(--text-secondary);
+	--tertiary-text: var(--text-tertiary);
+	--border-color: var(--border);
+	--surface: var(--bg-elevated);
+	--surface-alt: var(--bg-subtle);
+	--spotlight-color: var(--accent-muted);
 
-  /* Typography families */
-  --font-sans: "Geist Variable", system-ui, sans-serif;
-  --font-serif: "Instrument Serif", "Times New Roman", serif;
-  --font-mono: "JetBrains Mono Variable", "SF Mono", Menlo, monospace;
-  --font-family-sans: var(--font-sans); /* alias */
+	/* Typography families */
+	--font-sans: "Geist Variable", system-ui, sans-serif;
+	--font-serif: "Instrument Serif", "Times New Roman", serif;
+	--font-mono: "JetBrains Mono Variable", "SF Mono", Menlo, monospace;
+	--font-family-sans: var(--font-sans); /* alias */
 
-  /* Type scale (Major Third 1.25) — sin cambios estructurales */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-  --text-display: 4.5rem;
+	/* Type scale (Major Third 1.25) — sin cambios estructurales */
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 1.875rem;
+	--text-4xl: 2.25rem;
+	--text-5xl: 3rem;
+	--text-display: 4.5rem;
 
-  /* Rhythm */
-  --base-lh: 1.55;
-  --rhythm: calc(1rem * var(--base-lh));
+	/* Rhythm */
+	--base-lh: 1.55;
+	--rhythm: calc(1rem * var(--base-lh));
 }
 
-html, body {
-  background-color: var(--bg);
-  color: var(--text-primary);
+html,
+body {
+	background-color: var(--bg);
+	color: var(--text-primary);
 }
 
 html {
@@ -211,7 +212,10 @@ a {
 
 /* Shared card interactive hover pattern */
 .card-interactive {
-	transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+	transition:
+		background-color 200ms ease,
+		border-color 200ms ease,
+		transform 200ms ease;
 	border: 1px solid var(--border);
 	background-color: var(--bg-elevated);
 }

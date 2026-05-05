@@ -1,12 +1,12 @@
 ---
 import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
 import FeaturedProject from "./FeaturedProject.astro";
 import ProjectCard from "./ProjectCard.astro";
-import type { Locale } from "../../i18n";
 
 interface Props {
-  projects: CvData["projects"];
-  locale: Locale;
+	projects: CvData["projects"];
+	locale: Locale;
 }
 const { projects, locale } = Astro.props;
 const featured = projects.find((p) => p.featured) ?? projects[0];

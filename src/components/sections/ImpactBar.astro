@@ -1,11 +1,11 @@
 ---
 import type { CvMetric } from "../../data/cv";
-import MetricKpi from "../ui/MetricKpi.astro";
 import type { Locale } from "../../i18n";
+import MetricKpi from "../ui/MetricKpi.astro";
 
 interface Props {
-  metrics: CvMetric[];
-  locale: Locale;
+	metrics: CvMetric[];
+	locale: Locale;
 }
 const { metrics, locale } = Astro.props;
 const title = locale === "en" ? "// Impact in production" : "// Impacto en producción";

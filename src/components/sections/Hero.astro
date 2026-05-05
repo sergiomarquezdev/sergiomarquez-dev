@@ -1,18 +1,21 @@
 ---
 import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
+import DotGrid from "../ui/DotGrid.astro";
 import StackChip from "../ui/StackChip.astro";
 import StatusBadge from "../ui/StatusBadge.astro";
-import DotGrid from "../ui/DotGrid.astro";
-import type { Locale } from "../../i18n";
 
 interface Props {
-  basics: CvData["basics"];
-  locale: Locale;
+	basics: CvData["basics"];
+	locale: Locale;
 }
 const { basics, locale } = Astro.props;
 const headline = basics.headline ?? basics.tagline;
 const stack = basics.stackChips ?? [];
-const eyebrow = locale === "en" ? "// AI Engineer · Backend · Automation" : "// Ingeniería IA · Backend · Automatización";
+const eyebrow =
+	locale === "en"
+		? "// AI Engineer · Backend · Automation"
+		: "// Ingeniería IA · Backend · Automatización";
 const sub = basics.summary;
 const ctaPrimary = locale === "en" ? "Let's talk" : "Hablemos";
 const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";

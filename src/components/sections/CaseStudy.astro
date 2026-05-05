@@ -3,8 +3,8 @@ import type { CvData } from "../../data/cv";
 import MetricKpi from "../ui/MetricKpi.astro";
 
 interface Props {
-  entry: CvData["experience"][number];
-  index: number;
+	entry: CvData["experience"][number];
+	index: number;
 }
 const { entry, index } = Astro.props;
 const isLatest = index === 0;

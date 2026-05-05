@@ -3,7 +3,7 @@ import type { CvData } from "../data/cv";
 import { getLocale } from "../i18n";
 
 interface Props {
-  basics: CvData["basics"];
+	basics: CvData["basics"];
 }
 const { basics } = Astro.props;
 const locale = getLocale(Astro.currentLocale);

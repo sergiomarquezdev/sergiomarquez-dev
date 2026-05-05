@@ -1,12 +1,12 @@
 ---
 import type { CvData } from "../../data/cv";
-import StackChip from "../ui/StackChip.astro";
-import MetricKpi from "../ui/MetricKpi.astro";
 import LockIcon from "../icons/LockIcon.astro";
+import MetricKpi from "../ui/MetricKpi.astro";
+import StackChip from "../ui/StackChip.astro";
 
 interface Props {
-  project: CvData["projects"][number];
-  locale: "es" | "en";
+	project: CvData["projects"][number];
+	locale: "es" | "en";
 }
 const { project, locale } = Astro.props;
 const href = project.url ?? (project.private ? null : project.github?.[0]);
