@@ -1,0 +1,12 @@
+---
+import { cv } from "../../data/cv";
+
+const target = cv.basics.urls.instagram ?? cv.basics.urls.site;
+
+return new Response(null, {
+	status: 301,
+	headers: {
+		Location: target,
+	},
+});
+---

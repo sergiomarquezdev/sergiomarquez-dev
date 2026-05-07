@@ -22,8 +22,14 @@ export interface CvStatus {
 }
 
 export interface CvWritingChannel {
-	platform: "blog" | "youtube" | "linkedin" | "x" | "tiktok";
+	platform: "blog" | "youtube" | "linkedin" | "x" | "tiktok" | "instagram";
 	handle: string;
+	description: string;
+}
+
+export interface CvAlsoRunning {
+	name: string;
+	url: string;
 	description: string;
 }
 
@@ -44,12 +50,15 @@ export type CvData = {
 			x: string;
 			youtube: string;
 			tiktok: string;
+			instagram?: string;
 			blog?: string;
 		};
 		summary: string;
 		headline?: string;
+		headlineAccent?: string;
 		stackChips?: string[];
 		status?: CvStatus;
+		alsoRunning?: CvAlsoRunning;
 	};
 	experience: Array<{
 		company: string;

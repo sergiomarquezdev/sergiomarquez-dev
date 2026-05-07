@@ -24,7 +24,7 @@ const githubUrl = "https://github.com/sergiomarquezdev";
   {featured && <FeaturedProject project={featured} locale={locale} />}
   {rest.length > 0 && (
     <div class="psection__grid">
-      {rest.map((p) => <ProjectCard project={p} />)}
+      {rest.map((p, i) => <ProjectCard project={p} index={i} locale={locale} />)}
     </div>
   )}
   <a class="psection__more" href={githubUrl} target="_blank" rel="noopener noreferrer">
@@ -37,8 +37,10 @@ const githubUrl = "https://github.com/sergiomarquezdev";
   .psection__head { margin-bottom: 0.5rem; }
   .psection__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--accent-text);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
     margin: 0 0 0.5rem;
   }
   .psection__title {

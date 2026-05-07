@@ -6,7 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Instagram (`@sergiomarquezp_`) as a writing channel and header social link, including new `InstagramIcon.astro` and `/instagram` vanity redirect.
+- `basics.alsoRunning` optional CV field rendered as a muted line under the About summary, surfacing **Esem Projects** (`https://esemprojects.es`) without competing with the primary CTA.
+- `basics.headlineAccent` optional CV field that splits the hero headline into a sans-serif lead and an Instrument Serif italic + lime accent suffix (matches the canonical `Métricas, no demos.` brand signature treatment).
+- Numbered kicker meta row on `ProjectCard` (`0X / Build privado` or `0X / Open source`) with hover-animated `↗`/`→` affordance.
+
 ### Changed
+
+- Hero eyebrow restructured into segments (`// Topic` in lime + `·` separators in tertiary) instead of a single monochrome line.
+- Sidebar nav indicator switched from `scaleX(0.5 → 1)` of a 64px bar to a `width 24px → 40px` transition for a cleaner active state and lower default visual weight.
+- Sidebar social links converted from flat icon buttons to circular icons with 1px border, matching the design-system handoff aesthetic.
+- Sidebar brand name set in Instrument Serif italic for editorial weight.
+- Section eyebrows (About, Cases, Projects, Writing, Certifications) shifted from lime `accent-text` to muted tertiary uppercase mono (11px, `0.12em` letter-spacing) — restores "lime sparingly" discipline; lime now reserved for hero headline accent, nav active indicator, and CTAs.
+
+### Changed (legacy)
 
 - **Complete portfolio redesign** with "AI Engineer" personal brand identity.
 - Migrated from light minimalist theme to dark theme with lime accent (`#A3E635`).

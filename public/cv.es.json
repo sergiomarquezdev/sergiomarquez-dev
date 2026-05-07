@@ -10,14 +10,21 @@
       "x": "https://x.com/sergiomarquezp_",
       "youtube": "https://www.youtube.com/@sergiomarquezp",
       "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
+      "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "Desarrollador Backend reconvertido a IA/ML. Tras varios años desarrollando con Java y Spring, he evolucionado hacia la aplicación de un enfoque de ingeniería (APIs, datos, arquitectura y producción) a soluciones de IA usando Python y FastAPI. Me especializo en construir servicios que transforman necesidades de negocio en funcionalidades mantenibles, incorporando pipelines RAG, búsqueda semántica y arquitecturas agénticas. Me centro en que el 'cómo funciona' sea tan sólido como el 'qué hace' mediante automatización y prácticas de ingeniería robustas.",
     "headline": "Llevo IA a producción con métricas, no demos.",
+    "headlineAccent": "no demos.",
     "stackChips": ["Python", "FastAPI", "LLMs", "RAG", "n8n", "GCP"],
     "status": {
       "available": true,
       "label": "Disponible para nuevas oportunidades"
+    },
+    "alsoRunning": {
+      "name": "Esem Projects",
+      "url": "https://esemprojects.es",
+      "description": "agencia de IA aplicada para clínicas en España"
     }
   },
   "experience": [
@@ -203,6 +210,11 @@
         "platform": "tiktok",
         "handle": "@sergiomarquezp_",
         "description": "Pills cortas de IA"
+      },
+      {
+        "platform": "instagram",
+        "handle": "@sergiomarquezp_",
+        "description": "Reels y carruseles sobre IA, agentes y Claude Code"
       }
     ]
   },

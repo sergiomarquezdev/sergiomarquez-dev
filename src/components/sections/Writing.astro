@@ -2,6 +2,7 @@
 import type { CvWriting } from "../../data/cv";
 import type { Locale } from "../../i18n";
 import BlogIcon from "../icons/BlogIcon.astro";
+import InstagramIcon from "../icons/InstagramIcon.astro";
 import LinkedInIcon from "../icons/LinkedInIcon.astro";
 import TikTokIcon from "../icons/TikTokIcon.astro";
 import XIcon from "../icons/XIcon.astro";
@@ -21,6 +22,7 @@ const iconMap = {
 	linkedin: LinkedInIcon,
 	x: XIcon,
 	tiktok: TikTokIcon,
+	instagram: InstagramIcon,
 };
 
 const urlMap = {
@@ -29,6 +31,7 @@ const urlMap = {
 	linkedin: "https://www.linkedin.com/in/sergiomarquezp/",
 	x: "https://x.com/sergiomarquezp_",
 	tiktok: "https://www.tiktok.com/@sergiomarquezp_",
+	instagram: "https://www.instagram.com/sergiomarquezp_/",
 };
 ---
 <section id="writing" class="writing" aria-labelledby="writing-title">
@@ -61,8 +64,10 @@ const urlMap = {
   .writing__head { margin-bottom: 2rem; }
   .writing__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--accent-text);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
     margin: 0 0 0.5rem;
   }
   .writing__title {

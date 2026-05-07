@@ -9,6 +9,7 @@ const { basics } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const eyebrow = locale === "en" ? "// About" : "// Sobre mí";
 const title = locale === "en" ? "Backend engineer turned AI builder" : "Backend reconvertido a IA";
+const alsoRunningPrefix = locale === "en" ? "I also run" : "También dirijo";
 ---
 <section class="about" aria-labelledby="about-title">
   <header class="about__head">
@@ -16,6 +17,15 @@ const title = locale === "en" ? "Backend engineer turned AI builder" : "Backend 
     <h2 id="about-title" class="about__title">{title}</h2>
   </header>
   <p class="about__body">{basics.summary}</p>
+  {basics.alsoRunning && (
+    <p class="about__also">
+      {alsoRunningPrefix}{" "}
+      <a class="about__also-link" href={basics.alsoRunning.url} target="_blank" rel="noopener noreferrer">
+        {basics.alsoRunning.name}
+      </a>
+      , {basics.alsoRunning.description}.
+    </p>
+  )}
 </section>
 
 <style>
@@ -26,8 +36,10 @@ const title = locale === "en" ? "Backend engineer turned AI builder" : "Backend 
   .about__head { margin-bottom: 1.5rem; }
   .about__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--accent-text);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
     margin: 0 0 0.5rem;
   }
   .about__title {
@@ -45,5 +57,23 @@ const title = locale === "en" ? "Backend engineer turned AI builder" : "Backend 
     line-height: 1.7;
     color: var(--text-secondary);
     margin: 0;
+  }
+  .about__also {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-tertiary);
+    margin: 1rem 0 0;
+  }
+  .about__also-link {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.2em;
+    transition: color 200ms ease, text-decoration-color 200ms ease;
+  }
+  .about__also-link:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
   }
 </style>

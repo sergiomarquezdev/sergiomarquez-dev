@@ -9,12 +9,19 @@ interface Props {
 	locale: Locale;
 }
 const { basics, locale } = Astro.props;
-const headline = basics.headline ?? basics.tagline;
+const fullHeadline = basics.headline ?? basics.tagline;
+const accentSuffix = basics.headlineAccent;
+const headlineLead =
+	accentSuffix && fullHeadline.endsWith(accentSuffix)
+		? fullHeadline.slice(0, -accentSuffix.length).trimEnd()
+		: fullHeadline;
+const headlineAccentText =
+	accentSuffix && fullHeadline.endsWith(accentSuffix) ? accentSuffix : null;
 const stack = basics.stackChips ?? [];
-const eyebrow =
+const eyebrowSegments =
 	locale === "en"
-		? "// AI Engineer · Backend · Automation"
-		: "// Ingeniería IA · Backend · Automatización";
+		? ["// AI Engineer", "Backend", "Automation"]
+		: ["// Ingeniería IA", "Backend", "Automatización"];
 const sub = basics.summary;
 const ctaPrimary = locale === "en" ? "Let's talk" : "Hablemos";
 const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
@@ -22,8 +29,23 @@ const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
 <section class="hero" aria-labelledby="hero-headline">
   <DotGrid />
   <div class="hero__inner">
-    <p class="hero__eyebrow">{eyebrow}</p>
-    <h1 id="hero-headline" class="hero__headline">{headline}</h1>
+    <p class="hero__eyebrow">
+      {eyebrowSegments.map((segment, i) => (
+        <>
+          {i > 0 && <span class="hero__eyebrow-sep" aria-hidden="true">·</span>}
+          <span class="hero__eyebrow-item">{segment}</span>
+        </>
+      ))}
+    </p>
+    <h1 id="hero-headline" class="hero__headline">
+      {headlineLead}
+      {headlineAccentText && (
+        <>
+          {" "}
+          <span class="hero__headline-accent">{headlineAccentText}</span>
+        </>
+      )}
+    </h1>
     {sub && <p class="hero__sub">{sub}</p>}
     {stack.length > 0 && (
       <ul class="hero__stack" aria-label="Stack">
@@ -66,9 +88,18 @@ const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
   .hero__eyebrow {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
-    color: var(--accent-text);
     margin: 0;
     letter-spacing: 0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  .hero__eyebrow-item {
+    color: var(--accent-text);
+  }
+  .hero__eyebrow-sep {
+    color: var(--text-tertiary);
   }
   .hero__headline {
     font-family: var(--font-serif);
@@ -78,6 +109,10 @@ const ctaSecondary = locale === "en" ? "See cases" : "Ver casos";
     color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.02em;
+  }
+  .hero__headline-accent {
+    font-style: italic;
+    color: var(--accent);
   }
   .hero__sub {
     font-family: var(--font-sans);

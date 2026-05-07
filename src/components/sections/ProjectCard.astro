@@ -1,19 +1,33 @@
 ---
 import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
 import LockIcon from "../icons/LockIcon.astro";
 import StackChip from "../ui/StackChip.astro";
 
 interface Props {
 	project: CvData["projects"][number];
+	index: number;
+	locale: Locale;
 }
-const { project } = Astro.props;
+const { project, index, locale } = Astro.props;
 const href = project.url ?? (project.private ? null : project.github?.[0]);
 const Tag = href ? "a" : "div";
+const kickerNumber = String(index + 1).padStart(2, "0");
+const categoryLabel = project.private
+	? locale === "en"
+		? "Private build"
+		: "Build privado"
+	: "Open source";
+const arrow = href ? "↗" : "→";
 ---
 <Tag
   class={`pcard ${href ? "pcard--linked" : ""}`}
   {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
 >
+  <div class="pcard__meta">
+    <span class="pcard__kicker">{kickerNumber} / {categoryLabel}</span>
+    <span class="pcard__arrow" aria-hidden="true">{arrow}</span>
+  </div>
   <h4 class="pcard__name">
     {project.name}
     {project.private && <LockIcon class="pcard__lock" />}
@@ -38,6 +52,25 @@ const Tag = href ? "a" : "div";
     transition: border-color 200ms ease, transform 200ms ease;
   }
   .pcard--linked:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .pcard__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.25rem;
+  }
+  .pcard__arrow {
+    color: var(--text-secondary);
+    transition: color 200ms ease, transform 200ms ease;
+  }
+  .pcard--linked:hover .pcard__arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
   .pcard__name {
     font-family: var(--font-serif);
     font-size: 1.375rem;

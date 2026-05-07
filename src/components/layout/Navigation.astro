@@ -188,22 +188,23 @@ const navItems: NavItem[] = [
   .nav-link {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.25rem 0;
-    color: var(--text-tertiary);
+    gap: 0.875rem;
+    padding: 0.375rem 0;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: color 0.2s ease-in-out;
   }
 
   .nav-link:hover {
-    color: var(--text-secondary);
+    color: var(--text-primary);
   }
 
   .nav-link:hover .nav-indicator {
-    transform: scaleX(1);
+    width: 2.5rem;
     background-color: var(--text-secondary);
   }
 
@@ -212,30 +213,16 @@ const navItems: NavItem[] = [
   }
 
   .nav-link.active .nav-indicator {
-    transform: scaleX(1);
+    width: 2.5rem;
     background-color: var(--accent);
   }
 
   .nav-indicator {
-    width: 4rem;
+    width: 1.5rem;
     height: 1px;
-    background-color: var(--text-tertiary);
-    transform: scaleX(0.5);
-    transform-origin: left center;
+    background-color: var(--border-strong);
     transition:
-      transform 0.2s ease-in-out,
+      width 0.2s ease-in-out,
       background-color 0.2s ease-in-out;
-  }
-
-  .nav-text {
-    transition: transform 0.2s ease-in-out;
-  }
-
-  .nav-link:hover .nav-text {
-    transform: translateX(4px);
-  }
-
-  .nav-link.active .nav-text {
-    transform: translateX(4px);
   }
 </style>
