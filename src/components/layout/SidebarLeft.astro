@@ -19,17 +19,15 @@ const homeHref = locale === "en" ? "/en/" : "/";
 <header class="sidebar-left">
   <div class="sidebar-content">
     <div class="header-section">
-      <div class="name-row">
         <a href={homeHref} class="logo-link" aria-hidden="true" tabindex="-1">
-          <SergioMark variant="square" class="logo-mark" width={44} height={44} />
+          <SergioMark variant="square" class="logo-mark" width={36} height={36} />
         </a>
         <h1 class="name">
           <a href={homeHref}>{basics.name}</a>
         </h1>
+        <h2 class="tagline">{basics.tagline}</h2>
+        <GitHubActivity />
       </div>
-      <h2 class="tagline">{basics.tagline}</h2>
-      <GitHubActivity />
-    </div>
 
     <Navigation />
 
@@ -55,7 +53,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
       position: sticky;
       top: 0;
       max-height: 100vh;
-      padding: 6rem 0;
+      padding: 5.25rem 0 6rem;
       width: 42%;
       flex-shrink: 0;
     }
@@ -73,12 +71,6 @@ const homeHref = locale === "en" ? "/en/" : "/";
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-  }
-
-  .name-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
   }
 
   .logo-link {
@@ -107,8 +99,8 @@ const homeHref = locale === "en" ? "/en/" : "/";
 
   .logo-mark {
     display: block;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 0.5rem;
     border: 1px solid var(--border);
     background-color: var(--bg);
@@ -116,7 +108,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
   }
 
   .tagline {
-    margin: 0.75rem 0 0 0;
+    margin: 0.25rem 0 0 0;
     font-size: 1.125rem;
     font-weight: 500;
     color: var(--text-secondary);
