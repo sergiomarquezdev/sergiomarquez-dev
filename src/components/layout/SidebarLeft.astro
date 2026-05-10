@@ -3,6 +3,7 @@ import type { CvData } from "../../data/cv";
 import { getLocale } from "../../i18n/index";
 import GitHubActivity from "../GitHubActivity.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
+import SergioMark from "../SergioMark.astro";
 import Navigation from "./Navigation.astro";
 import SocialLinks from "./SocialLinks.astro";
 
@@ -20,7 +21,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
     <div class="header-section">
       <div class="name-row">
         <a href={homeHref} class="logo-link" aria-hidden="true" tabindex="-1">
-          <img src="/icon-192.png" alt="" class="logo-mark" width="44" height="44" />
+          <SergioMark variant="square" class="logo-mark" width={44} height={44} />
         </a>
         <h1 class="name">
           <a href={homeHref}>{basics.name}</a>
@@ -105,10 +106,12 @@ const homeHref = locale === "en" ? "/en/" : "/";
   }
 
   .logo-mark {
+    display: block;
     width: 44px;
     height: 44px;
     border-radius: 0.5rem;
     border: 1px solid var(--border);
+    background-color: var(--bg);
     flex-shrink: 0;
   }
 

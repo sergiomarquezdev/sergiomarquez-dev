@@ -5,6 +5,7 @@ import MainContent from "../components/layout/MainContent.astro";
 import MobileNav from "../components/layout/MobileNav.astro";
 import SidebarLeft from "../components/layout/SidebarLeft.astro";
 import SocialLinks from "../components/layout/SocialLinks.astro";
+import SergioMark from "../components/SergioMark.astro";
 import Spotlight from "../components/Spotlight.astro";
 import { getCv } from "../data/cv";
 import { getLocale, t } from "../i18n/index";
@@ -55,7 +56,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
         <div class="mobile-header-top">
           <div class="mobile-name-row">
             <a href={homeHref} class="mobile-logo-link" aria-hidden="true" tabindex="-1">
-              <img src="/icon-192.png" alt="" class="mobile-logo-mark" width="36" height="36" />
+              <SergioMark variant="square" class="mobile-logo-mark" width={36} height={36} />
             </a>
             <h1 class="mobile-name">
               <a href={homeHref}>{basics.name}</a>
@@ -188,10 +189,12 @@ const homeHref = locale === "en" ? "/en/" : "/";
       }
 
       .mobile-logo-mark {
+        display: block;
         width: 36px;
         height: 36px;
         border-radius: 0.5rem;
         border: 1px solid var(--border);
+        background-color: var(--bg);
         flex-shrink: 0;
       }
 

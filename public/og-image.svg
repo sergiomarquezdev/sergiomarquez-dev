@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Sergio Márquez — Llevo IA a producción con métricas, no demos.">
+  <rect width="1200" height="630" fill="#0a0a0b"/>
+  <defs>
+    <radialGradient id="og-glow" cx="22%" cy="68%" r="55%">
+      <stop offset="0%" stop-color="#a3e635" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#a3e635" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#a3e635" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og-glow)"/>
+
+  <g transform="translate(96 96)">
+    <rect x="48" y="24" width="33" height="33" fill="#a3e635"/>
+    <path d="M353 -16Q262 -16 196 15Q130 46 93 102Q56 158 51 234L204 241Q209 199 228 170Q247 140 278 125Q310 110 355 110Q393 110 420 119Q446 128 460 147Q474 165 474 192Q474 217 462 236Q451 254 417 270Q383 285 316 300Q225 321 170 347Q115 373 90 412Q64 452 64 512Q64 576 96 624Q128 672 188 699Q247 726 330 726Q419 726 479 695Q540 664 575 610Q609 556 617 486L465 478Q461 515 444 543Q427 570 398 585Q369 600 328 600Q277 600 247 577Q218 554 218 517Q218 491 231 473Q244 456 276 443Q308 430 366 418Q464 398 522 368Q579 337 604 295Q628 253 628 199Q628 133 594 84Q561 36 499 10Q438 -16 353 -16Z" transform="translate(0 57) scale(.069 -.069)" fill="#ffffff"/>
+    <path d="M74 0V710H277L458 193L638 710H841V0H689V460L522 2H392L226 460V0Z" transform="translate(81 57) scale(.069 -.069)" fill="#ffffff"/>
+    <text x="162" y="54" font-family="Geist,'Geist Variable',system-ui,sans-serif" font-weight="500" font-size="48" letter-spacing="-1" textLength="320" lengthAdjust="spacingAndGlyphs" fill="#ffffff">Sergio Márquez</text>
+  </g>
+
+  <text x="96" y="430" font-family="Geist,'Geist Variable',system-ui,sans-serif" font-weight="600" font-size="68" letter-spacing="-1.6" textLength="700" lengthAdjust="spacingAndGlyphs" fill="#ffffff">Llevo IA a producción</text>
+  <text x="96" y="510" font-family="'Instrument Serif',Georgia,serif" font-style="italic" font-weight="400" font-size="74" textLength="700" lengthAdjust="spacingAndGlyphs" fill="#a3e635">con métricas, no demos.</text>
+
+  <text x="96" y="566" font-family="'JetBrains Mono',Menlo,monospace" font-weight="500" font-size="20" letter-spacing="2" fill="#71717a">// SERGIOMARQUEZ.DEV</text>
+</svg>
