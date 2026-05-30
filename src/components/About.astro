@@ -7,13 +7,13 @@ interface Props {
 }
 const { basics } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const eyebrow = locale === "en" ? "// About" : "// Sobre mí";
-const title = locale === "en" ? "Backend engineer turned AI builder" : "Backend reconvertido a IA";
+const title =
+	locale === "en" ? "From backend to building with agents" : "Del backend a construir con agentes";
 const alsoRunningPrefix = locale === "en" ? "I also run" : "También dirijo";
 ---
 <section class="about" aria-labelledby="about-title">
   <header class="about__head">
-    <p class="about__eyebrow">{eyebrow}</p>
+    <p class="about__eyebrow"><span class="tok-prompt">~ %</span> cat about.md</p>
     <h2 id="about-title" class="about__title">{title}</h2>
   </header>
   <p class="about__body">{basics.summary}</p>
@@ -36,11 +36,13 @@ const alsoRunningPrefix = locale === "en" ? "I also run" : "También dirijo";
   .about__head { margin-bottom: 1.5rem; }
   .about__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
     color: var(--text-tertiary);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
+  }
+  .about__eyebrow .tok-prompt {
+    color: var(--accent);
   }
   .about__title {
     font-family: var(--font-serif);

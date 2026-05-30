@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "AI & Backend Developer | Python, FastAPI, LLMs",
+    "tagline": "Builder · Claude Code, agentic workflows & spec-driven dev",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -13,13 +13,13 @@
       "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "Backend Developer transitioned into AI/ML. After several years developing with Java and Spring, I've moved towards applying an engineering-first approach (APIs, data, architecture, and production) to AI solutions using Python and FastAPI. I specialize in building services that transform business needs into maintainable features, incorporating RAG pipelines, semantic search, and agentic architectures. I focus on making the 'how it works' as solid as the 'what it does' through automation and robust engineering practices.",
-    "headline": "I ship AI to production with metrics, not demos.",
-    "headlineAccent": "not demos.",
-    "stackChips": ["Python", "FastAPI", "LLMs", "RAG", "n8n", "GCP"],
+    "summary": "I build software with AI agents. I design and ship production systems powered by Claude Code and agentic workflows: spec-driven development, RAG pipelines, semantic search, and automation. I come from backend (Java/Spring → Python/FastAPI) and bring that engineering rigor so the 'how it works' is as solid as the 'what it does'. I measure in metrics, not demos.",
+    "headline": "Software built with AI agents, not by hand.",
+    "headlineAccent": "not by hand.",
+    "stackChips": ["Claude Code", "Agentic", "Spec-driven", "RAG", "Python", "FastAPI"],
     "status": {
       "available": true,
-      "label": "Available for new opportunities"
+      "label": "Building systems with AI agents"
     },
     "alsoRunning": {
       "name": "Esem Projects",
@@ -82,7 +82,7 @@
   "projects": [
     {
       "name": "One dAIly Blog",
-      "headline": "Autonomous AI-powered blog generating daily Python content with Gemini and OpenAI.",
+      "headline": "Autonomous blog: AI agents generate, illustrate, and publish technical content every day.",
       "stack": [
         "Astro",
         "Node.js",

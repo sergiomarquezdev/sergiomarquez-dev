@@ -1,6 +1,6 @@
 ---
 import type { CvData } from "../../data/cv";
-import { getLocale } from "../../i18n/index";
+import { getLocale, t } from "../../i18n/index";
 import GitHubActivity from "../GitHubActivity.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
 import SergioMark from "../SergioMark.astro";
@@ -25,13 +25,20 @@ const homeHref = locale === "en" ? "/en/" : "/";
         <h1 class="name">
           <a href={homeHref}>{basics.name}</a>
         </h1>
-        <h2 class="tagline">{basics.tagline}</h2>
+        <p class="whoami">
+          <span class="tok-prompt">$</span> whoami
+        </p>
+        <p class="tagline"><span class="tok-comment"># </span>{basics.tagline}</p>
         <GitHubActivity />
       </div>
 
     <Navigation />
 
     <div class="footer-section">
+      <button type="button" class="sb-cmdk" data-cmdk-open aria-haspopup="dialog">
+        <kbd class="kbd">⌘K</kbd>
+        <span>{t(locale, "cmdk.hint")}</span>
+      </button>
       <div class="footer-row">
         <SocialLinks urls={basics.urls} />
         <LanguageSwitcher />
@@ -79,10 +86,10 @@ const homeHref = locale === "en" ? "/en/" : "/";
   }
 
   .name {
-    margin: 0;
+    margin: 0.4rem 0 0;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     font-weight: 400;
     letter-spacing: -0.025em;
     line-height: 1.1;
@@ -107,16 +114,51 @@ const homeHref = locale === "en" ? "/en/" : "/";
     flex-shrink: 0;
   }
 
-  .tagline {
-    margin: 0.25rem 0 0 0;
-    font-size: 1.125rem;
-    font-weight: 500;
+  .whoami {
+    margin: 0.6rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
     color: var(--text-secondary);
-    line-height: 1.4;
+  }
+
+  .tagline {
+    margin: 0.15rem 0 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 22rem;
   }
 
   .footer-section {
     margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .sb-cmdk {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: flex-start;
+    padding: 0.4rem 0.7rem;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .sb-cmdk:hover {
+    border-color: var(--border-accent);
+    color: var(--accent);
   }
 
   .footer-row {

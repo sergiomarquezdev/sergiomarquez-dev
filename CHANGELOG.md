@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **"Agentic Console" redesign**: terminal-aesthetic shell (window chrome, shell prompts, monospace tokens, blinking caret) reframing the site as an agent session. Net-new `CommandPalette.astro` — an accessible `<dialog>` opened with `⌘/Ctrl+K` or `/` (plus a discoverable `⌘K` chip) that jumps to sections, opens links, toggles locale, and copies the email. Progressive enhancement: every action is also reachable via normal scroll/links, so no user is ever blocked.
+- Shared terminal CSS layer in `global.css` (`.term-window`, `.term-titlebar`, `.term-dots`, `.tok-*`, `.caret`, `.kbd`, `.term-btn`, `.term-section-head`), respecting brand effect rules (no glassmorphism, drop shadows, or gradients > 15%).
+- `hero.*` and `cmdk.*` i18n keys (ES/EN) for the terminal hero lines and command palette.
 - Instagram (`@sergiomarquezp_`) as a writing channel and header social link, including new `InstagramIcon.astro` and `/instagram` vanity redirect.
 - `basics.alsoRunning` optional CV field rendered as a muted line under the About summary, surfacing **Esem Projects** (`https://esemprojects.es`) without competing with the primary CTA.
 - `basics.headlineAccent` optional CV field that splits the hero headline into a sans-serif lead and an Instrument Serif italic + lime accent suffix (matches the canonical `Métricas, no demos.` brand signature treatment).
@@ -15,6 +18,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- **Repositioned** from "Backend reconvertido a IA" to builder-authority on Claude Code / AI agents / agentic & spec-driven development. Updated `cv.{es,en}.json` (tagline, summary, headline, `stackChips`, status, featured project), hero, about title, footer CTA, and SEO title/description/`knowsAbout`.
+- `SidebarLeft` reworked into a console panel: `$ whoami`, nav rendered as a `cd ~/<section>` command list with `# label` comments, and a `⌘K` chip. `Hero` rebuilt as a terminal session (window chrome + `whoami`/`cat ~/.now`/`ls ./proof` prompts) with the headline accent set in Instrument Serif italic lime. Section eyebrows converted to shell-prompt headers (`~ % cat about.md`, `~ % git log work/`, `~ % ls builds/`, …).
+- Hero `.hero` now clips overflow so the decorative `DotGrid` bleed (width 160%) can never create page-wide horizontal scroll.
 - Hero eyebrow restructured into segments (`// Topic` in lime + `·` separators in tertiary) instead of a single monochrome line.
 - Sidebar nav indicator switched from `scaleX(0.5 → 1)` of a 64px bar to a `width 24px → 40px` transition for a cleaner active state and lower default visual weight.
 - Sidebar social links converted from flat icon buttons to circular icons with 1px border, matching the design-system handoff aesthetic.

@@ -8,12 +8,11 @@ interface Props {
 }
 const { certifications } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const eyebrow = locale === "en" ? "// Certifications" : "// Certificaciones";
 const title = locale === "en" ? "Certifications & training" : "Certificaciones y formación";
 ---
 <section class="certs" aria-labelledby="certs-title">
   <header class="certs__head">
-    <p class="certs__eyebrow">{eyebrow}</p>
+    <p class="certs__eyebrow"><span class="tok-prompt">~ %</span> cat creds.md</p>
     <h2 id="certs-title" class="certs__title">{title}</h2>
   </header>
   <ul class="certs__list">
@@ -46,11 +45,13 @@ const title = locale === "en" ? "Certifications & training" : "Certificaciones y
   .certs__head { margin-bottom: 1.5rem; }
   .certs__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
     color: var(--text-tertiary);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
+  }
+  .certs__eyebrow .tok-prompt {
+    color: var(--accent);
   }
   .certs__title {
     font-family: var(--font-serif);

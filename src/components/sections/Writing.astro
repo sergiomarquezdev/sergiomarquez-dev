@@ -13,7 +13,6 @@ interface Props {
 	locale: Locale;
 }
 const { writing, locale } = Astro.props;
-const eyebrow = locale === "en" ? "// Writing & presence" : "// Escritura y presencia";
 const title = locale === "en" ? "Where I share what I learn" : "Donde comparto lo que aprendo";
 
 const iconMap = {
@@ -36,7 +35,7 @@ const urlMap = {
 ---
 <section id="writing" class="writing" aria-labelledby="writing-title">
   <header class="writing__head">
-    <p class="writing__eyebrow">{eyebrow}</p>
+    <p class="writing__eyebrow"><span class="tok-prompt">~ %</span> cat signals.md</p>
     <h2 id="writing-title" class="writing__title">{title}</h2>
   </header>
   <ul class="writing__grid">
@@ -64,11 +63,13 @@ const urlMap = {
   .writing__head { margin-bottom: 2rem; }
   .writing__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
     color: var(--text-tertiary);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
+  }
+  .writing__eyebrow .tok-prompt {
+    color: var(--accent);
   }
   .writing__title {
     font-family: var(--font-serif);

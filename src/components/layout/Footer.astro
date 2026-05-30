@@ -10,17 +10,17 @@ interface Props {
 }
 const { email, name, urls } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const headline = locale === "en" ? "Want to ship AI to production?" : "¿Llevamos IA a producción?";
+const headline =
+	locale === "en" ? "Let's build something with agents." : "¿Construimos algo con agentes?";
 const sub =
 	locale === "en"
-		? "I build AI systems that ship to production and survive their first customer."
-		: "Construyo sistemas de IA que llegan a producción y no rompen al primer cliente.";
+		? "Claude Code, agentic workflows, and AI systems that ship to production. Write me and let's get into it."
+		: "Claude Code, flujos agénticos y sistemas de IA que llegan a producción. Escríbeme y lo vemos.";
 const cta = locale === "en" ? "Email me" : "Escríbeme";
-const eyebrow = locale === "en" ? "// Contact" : "// Contacto";
 ---
 <footer id="contact" class="cta-footer">
   <div class="cta-footer__inner">
-    <p class="cta-footer__eyebrow">{eyebrow}</p>
+    <p class="cta-footer__eyebrow"><span class="tok-prompt">~ %</span> ./contact.sh</p>
     <h2 class="cta-footer__headline">{headline}</h2>
     <p class="cta-footer__sub">{sub}</p>
     <a class="cta-footer__btn" href={`mailto:${email}`}>{cta} →</a>
@@ -45,11 +45,13 @@ const eyebrow = locale === "en" ? "// Contact" : "// Contacto";
   }
   .cta-footer__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
     color: var(--text-tertiary);
     margin: 0;
+  }
+  .cta-footer__eyebrow .tok-prompt {
+    color: var(--accent);
   }
   .cta-footer__headline {
     font-family: var(--font-serif);

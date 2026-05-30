@@ -9,11 +9,10 @@ interface Props {
 }
 const { experience, locale } = Astro.props;
 const title = locale === "en" ? "Cases in production" : "Casos en producción";
-const eyebrow = locale === "en" ? "// Experience" : "// Experiencia";
 ---
 <section id="cases" class="cases" aria-labelledby="cases-title">
   <header class="cases__head">
-    <p class="cases__eyebrow">{eyebrow}</p>
+    <p class="cases__eyebrow"><span class="tok-prompt">~ %</span> git log --oneline work/</p>
     <h2 id="cases-title" class="cases__title">{title}</h2>
   </header>
   <div class="cases__grid">
@@ -26,11 +25,13 @@ const eyebrow = locale === "en" ? "// Experience" : "// Experiencia";
   .cases__head { margin-bottom: 2rem; }
   .cases__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
     color: var(--text-tertiary);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
+  }
+  .cases__eyebrow .tok-prompt {
+    color: var(--accent);
   }
   .cases__title {
     font-family: var(--font-serif);

@@ -1,12 +1,12 @@
 # Sergio Marquez - Personal Portfolio
 
-> **Bilingual (ES/EN) portfolio with "AI Engineer" personal brand — built with Astro and Tailwind CSS**
+> **Bilingual (ES/EN) portfolio with a builder personal brand (Claude Code / AI agents) — "Agentic Console" terminal aesthetic, built with Astro and Tailwind CSS**
 
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 [![CI](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml)
 
-Source code for my **personal portfolio**, positioned as an applied AI engineer with a backend-of-truth track record. Built with Astro 5 (SSG) + Tailwind v4, fully driven by `public/cv.{es,en}.json`.
+Source code for my **personal portfolio**, positioned as a builder working with Claude Code, AI agents, and agentic / spec-driven development (with a backend-of-truth track record). The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 5 (SSG) + Tailwind v4, fully driven by `public/cv.{es,en}.json`.
 
 Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 
@@ -20,7 +20,7 @@ Dark theme with lime (`#A3E635`) accent — distinctive in a sea of blue AI site
 |---|---|---|
 | Display | **Instrument Serif** | Hero headline, section titles |
 | Body / UI | **Geist Variable** | Paragraphs, navigation, labels |
-| Mono | **JetBrains Mono Variable** | KPIs, eyebrows (`// Section`), code, dates, stack chips |
+| Mono | **JetBrains Mono Variable** | Shell prompts (`~ % cat …`), window chrome, command palette, KPIs, code, dates |
 
 All design tokens are CSS custom properties in [`src/styles/global.css`](./src/styles/global.css). Backwards-compat aliases preserved (`--background`, `--primary-text`, etc.) so legacy components keep working during migration.
 
@@ -30,13 +30,14 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 
 - **Bilingual (i18n)**: Full ES/EN support with automatic locale detection, language switcher and hreflang tags.
 - **Data-driven content**: All sections rendered from `public/cv.{es,en}.json`. Optional brand fields (`metrics`, `kpis`, `headline`, `writing`, `featured`) are validated for parity in tests.
-- **Hero section**: Serif headline, animated `DotGrid` canvas (vanilla, <1KB, respects `prefers-reduced-motion`), stack chips and dual CTAs.
+- **Hero section**: Terminal-window session (window chrome + `whoami`/`cat ~/.now`/`ls ./proof` prompts), Geist display headline with Instrument Serif italic lime accent and blinking caret, animated `DotGrid` canvas (vanilla, <1KB, respects `prefers-reduced-motion`), stack chips and CTAs.
+- **Command palette (`⌘K`)**: Accessible `<dialog>` opened with `⌘/Ctrl+K`, `/`, or a discoverable `⌘K` chip — jumps to sections, opens links, toggles locale, copies email. Optional/progressive: everything is also reachable via normal scroll and links, so no user is blocked (no REPL).
 - **Impact Bar**: Four production metrics in mono lime — cost, validation rate, time saved, latency. Pulled from `cv.metrics`.
 - **Cases (replaces flat Experience timeline)**: Each work entry is a card with KPI badges front-and-center, headline in serif and arrow-marker bullets.
 - **Projects**: Featured project gets a large card with KPI and lime accent border; secondary projects in a responsive grid.
 - **Writing & Presence**: Consolidated grid of blog + social channels (YouTube, LinkedIn, X, TikTok, blog) with platform icon, handle and one-line description.
-- **CTA Footer**: Full-width "¿Llevamos IA a producción?" — serif headline + lime button + socials.
-- **Sidebar layout** (desktop): Sticky left sidebar with name (serif), tagline, GitHub activity, scroll-spy navigation and social links. Right sidebar shows vertical email.
+- **CTA Footer**: Full-width "¿Construimos algo con agentes?" — serif headline + lime button + socials.
+- **Sidebar layout** (desktop): Sticky left console panel with name (serif), `$ whoami` + tagline comment, GitHub activity, `cd ~/<section>` scroll-spy command nav, `⌘K` chip and social links. Right sidebar shows vertical email.
 - **Mobile bottom nav**: Sticky bar with icons, scroll-spy and safe-area support.
 - **Spotlight effect**: Subtle cursor-tracking radial gradient.
 - **GitHub activity widget**: Latest commit fetched at build time from GitHub Events API.

@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import CommandPalette from "../components/CommandPalette.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import MainContent from "../components/layout/MainContent.astro";
 import MobileNav from "../components/layout/MobileNav.astro";
@@ -83,6 +84,7 @@ const homeHref = locale === "en" ? "/en/" : "/";
     </div>
 
     <MobileNav />
+    <CommandPalette basics={basics} />
 
     <style>
       .skip-link {

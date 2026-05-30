@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "Desarrollador IA & Backend | Python, FastAPI, LLMs",
+    "tagline": "Builder · Claude Code, flujos agénticos y spec-driven dev",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -13,13 +13,13 @@
       "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "Desarrollador Backend reconvertido a IA/ML. Tras varios años desarrollando con Java y Spring, he evolucionado hacia la aplicación de un enfoque de ingeniería (APIs, datos, arquitectura y producción) a soluciones de IA usando Python y FastAPI. Me especializo en construir servicios que transforman necesidades de negocio en funcionalidades mantenibles, incorporando pipelines RAG, búsqueda semántica y arquitecturas agénticas. Me centro en que el 'cómo funciona' sea tan sólido como el 'qué hace' mediante automatización y prácticas de ingeniería robustas.",
-    "headline": "Llevo IA a producción con métricas, no demos.",
-    "headlineAccent": "no demos.",
-    "stackChips": ["Python", "FastAPI", "LLMs", "RAG", "n8n", "GCP"],
+    "summary": "Builder de software con agentes de IA. Diseño y llevo a producción sistemas apoyados en Claude Code y flujos agénticos: spec-driven development, pipelines RAG, búsqueda semántica y automatización. Vengo del backend (Java/Spring → Python/FastAPI) y aplico ese rigor de ingeniería para que el 'cómo funciona' sea tan sólido como el 'qué hace'. Mido en métricas, no en demos.",
+    "headline": "Construyo software con agentes de IA, no a mano.",
+    "headlineAccent": "no a mano.",
+    "stackChips": ["Claude Code", "Agentic", "Spec-driven", "RAG", "Python", "FastAPI"],
     "status": {
       "available": true,
-      "label": "Disponible para nuevas oportunidades"
+      "label": "Construyendo sistemas con agentes de IA"
     },
     "alsoRunning": {
       "name": "Esem Projects",
@@ -82,7 +82,7 @@
   "projects": [
     {
       "name": "One dAIly Blog",
-      "headline": "Blog autónomo con IA que genera contenido diario sobre Python con Gemini y OpenAI.",
+      "headline": "Blog autónomo: agentes de IA generan, ilustran y publican contenido técnico cada día.",
       "stack": [
         "Astro",
         "Node.js",
