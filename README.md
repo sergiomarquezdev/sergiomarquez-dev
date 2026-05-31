@@ -216,7 +216,7 @@ bun run validate       # type-check + lint + test + build
 ## Contact
 
 **Sergio Marquez**
-_Python AI Developer -- FastAPI, LLMs, RAG_
+_AI Engineer -- agentic AI & RAG systems in production on GCP_
 
 - Website: [sergiomarquez.dev](https://sergiomarquez.dev)
 - Email: [contacto@sergiomarquez.dev](mailto:contacto@sergiomarquez.dev)

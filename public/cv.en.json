@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "Builder · Claude Code, agentic workflows & spec-driven dev",
+    "tagline": "AI Engineer · agentic & RAG systems in production on GCP",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -13,13 +13,13 @@
       "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "I build software with AI agents. I design and ship production systems powered by Claude Code and agentic workflows: spec-driven development, RAG pipelines, semantic search, and automation. I come from backend (Java/Spring → Python/FastAPI) and bring that engineering rigor so the 'how it works' is as solid as the 'what it does'. I measure in metrics, not demos.",
-    "headline": "Software built with AI agents, not by hand.",
-    "headlineAccent": "not by hand.",
-    "stackChips": ["Claude Code", "Agentic", "Spec-driven", "RAG", "Python", "FastAPI"],
+    "summary": "AI Engineer specialized in agentic AI and RAG systems in production on Google Cloud. I design and ship conversational assistants (multi-agent orchestration with Google ADK and multi-provider routing via LiteLLM), automated LLM evaluation (LLM-as-judge), and multi-model consensus document validation, on top of a GCP data platform (BigQuery, Dataform, Dataflow) and GitOps on GKE. I come from backend (Java/Spring → Python/FastAPI) and work daily with AI-assisted development: Claude Code (agents, orchestrators, skills) and multi-model review. I measure in metrics, not demos.",
+    "headline": "I build agentic AI systems in production.",
+    "headlineAccent": "in production.",
+    "stackChips": ["Agentic RAG", "Google ADK", "Vertex AI", "Claude Code", "Python/FastAPI", "GCP"],
     "status": {
       "available": true,
-      "label": "Building systems with AI agents"
+      "label": "Agentic AI systems in production"
     },
     "alsoRunning": {
       "name": "Esem Projects",
@@ -30,24 +30,25 @@
   "experience": [
     {
       "company": "VITALY",
-      "role": "AI/ML Developer",
+      "role": "AI Engineer",
       "period": "May 2025 – Present",
-      "summary": "Backend engineer applying AI to real products and internal tooling, combining backend, data, and automation.",
+      "summary": "AI Engineer building agentic and RAG systems in production, on top of a GCP data platform and with GitOps practices.",
       "highlights": [
-        "Developed APIs and services in Python/FastAPI for data processing and system integration.",
-        "Built ingestion and processing pipelines (documents, video) including transcription and validations.",
-        "Implemented AI capabilities with LLMs: RAG, embeddings, and vector search integrated into production middleware.",
-        "Evolution of AI assistants: managing memory/sessions, stability improvements, and post-deployment fine-tuning.",
-        "Automated RAG ingestion via n8n + Python (Sheets -> MongoDB + Pinecone) with hash dedupe; saved ~8–10 hours per setup.",
-        "Improved document validation pass rate from 70% to 90% using a GPT+Claude+Gemini ensemble and OCR tuning.",
-        "Migrated chat to an agentic architecture (Google ADK) with LiteLLM; ~15% lower latency and ~35% lower infra cost.",
-        "Stack: Python, FastAPI, n8n, GCP, MongoDB, BigQuery/Firestore, Pinecone, Docker, GitLab CI/CD, OpenTelemetry."
+        "Multi-tenant conversational assistant with an agentic architecture (orchestrator and sub-agents) on Google ADK, with multi-provider routing via LiteLLM configurable without redeploy.",
+        "Automated RAG quality evaluation subsystem (LLM-as-judge, multiple dimensions) with dataset generation at ingestion; fixed a defect that cut false negatives from 91% to nearly 0%.",
+        "Document validation pipeline via multi-LLM consensus (GPT + Claude + Gemini) with OCR: validation pass rate from 70% to 90%.",
+        "GCP data platform (BigQuery, Dataform, Dataflow; medallion architecture): 3.6M+ records processed with zero data loss, backfill 2× faster (34 → 17 min) and orphan-document cleanup; process cost reduced ~75% (from ~€1,400 to ~€300).",
+        "Hybrid search (vector + text + RRF) with reranking and plan-based access control; prompts and models configurable per agent to optimize cost and latency.",
+        "Chat migration to an agentic architecture (Google ADK + LiteLLM): ~15% lower latency and ~35% lower infrastructure cost.",
+        "AI-assisted development as a daily practice: Claude Code (agents, orchestrators, skills) and multi-model review (Codex/GPT, Gemini) before critical changes.",
+        "GitOps on multi-cluster GKE (demo → preprod → prod), GitLab CI/CD with shift-left security (Trivy) and observability (OpenTelemetry/New Relic); 80% minimum coverage as a gate.",
+        "Stack: Python, FastAPI, Google ADK, Vertex AI, LiteLLM, BigQuery, Dataform, Dataflow, MongoDB, Firestore, Oracle, GKE, GitLab CI/CD."
       ],
-      "headline": "Applied AI engineer with production backend: RAG, agents, and automation with real metrics.",
+      "headline": "Agentic AI systems in production: RAG, LLM evaluation, and a GCP data platform, with real metrics.",
       "kpis": [
-        { "value": "−35%", "label": "infra cost" },
-        { "value": "+20pp", "label": "validation" },
-        { "value": "8–10h", "label": "/config" }
+        { "value": "70→90%", "label": "validation" },
+        { "value": "−75%", "label": "data cost" },
+        { "value": "3.6M", "label": "records" }
       ]
     },
     {
@@ -163,24 +164,24 @@
   ],
   "metrics": [
     {
+      "value": "−75%",
+      "label": "processing cost",
+      "context": "GCP data platform: faster processing and orphan-document cleanup"
+    },
+    {
+      "value": "70 → 90%",
+      "label": "document validation",
+      "context": "Multi-LLM consensus (GPT + Claude + Gemini) with tuned OCR"
+    },
+    {
       "value": "−35%",
       "label": "infrastructure cost",
       "context": "Chat migration to agentic architecture with Google ADK + LiteLLM"
     },
     {
-      "value": "70 → 90%",
-      "label": "document validation",
-      "context": "GPT + Claude + Gemini ensemble with tuned OCR"
-    },
-    {
-      "value": "8–10h",
-      "label": "saved per setup",
-      "context": "RAG ingestion automation with n8n + Python (Sheets → MongoDB + Pinecone)"
-    },
-    {
-      "value": "−15%",
-      "label": "chat latency",
-      "context": "Migration to Google ADK with LiteLLM"
+      "value": "3.6M+",
+      "label": "records processed",
+      "context": "GCP data platform (medallion) with zero data loss"
     }
   ],
   "writing": {
