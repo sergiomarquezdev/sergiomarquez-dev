@@ -14,9 +14,9 @@ const ui = {
 		"section.experience": "Experiencia",
 		"section.projects": "Proyectos",
 		"section.certifications": "Certificaciones",
-		"seo.title": "Sergio Márquez — Sistemas de IA agéntica en producción",
+		"seo.title": "Sergio Márquez — AI Engineer · IA en producción (LLMs, Python, GCP)",
 		"seo.description":
-			"AI Engineer especializado en sistemas de IA agéntica y RAG en producción sobre GCP: Google ADK, evaluación de LLMs y plataforma de datos. Construyo con Claude Code y mido en métricas, no en demos.",
+			"AI Engineer. Construyo IA en producción: asistentes, búsqueda inteligente y validación de documentos. Trabajo con LLMs, Python/FastAPI y GCP. Desarrollo asistido por IA con Claude Code. Mido en métricas, no en demos.",
 		"skip.main": "Ir al contenido principal",
 		"aria.sendEmail": "Enviar email a Sergio Márquez",
 		"aria.mainNav": "Navegación principal",
@@ -24,7 +24,7 @@ const ui = {
 		"aria.viewProject": "Ver proyecto",
 		"aria.viewCert": "Ver certificado",
 		"structured.knowsAbout":
-			"Agentes de IA,Claude Code,Agentic RAG,Google ADK,Vertex AI,LLM-as-judge,GCP,BigQuery,Python,FastAPI,Inteligencia Artificial,LLMs",
+			"Inteligencia Artificial,Machine Learning,LLMs,RAG,Claude Code,Vertex AI,GCP,Python,FastAPI,Backend,Asistentes conversacionales,Búsqueda semántica",
 		"og.locale": "es_ES",
 		"og.imageAlt": "Sergio Márquez - AI Engineer · sistemas de IA agéntica en producción",
 		"lang.switch": "EN",
@@ -59,9 +59,9 @@ const ui = {
 		"section.experience": "Experience",
 		"section.projects": "Projects",
 		"section.certifications": "Certifications",
-		"seo.title": "Sergio Márquez — Agentic AI systems in production",
+		"seo.title": "Sergio Márquez — AI Engineer · AI in production (LLMs, Python, GCP)",
 		"seo.description":
-			"AI Engineer specialized in agentic AI and RAG systems in production on GCP: Google ADK, LLM evaluation, and a data platform. I build with Claude Code and measure in metrics, not demos.",
+			"AI Engineer. I build AI in production: assistants, smart search and document validation. I work with LLMs, Python/FastAPI and GCP. AI-assisted development with Claude Code. I measure in metrics, not demos.",
 		"skip.main": "Skip to main content",
 		"aria.sendEmail": "Send email to Sergio Márquez",
 		"aria.mainNav": "Main navigation",
@@ -69,7 +69,7 @@ const ui = {
 		"aria.viewProject": "View project",
 		"aria.viewCert": "View certificate",
 		"structured.knowsAbout":
-			"AI Agents,Claude Code,Agentic RAG,Google ADK,Vertex AI,LLM-as-judge,GCP,BigQuery,Python,FastAPI,Artificial Intelligence,LLMs",
+			"Artificial Intelligence,Machine Learning,LLMs,RAG,Claude Code,Vertex AI,GCP,Python,FastAPI,Backend,Conversational assistants,Semantic search",
 		"og.locale": "en_US",
 		"og.imageAlt": "Sergio Márquez - AI Engineer · agentic AI systems in production",
 		"lang.switch": "ES",

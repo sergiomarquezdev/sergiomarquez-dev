@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "AI Engineer · sistemas agénticos y RAG en producción sobre GCP",
+    "tagline": "AI Engineer · IA en producción: asistentes, búsqueda inteligente y validación de documentos",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -13,7 +13,7 @@
       "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "AI Engineer especializado en sistemas de IA agéntica y RAG en producción sobre Google Cloud. Diseño y llevo a producción asistentes conversacionales (orquestación multi-agente con Google ADK y enrutado multi-proveedor con LiteLLM), evaluación automática de LLMs (LLM-as-judge) y validación documental por consenso multi-modelo, sobre una plataforma de datos en GCP (BigQuery, Dataform, Dataflow) y GitOps en GKE. Vengo del backend (Java/Spring → Python/FastAPI) y trabajo a diario con desarrollo asistido por IA: Claude Code (agentes, orquestadores, skills) y revisión multi-modelo. Mido en métricas, no en demos.",
+    "summary": "AI Engineer. Construyo sistemas de IA que funcionan en producción: asistentes conversacionales, búsqueda inteligente sobre documentación y validación automática de documentos. Trabajo con LLMs, Python/FastAPI y GCP, con base de backend, datos y operación para que la IA no se quede en una demo. Resultados del último año: validación documental del 70% al 90%, ~35% menos de coste de infraestructura y ~75% menos en el procesado de datos. A diario uso Claude Code y reviso con varios modelos antes de los cambios críticos. Mido en métricas, no en demos.",
     "headline": "Construyo sistemas de IA agéntica en producción.",
     "headlineAccent": "en producción.",
     "stackChips": ["Agentic RAG", "Google ADK", "Vertex AI", "Claude Code", "Python/FastAPI", "GCP"],

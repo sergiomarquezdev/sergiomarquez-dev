@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "AI Engineer · agentic & RAG systems in production on GCP",
+    "tagline": "AI Engineer · AI in production: assistants, smart search and document validation",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -13,7 +13,7 @@
       "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "AI Engineer specialized in agentic AI and RAG systems in production on Google Cloud. I design and ship conversational assistants (multi-agent orchestration with Google ADK and multi-provider routing via LiteLLM), automated LLM evaluation (LLM-as-judge), and multi-model consensus document validation, on top of a GCP data platform (BigQuery, Dataform, Dataflow) and GitOps on GKE. I come from backend (Java/Spring → Python/FastAPI) and work daily with AI-assisted development: Claude Code (agents, orchestrators, skills) and multi-model review. I measure in metrics, not demos.",
+    "summary": "AI Engineer. I build AI systems that actually run in production: conversational assistants, smart search over documentation, and automated document validation. I work with LLMs, Python/FastAPI and GCP, with a backend, data and operations foundation so AI doesn't stay a demo. Results this past year: document validation from 70% to 90%, ~35% lower infrastructure cost, and ~75% lower data-processing cost. I use Claude Code daily and review with multiple models before critical changes. I measure in metrics, not demos.",
     "headline": "I build agentic AI systems in production.",
     "headlineAccent": "in production.",
     "stackChips": ["Agentic RAG", "Google ADK", "Vertex AI", "Claude Code", "Python/FastAPI", "GCP"],
