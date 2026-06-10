@@ -117,7 +117,7 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 ### What is Not Tested (and Why)
 
-- **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `bun run validate`.
+- **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `pnpm run validate`.
 - **i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time.
 - **Redirect pages**: 7 trivial files that return 301 responses. Verified by build success.
 
@@ -129,19 +129,20 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 ### Local Development
 
-- **Bun** as package manager and script runner
-- `bun run dev` starts Astro dev server at `localhost:4321`
-- `bun run validate` runs the full pipeline: type-check + lint + test + build
+- **pnpm** as package manager and script runner
+- `pnpm run dev` starts Astro dev server at `localhost:4321`
+- `pnpm run validate` runs the full pipeline: type-check + lint + test + build
 
 ### CI (GitHub Actions)
 
 `.github/workflows/ci.yml` runs on push/PR to `main`:
-1. Checkout + setup Bun
-2. `bun install`
-3. `bun run type-check`
-4. `bun run lint`
-5. `bun run test`
-6. `bun run build`
+1. Checkout + setup Node (`.nvmrc`) + setup pnpm
+2. `pnpm install --frozen-lockfile`
+3. `pnpm run lint` (Biome CLI)
+4. `pnpm run type-check`
+5. `pnpm run test`
+6. `pnpm run build`
+7. On `main`: trigger the Cloudflare Pages deploy hook
 
 ### Production (Cloudflare Pages)
 

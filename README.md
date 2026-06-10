@@ -22,7 +22,7 @@ Dark theme with lime (`#A3E635`) accent — distinctive in a sea of blue AI site
 | Body / UI | **Geist Variable** | Paragraphs, navigation, labels |
 | Mono | **JetBrains Mono Variable** | Shell prompts (`~ % cat …`), window chrome, command palette, KPIs, code, dates |
 
-All design tokens are CSS custom properties in [`src/styles/global.css`](./src/styles/global.css). Backwards-compat aliases preserved (`--background`, `--primary-text`, etc.) so legacy components keep working during migration.
+All design tokens are CSS custom properties in [`src/styles/global.css`](./src/styles/global.css) (`--bg`, `--text-primary`, `--accent`, …), consumed directly by scoped component styles.
 
 ---
 
@@ -37,14 +37,14 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 - **Projects**: Featured project gets a large card with KPI and lime accent border; secondary projects in a responsive grid.
 - **Writing & Presence**: Consolidated grid of blog + social channels (YouTube, LinkedIn, X, TikTok, blog) with platform icon, handle and one-line description.
 - **CTA Footer**: Full-width "¿Construimos algo con agentes?" — serif headline + lime button + socials.
-- **Sidebar layout** (desktop): Sticky left console panel with name (serif), `$ whoami` + tagline comment, GitHub activity, `cd ~/<section>` scroll-spy command nav, `⌘K` chip and social links. Right sidebar shows vertical email.
+- **Sidebar layout** (desktop): Sticky left console panel with name (serif), `$ whoami` + tagline comment, GitHub activity, `cd ~/<section>` scroll-spy command nav, `⌘K` chip and social links.
 - **Mobile bottom nav**: Sticky bar with icons, scroll-spy and safe-area support.
 - **Spotlight effect**: Subtle cursor-tracking radial gradient.
 - **GitHub activity widget**: Latest commit fetched at build time from GitHub Events API.
 - **Accessibility**: Skip links, ARIA labels, keyboard nav, `prefers-reduced-motion` support, focus-visible with lime outline.
 - **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap, PWA manifest.
 - **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok` → external profiles.
-- **Performance**: Lighthouse 95+ on every metric. Static output, compressed HTML, CSS minification via lightningcss.
+- **Performance**: PageSpeed mobile 99 / desktop 100, accessibility/best-practices/SEO 100. Fully inlined CSS, preloaded latin-subset fonts, immutable asset caching, zero client frameworks (~9 KB of inline vanilla JS).
 
 ---
 
@@ -57,8 +57,8 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 - **[lightningcss](https://lightningcss.dev/)** -- CSS minification
 - **[Geist Variable](https://vercel.com/font)** -- Self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`)
 - **[Biome](https://biomejs.dev/)** -- Fast linting and formatting
-- **[Bun](https://bun.sh/)** -- Preferred package manager (local dev)
-- **[Cloudflare Pages](https://pages.cloudflare.com/)** -- Hosting & CDN (uses `npm ci`)
+- **[pnpm](https://pnpm.io/)** -- Package manager (local dev and Cloudflare Pages)
+- **[Cloudflare Pages](https://pages.cloudflare.com/)** -- Hosting & CDN (builds with pnpm)
 
 ---
 
@@ -85,20 +85,20 @@ sergiomarquez-dev/
 │   │   ├── About.astro
 │   │   ├── BaseHead.astro       # Meta tags, hreflang, JSON-LD
 │   │   ├── Certifications.astro
-│   │   ├── Experience.astro
+│   │   ├── CommandPalette.astro # ⌘K command palette (accessible <dialog>)
 │   │   ├── GitHubActivity.astro # Live latest commit widget
 │   │   ├── HomePage.astro       # Section composition
 │   │   ├── LanguageSwitcher.astro
-│   │   ├── Projects.astro
 │   │   ├── Spotlight.astro      # Cursor-tracking spotlight effect
-│   │   ├── icons/               # SVG icon components (Link, Lock, User, Briefcase, Code, Award, GitHub, etc.)
+│   │   ├── icons/               # SVG icon components (Link, Lock, User, Briefcase, Code, GitHub, etc.)
+│   │   ├── sections/            # Hero, ImpactBar, CasesGrid, Projects, Writing, …
+│   │   ├── ui/                  # MetricKpi, StackChip, DotGrid
 │   │   └── layout/              # Layout sub-components
 │   │       ├── Footer.astro     # CTA + copyright footer
 │   │       ├── MainContent.astro
 │   │       ├── MobileNav.astro  # Bottom nav bar with scroll-spy
 │   │       ├── Navigation.astro # Scroll-spy sidebar nav
 │   │       ├── SidebarLeft.astro
-│   │       ├── SidebarRight.astro
 │   │       └── SocialLinks.astro
 │   ├── data/
 │   │   ├── cv.ts                # Typed loader + locale cache for cv JSON
@@ -118,6 +118,8 @@ sergiomarquez-dev/
 │   │   ├── youtube/index.astro
 │   │   ├── yt/index.astro
 │   │   └── blog/index.astro
+│   ├── scripts/
+│   │   └── scrollSpy.ts         # Shared scroll-spy (sidebar nav + mobile nav)
 │   └── styles/
 │       ├── global.css           # Design tokens, animations, print styles
 │       └── reset.css            # Preflight-style CSS reset (no framework)
@@ -137,7 +139,7 @@ sergiomarquez-dev/
 ### Prerequisites
 
 - **Node.js 20+** (LTS recommended)
-- **[Bun](https://bun.sh/)** (recommended) or **npm**
+- **[pnpm](https://pnpm.io/)** (the project lockfile is `pnpm-lock.yaml`)
 
 ### Installation
 
@@ -151,13 +153,13 @@ sergiomarquez-dev/
 2. **Install dependencies**
 
    ```bash
-   bun install
+   pnpm install
    ```
 
 3. **Start the development server**
 
    ```bash
-   bun run dev
+   pnpm run dev
    ```
 
    - Spanish (default): `http://localhost:4321/`
@@ -170,23 +172,23 @@ sergiomarquez-dev/
 
 ```bash
 # Development
-bun run dev            # Start development server with hot reload
-bun run build          # Create production build
-bun run preview        # Preview production build locally
+pnpm run dev            # Start development server with hot reload
+pnpm run build          # Create production build
+pnpm run preview        # Preview production build locally
 
 # Quality checks
-bun run type-check     # TypeScript validation with Astro
-bun run lint           # Biome linting
-bun run lint:fix       # Auto-fix linting issues
-bun run format         # Auto-format with Biome
-bun run format:check   # Check formatting without modifying
+pnpm run type-check     # TypeScript validation with Astro
+pnpm run lint           # Biome linting
+pnpm run lint:fix       # Auto-fix linting issues
+pnpm run format         # Auto-format with Biome
+pnpm run format:check   # Check formatting without modifying
 
 # Testing
-bun run test           # Run unit tests (Vitest)
-bun run test:watch     # Run tests in watch mode
+pnpm run test           # Run unit tests (Vitest)
+pnpm run test:watch     # Run tests in watch mode
 
 # Full validation (mandatory before committing)
-bun run validate       # type-check + lint + test + build
+pnpm run validate       # type-check + lint + test + build
 ```
 
 ---
@@ -194,8 +196,8 @@ bun run validate       # type-check + lint + test + build
 ## Development Workflow
 
 1. Update content in `public/cv.es.json` / `public/cv.en.json` or tweak components.
-2. Test locally with `bun run dev` -- check both `/` (ES) and `/en/` (EN).
-3. Run `bun run validate` to ensure everything passes.
+2. Test locally with `pnpm run dev` -- check both `/` (ES) and `/en/` (EN).
+3. Run `pnpm run validate` to ensure everything passes.
 4. Commit changes (pre-commit hook runs lint-staged on `src/`).
 5. Push to `main` -- Cloudflare Pages builds and deploys automatically.
 
