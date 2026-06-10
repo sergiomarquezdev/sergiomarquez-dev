@@ -98,3 +98,53 @@ describe("cv data loader", () => {
 		}
 	});
 });
+
+// The loader trusts JSON.parse (no runtime schema), so these tests are the
+// safety net that catches typos in cv.es.json / cv.en.json before the build.
+describe("cv data validation", () => {
+	const VALID_PLATFORMS = ["blog", "youtube", "linkedin", "x", "tiktok", "instagram"];
+	const REQUIRED_URLS = ["site", "linkedin", "github", "x", "youtube", "tiktok"] as const;
+
+	/** Collects every key path recursively, including array indices */
+	function keyPaths(value: unknown, prefix = ""): string[] {
+		if (Array.isArray(value)) {
+			return value.flatMap((item, i) => keyPaths(item, `${prefix}[${i}]`));
+		}
+		if (value !== null && typeof value === "object") {
+			return Object.entries(value).flatMap(([key, child]) => {
+				const path = prefix ? `${prefix}.${key}` : key;
+				return [path, ...keyPaths(child, path)];
+			});
+		}
+		return [];
+	}
+
+	it("has recursive key parity between locales", () => {
+		const esKeys = keyPaths(getCv("es")).sort();
+		const enKeys = keyPaths(getCv("en")).sort();
+		expect(esKeys).toEqual(enKeys);
+	});
+
+	it("has all required urls as https links", () => {
+		for (const locale of ["es", "en"] as const) {
+			const { urls } = getCv(locale).basics;
+			for (const key of REQUIRED_URLS) {
+				const url = urls[key];
+				expect(url, `${locale}: basics.urls.${key} missing`).toBeDefined();
+				expect(url.startsWith("https://"), `${locale}: basics.urls.${key} = ${url}`).toBe(true);
+			}
+		}
+	});
+
+	it("uses only known writing platforms", () => {
+		for (const locale of ["es", "en"] as const) {
+			const channels = getCv(locale).writing?.channels ?? [];
+			expect(channels.length).toBeGreaterThan(0);
+			for (const channel of channels) {
+				expect(VALID_PLATFORMS, `${locale}: platform ${channel.platform}`).toContain(
+					channel.platform,
+				);
+			}
+		}
+	});
+});

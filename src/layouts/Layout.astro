@@ -31,6 +31,8 @@ const homeHref = locale === "en" ? "/en/" : "/";
     <!-- Language detection: redirect English speakers on first visit -->
     <script is:inline>
       (function() {
+        // Mark JS as available so CSS can gate JS-dependent hiding (fade-up)
+        document.documentElement.classList.add('js');
         try {
           var KEY = 'preferred-locale';
           if (localStorage.getItem(KEY)) return;
@@ -59,9 +61,9 @@ const homeHref = locale === "en" ? "/en/" : "/";
             <a href={homeHref} class="mobile-logo-link" aria-hidden="true" tabindex="-1">
               <SergioMark variant="square" class="mobile-logo-mark" width={36} height={36} />
             </a>
-            <h1 class="mobile-name">
+            <p class="mobile-name">
               <a href={homeHref}>{basics.name}</a>
-            </h1>
+            </p>
           </div>
           <div class="mobile-header-actions">
             <div class="tablet-social">

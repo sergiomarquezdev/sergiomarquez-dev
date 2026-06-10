@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -18,9 +17,9 @@ export default defineConfig({
 
   // Build optimizations
   build: {
-    format: "file", // Generate files instead of directories for better SEO
+    // Default "directory" format keeps canonical/hreflang/sitemap URLs consistent (/en/)
     assets: "_astro", // Clean asset organization
-    inlineStylesheets: "auto", // Inline critical CSS automatically
+    inlineStylesheets: "always", // Single-page site: inlining removes render-blocking CSS requests
   },
 
   // Integrations with optimized configuration
@@ -28,7 +27,11 @@ export default defineConfig({
     sitemap({
       changefreq: "monthly",
       priority: 0.7,
-      lastmod: new Date(),
+      // Exclude social redirect stubs: they carry noindex, listing them contradicts it
+      filter: (page) =>
+        !/\/(blog|github|instagram|linkedin|tiktok|twitter|x|yt|youtube)\/?$/.test(
+          new URL(page).pathname,
+        ),
       i18n: {
         defaultLocale: "es",
         locales: { es: "es", en: "en" },
@@ -41,7 +44,6 @@ export default defineConfig({
 
   // Vite optimizations
   vite: {
-    plugins: [tailwindcss()],
     build: {
       cssMinify: "lightningcss",
       rollupOptions: {

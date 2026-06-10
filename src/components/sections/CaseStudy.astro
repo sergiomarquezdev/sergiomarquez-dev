@@ -1,5 +1,6 @@
 ---
 import type { CvData } from "../../data/cv";
+import { getLocale, t } from "../../i18n/index";
 import MetricKpi from "../ui/MetricKpi.astro";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 	index: number;
 }
 const { entry, index } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 const isLatest = index === 0;
 const period = entry.period;
 const isCurrent = /presente|present/i.test(period);
@@ -17,7 +19,12 @@ const isCurrent = /presente|present/i.test(period);
       <span class="case__company">{entry.company}</span>
       <span class="case__sep">·</span>
       <span class="case__role">{entry.role}</span>
-      {isCurrent && <span class="case__live" aria-label="actual">●</span>}
+      {isCurrent && (
+        <>
+          <span class="case__live" aria-hidden="true">●</span>
+          <span class="sr-only">{t(locale, "case.current")}</span>
+        </>
+      )}
     </div>
     <span class="case__period">{period}</span>
   </header>
@@ -67,7 +74,7 @@ const isCurrent = /presente|present/i.test(period);
   .case__live {
     color: var(--accent);
     font-size: 0.625rem;
-    animation: status-pulse 2.4s ease-in-out infinite;
+    animation: pulse 2.4s ease-in-out infinite;
   }
   .case__period {
     font-family: var(--font-mono);

@@ -27,116 +27,12 @@ const navItems = [
 </nav>
 
 <script>
-  let mobileNavController: AbortController | null = null;
+  import { initScrollSpy } from "../../scripts/scrollSpy";
 
-  function initMobileNav() {
-    mobileNavController?.abort();
-    mobileNavController = new AbortController();
-    const { signal } = mobileNavController;
-
-    const navItems = document.querySelectorAll<HTMLAnchorElement>('.mobile-nav-item');
-    // Resolve targets by the IDs declared in nav items (matches sections AND
-    // the contact <footer>) so scroll-spy also activates the contact link.
-    const targetIds = Array.from(navItems)
-      .map((i) => i.dataset.mobileSection)
-      .filter((id): id is string => !!id);
-    const sections = targetIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    if (navItems.length === 0 || sections.length === 0) return;
-
-    const sectionsArray = Array.from(sections);
-    let currentActive: string | null = null;
-    let clickLockUntil = 0;
-
-    function setActiveItem(sectionId: string, fromClick = false) {
-      if (currentActive === sectionId) return;
-      currentActive = sectionId;
-      navItems.forEach(item => {
-        const isActive = item.dataset.mobileSection === sectionId;
-        item.classList.toggle('active', isActive);
-      });
-      if (fromClick) {
-        clickLockUntil = Date.now() + 800;
-      }
-    }
-
-    function updateActiveSection() {
-      if (Date.now() < clickLockUntil) return;
-
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-
-      if (scrollY < viewportHeight * 0.25) {
-        setActiveItem(sectionsArray[0].id);
-        return;
-      }
-
-      if (scrollY + viewportHeight >= documentHeight - 100) {
-        setActiveItem(sectionsArray[sectionsArray.length - 1].id);
-        return;
-      }
-
-      const targetLine = viewportHeight * 0.2;
-      let bestSection: string | null = null;
-      let bestScore = -Infinity;
-
-      sectionsArray.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > viewportHeight) return;
-
-        let score = 0;
-        if (rect.top <= targetLine) {
-          score = 1000 - Math.abs(rect.top);
-        } else {
-          score = -rect.top;
-        }
-
-        if (score > bestScore) {
-          bestScore = score;
-          bestSection = section.id;
-        }
-      });
-
-      if (bestSection) {
-        setActiveItem(bestSection);
-      }
-    }
-
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveSection();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true, signal });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const sectionId = item.dataset.mobileSection;
-        if (sectionId) {
-          setActiveItem(sectionId, true);
-        }
-      }, { signal });
-    });
-
-    const hash = window.location.hash.slice(1);
-    if (hash && document.getElementById(hash)) {
-      setActiveItem(hash, true);
-    } else {
-      updateActiveSection();
-    }
-  }
-
-  document.addEventListener('astro:page-load', initMobileNav);
-  initMobileNav();
+  initScrollSpy({
+    linkSelector: ".mobile-nav-item",
+    getSectionId: (link) => link.dataset.mobileSection,
+  });
 </script>
 
 <style>
@@ -150,8 +46,6 @@ const navItems = [
     right: 0;
     z-index: 40;
     background-color: var(--bg-elevated);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid var(--border);
     padding: 0.5rem 0;
     padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));

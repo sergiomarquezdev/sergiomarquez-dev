@@ -1,7 +1,4 @@
 import { defineConfig } from "vitest/config";
 
-export default defineConfig({
-	test: {
-		globals: true,
-	},
-});
+// Tests import from vitest explicitly; no globals needed
+export default defineConfig({});

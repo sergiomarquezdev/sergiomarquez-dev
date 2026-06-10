@@ -6,10 +6,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Performance (final optimization audit)
+
+- Inline all CSS (`inlineStylesheets: "always"`) — single-page site; removes both render-blocking stylesheet requests and exposes `@font-face` rules at first HTML parse.
+- Preload the three above-the-fold fonts (Geist sans, JetBrains Mono, Instrument Serif italic). Mono/serif woff2 URLs resolved through Vite `?url` imports so preload hashes always match the CSS.
+- Subset `Geist-var.woff2` to latin (62.6 KB → 29.3 KB, −53%) as `Geist-var-latin.woff2` with explicit `unicode-range`.
+- New `public/_headers` with immutable cache-control for `/assets/*`, `/_astro/*` and `/fonts/*` (Cloudflare Pages).
+- Removed Tailwind entirely (zero utility classes in the markup): `@import "tailwindcss"` replaced by `src/styles/reset.css` (preflight-equivalent); dropped `tailwind.config.ts`, the Vite plugin and the `tailwindcss`/`@tailwindcss/vite` deps.
+- `DotGrid` draw loop pauses via IntersectionObserver while the hero is off-screen (was an unconditional rAF loop).
+- Removed invisible `backdrop-filter: blur(8px)` from the opaque mobile nav.
+
+### Accessibility (Lighthouse 95 → 100)
+
+- Raised `--text-tertiary` `#71717a` → `#85858f`: the old token failed WCAG AA contrast (≈4.1:1) on every eyebrow/period/kicker (confirmed by Lighthouse `color-contrast`).
+- `CaseStudy` "current" dot: prohibited `aria-label` on a generic span replaced by an `aria-hidden` dot + translated `.sr-only` text (new `case.current` i18n key).
+- Command palette upgraded to the combobox pattern: `role="combobox"` + `aria-activedescendant` on the input, `role="group"` per command group, result-count live region (new `cmdk.results` i18n key), pre-rendered toast, empty state moved out of the listbox as `role="status"`, and anchor scrolling that respects `prefers-reduced-motion`.
+- Demoted the sidebar/mobile-header name from `<h1>` to `<p>` — the hero headline is the single h1 per page.
+- Language switcher touch target expanded to ~44px via invisible `::after` overlay.
+- Below-the-fold sections only start hidden when JS runs (`html.js` gate set by the inline head script) — content stays visible with JS disabled.
+
+### SEO
+
+- Removed `build.format: "file"`: the EN canonical/og:url pointed at `/en.html` (a URL that 308-redirects). Default directory format keeps canonical, hreflang and sitemap consistent on `/en/`.
+- Sitemap excludes the nine social redirect stubs (they carry `noindex`; listing them contradicted it) and no longer stamps a fake `lastmod` on every deploy.
+- Added `og:locale:alternate`; `robots.txt` cleaned (single sitemap index, dropped ignored `Crawl-delay`); manifest description refreshed to "AI Engineer".
+
+### Fixed
+
+- `CaseStudy` live-dot animation referenced `status-pulse` keyframes that only existed inside the dead `StatusBadge` component (never compiled into any page) — now uses the global `pulse` keyframes and actually animates.
+- `[hidden]` elements with an author `display` (e.g. palette items, `display: flex`) are forced hidden in the reset — without the Tailwind preflight rule the palette filter visually did nothing.
+
+### Removed (dead code)
+
+- Components with zero imports: `SidebarRight.astro`, `StatusBadge.astro`, `AwardIcon.astro`.
+- Unused `non.geist` dependency (the font ships self-hosted from `public/fonts/`), stale `package-lock.json` (pnpm-only project), unused `@/*` tsconfig alias, unused `vitest` globals flag.
+- Dead CSS in `global.css`: `.animate-*`, `.delay-*`, `.section-title`, `.card-interactive`, `.tok-flag`, `.term-section-head`, `fade-up`/`fade-in` keyframes, and the backwards-compat token aliases (scrollbar/404/Spotlight migrated to canonical tokens).
+- `astro:page-load` listeners and re-init `AbortController`s in five components — there is no `<ClientRouter />`, so they never fired.
+
+### Changed (internal)
+
+- Deduplicated ~100 lines of identical scroll-spy logic from `Navigation.astro` and `MobileNav.astro` into `src/scripts/scrollSpy.ts`.
+- `cv.test.ts` gained a validation suite: recursive key parity between `cv.es.json`/`cv.en.json`, required https URLs, and `writing.channels[].platform` enum check (the loader itself stays a trusting `JSON.parse`; tests run before build in `validate`).
+
 ### Added
 
 - **"Agentic Console" redesign**: terminal-aesthetic shell (window chrome, shell prompts, monospace tokens, blinking caret) reframing the site as an agent session. Net-new `CommandPalette.astro` — an accessible `<dialog>` opened with `⌘/Ctrl+K` or `/` (plus a discoverable `⌘K` chip) that jumps to sections, opens links, toggles locale, and copies the email. Progressive enhancement: every action is also reachable via normal scroll/links, so no user is ever blocked.
-- Shared terminal CSS layer in `global.css` (`.term-window`, `.term-titlebar`, `.term-dots`, `.tok-*`, `.caret`, `.kbd`, `.term-btn`, `.term-section-head`), respecting brand effect rules (no glassmorphism, drop shadows, or gradients > 15%).
+- Shared terminal CSS layer in `global.css` (`.term-window`, `.term-titlebar`, `.term-dots`, `.tok-*`, `.caret`, `.kbd`, `.term-btn`), respecting brand effect rules (no glassmorphism, drop shadows, or gradients > 15%).
 - `hero.*` and `cmdk.*` i18n keys (ES/EN) for the terminal hero lines and command palette.
 - Instagram (`@sergiomarquezp_`) as a writing channel and header social link, including new `InstagramIcon.astro` and `/instagram` vanity redirect.
 - `basics.alsoRunning` optional CV field rendered as a muted line under the About summary, surfacing **Esem Projects** (`https://esemprojects.es`) without competing with the primary CTA.

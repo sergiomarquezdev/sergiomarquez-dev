@@ -46,6 +46,7 @@ const groups = [
   id="cmdk"
   aria-label={t(locale, "cmdk.placeholder")}
   data-copied={t(locale, "cmdk.copied")}
+  data-results={t(locale, "cmdk.results")}
 >
   <div class="cmdk__panel term-window">
     <div class="cmdk__inputrow">
@@ -54,6 +55,10 @@ const groups = [
         type="text"
         class="cmdk__input"
         id="cmdk-input"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="cmdk-list"
+        aria-autocomplete="list"
         placeholder={t(locale, "cmdk.placeholder")}
         autocomplete="off"
         autocorrect="off"
@@ -65,8 +70,8 @@ const groups = [
     <ul class="cmdk__list" id="cmdk-list" role="listbox" aria-label={t(locale, "cmdk.placeholder")}>
       {groups.map((group) => (
         <li class="cmdk__group" role="presentation">
-          <p class="cmdk__grouptitle">{group.title}</p>
-          <ul role="presentation">
+          <p class="cmdk__grouptitle" aria-hidden="true">{group.title}</p>
+          <ul role="group" aria-label={group.title}>
             {group.items.map((item) => (
               <li role="presentation">
                 <button
@@ -86,10 +91,12 @@ const groups = [
           </ul>
         </li>
       ))}
-      <li class="cmdk__empty" id="cmdk-empty" hidden>{t(locale, "cmdk.empty")}</li>
     </ul>
+    <p class="cmdk__empty" id="cmdk-empty" role="status" hidden>{t(locale, "cmdk.empty")}</p>
+    <span class="sr-only" id="cmdk-results" aria-live="polite"></span>
   </div>
 </dialog>
+<div class="cmdk__toast" id="cmdk-toast" role="status"></div>
 
 <script>
   function initCommandPalette() {
@@ -115,18 +122,30 @@ const groups = [
   ) {
     const items = () =>
       Array.from(dialog.querySelectorAll<HTMLButtonElement>(".cmdk__item:not([hidden])"));
+    const resultsLive = document.getElementById("cmdk-results");
+
+    // Stable option ids so aria-activedescendant can reference them
+    dialog.querySelectorAll<HTMLButtonElement>(".cmdk__item").forEach((el, i) => {
+      el.id = `cmdk-opt-${i}`;
+    });
 
     let activeIndex = 0;
 
     function setActive(index: number) {
       const visible = items();
-      if (visible.length === 0) return;
+      if (visible.length === 0) {
+        input.removeAttribute("aria-activedescendant");
+        return;
+      }
       activeIndex = (index + visible.length) % visible.length;
       visible.forEach((el, i) => {
         const isActive = i === activeIndex;
         el.setAttribute("aria-selected", isActive ? "true" : "false");
         el.classList.toggle("is-active", isActive);
-        if (isActive) el.scrollIntoView({ block: "nearest" });
+        if (isActive) {
+          input.setAttribute("aria-activedescendant", el.id);
+          el.scrollIntoView({ block: "nearest" });
+        }
       });
     }
 
@@ -146,19 +165,24 @@ const groups = [
 
     function filter() {
       const q = input.value.trim().toLowerCase();
-      let anyVisible = false;
+      let visibleCount = 0;
       dialog.querySelectorAll<HTMLButtonElement>(".cmdk__item").forEach((el) => {
         const label = el.dataset.label ?? "";
         const match = q === "" || label.includes(q);
         el.toggleAttribute("hidden", !match);
-        if (match) anyVisible = true;
+        if (match) visibleCount++;
       });
       // Hide group titles whose items are all filtered out
       dialog.querySelectorAll<HTMLElement>(".cmdk__group").forEach((group) => {
         const hasVisible = group.querySelector(".cmdk__item:not([hidden])") !== null;
         group.toggleAttribute("hidden", !hasVisible);
       });
-      if (empty) empty.toggleAttribute("hidden", anyVisible);
+      if (empty) empty.toggleAttribute("hidden", visibleCount > 0);
+      // Announce the result count to screen readers (aria-activedescendant
+      // covers the active option; this covers how many matches remain)
+      if (resultsLive) {
+        resultsLive.textContent = `${visibleCount} ${dialog.dataset.results ?? ""}`;
+      }
       activeIndex = 0;
       setActive(0);
     }
@@ -171,7 +195,12 @@ const groups = [
         case "anchor": {
           const target = document.querySelector(value);
           if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            const behavior: ScrollBehavior = window.matchMedia(
+              "(prefers-reduced-motion: reduce)",
+            ).matches
+              ? "auto"
+              : "smooth";
+            target.scrollIntoView({ behavior, block: "start" });
             history.replaceState(null, "", value);
           }
           break;
@@ -192,17 +221,13 @@ const groups = [
 
     function announce(message: string) {
       if (!message) return;
-      let toast = document.getElementById("cmdk-toast");
-      if (!toast) {
-        toast = document.createElement("div");
-        toast.id = "cmdk-toast";
-        toast.className = "cmdk__toast";
-        toast.setAttribute("role", "status");
-        document.body.appendChild(toast);
-      }
+      // The toast is pre-rendered in the HTML so the live region exists
+      // before the first announcement (dynamic role=status often misses it)
+      const toast = document.getElementById("cmdk-toast");
+      if (!toast) return;
       toast.textContent = message;
       toast.classList.add("is-visible");
-      window.setTimeout(() => toast?.classList.remove("is-visible"), 1600);
+      window.setTimeout(() => toast.classList.remove("is-visible"), 1600);
     }
 
     // Open triggers: Cmd/Ctrl+K from anywhere, or "/" when not already typing.
@@ -257,7 +282,6 @@ const groups = [
     });
   }
 
-  document.addEventListener("astro:page-load", initCommandPalette);
   initCommandPalette();
 </script>
 
@@ -368,7 +392,7 @@ const groups = [
   }
 
   .cmdk__empty {
-    list-style: none;
+    margin: 0;
     padding: 1.25rem;
     text-align: center;
     color: var(--text-tertiary);

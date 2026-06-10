@@ -1,16 +1,16 @@
 ---
 import type { CvData } from "../../data/cv";
+import type { Locale } from "../../i18n";
 import LockIcon from "../icons/LockIcon.astro";
 import MetricKpi from "../ui/MetricKpi.astro";
 import StackChip from "../ui/StackChip.astro";
 
 interface Props {
 	project: CvData["projects"][number];
-	locale: "es" | "en";
+	locale: Locale;
 }
 const { project, locale } = Astro.props;
 const href = project.url ?? (project.private ? null : project.github?.[0]);
-const isExternal = !!href && !href.startsWith("/");
 const visit = locale === "en" ? "Visit project" : "Ver proyecto";
 const featuredLabel = locale === "en" ? "// Featured project" : "// Proyecto destacado";
 const Tag = href ? "a" : "div";

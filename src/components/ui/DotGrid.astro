@@ -85,7 +85,21 @@
     // is pointer-events: none (clicks pass through to content above)
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerleave", onLeave);
-    raf = requestAnimationFrame(draw);
+
+    // Run the draw loop only while the hero is on screen; an unconditional
+    // rAF loop keeps painting (and draining battery) after scrolling past it
+    function start() {
+      if (!raf) raf = requestAnimationFrame(draw);
+    }
+    function stop() {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) start();
+      else stop();
+    });
+    io.observe(canvas);
   }
 
   if (document.readyState !== "loading") init();

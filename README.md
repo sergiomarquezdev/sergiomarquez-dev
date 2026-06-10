@@ -1,12 +1,12 @@
 # Sergio Marquez - Personal Portfolio
 
-> **Bilingual (ES/EN) portfolio with a builder personal brand (Claude Code / AI agents) — "Agentic Console" terminal aesthetic, built with Astro and Tailwind CSS**
+> **Bilingual (ES/EN) portfolio with a builder personal brand (Claude Code / AI agents) — "Agentic Console" terminal aesthetic, built with Astro and scoped vanilla CSS**
 
-[![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://pagespeed.web.dev/)
+[![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-99%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 [![CI](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml)
 
-Source code for my **personal portfolio**, positioned as a builder working with Claude Code, AI agents, and agentic / spec-driven development (with a backend-of-truth track record). The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 5 (SSG) + Tailwind v4, fully driven by `public/cv.{es,en}.json`.
+Source code for my **personal portfolio**, positioned as a builder working with Claude Code, AI agents, and agentic / spec-driven development (with a backend-of-truth track record). The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 5 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
 
 Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 
@@ -51,11 +51,11 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 ## Tech Stack
 
 - **[Astro](https://astro.build/) ^5.16.0** -- Static site generator with i18n routing
-- **[Tailwind CSS](https://tailwindcss.com/) ^4.1.17** -- Utility-first CSS framework (via Vite plugin)
+- **Scoped vanilla CSS** -- design tokens in `global.css` + a preflight-style reset (`reset.css`); no CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** -- Type-safe JavaScript
 - **[Vitest](https://vitest.dev/) ^4.0.18** -- Unit testing framework
 - **[lightningcss](https://lightningcss.dev/)** -- CSS minification
-- **[non.geist](https://vercel.com/font/sans)** -- Modern typography (Geist Variable)
+- **[Geist Variable](https://vercel.com/font)** -- Self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`)
 - **[Biome](https://biomejs.dev/)** -- Fast linting and formatting
 - **[Bun](https://bun.sh/)** -- Preferred package manager (local dev)
 - **[Cloudflare Pages](https://pages.cloudflare.com/)** -- Hosting & CDN (uses `npm ci`)
@@ -119,9 +119,9 @@ sergiomarquez-dev/
 │   │   ├── yt/index.astro
 │   │   └── blog/index.astro
 │   └── styles/
-│       └── global.css           # Design tokens, animations, print styles
+│       ├── global.css           # Design tokens, animations, print styles
+│       └── reset.css            # Preflight-style CSS reset (no framework)
 ├── astro.config.mjs
-├── tailwind.config.ts           # Bridges CSS custom properties to Tailwind
 ├── vitest.config.ts
 ├── biome.json
 ├── CLAUDE.md
@@ -231,6 +231,5 @@ _AI Engineer -- agentic AI & RAG systems in production on GCP_
 
 [![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 </div>

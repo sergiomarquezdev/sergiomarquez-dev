@@ -5,13 +5,7 @@
 <div class="spotlight" aria-hidden="true" />
 
 <script>
-  let spotlightController: AbortController | null = null;
-
   function initSpotlight() {
-    // Clean up previous listener
-    spotlightController?.abort();
-    spotlightController = new AbortController();
-
     const spotlight = document.querySelector<HTMLElement>('.spotlight');
     if (!spotlight) return;
 
@@ -36,11 +30,9 @@
       }
     }
 
-    document.addEventListener('mousemove', handleMouseMove, { signal: spotlightController.signal });
+    document.addEventListener('mousemove', handleMouseMove);
   }
 
-  // Run on initial load and after view transitions
-  document.addEventListener('astro:page-load', initSpotlight);
   initSpotlight();
 </script>
 
@@ -52,7 +44,7 @@
     z-index: 30;
     background: radial-gradient(
       600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      var(--spotlight-color),
+      var(--accent-muted),
       transparent 40%
     );
     opacity: 0.08;

@@ -34,6 +34,7 @@ const ui = {
 		"hero.role": "AI Engineer · IA aplicada",
 		"hero.proof": "Sistemas de IA en producción · 40+ repos open source",
 		"hero.now": "Ahora",
+		"case.current": "Puesto actual",
 		"cmdk.hint": "comandos",
 		"cmdk.placeholder": "Escribe un comando o busca…",
 		"cmdk.empty": "Sin resultados",
@@ -47,6 +48,7 @@ const ui = {
 		"cmdk.openX": "Abrir X (Twitter)",
 		"cmdk.copyEmail": "Copiar email",
 		"cmdk.copied": "Email copiado",
+		"cmdk.results": "resultados",
 	},
 	en: {
 		"nav.about": "About",
@@ -79,6 +81,7 @@ const ui = {
 		"hero.role": "AI Engineer · applied AI",
 		"hero.proof": "AI systems in production · 40+ open-source repos",
 		"hero.now": "Now",
+		"case.current": "Current role",
 		"cmdk.hint": "commands",
 		"cmdk.placeholder": "Type a command or search…",
 		"cmdk.empty": "No results",
@@ -92,6 +95,7 @@ const ui = {
 		"cmdk.openX": "Open X (Twitter)",
 		"cmdk.copyEmail": "Copy email",
 		"cmdk.copied": "Email copied",
+		"cmdk.results": "results",
 	},
 } as const;
 

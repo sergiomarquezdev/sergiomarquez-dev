@@ -1,4 +1,6 @@
 ---
+import instrumentSerifItalicWoff2 from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
+import jetbrainsMonoWoff2 from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
 import { getCv } from "../data/cv";
 import { getLocale, t } from "../i18n/index";
 
@@ -38,7 +40,10 @@ const structuredData = {
 ---
 
 <meta charset='UTF-8' />
-<link rel='preload' href='/fonts/Geist-var.woff2' as='font' type='font/woff2' crossorigin />
+<!-- Above-the-fold fonts: sans (headline/LCP), mono (hero terminal), serif italic (headline accent) -->
+<link rel='preload' href='/fonts/Geist-var-latin.woff2' as='font' type='font/woff2' crossorigin />
+<link rel='preload' href={jetbrainsMonoWoff2} as='font' type='font/woff2' crossorigin />
+<link rel='preload' href={instrumentSerifItalicWoff2} as='font' type='font/woff2' crossorigin />
 <meta name='description' content={description} />
 <meta name='viewport' content='width=device-width' />
 <meta name='theme-color' content='#0a0a0b' />
@@ -67,6 +72,7 @@ const structuredData = {
 <meta property='og:image:height' content='630' />
 <meta property='og:image:alt' content={t(locale, "og.imageAlt")} />
 <meta property='og:locale' content={t(locale, "og.locale")} />
+<meta property='og:locale:alternate' content={locale === "es" ? "en_US" : "es_ES"} />
 <meta property='og:site_name' content='Sergio Márquez' />
 
 <!-- Twitter -->

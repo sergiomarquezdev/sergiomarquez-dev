@@ -1,14 +1,17 @@
-@import "tailwindcss";
+@import "./reset.css";
 @import "@fontsource/instrument-serif/400.css";
 @import "@fontsource/instrument-serif/400-italic.css";
 @import "@fontsource-variable/jetbrains-mono";
 
 @font-face {
 	font-family: "Geist Variable";
-	src: url("/fonts/Geist-var.woff2") format("woff2");
+	src: url("/fonts/Geist-var-latin.woff2") format("woff2");
 	font-weight: 100 900;
 	font-display: swap;
 	font-synthesis: none;
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+		U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /*
@@ -25,7 +28,7 @@
 	/* Text */
 	--text-primary: #f5f5f7;
 	--text-secondary: #a1a1aa;
-	--text-tertiary: #71717a;
+	--text-tertiary: #85858f;
 
 	/* Borders */
 	--border: rgba(255, 255, 255, 0.08);
@@ -39,21 +42,10 @@
 	--accent-glow: rgba(163, 230, 53, 0.18);
 	--accent-text: #bef264;
 
-	/* Backwards-compat aliases (will be removed once migration done) */
-	--background: var(--bg);
-	--primary-text: var(--text-primary);
-	--secondary-text: var(--text-secondary);
-	--tertiary-text: var(--text-tertiary);
-	--border-color: var(--border);
-	--surface: var(--bg-elevated);
-	--surface-alt: var(--bg-subtle);
-	--spotlight-color: var(--accent-muted);
-
 	/* Typography families */
 	--font-sans: "Geist Variable", system-ui, sans-serif;
 	--font-serif: "Instrument Serif", "Times New Roman", serif;
 	--font-mono: "JetBrains Mono Variable", "SF Mono", Menlo, monospace;
-	--font-family-sans: var(--font-sans); /* alias */
 
 	/* Type scale (Major Third 1.25) — sin cambios estructurales */
 	--text-xs: 0.75rem;
@@ -97,7 +89,7 @@ html {
 }
 
 body {
-	font-family: var(--font-family-sans);
+	font-family: var(--font-sans);
 	margin: 0;
 	line-height: var(--base-lh);
 	font-kerning: auto;
@@ -125,39 +117,19 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-	background: var(--background);
+	background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--surface-alt);
+	background: var(--bg-subtle);
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--tertiary-text);
+	background: var(--text-tertiary);
 }
 
 /* Animation keyframes */
-@keyframes fade-up {
-	from {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
 @keyframes pulse {
 	0%,
 	100% {
@@ -166,62 +138,6 @@ a {
 	50% {
 		opacity: 0.5;
 	}
-}
-
-/* Animation classes */
-.animate-fade-up {
-	animation: fade-up 0.6s ease-out forwards;
-	opacity: 0;
-}
-
-.animate-fade-in {
-	animation: fade-in 0.4s ease-out forwards;
-	opacity: 0;
-}
-
-.animate-pulse {
-	animation: pulse 2s ease-in-out infinite;
-}
-
-/* Stagger delays */
-.delay-100 {
-	animation-delay: 100ms;
-}
-.delay-200 {
-	animation-delay: 200ms;
-}
-.delay-300 {
-	animation-delay: 300ms;
-}
-
-/* Shared section title (hidden on desktop where sidebar nav is visible) */
-.section-title {
-	margin: 0;
-	font-size: 0.875rem;
-	font-weight: 600;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--primary-text);
-}
-
-@media (min-width: 1024px) {
-	.section-title {
-		display: none;
-	}
-}
-
-/* Shared card interactive hover pattern */
-.card-interactive {
-	transition:
-		background-color 200ms ease,
-		border-color 200ms ease,
-		transform 200ms ease;
-	border: 1px solid var(--border);
-	background-color: var(--bg-elevated);
-}
-.card-interactive:hover {
-	background-color: var(--bg-subtle);
-	border-color: var(--border-strong);
 }
 
 /* Visually hidden but accessible to screen readers */
@@ -336,10 +252,6 @@ p {
 	color: var(--text-tertiary);
 }
 
-.tok-flag {
-	color: var(--accent-text);
-}
-
 /* Blinking caret */
 .caret {
 	display: inline-block;
@@ -422,34 +334,12 @@ p {
 	color: #0a0a0b;
 }
 
-/* Section prompt header — replaces uppercase "label" section titles */
-.term-section-head {
-	font-family: var(--font-mono);
-	font-size: 0.8125rem;
-	color: var(--text-tertiary);
-	margin: 0 0 1.25rem;
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	flex-wrap: wrap;
-}
-
-.term-section-head .tok-prompt {
-	color: var(--accent);
-}
-
-.term-section-head .cmd {
-	color: var(--text-secondary);
-}
-
 /* Print styles */
 @media print {
 	header,
 	footer,
 	nav,
-	.no-print,
-	.sidebar-left,
-	.sidebar-right {
+	.sidebar-left {
 		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
 		display: none !important;
 	}

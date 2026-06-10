@@ -91,25 +91,14 @@ In `Layout.astro`, an inline script runs on first visit:
 ### CSS Custom Properties (Single Source of Truth)
 
 Defined in `src/styles/global.css` under `:root`:
-- Color palette: `--background`, `--primary-text`, `--secondary-text`, `--tertiary-text`, `--accent`, `--accent-muted`, `--accent-hover`, `--navy-light`, `--navy-lighter`, `--border-color`
-- Typography: Modular scale (Major Third, ratio 1.25) via `--text-xs` through `--text-3xl`
-- Vertical rhythm: `--base-lh: 1.5`, `--rhythm: calc(1rem * var(--base-lh))`
-- Measure: `--measure: 66ch` for prose readability
-- Spotlight: `--spotlight-color`, `--mouse-x`, `--mouse-y`
-- Font: `--font-family-sans: "Geist Variable", system-ui, sans-serif`
+- Color palette: `--bg`, `--bg-elevated`, `--bg-subtle`, `--text-primary`, `--text-secondary`, `--text-tertiary`, `--border`, `--border-strong`, `--accent`, `--accent-muted`, `--accent-hover`, `--accent-glow`, `--accent-text`
+- Typography: Modular scale (Major Third, ratio 1.25) via `--text-xs` through `--text-display`
+- Vertical rhythm: `--base-lh: 1.55`, `--rhythm: calc(1rem * var(--base-lh))`
+- Fonts: `--font-sans` ("Geist Variable", latin subset, self-hosted), `--font-serif` (Instrument Serif), `--font-mono` (JetBrains Mono Variable)
 
-### Tailwind Bridge
+### CSS Reset
 
-`tailwind.config.ts` maps CSS custom properties to Tailwind utility classes:
-```ts
-colors: {
-  background: "var(--background)",
-  accent: "var(--accent)",
-  // ...
-}
-```
-
-This keeps CSS custom properties as the single source of truth while enabling Tailwind utilities in templates.
+`src/styles/reset.css` is a preflight-style modern reset (box-sizing, zeroed margins, list/media/form normalization, `[hidden]` enforcement) imported at the top of `global.css`. There is no CSS framework: the markup uses BEM-ish class names with scoped styles, and every value comes from the custom-property tokens.
 
 ### Scoped Styles
 
@@ -156,8 +145,8 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 ### Production (Cloudflare Pages)
 
-- Builds from `main` branch using `npm ci` (not Bun)
-- Both `bun.lockb` and `package-lock.json` must be kept in sync
+- Builds from `main` branch using pnpm (`pnpm-lock.yaml` is the only lockfile)
+- `public/_headers` sets immutable cache-control for hashed assets and fonts
 - `"prepare": "husky || true"` prevents CI failure from missing git hooks
 
 ### Pre-commit Hooks
@@ -176,9 +165,6 @@ Astro Content Collections are designed for Markdown/MDX content with frontmatter
 
 There are 7 redirect pages (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`). Each is a trivial `.astro` file returning a 301. Generating them from data would save ~50 lines but add indirection. YAGNI -- the manual approach is readable and maintainable at this scale.
 
-### Why CSS Custom Properties Over Tailwind Theme
+### Why CSS Custom Properties (and No Framework)
 
-CSS custom properties in `global.css` serve as the canonical design tokens. Tailwind's `tailwind.config.ts` bridges them into utility classes. This means:
-- Design tokens are readable without knowing Tailwind
-- Scoped `<style>` blocks in Astro components can reference tokens directly
-- Tailwind utilities remain available for rapid prototyping in templates
+CSS custom properties in `global.css` serve as the canonical design tokens, consumed directly by scoped `<style>` blocks in Astro components. Tailwind was removed once an audit showed zero utility classes in the markup — only its preflight mattered, now replaced by `src/styles/reset.css`. This keeps the token layer readable, the CSS payload minimal, and one less dependency to track.
