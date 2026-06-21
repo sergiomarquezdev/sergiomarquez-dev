@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "AI Engineer · AI in production: assistants, smart search and document validation",
+    "tagline": "AI Engineer · Conversational, voice and generative AI agents (image and video) in production",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -13,18 +13,18 @@
       "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "AI Engineer. I build AI systems that actually run in production: conversational assistants, smart search over documentation, and automated document validation. I work with LLMs, Python/FastAPI and GCP, with a backend, data and operations foundation so AI doesn't stay a demo. Results this past year: document validation from 70% to 90%, ~35% lower infrastructure cost, and ~75% lower data-processing cost. I use Claude Code daily and review with multiple models before critical changes. I measure in metrics, not demos.",
-    "headline": "I build agentic AI systems in production.",
+    "summary": "AI Engineer in Madrid. I build AI systems that reach production, not demos. In my main role: agentic and RAG assistants on GCP (Google ADK + LiteLLM), multi-LLM consensus document validation (from 70% to 90%), and a data platform with 3.6M+ records (−75% cost). In parallel I build and operate generative AI end to end: a voice agent that handles real phone calls, WhatsApp agents, and pipelines that turn a brief into video ads (script, voice, b-roll and render). I use Claude Code daily as an orchestrator. I measure in metrics, not demos.",
+    "headline": "I build AI agents and generative pipelines in production.",
     "headlineAccent": "in production.",
-    "stackChips": ["Agentic RAG", "Google ADK", "Vertex AI", "Claude Code", "Python/FastAPI", "GCP"],
+    "stackChips": ["Agentic AI", "Voice agents", "AI image/video gen", "Agentic RAG", "Vertex AI", "Claude Code"],
     "status": {
       "available": true,
-      "label": "Agentic AI systems in production"
+      "label": "AI agents and generative AI in production"
     },
     "alsoRunning": {
       "name": "Esem Projects",
       "url": "https://esemprojects.es",
-      "description": "an applied-AI agency for clinics in Spain"
+      "description": "applied-AI studio: voice and WhatsApp agents, ad generation and automation for businesses"
     }
   },
   "experience": [
@@ -83,40 +83,102 @@
   "projects": [
     {
       "name": "One dAIly Blog",
-      "headline": "Autonomous blog: AI agents generate, illustrate, and publish technical content every day.",
+      "headline": "Fully autonomous blog: AI agents generate, illustrate, and publish a technical article every day, with a viral video pipeline and multi-channel distribution.",
       "stack": [
-        "Astro",
+        "Claude",
+        "fal.ai FLUX",
+        "Veo 3.1",
+        "ElevenLabs",
         "Node.js",
-        "Gemini",
-        "OpenAI",
         "PostgreSQL"
       ],
       "url": "https://blog.sergiomarquez.dev",
-      "github": [
-        "https://github.com/sergiomarquezdev/one-daily-blog",
-        "https://github.com/sergiomarquezdev/one-daily-blog-backend"
-      ],
       "private": true,
       "featured": true,
-      "kpi": { "value": "1/día", "label": "autonomous post" }
+      "kpi": { "value": "1/day", "label": "autonomous post" }
+    },
+    {
+      "name": "AI Video Ad Generator",
+      "headline": "From a text brief to a complete 9:16 vertical video ad: Gemini script, ElevenLabs voice, CLIP-reranked b-roll, and ffmpeg render. Fully automated.",
+      "stack": [
+        "Gemini 2.5 Flash",
+        "ElevenLabs",
+        "fal.ai FLUX",
+        "Replicate CLIP",
+        "ffmpeg",
+        "Next.js"
+      ],
+      "private": true
+    },
+    {
+      "name": "AI Voice Receptionist 24/7",
+      "headline": "Conversational phone agent (ASR + LLM + TTS loop) that handles real calls and manages appointments by voice, integrated with telephony and scheduling.",
+      "stack": [
+        "ElevenLabs Conversational AI",
+        "Gemini",
+        "Cloudflare Workers",
+        "SIP",
+        "GoHighLevel"
+      ],
+      "private": true
+    },
+    {
+      "name": "WhatsApp AI Agent",
+      "headline": "Self-hosted WhatsApp agent: hot-swappable LLM, Whisper voice-note transcription, at-least-once delivery, and multi-arch Docker deployment.",
+      "stack": [
+        "TypeScript",
+        "Baileys",
+        "Next.js",
+        "Whisper",
+        "SQLite",
+        "Docker"
+      ],
+      "private": true
     },
     {
       "name": "AI Photo Transformer",
-      "headline": "Multi-stage AI pipeline for cinematic photo transformations using Gemini and Seedream 4.",
+      "headline": "AI portrait transformation: Gemini classifies and enhances the prompt and Seedream 4 generates the 4K image, with streaming progress (SSE).",
       "stack": [
         "FastAPI",
         "Python",
-        "Gemini",
+        "Gemini 2.0 Flash",
         "Replicate",
-        "Supabase",
-        "HTMX"
+        "Seedream 4",
+        "PostgreSQL"
       ],
+      "private": true
+    },
+    {
+      "name": "Multimodal Vector Search",
+      "headline": "Semantic search over text, image, PDF with OCR, audio, and video using gemini-embedding-2 on Vertex AI and MongoDB Atlas.",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Vertex AI",
+        "gemini-embedding-2",
+        "MongoDB Atlas"
+      ],
+      "url": "https://github.com/sergiomarquezdev/gemini-embeddings-2-mongo-demo",
       "github": [
-        "https://github.com/sergiomarquezdev/altoke_image_gen"
+        "https://github.com/sergiomarquezdev/gemini-embeddings-2-mongo-demo"
       ],
-      "private": true,
-      "featured": false,
-      "kpi": { "value": "Multi-IA", "label": "pipeline" }
+      "private": false
+    },
+    {
+      "name": "Personal AI Agent (Google ADK)",
+      "headline": "Multi-agent system with Google ADK (orchestrator and specialists) that answers about my CV and searches my blog with real tool use.",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Google ADK",
+        "Gemini",
+        "Docker"
+      ],
+      "url": "https://github.com/sergiomarquezdev/adk-agent-personal",
+      "github": [
+        "https://github.com/sergiomarquezdev/adk-agent-personal"
+      ],
+      "private": false
     },
     {
       "name": "Video Transcriber & AI Summarizer",
@@ -130,34 +192,6 @@
       ],
       "github": [
         "https://github.com/sergiomarquezdev/yt-transcriber"
-      ],
-      "private": false
-    },
-    {
-      "name": "Gesture-Controlled Digital Whiteboard",
-      "headline": "Real-time hand tracking whiteboard using computer vision and MediaPipe.",
-      "stack": [
-        "Python",
-        "OpenCV",
-        "MediaPipe"
-      ],
-      "url": "https://github.com/sergiomarquezdev/pizarra-digital-python",
-      "github": [
-        "https://github.com/sergiomarquezdev/pizarra-digital-python"
-      ],
-      "private": false
-    },
-    {
-      "name": "Acestream Docker Engine",
-      "headline": "Containerized streaming solution with automated setup for Ubuntu environments.",
-      "stack": [
-        "Docker",
-        "Shell",
-        "Ubuntu"
-      ],
-      "url": "https://github.com/sergiomarquezdev/acestream-docker-home",
-      "github": [
-        "https://github.com/sergiomarquezdev/acestream-docker-home"
       ],
       "private": false
     }

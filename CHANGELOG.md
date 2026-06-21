@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Content & positioning
+
+- Reframed the profile from "assistants / smart search / document validation" to a hybrid **AI Engineer + builder** angle covering conversational, voice and generative AI agents in production. Updated `tagline`, `headline`, `stackChips`, `status` and `summary` in both locales.
+- Rebuilt the `projects` list (5 → 8) from code-verified stacks: added AI Video Ad Generator, AI Voice Receptionist 24/7, WhatsApp AI Agent, Multimodal Vector Search and a Google ADK personal agent; corrected AI Photo Transformer's stack (was Supabase/HTMX, now Gemini 2.0 Flash + Seedream 4 + PostgreSQL + SSE); dropped the off-brand Acestream and gesture-whiteboard demos.
+- `alsoRunning` reworded to present Esem Projects as an applied-AI studio (voice/WhatsApp agents, ad generation, automation).
+
 ### Performance (final optimization audit)
 
 - Inline all CSS (`inlineStylesheets: "always"`) — single-page site; removes both render-blocking stylesheet requests and exposes `@font-face` rules at first HTML parse.
