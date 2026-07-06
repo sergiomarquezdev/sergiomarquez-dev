@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Documentation
+
+- Realigned README.md with the shipped site: hybrid AI Engineer + builder intro and contact tagline, complete `public/` and `src/` structure trees (`_headers`, `fonts/`, PWA icons, `404.astro`, `/instagram` and `/tiktok` redirects, `SergioMark`), full dependency list (`@astrojs/sitemap`, Fontsource packages), Node 22 prerequisite and consistent Lighthouse 99/100 figures.
+- Refreshed CLAUDE.md and AGENTS.md (now synced copies): current gotchas (doc-only pushes skip CI/deploy, `html.js` gate, `[hidden]` reset rule, i18n import-depth nuance) and the `pnpm-workspace.yaml` tracking rule.
+- Updated `docs/ARCHITECTURE.md` data flow and component tree to the Agentic Console composition (Hero, ImpactBar, Cases, Projects, Writing, MobileNav, CommandPalette); redirect page count corrected 7 → 9.
+- Archived shipped/obsolete docs into `docs/archive/` (Agentic Console design spec, 2026 profile-update spec, One dAIly Blog marketing context) and removed the empty `docs/superpowers/` and `.agents/` directories.
+
+## [2026-06-21]
+
 ### Content & positioning
 
 - Reframed the profile from "assistants / smart search / document validation" to a hybrid **AI Engineer + builder** angle covering conversational, voice and generative AI agents in production. Updated `tagline`, `headline`, `stackChips`, `status` and `summary` in both locales.
@@ -41,6 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `CaseStudy` live-dot animation referenced `status-pulse` keyframes that only existed inside the dead `StatusBadge` component (never compiled into any page) — now uses the global `pulse` keyframes and actually animates.
 - `[hidden]` elements with an author `display` (e.g. palette items, `display: flex`) are forced hidden in the reset — without the Tailwind preflight rule the palette filter visually did nothing.
+- Footer/sidebar social links now wrap (`flex-wrap: wrap`) instead of overflowing horizontally on narrow mobile viewports (`SocialLinks.astro`).
 
 ### Removed (dead code)
 

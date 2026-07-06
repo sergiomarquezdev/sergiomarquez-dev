@@ -24,7 +24,7 @@ src/components/HomePage.astro
   Receives full CvData, destructures into sections
         |
         v
-About / Experience / Projects / Certifications
+Hero / ImpactBar / About / CasesGrid / ProjectsSection / Writing / Certifications / Footer
   Each receives its slice of CvData as props
 ```
 
@@ -35,25 +35,33 @@ The data layer is pure functions with no side effects after initial load, making
 ```
 Layout.astro
 ├── BaseHead.astro              -- <head>: meta, hreflang, JSON-LD, OG tags
-├── LanguageSwitcher.astro      -- mobile language toggle (visible < 1024px)
 ├── Spotlight.astro             -- cursor-tracking radial gradient overlay
 ├── mobile-header               -- inline in Layout (visible < 1024px)
-├── layout/SidebarLeft.astro    -- sticky left column (visible >= 1024px)
+│   ├── SergioMark.astro        -- path-based "S■M" logo
+│   ├── layout/SocialLinks.astro
+│   └── LanguageSwitcher.astro  -- mobile language toggle
+├── layout/SidebarLeft.astro    -- sticky left console panel (visible >= 1024px)
+│   ├── SergioMark.astro
 │   ├── GitHubActivity.astro    -- latest commit widget
-│   ├── layout/Navigation.astro -- scroll-spy nav links
+│   ├── layout/Navigation.astro -- scroll-spy `cd ~/<section>` command nav
 │   ├── layout/SocialLinks.astro
 │   └── LanguageSwitcher.astro  -- desktop language toggle
 ├── layout/MainContent.astro    -- <main> wrapper with max-width
 │   └── <slot />                -- page content injected here
 │       └── HomePage.astro
+│           ├── sections/Hero.astro           -- terminal-window session + headline
+│           ├── sections/ImpactBar.astro      -- production metrics (ui/MetricKpi)
 │           ├── About.astro
-│           ├── Experience.astro
-│           ├── Projects.astro
-│           └── Certifications.astro
-└── layout/SidebarRight.astro   -- email link (visible >= 1024px)
+│           ├── sections/CasesGrid.astro      -- sections/CaseStudy per work entry
+│           ├── sections/ProjectsSection.astro -- FeaturedProject + ProjectCard grid
+│           ├── sections/Writing.astro        -- blog + social channels grid
+│           ├── Certifications.astro
+│           └── layout/Footer.astro           -- full-width CTA + copyright
+├── layout/MobileNav.astro      -- bottom nav bar with scroll-spy (visible < 1024px)
+└── CommandPalette.astro        -- ⌘K palette (accessible <dialog>)
 ```
 
-The `layout/` subdirectory contains structural components (sidebars, nav, main content wrapper). Top-level components in `components/` are content-oriented sections.
+The `layout/` subdirectory contains structural components (sidebar, nav, footer, main content wrapper), `sections/` holds the home-page content sections, `ui/` holds small primitives (`DotGrid`, `MetricKpi`, `StackChip`), and top-level components in `components/` are shared pieces (About, Certifications, CommandPalette, BaseHead, SergioMark, …).
 
 ## i18n Strategy
 
@@ -119,7 +127,7 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 - **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `pnpm run validate`.
 - **i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time.
-- **Redirect pages**: 7 trivial files that return 301 responses. Verified by build success.
+- **Redirect pages**: 9 trivial files that return 301 responses. Verified by build success.
 
 ### Test Utilities
 
@@ -164,7 +172,7 @@ Astro Content Collections are designed for Markdown/MDX content with frontmatter
 
 ### Why Manual Redirect Pages
 
-There are 7 redirect pages (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`). Each is a trivial `.astro` file returning a 301. Generating them from data would save ~50 lines but add indirection. YAGNI -- the manual approach is readable and maintainable at this scale.
+There are 9 redirect pages (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram`). Each is a trivial `.astro` file returning a 301. Generating them from data would save ~50 lines but add indirection. YAGNI -- the manual approach is readable and maintainable at this scale.
 
 ### Why CSS Custom Properties (and No Framework)
 

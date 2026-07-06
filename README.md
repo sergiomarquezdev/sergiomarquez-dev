@@ -1,12 +1,12 @@
 # Sergio Marquez - Personal Portfolio
 
-> **Bilingual (ES/EN) portfolio with a builder personal brand (Claude Code / AI agents) — "Agentic Console" terminal aesthetic, built with Astro and scoped vanilla CSS**
+> **Bilingual (ES/EN) portfolio for a hybrid AI Engineer + builder profile — "Agentic Console" terminal aesthetic, built with Astro 5 and scoped vanilla CSS**
 
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-99%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 [![CI](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml)
 
-Source code for my **personal portfolio**, positioned as a builder working with Claude Code, AI agents, and agentic / spec-driven development (with a backend-of-truth track record). The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 5 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
+Source code for my **personal portfolio**, positioned as a hybrid **AI Engineer + builder**: conversational, voice and generative AI agents (image and video) in production, plus applied-AI side builds. The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 5 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
 
 Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 
@@ -29,33 +29,35 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 ## Key Features
 
 - **Bilingual (i18n)**: Full ES/EN support with automatic locale detection, language switcher and hreflang tags.
-- **Data-driven content**: All sections rendered from `public/cv.{es,en}.json`. Optional brand fields (`metrics`, `kpis`, `headline`, `writing`, `featured`) are validated for parity in tests.
+- **Data-driven content**: All sections rendered from `public/cv.{es,en}.json`. Optional brand fields (`metrics`, `kpis`, `headline`, `headlineAccent`, `writing`, `featured`, `alsoRunning`) are validated for parity in tests.
 - **Hero section**: Terminal-window session (window chrome + `whoami`/`cat ~/.now`/`ls ./proof` prompts), Geist display headline with Instrument Serif italic lime accent and blinking caret, animated `DotGrid` canvas (vanilla, <1KB, respects `prefers-reduced-motion`), stack chips and CTAs.
 - **Command palette (`⌘K`)**: Accessible `<dialog>` opened with `⌘/Ctrl+K`, `/`, or a discoverable `⌘K` chip — jumps to sections, opens links, toggles locale, copies email. Optional/progressive: everything is also reachable via normal scroll and links, so no user is blocked (no REPL).
 - **Impact Bar**: Four production metrics in mono lime — cost, validation rate, time saved, latency. Pulled from `cv.metrics`.
 - **Cases (replaces flat Experience timeline)**: Each work entry is a card with KPI badges front-and-center, headline in serif and arrow-marker bullets.
 - **Projects**: Featured project gets a large card with KPI and lime accent border; secondary projects in a responsive grid.
-- **Writing & Presence**: Consolidated grid of blog + social channels (YouTube, LinkedIn, X, TikTok, blog) with platform icon, handle and one-line description.
+- **Writing & Presence**: Consolidated grid of blog + social channels (YouTube, LinkedIn, X, TikTok, Instagram, blog) with platform icon, handle and one-line description.
 - **CTA Footer**: Full-width "¿Construimos algo con agentes?" — serif headline + lime button + socials.
 - **Sidebar layout** (desktop): Sticky left console panel with name (serif), `$ whoami` + tagline comment, GitHub activity, `cd ~/<section>` scroll-spy command nav, `⌘K` chip and social links.
 - **Mobile bottom nav**: Sticky bar with icons, scroll-spy and safe-area support.
 - **Spotlight effect**: Subtle cursor-tracking radial gradient.
 - **GitHub activity widget**: Latest commit fetched at build time from GitHub Events API.
+- **Custom 404**: Branded ES/EN error page with home CTA.
 - **Accessibility**: Skip links, ARIA labels, keyboard nav, `prefers-reduced-motion` support, focus-visible with lime outline.
-- **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap, PWA manifest.
-- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok` → external profiles.
-- **Performance**: PageSpeed mobile 99 / desktop 100, accessibility/best-practices/SEO 100. Fully inlined CSS, preloaded latin-subset fonts, immutable asset caching, zero client frameworks (~9 KB of inline vanilla JS).
+- **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap (social redirects excluded), PWA manifest.
+- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram` → external profiles.
+- **Performance**: PageSpeed mobile 99 / desktop 100, accessibility/best-practices/SEO 100. Fully inlined CSS, preloaded latin-subset fonts, immutable asset caching (`public/_headers`), zero client frameworks (~9 KB of inline vanilla JS).
 
 ---
 
 ## Tech Stack
 
 - **[Astro](https://astro.build/) ^5.16.0** -- Static site generator with i18n routing
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) ^3.6.0** -- i18n sitemap generation
 - **Scoped vanilla CSS** -- design tokens in `global.css` + a preflight-style reset (`reset.css`); no CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** -- Type-safe JavaScript
 - **[Vitest](https://vitest.dev/) ^4.0.18** -- Unit testing framework
 - **[lightningcss](https://lightningcss.dev/)** -- CSS minification
-- **[Geist Variable](https://vercel.com/font)** -- Self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`)
+- **Fonts** -- [Geist Variable](https://vercel.com/font) self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`); [JetBrains Mono Variable](https://fontsource.org/fonts/jetbrains-mono) and [Instrument Serif](https://fontsource.org/fonts/instrument-serif) via Fontsource
 - **[Biome](https://biomejs.dev/)** -- Fast linting and formatting
 - **[pnpm](https://pnpm.io/)** -- Package manager (local dev and Cloudflare Pages)
 - **[Cloudflare Pages](https://pages.cloudflare.com/)** -- Hosting & CDN (builds with pnpm)
@@ -66,19 +68,23 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 
 ```
 sergiomarquez-dev/
-├── .github/workflows/ci.yml     # GitHub Actions CI pipeline
+├── .github/workflows/ci.yml     # GitHub Actions CI pipeline + CF Pages deploy hook
 ├── .husky/                      # Git hooks (pre-commit via lint-staged)
 ├── .vscode/                     # Shared VS Code settings & extensions
 ├── docs/
-│   └── ARCHITECTURE.md          # Architecture documentation
+│   ├── ARCHITECTURE.md          # Architecture documentation
+│   └── archive/                 # Historical specs (shipped work), kept for reference
 ├── public/                      # Static assets served as-is
+│   ├── _headers                 # Cloudflare immutable cache-control rules
 │   ├── ads.txt                  # Google AdSense verification
 │   ├── cv.es.json               # Portfolio data (Spanish)
 │   ├── cv.en.json               # Portfolio data (English)
+│   ├── fonts/Geist-var-latin.woff2  # Self-hosted latin-subset body font
+│   ├── favicon.ico / favicon.svg
+│   ├── icon-192.{png,svg} / icon-512.png  # PWA icons
 │   ├── manifest.webmanifest     # PWA manifest
-│   ├── og-image.svg
+│   ├── og-image.png / og-image.svg
 │   ├── Profile.pdf              # Downloadable resume
-│   ├── favicon.ico
 │   └── robots.txt
 ├── src/
 │   ├── components/
@@ -89,10 +95,12 @@ sergiomarquez-dev/
 │   │   ├── GitHubActivity.astro # Live latest commit widget
 │   │   ├── HomePage.astro       # Section composition
 │   │   ├── LanguageSwitcher.astro
+│   │   ├── SergioMark.astro     # Path-based "S■M" logo
 │   │   ├── Spotlight.astro      # Cursor-tracking spotlight effect
-│   │   ├── icons/               # SVG icon components (Link, Lock, User, Briefcase, Code, GitHub, etc.)
-│   │   ├── sections/            # Hero, ImpactBar, CasesGrid, Projects, Writing, …
-│   │   ├── ui/                  # MetricKpi, StackChip, DotGrid
+│   │   ├── icons/               # SVG icon components (GitHub, LinkedIn, X, YouTube, TikTok, Instagram, …)
+│   │   ├── sections/            # Hero, ImpactBar, CasesGrid, CaseStudy,
+│   │   │                        #   FeaturedProject, ProjectCard, ProjectsSection, Writing
+│   │   ├── ui/                  # DotGrid, MetricKpi, StackChip
 │   │   └── layout/              # Layout sub-components
 │   │       ├── Footer.astro     # CTA + copyright footer
 │   │       ├── MainContent.astro
@@ -111,13 +119,16 @@ sergiomarquez-dev/
 │   ├── pages/
 │   │   ├── index.astro          # Home page (ES, default locale)
 │   │   ├── en/index.astro       # Home page (EN)
+│   │   ├── 404.astro            # Custom 404 (ES/EN)
 │   │   ├── linkedin/index.astro # Vanity redirect pages
 │   │   ├── github/index.astro
 │   │   ├── x/index.astro
 │   │   ├── twitter/index.astro
 │   │   ├── youtube/index.astro
 │   │   ├── yt/index.astro
-│   │   └── blog/index.astro
+│   │   ├── blog/index.astro
+│   │   ├── tiktok/index.astro
+│   │   └── instagram/index.astro
 │   ├── scripts/
 │   │   └── scrollSpy.ts         # Shared scroll-spy (sidebar nav + mobile nav)
 │   └── styles/
@@ -126,7 +137,8 @@ sergiomarquez-dev/
 ├── astro.config.mjs
 ├── vitest.config.ts
 ├── biome.json
-├── CLAUDE.md
+├── pnpm-workspace.yaml          # pnpm build-script approvals (esbuild, sharp)
+├── CLAUDE.md                    # Agent instructions (AGENTS.md is a synced copy)
 ├── AGENTS.md
 ├── CHANGELOG.md
 └── package.json
@@ -138,7 +150,7 @@ sergiomarquez-dev/
 
 ### Prerequisites
 
-- **Node.js 20+** (LTS recommended)
+- **Node.js 22** (`.nvmrc` pins 22.18.0)
 - **[pnpm](https://pnpm.io/)** (the project lockfile is `pnpm-lock.yaml`)
 
 ### Installation
@@ -199,26 +211,28 @@ pnpm run validate       # type-check + lint + test + build
 2. Test locally with `pnpm run dev` -- check both `/` (ES) and `/en/` (EN).
 3. Run `pnpm run validate` to ensure everything passes.
 4. Commit changes (pre-commit hook runs lint-staged on `src/`).
-5. Push to `main` -- Cloudflare Pages builds and deploys automatically.
+5. Push to `main` -- CI runs lint/type-check/test/build, then triggers the Cloudflare Pages deploy hook.
+
+> Note: pushes touching only Markdown, `docs/` or `.vscode/` skip CI and deploy (`paths-ignore` in `ci.yml`).
 
 ---
 
 ## Performance & SEO
 
-- **Lighthouse**: 95+ performance, 100/100 SEO
-- **Sitemap**: Generated automatically via `@astrojs/sitemap` with i18n support
+- **Lighthouse / PageSpeed**: 99 mobile / 100 desktop performance; 100 accessibility, best-practices and SEO
+- **Sitemap**: Generated automatically via `@astrojs/sitemap` with i18n support; social redirect stubs excluded
 - **Hreflang**: `<link rel="alternate">` tags for ES, EN, and x-default
 - **Structured data**: JSON-LD Person schema via `BaseHead.astro`
 - **Canonical URLs**: Per-page canonical links
 - **PWA manifest**: `manifest.webmanifest` for installability
-- **Fast delivery**: Static output served from Cloudflare Pages CDN
+- **Fast delivery**: Static output served from Cloudflare Pages CDN with immutable caching for hashed assets and fonts (`public/_headers`)
 
 ---
 
 ## Contact
 
 **Sergio Marquez**
-_AI Engineer -- agentic AI & RAG systems in production on GCP_
+_AI Engineer -- conversational, voice and generative AI agents (image and video) in production_
 
 - Website: [sergiomarquez.dev](https://sergiomarquez.dev)
 - Email: [contacto@sergiomarquez.dev](mailto:contacto@sergiomarquez.dev)
@@ -226,6 +240,7 @@ _AI Engineer -- agentic AI & RAG systems in production on GCP_
 - GitHub: [sergiomarquezdev](https://github.com/sergiomarquezdev)
 - X (Twitter): [@sergiomarquezp\_](https://x.com/sergiomarquezp_)
 - YouTube: [@sergiomarquezp](https://www.youtube.com/@sergiomarquezp)
+- Instagram: [@sergiomarquezp\_](https://www.instagram.com/sergiomarquezp_/)
 
 ---
 
