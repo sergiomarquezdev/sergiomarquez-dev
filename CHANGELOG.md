@@ -9,10 +9,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Dependencies
 
 - Upgraded **Astro 5.16 → 7.1** (Vite 8, Rust compiler now default). `src/data/cv.ts` resolves `public/cv.*.json` from `process.cwd()` instead of module-relative paths: Astro 7 executes prerender chunks from `dist/.prerender/chunks/`, so `import.meta.url`-relative resolution pointed inside `dist/`. Verified the `dist/` layout is unchanged (fonts under `/assets/`, scripts under `/_astro/`) and the top-level `vite.build.rollupOptions.output` override still applies to the prerender build.
-- Updated @astrojs/sitemap 3.6 → 3.7.3, @astrojs/check 0.9.5 → 0.9.9, Biome 2.3 → 2.5.4, lightningcss 1.30 → 1.32, Vitest 4.0 → 4.1.10, lint-staged 16.2 → 16.4.
+- Updated @astrojs/sitemap 3.6 → 3.7.3, @astrojs/check 0.9.5 → 0.9.9, Biome 2.3 → 2.5.4, lightningcss 1.30 → 1.32, Vitest 4.0 → 4.1.10, lint-staged 16.2 → 17.0.8.
 - **TypeScript capped at ^6.0.3** (not 7.x): `astro check` depends on the TS Language Service API, which the TS 7 native compiler does not expose until 7.1.
-- **lint-staged capped at ^16.4.0** (not 17.x): v17 requires Node >= 22.22.1; the repo pins 22.18.0 in `.nvmrc`.
 - Fixed Biome 2.5 `useOptionalChain` warning in `src/data/github.ts`.
+
+### CI & Infrastructure
+
+- **Node 22.18.0 → 24.18.0** (`.nvmrc`): Node 22 is in LTS maintenance nearing EOL (April 2027); 24 is the active LTS (EOL April 2028). Also clears the corepack `EBADENGINE` warning on Cloudflare Pages builds and satisfies lint-staged 17's `>= 22.22.1` requirement.
+- Pinned pnpm through the `packageManager` field (`pnpm@11.6.0`) so local, CI and Cloudflare Pages all resolve the same version (CF was defaulting to 10.11.1).
+- CI workflow: bumped pinned actions (checkout v7.0.0, setup-node v7.0.0, pnpm/action-setup v6.0.9 — clears the "Node.js 20 deprecated" annotation), pnpm set up before setup-node with `cache: "pnpm"` store caching, removed the redundant `setup-biome` step (`pnpm run lint` already runs the local Biome devDependency), deploy-hook secret now passed via `env`, dropped the duplicate `CHANGELOG.md` paths-ignore entry.
+- Disabled Cloudflare Pages automatic git deployments for production: deploys now happen only through the CI deploy hook, so production is gated on CI passing (previously every push built twice and deployed even if CI failed).
 
 ### Documentation
 

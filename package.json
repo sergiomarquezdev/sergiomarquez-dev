@@ -2,6 +2,7 @@
 	"name": "sergiomarquez-web",
 	"type": "module",
 	"version": "1.0.0",
+	"packageManager": "pnpm@11.6.0",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -37,7 +38,7 @@
 		"@astrojs/check": "^0.9.9",
 		"@biomejs/biome": "^2.5.4",
 		"husky": "^9.1.7",
-		"lint-staged": "^16.4.0",
+		"lint-staged": "^17.0.8",
 		"typescript": "^6.0.3",
 		"vitest": "^4.1.10"
 	}

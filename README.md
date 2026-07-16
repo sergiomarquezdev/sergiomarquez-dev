@@ -150,7 +150,7 @@ sergiomarquez-dev/
 
 ### Prerequisites
 
-- **Node.js 22** (`.nvmrc` pins 22.18.0)
+- **Node.js 24** (`.nvmrc` pins 24.18.0)
 - **[pnpm](https://pnpm.io/)** (the project lockfile is `pnpm-lock.yaml`)
 
 ### Installation

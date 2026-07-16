@@ -8,7 +8,6 @@ on:
       - "**.md"
       - "docs/**"
       - ".vscode/**"
-      - "CHANGELOG.md"
   pull_request:
     branches:
       - main
@@ -33,26 +32,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
+      # pnpm before setup-node: the pnpm store cache needs `pnpm store path`.
+      # Version comes from the packageManager field in package.json.
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
       - name: Set up Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
-        with:
-          version: 10
-          run_install: false
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Setup Biome CLI
-        uses: biomejs/setup-biome@4c91541eaada48f67d7dbd7833600ce162b68f51 # v2.7.1
 
       - name: Lint
         run: pnpm run lint
@@ -75,13 +71,14 @@ jobs:
 
     steps:
       - name: Trigger Cloudflare Pages deploy
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.CF_PAGES_DEPLOY_HOOK_URL }}
         run: |
-          response=$(curl -sS -w "\n%{http_code}" -X POST "${{ secrets.CF_PAGES_DEPLOY_HOOK_URL }}")
-          http_code=$(echo "$response" | tail -1)
-          body=$(echo "$response" | head -1)
+          http_code=$(curl -sS -o /tmp/deploy_response.txt -w "%{http_code}" -X POST "$DEPLOY_HOOK_URL")
           echo "Cloudflare response: HTTP $http_code"
           if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
-            echo "Deploy hook failed: $body"
+            echo "Deploy hook failed:"
+            cat /tmp/deploy_response.txt
             exit 1
           fi
           echo "Deploy hook triggered successfully"
