@@ -1,12 +1,12 @@
 # Sergio Marquez - Personal Portfolio
 
-> **Bilingual (ES/EN) portfolio for a hybrid AI Engineer + builder profile — "Agentic Console" terminal aesthetic, built with Astro 5 and scoped vanilla CSS**
+> **Bilingual (ES/EN) portfolio for a hybrid AI Engineer + builder profile — "Agentic Console" terminal aesthetic, built with Astro 7 and scoped vanilla CSS**
 
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-99%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 [![CI](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml)
 
-Source code for my **personal portfolio**, positioned as a hybrid **AI Engineer + builder**: conversational, voice and generative AI agents (image and video) in production, plus applied-AI side builds. The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 5 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
+Source code for my **personal portfolio**, positioned as a hybrid **AI Engineer + builder**: conversational, voice and generative AI agents (image and video) in production, plus applied-AI side builds. The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 7 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
 
 Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 
@@ -51,11 +51,11 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 
 ## Tech Stack
 
-- **[Astro](https://astro.build/) ^5.16.0** -- Static site generator with i18n routing
-- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) ^3.6.0** -- i18n sitemap generation
+- **[Astro](https://astro.build/) ^7.1.0** -- Static site generator with i18n routing
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) ^3.7.3** -- i18n sitemap generation
 - **Scoped vanilla CSS** -- design tokens in `global.css` + a preflight-style reset (`reset.css`); no CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** -- Type-safe JavaScript
-- **[Vitest](https://vitest.dev/) ^4.0.18** -- Unit testing framework
+- **[Vitest](https://vitest.dev/) ^4.1.10** -- Unit testing framework
 - **[lightningcss](https://lightningcss.dev/)** -- CSS minification
 - **Fonts** -- [Geist Variable](https://vercel.com/font) self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`); [JetBrains Mono Variable](https://fontsource.org/fonts/jetbrains-mono) and [Instrument Serif](https://fontsource.org/fonts/instrument-serif) via Fontsource
 - **[Biome](https://biomejs.dev/)** -- Fast linting and formatting

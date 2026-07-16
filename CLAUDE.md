@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` through typed loader into Astro 5 components. `AGENTS.md` is a synced copy of this file -- update both together.
+Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` through typed loader into Astro 7 components. `AGENTS.md` is a synced copy of this file -- update both together.
 
 ## Rules
 

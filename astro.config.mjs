@@ -48,6 +48,9 @@ export default defineConfig({
       cssMinify: "lightningcss",
       rollupOptions: {
         output: {
+          // Applies to the prerender build, which emits the font assets.
+          // Astro 6+ scopes CLIENT asset output to vite.environments.client;
+          // add it there too if client-emitted assets ever appear.
           assetFileNames: "assets/[name].[hash][extname]",
         },
       },

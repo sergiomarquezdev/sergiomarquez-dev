@@ -1,9 +1,6 @@
 import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { defaultLocale, type Locale, locales } from "../i18n/index";
-
-const currentDir = dirname(fileURLToPath(import.meta.url));
 
 export interface CvMetric {
 	value: string;
@@ -91,7 +88,9 @@ export type CvData = {
 };
 
 function loadCv(locale: Locale): CvData {
-	const cvPath = join(currentDir, `../../public/cv.${locale}.json`);
+	// Resolve from project root: module-relative paths break in Astro 7,
+	// whose prerender chunks execute from dist/.prerender/chunks/
+	const cvPath = join(process.cwd(), `public/cv.${locale}.json`);
 	return JSON.parse(readFileSync(cvPath, "utf8"));
 }
 

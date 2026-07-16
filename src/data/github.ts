@@ -43,7 +43,7 @@ export async function getLatestCommit(): Promise<GitHubCommit | null> {
 				event.type === "PushEvent" && event.payload.commits && event.payload.commits.length > 0,
 		);
 
-		if (!pushEvent || !pushEvent.payload.commits) {
+		if (!pushEvent?.payload.commits) {
 			return null;
 		}
 
