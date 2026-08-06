@@ -10,8 +10,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Upgraded **Astro 5.16 → 7.1** (Vite 8, Rust compiler now default). `src/data/cv.ts` resolves `public/cv.*.json` from `process.cwd()` instead of module-relative paths: Astro 7 executes prerender chunks from `dist/.prerender/chunks/`, so `import.meta.url`-relative resolution pointed inside `dist/`. Verified the `dist/` layout is unchanged (fonts under `/assets/`, scripts under `/_astro/`) and the top-level `vite.build.rollupOptions.output` override still applies to the prerender build.
 - Updated @astrojs/sitemap 3.6 → 3.7.3, @astrojs/check 0.9.5 → 0.9.9, Biome 2.3 → 2.5.4, lightningcss 1.30 → 1.32, Vitest 4.0 → 4.1.10, lint-staged 16.2 → 17.0.8.
-- **TypeScript capped at ^6.0.3** (not 7.x): `astro check` depends on the TS Language Service API, which the TS 7 native compiler does not expose until 7.1.
+- **TypeScript capped at ^6.0.3** (not 7.x): `astro check` depends on the TS Language Service API, which the TS 7 native compiler does not expose until 7.1. Confirmed again on `@astrojs/check` 0.9.10, whose peer range is still `^5.0.0 || ^6.0.0`.
 - Fixed Biome 2.5 `useOptionalChain` warning in `src/data/github.ts`.
+
+### Security
+
+- Cleared all 16 advisories reported by `pnpm audit` (10 high, 6 moderate — all transitive). Astro 7.1.0 → 7.1.6 fixed `js-yaml`, `sharp`, `postcss`, `mdast-util-to-hast` and `picomatch`; `@astrojs/check` 0.9.9 → 0.9.10 fixed `ajv` and `fast-uri`; Vitest picked up a patched `picomatch`.
+- Added a `rollup: ^4.62.4` override in `pnpm-workspace.yaml`: `astro > @rollup/pluginutils` resolved rollup 4.44.2, vulnerable to arbitrary file write via path traversal ([GHSA-mw96-cpmx-2vgc](https://github.com/advisories/GHSA-mw96-cpmx-2vgc)). No upstream release lifts that transitive pin yet — remove the override once Astro ships one.
+- `pnpm audit` now reports no known vulnerabilities.
+
+### Tooling
+
+- Updated Biome 2.5.4 → 2.5.7, lint-staged 17.0.8 → 17.3.0, lightningcss 1.32 → 1.33, Fontsource packages 5.2.8 → 5.3.0.
+- Renamed the seven `biome-ignore lint/complexity/noImportant` suppressions in `src/styles/global.css` to `noImportantStyles`; Biome 2.5.7 no longer accepts the old category name and failed the whole lint run with `suppressions/parse` errors. Bumped `biome.json`'s `$schema` to 2.5.7.
 
 ### CI & Infrastructure
 

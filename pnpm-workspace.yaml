@@ -2,4 +2,7 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - astro@7.1.0
+  - astro@7.1.6
+overrides:
+  # astro > @rollup/pluginutils pins rollup < 4.59, vulnerable to GHSA-mw96-cpmx-2vgc
+  rollup: '^4.62.4'

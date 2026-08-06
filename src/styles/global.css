@@ -340,14 +340,14 @@ p {
 	footer,
 	nav,
 	.sidebar-left {
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		display: none !important;
 	}
 
 	body {
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		background-color: white !important;
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		color: black !important;
 		font-size: 12pt;
 		line-height: 1.4;
@@ -355,16 +355,16 @@ p {
 
 	a {
 		text-decoration: underline;
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		color: black !important;
 	}
 
 	main {
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		max-width: 100% !important;
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		margin: 0 !important;
-		/* biome-ignore lint/complexity/noImportant: Print styles require overrides */
+		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
 		padding: 0 !important;
 	}
 
