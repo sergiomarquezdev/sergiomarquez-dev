@@ -11,7 +11,7 @@
       "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "AI Engineer in Madrid. I build AI systems that reach production, not demos. In my main role: agentic and RAG assistants on GCP (Google ADK + LiteLLM), multi-LLM consensus document validation (from 70% to 90%), and a data platform with 3.6M+ records (−75% cost). In parallel I build and operate generative AI end to end: a voice agent that handles real phone calls, WhatsApp agents, and pipelines that turn a brief into video ads (script, voice, b-roll and render). I use Claude Code daily as an orchestrator. I measure in metrics, not demos.",
+    "summary": "AI Engineer in Madrid. I build AI systems that reach production, not demos. In my main role: agentic and RAG assistants on GCP (Google ADK + LiteLLM), multi-LLM consensus document validation (from 70% to 90%), and a data platform with 3.6M+ records (−75% cost). In parallel, through my own applied-AI studio, I built and operated generative AI end to end: a voice agent that handled real phone calls, WhatsApp agents, and pipelines that turned a brief into video ads (script, voice, b-roll and render). I use Claude Code daily as an orchestrator. I measure in metrics, not demos.",
     "headline": "I build AI agents and generative pipelines in production.",
     "headlineAccent": "in production.",
     "stackChips": ["Agentic AI", "Voice agents", "AI image/video gen", "Agentic RAG", "Vertex AI", "Claude Code"],
@@ -105,7 +105,7 @@
     },
     {
       "name": "AI Voice Receptionist 24/7",
-      "headline": "Conversational phone agent (ASR + LLM + TTS loop) that handles real calls and manages appointments by voice, integrated with telephony and scheduling.",
+      "headline": "Conversational phone agent (ASR + LLM + TTS loop) that handled real calls and managed appointments by voice, integrated with telephony and scheduling.",
       "stack": [
         "ElevenLabs Conversational AI",
         "Gemini",

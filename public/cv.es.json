@@ -11,7 +11,7 @@
       "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "AI Engineer en Madrid. Construyo sistemas de IA que llegan a producción, no demos. En mi trabajo principal: asistentes agénticos y RAG sobre GCP (Google ADK + LiteLLM), validación documental por consenso multi-LLM (del 70% al 90%) y una plataforma de datos con 3,6M+ registros (−75% de coste). En paralelo construyo y opero IA generativa de extremo a extremo: un agente de voz que atiende llamadas reales, agentes de WhatsApp y pipelines que convierten un brief en anuncios de vídeo (guion, voz, b-roll y render). Uso Claude Code a diario como orquestador. Mido en métricas, no en demos.",
+    "summary": "AI Engineer en Madrid. Construyo sistemas de IA que llegan a producción, no demos. En mi trabajo principal: asistentes agénticos y RAG sobre GCP (Google ADK + LiteLLM), validación documental por consenso multi-LLM (del 70% al 90%) y una plataforma de datos con 3,6M+ registros (−75% de coste). En paralelo, con mi propio estudio de IA aplicada, construí y operé IA generativa de extremo a extremo: un agente de voz que atendía llamadas reales, agentes de WhatsApp y pipelines que convertían un brief en anuncios de vídeo (guion, voz, b-roll y render). Uso Claude Code a diario como orquestador. Mido en métricas, no en demos.",
     "headline": "Construyo agentes de IA y pipelines generativos en producción.",
     "headlineAccent": "en producción.",
     "stackChips": ["Agentic AI", "Voice agents", "AI image/video gen", "Agentic RAG", "Vertex AI", "Claude Code"],
@@ -105,7 +105,7 @@
     },
     {
       "name": "Recepcionista de voz IA 24/7",
-      "headline": "Agente telefónico conversacional (ASR + LLM + TTS en bucle) que atiende llamadas reales y gestiona citas por voz, integrado con telefonía y agenda.",
+      "headline": "Agente telefónico conversacional (ASR + LLM + TTS en bucle) que atendió llamadas reales y gestionó citas por voz, integrado con telefonía y agenda.",
       "stack": [
         "ElevenLabs Conversational AI",
         "Gemini",
