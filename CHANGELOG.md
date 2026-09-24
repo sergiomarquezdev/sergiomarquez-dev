@@ -20,12 +20,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Updated @astrojs/sitemap 3.6 → 3.7.3, @astrojs/check 0.9.5 → 0.9.9, Biome 2.3 → 2.5.4, lightningcss 1.30 → 1.32, Vitest 4.0 → 4.1.10, lint-staged 16.2 → 17.0.8.
 - **TypeScript capped at ^6.0.3** (not 7.x): `astro check` depends on the TS Language Service API, which the TS 7 native compiler does not expose until 7.1. Confirmed again on `@astrojs/check` 0.9.10, whose peer range is still `^5.0.0 || ^6.0.0`.
 - Fixed Biome 2.5 `useOptionalChain` warning in `src/data/github.ts`.
+- Follow-up pass (2026-09-24): Astro 7.1.6 → 7.3.4, @astrojs/sitemap 3.7.3 → 3.7.4, Biome 2.5.7 → 2.5.14, lint-staged 17.3.0 → 17.5.1, Vitest 4.1.10 → **5.0.1** (major; no config or test changes needed — `vitest.config.ts` has no globals/plugins that Vitest 5 touches, all 23 tests pass unchanged).
+- Re-confirmed the **TypeScript ^6.0.3 cap still applies**: 6.0.3 remains the latest stable 6.x release and `@astrojs/check`'s peer range is still `^5.0.0 || ^6.0.0` (checked against `@astrojs/check@latest`, still 0.9.10) — TS 7.0.2 is out but unsupported by `astro check` until `@astrojs/check` adds a peer range for it.
+- Held back **Astro 7.3.5**: published ~8h before this run, inside pnpm 11's default minimum-release-age window. Kept 7.3.4 per policy instead of excluding it; no code changes needed either way.
+- `astro@7.1.6` was pinned in `minimumReleaseAgeExclude` (`pnpm-workspace.yaml`) — removed now that 7.1.6 is no longer resolved anywhere in the lockfile.
 
 ### Security
 
 - Cleared all 16 advisories reported by `pnpm audit` (10 high, 6 moderate — all transitive). Astro 7.1.0 → 7.1.6 fixed `js-yaml`, `sharp`, `postcss`, `mdast-util-to-hast` and `picomatch`; `@astrojs/check` 0.9.9 → 0.9.10 fixed `ajv` and `fast-uri`; Vitest picked up a patched `picomatch`.
 - Added a `rollup: ^4.62.4` override in `pnpm-workspace.yaml`: `astro > @rollup/pluginutils` resolved rollup 4.44.2, vulnerable to arbitrary file write via path traversal ([GHSA-mw96-cpmx-2vgc](https://github.com/advisories/GHSA-mw96-cpmx-2vgc)). No upstream release lifts that transitive pin yet — remove the override once Astro ships one.
 - `pnpm audit` now reports no known vulnerabilities.
+- Follow-up pass (2026-09-24): **removed the `rollup` override** — Astro 7.3's Vite 8 no longer resolves `rollup` anywhere in the tree (`@rollup/pluginutils` dependency is gone), confirmed via `grep -i rollup pnpm-lock.yaml` returning nothing before the override was dropped.
+- `pnpm audit` surfaced 7 new advisories after the Astro/Vitest bump (6 high, 1 moderate), all transitive and one version behind their fix: `nanoid` (astro > vite > postcss, GHSA-mwcw-c2x4-8c55), `fast-uri` ×4 (@astrojs/check > @astrojs/language-server > volar-service-*, host-confusion/SSRF advisories), `js-yaml` (astro > @astrojs/internal-helpers, GHSA-2883-xcg3-v3hh), `devalue` (astro, GHSA-9rgm-9g3h-6x36). None of the parent packages had shipped a release bumping these yet, so added same-major overrides in `pnpm-workspace.yaml`: `nanoid: '>=3.3.19 <4'`, `fast-uri: '>=3.1.8 <4'`, `js-yaml: '>=4.3.2 <5'`, `devalue: '>=5.9.4 <6'`. `pnpm audit` is clean again.
 
 ### Tooling
 
