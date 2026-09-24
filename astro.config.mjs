@@ -29,7 +29,7 @@ export default defineConfig({
       priority: 0.7,
       // Exclude social redirect stubs: they carry noindex, listing them contradicts it
       filter: (page) =>
-        !/\/(blog|github|instagram|linkedin|tiktok|twitter|x|yt|youtube)\/?$/.test(
+        !/\/(blog|github|linkedin|tiktok|twitter|x)\/?$/.test(
           new URL(page).pathname,
         ),
       i18n: {

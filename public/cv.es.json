@@ -8,9 +8,7 @@
       "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
       "github": "https://github.com/sergiomarquezdev",
       "x": "https://x.com/sergiomarquezp_",
-      "youtube": "https://www.youtube.com/@sergiomarquezp",
       "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
-      "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "AI Engineer en Madrid. Construyo sistemas de IA que llegan a producción, no demos. En mi trabajo principal: asistentes agénticos y RAG sobre GCP (Google ADK + LiteLLM), validación documental por consenso multi-LLM (del 70% al 90%) y una plataforma de datos con 3,6M+ registros (−75% de coste). En paralelo construyo y opero IA generativa de extremo a extremo: un agente de voz que atiende llamadas reales, agentes de WhatsApp y pipelines que convierten un brief en anuncios de vídeo (guion, voz, b-roll y render). Uso Claude Code a diario como orquestador. Mido en métricas, no en demos.",
@@ -20,11 +18,6 @@
     "status": {
       "available": true,
       "label": "Agentes de IA y generativo en producción"
-    },
-    "alsoRunning": {
-      "name": "Esem Projects",
-      "url": "https://esemprojects.es",
-      "description": "estudio de IA aplicada: agentes de voz y WhatsApp, generación de anuncios y automatización para negocios"
     }
   },
   "experience": [
@@ -227,11 +220,6 @@
         "description": "Notas técnicas sobre IA aplicada y backend en producción"
       },
       {
-        "platform": "youtube",
-        "handle": "@sergiomarquezp",
-        "description": "Tutoriales y casos prácticos de IA"
-      },
-      {
         "platform": "linkedin",
         "handle": "in/sergiomarquezp",
         "description": "Reflexiones sobre ingeniería IA"
@@ -245,11 +233,6 @@
         "platform": "tiktok",
         "handle": "@sergiomarquezp_",
         "description": "Pills cortas de IA"
-      },
-      {
-        "platform": "instagram",
-        "handle": "@sergiomarquezp_",
-        "description": "Reels y carruseles sobre IA, agentes y Claude Code"
       }
     ]
   },

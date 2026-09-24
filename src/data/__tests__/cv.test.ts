@@ -102,8 +102,8 @@ describe("cv data loader", () => {
 // The loader trusts JSON.parse (no runtime schema), so these tests are the
 // safety net that catches typos in cv.es.json / cv.en.json before the build.
 describe("cv data validation", () => {
-	const VALID_PLATFORMS = ["blog", "youtube", "linkedin", "x", "tiktok", "instagram"];
-	const REQUIRED_URLS = ["site", "linkedin", "github", "x", "youtube", "tiktok"] as const;
+	const VALID_PLATFORMS = ["blog", "linkedin", "x", "tiktok"];
+	const REQUIRED_URLS = ["site", "linkedin", "github", "x", "tiktok"] as const;
 
 	/** Collects every key path recursively, including array indices */
 	function keyPaths(value: unknown, prefix = ""): string[] {

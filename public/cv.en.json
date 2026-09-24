@@ -8,9 +8,7 @@
       "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
       "github": "https://github.com/sergiomarquezdev",
       "x": "https://x.com/sergiomarquezp_",
-      "youtube": "https://www.youtube.com/@sergiomarquezp",
       "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
-      "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "AI Engineer in Madrid. I build AI systems that reach production, not demos. In my main role: agentic and RAG assistants on GCP (Google ADK + LiteLLM), multi-LLM consensus document validation (from 70% to 90%), and a data platform with 3.6M+ records (−75% cost). In parallel I build and operate generative AI end to end: a voice agent that handles real phone calls, WhatsApp agents, and pipelines that turn a brief into video ads (script, voice, b-roll and render). I use Claude Code daily as an orchestrator. I measure in metrics, not demos.",
@@ -20,11 +18,6 @@
     "status": {
       "available": true,
       "label": "AI agents and generative AI in production"
-    },
-    "alsoRunning": {
-      "name": "Esem Projects",
-      "url": "https://esemprojects.es",
-      "description": "applied-AI studio: voice and WhatsApp agents, ad generation and automation for businesses"
     }
   },
   "experience": [
@@ -227,11 +220,6 @@
         "description": "Technical notes on applied AI and production backend"
       },
       {
-        "platform": "youtube",
-        "handle": "@sergiomarquezp",
-        "description": "Tutorials and practical AI case studies"
-      },
-      {
         "platform": "linkedin",
         "handle": "in/sergiomarquezp",
         "description": "Reflections on AI engineering"
@@ -245,11 +233,6 @@
         "platform": "tiktok",
         "handle": "@sergiomarquezp_",
         "description": "Short AI pills"
-      },
-      {
-        "platform": "instagram",
-        "handle": "@sergiomarquezp_",
-        "description": "Reels and carousels about AI, agents and Claude Code"
       }
     ]
   },

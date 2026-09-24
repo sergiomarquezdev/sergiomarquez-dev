@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Removed
+
+- Deleted channels and ventures (2026-09-24). The YouTube channel (`@sergiomarquezp`) and the Instagram account (`@sergiomarquezp_`) no longer exist.
+  - Both leave `basics.urls` and the "Writing & Presence" channels in `cv.es.json`/`cv.en.json`, the `CvData` types and the data tests, `SocialLinks` and `Writing`.
+  - Also removed: the `/youtube`, `/yt` and `/instagram` redirect pages, their sitemap exclusions and the now-unused `YouTubeIcon`/`InstagramIcon`.
+  - JSON-LD `sameAs` swaps YouTube for the TikTok profile, which is still live.
+  - The "also running Esem Projects" line is gone: the studio is closed and `esemprojects.es` is expiring.
+
 ### Dependencies
 
 - Upgraded **Astro 5.16 → 7.1** (Vite 8, Rust compiler now default). `src/data/cv.ts` resolves `public/cv.*.json` from `process.cwd()` instead of module-relative paths: Astro 7 executes prerender chunks from `dist/.prerender/chunks/`, so `import.meta.url`-relative resolution pointed inside `dist/`. Verified the `dist/` layout is unchanged (fonts under `/assets/`, scripts under `/_astro/`) and the top-level `vite.build.rollupOptions.output` override still applies to the prerender build.

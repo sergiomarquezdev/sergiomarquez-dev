@@ -35,7 +35,7 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 - **Impact Bar**: Four production metrics in mono lime — cost, validation rate, time saved, latency. Pulled from `cv.metrics`.
 - **Cases (replaces flat Experience timeline)**: Each work entry is a card with KPI badges front-and-center, headline in serif and arrow-marker bullets.
 - **Projects**: Featured project gets a large card with KPI and lime accent border; secondary projects in a responsive grid.
-- **Writing & Presence**: Consolidated grid of blog + social channels (YouTube, LinkedIn, X, TikTok, Instagram, blog) with platform icon, handle and one-line description.
+- **Writing & Presence**: Consolidated grid of blog + social channels (LinkedIn, X, TikTok, blog) with platform icon, handle and one-line description.
 - **CTA Footer**: Full-width "¿Construimos algo con agentes?" — serif headline + lime button + socials.
 - **Sidebar layout** (desktop): Sticky left console panel with name (serif), `$ whoami` + tagline comment, GitHub activity, `cd ~/<section>` scroll-spy command nav, `⌘K` chip and social links.
 - **Mobile bottom nav**: Sticky bar with icons, scroll-spy and safe-area support.
@@ -44,7 +44,7 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 - **Custom 404**: Branded ES/EN error page with home CTA.
 - **Accessibility**: Skip links, ARIA labels, keyboard nav, `prefers-reduced-motion` support, focus-visible with lime outline.
 - **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap (social redirects excluded), PWA manifest.
-- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram` → external profiles.
+- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/blog`, `/tiktok` → external profiles.
 - **Performance**: PageSpeed mobile 99 / desktop 100, accessibility/best-practices/SEO 100. Fully inlined CSS, preloaded latin-subset fonts, immutable asset caching (`public/_headers`), zero client frameworks (~9 KB of inline vanilla JS).
 
 ---
@@ -97,7 +97,7 @@ sergiomarquez-dev/
 │   │   ├── LanguageSwitcher.astro
 │   │   ├── SergioMark.astro     # Path-based "S■M" logo
 │   │   ├── Spotlight.astro      # Cursor-tracking spotlight effect
-│   │   ├── icons/               # SVG icon components (GitHub, LinkedIn, X, YouTube, TikTok, Instagram, …)
+│   │   ├── icons/               # SVG icon components (GitHub, LinkedIn, X, TikTok, …)
 │   │   ├── sections/            # Hero, ImpactBar, CasesGrid, CaseStudy,
 │   │   │                        #   FeaturedProject, ProjectCard, ProjectsSection, Writing
 │   │   ├── ui/                  # DotGrid, MetricKpi, StackChip
@@ -124,11 +124,8 @@ sergiomarquez-dev/
 │   │   ├── github/index.astro
 │   │   ├── x/index.astro
 │   │   ├── twitter/index.astro
-│   │   ├── youtube/index.astro
-│   │   ├── yt/index.astro
 │   │   ├── blog/index.astro
-│   │   ├── tiktok/index.astro
-│   │   └── instagram/index.astro
+│   │   └── tiktok/index.astro
 │   ├── scripts/
 │   │   └── scrollSpy.ts         # Shared scroll-spy (sidebar nav + mobile nav)
 │   └── styles/
@@ -239,8 +236,7 @@ _AI Engineer -- conversational, voice and generative AI agents (image and video)
 - LinkedIn: [sergiomarquezp](https://www.linkedin.com/in/sergiomarquezp/)
 - GitHub: [sergiomarquezdev](https://github.com/sergiomarquezdev)
 - X (Twitter): [@sergiomarquezp\_](https://x.com/sergiomarquezp_)
-- YouTube: [@sergiomarquezp](https://www.youtube.com/@sergiomarquezp)
-- Instagram: [@sergiomarquezp\_](https://www.instagram.com/sergiomarquezp_/)
+- TikTok: [@sergiomarquezp\_](https://www.tiktok.com/@sergiomarquezp_)
 
 ---
 
