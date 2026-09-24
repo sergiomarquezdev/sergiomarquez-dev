@@ -31,6 +31,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Security
 
+- Security headers (2026-09-24): `public/_headers` gains a `/*` block with Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy and HSTS, matching the blog.
+  - The CSP allows only the site's own origin. `'unsafe-inline'` stays for scripts and styles because Astro inlines both (`inlineStylesheets: "always"`) and Cloudflare injects an inline bot-detection script.
+  - `font-src` includes `data:` because the build inlines font files as `data:font/woff2` URIs; without it JetBrains Mono failed to load.
+  - Checked in Chrome against the built `dist/` served with these headers: no violations on `/`, `/en/` or the 404 page, and the Ctrl+K palette still works. A control run without `data:` caught the font violation, so the check is not blind.
+- CI runs `pnpm audit --audit-level=moderate` after the build, with no ignores.
+- `.github/dependabot.yml` keeps the SHA-pinned GitHub Actions current (monthly, grouped). npm dependencies stay manual and gated by the audit step.
+- Added `SECURITY.md`: report through GitHub private vulnerability reporting or contacto@sergiomarquez.dev.
 - Cleared all 16 advisories reported by `pnpm audit` (10 high, 6 moderate — all transitive). Astro 7.1.0 → 7.1.6 fixed `js-yaml`, `sharp`, `postcss`, `mdast-util-to-hast` and `picomatch`; `@astrojs/check` 0.9.9 → 0.9.10 fixed `ajv` and `fast-uri`; Vitest picked up a patched `picomatch`.
 - Added a `rollup: ^4.62.4` override in `pnpm-workspace.yaml`: `astro > @rollup/pluginutils` resolved rollup 4.44.2, vulnerable to arbitrary file write via path traversal ([GHSA-mw96-cpmx-2vgc](https://github.com/advisories/GHSA-mw96-cpmx-2vgc)). No upstream release lifts that transitive pin yet — remove the override once Astro ships one.
 - `pnpm audit` now reports no known vulnerabilities.

@@ -1,0 +1,14 @@
+# Keeps the SHA-pinned GitHub Actions current. npm dependencies are not listed
+# here on purpose: they are upgraded by hand and gated by `pnpm audit` in CI.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: ci
