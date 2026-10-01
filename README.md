@@ -51,11 +51,11 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 
 ## Tech Stack
 
-- **[Astro](https://astro.build/) ^7.1.0** -- Static site generator with i18n routing
+- **[Astro](https://astro.build/) ^7.3.4** -- Static site generator with i18n routing
 - **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) ^3.7.3** -- i18n sitemap generation
 - **Scoped vanilla CSS** -- design tokens in `global.css` + a preflight-style reset (`reset.css`); no CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** -- Type-safe JavaScript
-- **[Vitest](https://vitest.dev/) ^4.1.10** -- Unit testing framework
+- **[Vitest](https://vitest.dev/) ^5.0.1** -- Unit testing framework
 - **[lightningcss](https://lightningcss.dev/)** -- CSS minification
 - **Fonts** -- [Geist Variable](https://vercel.com/font) self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`); [JetBrains Mono Variable](https://fontsource.org/fonts/jetbrains-mono) and [Instrument Serif](https://fontsource.org/fonts/instrument-serif) via Fontsource
 - **[Biome](https://biomejs.dev/)** -- Fast linting and formatting
@@ -69,13 +69,14 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 ```
 sergiomarquez-dev/
 ├── .github/workflows/ci.yml     # GitHub Actions CI pipeline + CF Pages deploy hook
+├── .github/dependabot.yml       # Monthly grouped GitHub Actions updates
 ├── .husky/                      # Git hooks (pre-commit via lint-staged)
 ├── .vscode/                     # Shared VS Code settings & extensions
 ├── docs/
 │   ├── ARCHITECTURE.md          # Architecture documentation
 │   └── archive/                 # Historical specs (shipped work), kept for reference
 ├── public/                      # Static assets served as-is
-│   ├── _headers                 # Cloudflare immutable cache-control rules
+│   ├── _headers                 # Cloudflare headers: cache-control, CSP, HSTS and other security headers
 │   ├── ads.txt                  # Google AdSense verification
 │   ├── cv.es.json               # Portfolio data (Spanish)
 │   ├── cv.en.json               # Portfolio data (English)
@@ -138,6 +139,7 @@ sergiomarquez-dev/
 ├── CLAUDE.md                    # Agent instructions (AGENTS.md is a synced copy)
 ├── AGENTS.md
 ├── CHANGELOG.md
+├── SECURITY.md                  # Vulnerability reporting policy
 └── package.json
 ```
 
