@@ -19,6 +19,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Profile copy (2026-10-04), ES and EN: hero (role, headline, tagline, status, chips and proof line), summary, current-role experience, SEO title/description, OG alt text and footer CTA now describe the current work (LLM systems on Google Cloud, agents, RAG, data) and own projects without the closed studio. Location is Badajoz.
+  - Work metrics removed: the `metrics` impact bar and the current-role KPIs are gone, and the highlights are qualitative.
+  - Projects: added One Bad Wire, Pingufly (itch.io), the daily short AI videos and acestream-docker-home; the blog headline reflects the single daily post; the voice receptionist no longer claims real calls.
+  - The hero proof line no longer claims "40+ open-source repos" (there are 24 public repos), and "Ver work" reads "Ver proyectos".
+  - EN full-stack KPI label fixed from "3 meses" to "3 months".
+
 - CV copy (2026-09-24): the generative-AI work from the closed applied-AI studio is now described as past experience ("En paralelo, con mi propio estudio de IA aplicada, construí y operé…" / "through my own applied-AI studio, I built and operated…"). The voice-receptionist project headline moves to the past tense ("atendió llamadas reales" / "handled real calls"), because that agent no longer runs.
 
 ### Removed

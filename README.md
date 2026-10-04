@@ -1,12 +1,12 @@
 # Sergio Marquez - Personal Portfolio
 
-> **Bilingual (ES/EN) portfolio for a hybrid AI Engineer + builder profile — "Agentic Console" terminal aesthetic, built with Astro 7 and scoped vanilla CSS**
+> **Bilingual (ES/EN) portfolio for a backend & AI engineer who builds his own projects — "Agentic Console" terminal aesthetic, built with Astro 7 and scoped vanilla CSS**
 
 [![Lighthouse Performance](https://img.shields.io/badge/Lighthouse-99%2B-brightgreen)](https://pagespeed.web.dev/)
 [![Lighthouse SEO](https://img.shields.io/badge/SEO-100%2F100-brightgreen)](https://pagespeed.web.dev/)
 [![CI](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiomarquezdev/sergiomarquez-dev/actions/workflows/ci.yml)
 
-Source code for my **personal portfolio**, positioned as a hybrid **AI Engineer + builder**: conversational, voice and generative AI agents (image and video) in production, plus applied-AI side builds. The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 7 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
+Source code for my **personal portfolio**, for a **backend & AI engineer**: LLM systems in production on Google Cloud (agents, RAG, data) plus his own projects built with AI agents. The UI adopts an "Agentic Console" terminal aesthetic. Built with Astro 7 (SSG) and scoped vanilla CSS over design tokens, fully driven by `public/cv.{es,en}.json`.
 
 Live Site: [sergiomarquez.dev](https://sergiomarquez.dev)
 
@@ -233,7 +233,7 @@ pnpm run validate       # type-check + lint + test + build
 ## Contact
 
 **Sergio Marquez**
-_AI Engineer -- conversational, voice and generative AI agents (image and video) in production_
+_Backend & AI Engineer -- agents, RAG and LLMs in production_
 
 - Website: [sergiomarquez.dev](https://sergiomarquez.dev)
 - Email: [contacto@sergiomarquez.dev](mailto:contacto@sergiomarquez.dev)

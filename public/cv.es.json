@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "AI Engineer · Agentes conversacionales, de voz y pipelines generativos de imagen y vídeo en producción",
+    "tagline": "Ingeniero backend e IA · Agentes, RAG y LLMs en producción",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -12,13 +12,20 @@
       "tiktok": "https://www.tiktok.com/@sergio_marquezp",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "AI Engineer en Madrid. Construyo sistemas de IA que llegan a producción, no demos. En mi trabajo principal: asistentes agénticos y RAG sobre GCP (Google ADK + LiteLLM), validación documental por consenso multi-LLM (del 70% al 90%) y una plataforma de datos con 3,6M+ registros (−75% de coste). En paralelo, con mi propio estudio de IA aplicada, construí y operé IA generativa de extremo a extremo: un agente de voz que atendía llamadas reales, agentes de WhatsApp y pipelines que convertían un brief en anuncios de vídeo (guion, voz, b-roll y render). Uso Claude Code a diario como orquestador. Mido en métricas, no en demos.",
-    "headline": "Construyo agentes de IA y pipelines generativos en producción.",
-    "headlineAccent": "en producción.",
-    "stackChips": ["Agentic AI", "Voice agents", "AI image/video gen", "Agentic RAG", "Vertex AI", "Claude Code"],
+    "summary": "Ingeniero backend e IA en Badajoz. En VITALY diseño y llevo a producción sistemas con LLMs sobre Google Cloud: asistentes multi-agente con RAG y voz, validación de documentos con modelos multimodales, pipelines de datos y automatizaciones de negocio. Fuera del trabajo construyo proyectos propios: agentes de voz y de WhatsApp, pipelines de imagen y vídeo, un blog que se publica solo cada día y algún videojuego. Programo a diario con agentes desde 2024 (Claude Code y Codex) y reviso con varios modelos antes de cambios críticos.",
+    "headline": "Construyo agentes y sistemas de IA que llegan a producción.",
+    "headlineAccent": "llegan a producción.",
+    "stackChips": [
+      "Agentes de IA",
+      "RAG",
+      "Python",
+      "TypeScript",
+      "GCP",
+      "Claude Code"
+    ],
     "status": {
       "available": true,
-      "label": "Agentes de IA y generativo en producción"
+      "label": "Agentes de IA y RAG en producción"
     }
   },
   "experience": [
@@ -26,24 +33,20 @@
       "company": "VITALY",
       "role": "Ingeniero de IA",
       "period": "May 2025 – Presente",
-      "summary": "Ingeniero de IA construyendo sistemas agénticos y RAG en producción, sobre una plataforma de datos en GCP y con prácticas de GitOps.",
+      "summary": "Diseño y llevo a producción sistemas de IA con LLMs sobre Google Cloud, combinando backend, datos, evaluación y operación.",
       "highlights": [
-        "Asistente conversacional multi-tenant con arquitectura agéntica (orquestador y sub-agentes) sobre Google ADK, con enrutado multi-proveedor vía LiteLLM configurable sin redeploy.",
-        "Subsistema de evaluación automática de calidad RAG (LLM-as-judge, varias dimensiones) con generación de datasets en la ingesta; corregido un fallo que redujo los falsos negativos del 91% a casi 0%.",
-        "Pipeline de validación documental por consenso multi-LLM (GPT + Claude + Gemini) con OCR: tasa de validación del 70% al 90%.",
-        "Plataforma de datos en GCP (BigQuery, Dataform, Dataflow; arquitectura medallion): 3,6M+ registros procesados sin pérdida de datos, backfill 2× más rápido (34 → 17 min) y limpieza de documentos huérfanos; coste del proceso reducido ~75% (de ~1.400 € a ~300 €).",
-        "Búsqueda híbrida (vector + texto + RRF) con reranking y control de acceso por planes; prompts y modelos configurables por agente para optimizar coste y latencia.",
-        "Migración del chat a arquitectura agéntica (Google ADK + LiteLLM): ~15% menos latencia y ~35% menos coste de infraestructura.",
-        "Desarrollo asistido por IA como práctica diaria: Claude Code (agentes, orquestadores, skills) y revisión multi-modelo (Codex/GPT, Gemini) antes de cambios críticos.",
-        "GitOps en GKE multi-cluster (demo → preprod → prod), CI/CD en GitLab con seguridad shift-left (Trivy) y observabilidad (OpenTelemetry/New Relic); cobertura mínima del 80% como gate.",
-        "Stack: Python, FastAPI, Google ADK, Vertex AI, LiteLLM, BigQuery, Dataform, Dataflow, MongoDB, Firestore, Oracle, GKE, GitLab CI/CD."
+        "Owner end-to-end de un asistente conversacional multi-tenant en producción, con arquitectura multi-agente (Google ADK + LiteLLM), RAG, enrutado multi-proveedor de modelos y voz (STT/TTS).",
+        "Evaluación automática de calidad RAG (LLM-as-judge) con generación de datasets en la ingesta.",
+        "Validación documental con modelos multimodales y comparativa continua de proveedores (Gemini, Claude y GPT).",
+        "Plataforma de datos en GCP (BigQuery, Dataform, Dataflow) con backfills controlados en coste y alertas, y la API que sirve ese contexto, cifrado, a los asistentes.",
+        "Aplicación interna de gobierno de casos de uso de IA, con prevaloración por LLM, de la arquitectura a las demos con negocio.",
+        "Agentes que convierten una llamada en datos estructurados (Whisper + Gemini) y extracción híbrida (reglas + LLM) de documentos PDF.",
+        "Automatizaciones de negocio en producción y estándares de calidad para los repositorios del equipo (tests, SAST, CVEs y CI).",
+        "GitOps en GKE multi-cluster, CI/CD en GitLab y observabilidad con OpenTelemetry y New Relic.",
+        "Desarrollo asistido por IA con Claude Code (agentes, skills) y revisión multi-modelo para cambios críticos.",
+        "Stack: Python, FastAPI, Google ADK, LiteLLM, Vertex AI, BigQuery, Dataform, Dataflow, MongoDB, PostgreSQL, Firestore, Oracle, GKE, GitLab CI/CD."
       ],
-      "headline": "Sistemas de IA agéntica en producción: RAG, evaluación LLM y plataforma de datos en GCP, con métricas reales.",
-      "kpis": [
-        { "value": "70→90%", "label": "validación" },
-        { "value": "−75%", "label": "coste datos" },
-        { "value": "3,6M", "label": "registros" }
-      ]
+      "headline": "IA aplicada de principio a fin: asistentes, documentos, datos y operación."
     },
     {
       "company": "VITALY",
@@ -59,8 +62,14 @@
       ],
       "headline": "Backend Java/Spring con liderazgo en migración a GKE y CI/CD.",
       "kpis": [
-        { "value": "GKE", "label": "migración liderada" },
-        { "value": "3 meses", "label": "Dublín 2022" }
+        {
+          "value": "GKE",
+          "label": "migración liderada"
+        },
+        {
+          "value": "3 meses",
+          "label": "Dublín 2022"
+        }
       ]
     },
     {
@@ -77,43 +86,54 @@
   "projects": [
     {
       "name": "One dAIly Blog",
-      "headline": "Blog 100% autónomo: agentes de IA generan, ilustran y publican un artículo técnico cada día, con pipeline de vídeo viral y distribución multicanal.",
+      "headline": "Blog autónomo: un pipeline con IA investiga, escribe, ilustra y publica un artículo técnico cada día, sin revisión manual.",
       "stack": [
         "Claude",
+        "Codex",
         "fal.ai FLUX",
-        "Veo 3.1",
-        "ElevenLabs",
+        "Astro",
         "Node.js",
         "PostgreSQL"
       ],
       "url": "https://blog.sergiomarquez.dev",
       "private": true,
       "featured": true,
-      "kpi": { "value": "1/día", "label": "post autónomo" }
+      "kpi": {
+        "value": "1/día",
+        "label": "post autónomo"
+      }
     },
     {
-      "name": "Generador de anuncios de vídeo IA",
-      "headline": "De un brief de texto a un anuncio vertical 9:16 completo: guion con Gemini, voz con ElevenLabs, b-roll re-rankeado por CLIP y render con ffmpeg, todo automático.",
+      "name": "One Bad Wire",
+      "headline": "Juego de puzles: repara el cableado de una centralita antes de que todo falle. Hecho con Godot, con ranking online y versión web.",
       "stack": [
-        "Gemini 2.5 Flash",
-        "ElevenLabs",
-        "fal.ai FLUX",
-        "Replicate CLIP",
-        "ffmpeg",
-        "Next.js"
+        "Godot",
+        "GDScript",
+        "Claude Code"
       ],
+      "url": "https://sergiomarquezdev.itch.io/one-bad-wire",
       "private": true
     },
     {
-      "name": "Recepcionista de voz IA 24/7",
-      "headline": "Agente telefónico conversacional (ASR + LLM + TTS en bucle) que atendió llamadas reales y gestionó citas por voz, integrado con telefonía y agenda.",
+      "name": "Pingufly",
+      "headline": "Lanza un pingüino lo más lejos posible. Homenaje a Yeti Sports, rehecho en 3D con Godot y modelos generados con IA.",
       "stack": [
-        "ElevenLabs Conversational AI",
-        "Gemini",
-        "Cloudflare Workers",
-        "SIP",
-        "GoHighLevel"
+        "Godot",
+        "Meshy",
+        "Blender"
       ],
+      "url": "https://sergiomarquezdev.itch.io/pingufly",
+      "private": true
+    },
+    {
+      "name": "Vídeos cortos de IA",
+      "headline": "Serie diaria de vídeos verticales que explican conceptos de IA, generados por un pipeline propio: guion, voz, animación y subtítulos.",
+      "stack": [
+        "TypeScript",
+        "Remotion",
+        "ElevenLabs"
+      ],
+      "url": "https://www.youtube.com/@sergio_marquezp",
       "private": true
     },
     {
@@ -130,17 +150,43 @@
       "private": true
     },
     {
-      "name": "AI Photo Transformer",
-      "headline": "Transformación de retratos con IA: Gemini clasifica y mejora el prompt y Seedream 4 genera la imagen en 4K, con progreso en streaming (SSE).",
+      "name": "Recepcionista de voz IA 24/7",
+      "headline": "Agente telefónico conversacional (ASR + LLM + TTS en bucle) que atiende llamadas, responde dudas y gestiona citas por voz, integrado con telefonía y agenda.",
       "stack": [
-        "FastAPI",
-        "Python",
-        "Gemini 2.0 Flash",
-        "Replicate",
-        "Seedream 4",
-        "PostgreSQL"
+        "ElevenLabs Conversational AI",
+        "Gemini",
+        "Cloudflare Workers",
+        "SIP",
+        "GoHighLevel"
       ],
       "private": true
+    },
+    {
+      "name": "Generador de anuncios de vídeo IA",
+      "headline": "De un brief de texto a un anuncio vertical 9:16 completo: guion con Gemini, voz con ElevenLabs, b-roll re-rankeado por CLIP y render con ffmpeg, todo automático.",
+      "stack": [
+        "Gemini 2.5 Flash",
+        "ElevenLabs",
+        "fal.ai FLUX",
+        "Replicate CLIP",
+        "ffmpeg",
+        "Next.js"
+      ],
+      "private": true
+    },
+    {
+      "name": "acestream-docker-home",
+      "headline": "Acestream con un clic en Windows, Linux y macOS gracias a Docker, con reproductor web en castellano e inglés.",
+      "stack": [
+        "Docker",
+        "Python",
+        "Shell"
+      ],
+      "url": "https://github.com/sergiomarquezdev/acestream-docker-home",
+      "github": [
+        "https://github.com/sergiomarquezdev/acestream-docker-home"
+      ],
+      "private": false
     },
     {
       "name": "Búsqueda vectorial multimodal",
@@ -157,6 +203,19 @@
         "https://github.com/sergiomarquezdev/gemini-embeddings-2-mongo-demo"
       ],
       "private": false
+    },
+    {
+      "name": "AI Photo Transformer",
+      "headline": "Transformación de retratos con IA: Gemini clasifica y mejora el prompt y Seedream 4 genera la imagen en 4K, con progreso en streaming (SSE).",
+      "stack": [
+        "FastAPI",
+        "Python",
+        "Gemini 2.0 Flash",
+        "Replicate",
+        "Seedream 4",
+        "PostgreSQL"
+      ],
+      "private": true
     },
     {
       "name": "Agente personal con Google ADK",
@@ -190,35 +249,13 @@
       "private": false
     }
   ],
-  "metrics": [
-    {
-      "value": "−75%",
-      "label": "coste de procesado",
-      "context": "Plataforma de datos en GCP: procesado más rápido y limpieza de documentos huérfanos"
-    },
-    {
-      "value": "70 → 90%",
-      "label": "validación de documentos",
-      "context": "Consenso multi-LLM (GPT + Claude + Gemini) con OCR ajustado"
-    },
-    {
-      "value": "−35%",
-      "label": "coste de infraestructura",
-      "context": "Migración del chat a arquitectura agéntica con Google ADK + LiteLLM"
-    },
-    {
-      "value": "3,6M+",
-      "label": "registros procesados",
-      "context": "Plataforma de datos en GCP (medallion) con 0 pérdida de datos"
-    }
-  ],
   "writing": {
     "blogUrl": "https://blog.sergiomarquez.dev",
     "channels": [
       {
         "platform": "blog",
         "handle": "blog.sergiomarquez.dev",
-        "description": "Notas técnicas sobre IA aplicada y backend en producción"
+        "description": "Un artículo técnico al día, generado con IA"
       },
       {
         "platform": "linkedin",
@@ -238,7 +275,7 @@
       {
         "platform": "tiktok",
         "handle": "@sergio_marquezp",
-        "description": "Pills cortas de IA"
+        "description": "Vídeos cortos de IA"
       }
     ]
   },
