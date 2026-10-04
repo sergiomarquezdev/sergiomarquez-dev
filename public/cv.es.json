@@ -8,7 +8,7 @@
       "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
       "github": "https://github.com/sergiomarquezdev",
       "x": "https://x.com/sergiomarquezp_",
-      "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
+      "tiktok": "https://www.tiktok.com/@sergio_marquezp",
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "AI Engineer en Madrid. Construyo sistemas de IA que llegan a producción, no demos. En mi trabajo principal: asistentes agénticos y RAG sobre GCP (Google ADK + LiteLLM), validación documental por consenso multi-LLM (del 70% al 90%) y una plataforma de datos con 3,6M+ registros (−75% de coste). En paralelo, con mi propio estudio de IA aplicada, construí y operé IA generativa de extremo a extremo: un agente de voz que atendía llamadas reales, agentes de WhatsApp y pipelines que convertían un brief en anuncios de vídeo (guion, voz, b-roll y render). Uso Claude Code a diario como orquestador. Mido en métricas, no en demos.",
@@ -231,7 +231,7 @@
       },
       {
         "platform": "tiktok",
-        "handle": "@sergiomarquezp_",
+        "handle": "@sergio_marquezp",
         "description": "Pills cortas de IA"
       }
     ]

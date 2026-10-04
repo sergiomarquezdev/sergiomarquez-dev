@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- TikTok profile link (2026-10-04): the account is `@sergio_marquezp`, not `@sergiomarquezp_` (that handle does not exist on TikTok). Fixed in `basics.urls.tiktok` and the "Writing & Presence" handle of `cv.es.json`/`cv.en.json`, the `Writing` URL map and the README. X stays `@sergiomarquezp_`.
+
 ### Changed
 
 - CV copy (2026-09-24): the generative-AI work from the closed applied-AI studio is now described as past experience ("En paralelo, con mi propio estudio de IA aplicada, construí y operé…" / "through my own applied-AI studio, I built and operated…"). The voice-receptionist project headline moves to the past tense ("atendió llamadas reales" / "handled real calls"), because that agent no longer runs.

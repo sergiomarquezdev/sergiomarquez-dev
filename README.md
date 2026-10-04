@@ -238,7 +238,7 @@ _AI Engineer -- conversational, voice and generative AI agents (image and video)
 - LinkedIn: [sergiomarquezp](https://www.linkedin.com/in/sergiomarquezp/)
 - GitHub: [sergiomarquezdev](https://github.com/sergiomarquezdev)
 - X (Twitter): [@sergiomarquezp\_](https://x.com/sergiomarquezp_)
-- TikTok: [@sergiomarquezp\_](https://www.tiktok.com/@sergiomarquezp_)
+- TikTok: [@sergio\_marquezp](https://www.tiktok.com/@sergio_marquezp)
 
 ---
 

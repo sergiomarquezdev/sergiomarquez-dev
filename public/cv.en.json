@@ -8,7 +8,7 @@
       "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
       "github": "https://github.com/sergiomarquezdev",
       "x": "https://x.com/sergiomarquezp_",
-      "tiktok": "https://www.tiktok.com/@sergiomarquezp_",
+      "tiktok": "https://www.tiktok.com/@sergio_marquezp",
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "AI Engineer in Madrid. I build AI systems that reach production, not demos. In my main role: agentic and RAG assistants on GCP (Google ADK + LiteLLM), multi-LLM consensus document validation (from 70% to 90%), and a data platform with 3.6M+ records (−75% cost). In parallel, through my own applied-AI studio, I built and operated generative AI end to end: a voice agent that handled real phone calls, WhatsApp agents, and pipelines that turned a brief into video ads (script, voice, b-roll and render). I use Claude Code daily as an orchestrator. I measure in metrics, not demos.",
@@ -231,7 +231,7 @@
       },
       {
         "platform": "tiktok",
-        "handle": "@sergiomarquezp_",
+        "handle": "@sergio_marquezp",
         "description": "Short AI pills"
       }
     ]
