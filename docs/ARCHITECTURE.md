@@ -127,7 +127,7 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 - **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `pnpm run validate`.
 - **i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time.
-- **Redirect pages**: 6 trivial files that return 301 responses. Verified by build success.
+- **Redirect pages**: 8 trivial files that return 301 responses. Verified by build success.
 
 ### Test Utilities
 
@@ -172,7 +172,7 @@ Astro Content Collections are designed for Markdown/MDX content with frontmatter
 
 ### Why Manual Redirect Pages
 
-There are 6 redirect pages (`/linkedin`, `/github`, `/x`, `/twitter`, `/blog`, `/tiktok`). `/youtube`, `/yt` and `/instagram` were removed on 2026-09-24 together with those channels; they now fall through to the 404 page. Each is a trivial `.astro` file returning a 301. Generating them from data would save ~50 lines but add indirection. YAGNI -- the manual approach is readable and maintainable at this scale.
+There are 8 redirect pages (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`). `/instagram` was removed on 2026-09-24 together with that account and falls through to the 404 page; `/youtube` and `/yt` came back on 2026-10-04 with the new channel. Each is a trivial `.astro` file returning a 301. Generating them from data would save ~50 lines but add indirection. YAGNI -- the manual approach is readable and maintainable at this scale.
 
 ### Why CSS Custom Properties (and No Framework)
 

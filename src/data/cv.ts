@@ -19,7 +19,7 @@ export interface CvStatus {
 }
 
 export interface CvWritingChannel {
-	platform: "blog" | "linkedin" | "x" | "tiktok";
+	platform: "blog" | "youtube" | "linkedin" | "x" | "tiktok";
 	handle: string;
 	description: string;
 }
@@ -45,6 +45,7 @@ export type CvData = {
 			linkedin: string;
 			github: string;
 			x: string;
+			youtube: string;
 			tiktok: string;
 			blog?: string;
 		};

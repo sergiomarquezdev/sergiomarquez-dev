@@ -5,6 +5,7 @@ import BlogIcon from "../icons/BlogIcon.astro";
 import LinkedInIcon from "../icons/LinkedInIcon.astro";
 import TikTokIcon from "../icons/TikTokIcon.astro";
 import XIcon from "../icons/XIcon.astro";
+import YouTubeIcon from "../icons/YouTubeIcon.astro";
 
 interface Props {
 	writing: CvWriting;
@@ -15,6 +16,7 @@ const title = locale === "en" ? "Where I share what I learn" : "Donde comparto l
 
 const iconMap = {
 	blog: BlogIcon,
+	youtube: YouTubeIcon,
 	linkedin: LinkedInIcon,
 	x: XIcon,
 	tiktok: TikTokIcon,
@@ -22,6 +24,7 @@ const iconMap = {
 
 const urlMap = {
 	blog: writing.blogUrl,
+	youtube: "https://www.youtube.com/@sergio_marquezp",
 	linkedin: "https://www.linkedin.com/in/sergiomarquezp/",
 	x: "https://x.com/sergiomarquezp_",
 	tiktok: "https://www.tiktok.com/@sergio_marquezp",

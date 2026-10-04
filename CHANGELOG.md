@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- YouTube is back with the new channel `@sergio_marquezp` (2026-10-04). The old `@sergiomarquezp` was deleted on 2026-09-24; the new URL is `https://www.youtube.com/@sergio_marquezp`.
+  - Restored `basics.urls.youtube` and the "Writing & Presence" channel (short AI videos) in `cv.es.json`/`cv.en.json`, the `CvData` types and the data tests, `SocialLinks`, `Writing`, `YouTubeIcon`, the `/youtube` and `/yt` redirect pages and their sitemap exclusions.
+  - JSON-LD `sameAs` lists YouTube again alongside TikTok.
+  - Instagram and Esem Projects stay removed.
+
 ### Fixed
 
 - TikTok profile link (2026-10-04): the account is `@sergio_marquezp`, not `@sergiomarquezp_` (that handle does not exist on TikTok). Fixed in `basics.urls.tiktok` and the "Writing & Presence" handle of `cv.es.json`/`cv.en.json`, the `Writing` URL map and the README. X stays `@sergiomarquezp_`.

@@ -8,6 +8,7 @@
       "linkedin": "https://www.linkedin.com/in/sergiomarquezp/",
       "github": "https://github.com/sergiomarquezdev",
       "x": "https://x.com/sergiomarquezp_",
+      "youtube": "https://www.youtube.com/@sergio_marquezp",
       "tiktok": "https://www.tiktok.com/@sergio_marquezp",
       "blog": "https://blog.sergiomarquez.dev"
     },
@@ -228,6 +229,11 @@
         "platform": "x",
         "handle": "@sergiomarquezp_",
         "description": "Short notes and daily discoveries"
+      },
+      {
+        "platform": "youtube",
+        "handle": "@sergio_marquezp",
+        "description": "Short AI videos"
       },
       {
         "platform": "tiktok",
