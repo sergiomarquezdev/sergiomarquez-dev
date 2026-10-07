@@ -103,7 +103,6 @@
 	--s-4: 2rem;
 	--s-6: 3rem;
 	--s-8: 4rem;
-	--s-12: 6rem;
 	--section: clamp(4rem, 2.5rem + 6vw, 8rem);
 	--gutter: clamp(1rem, 0.5rem + 2.5vw, 3rem);
 	--container: 72rem;
@@ -118,11 +117,11 @@
 		--paper: #0c0a09;
 		--ink: #f5f5f4;
 		--ink-2: #a8a29e;
-		--teal: #2dd4bf;
+		--teal: #70abab;
 		--accent: #fb923c;
 		--accent-strong: #fdba74;
 		--mark: #f97316;
-		--rule: #292524;
+		--rule: #44403c;
 	}
 }
 
@@ -203,16 +202,13 @@ time,
 	font-variant-numeric: tabular-nums;
 }
 
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip-path: inset(50%);
-	white-space: nowrap;
-	border: 0;
+/* Display line: the name on the front of the card and the 404 code */
+.display {
+	font-size: var(--step-4);
+	font-weight: 700;
+	line-height: var(--lh-display);
+	letter-spacing: var(--track-display);
+	color: var(--teal);
 }
 
 .container {

@@ -29,13 +29,14 @@ sections/Intro / sections/About / sections/Projects / sections/Experience
   (SiteHeader and SiteFooter read getCv(locale) themselves from Layout)
 ```
 
-The data layer is pure functions with no side effects after initial load, making it fully testable without Astro runtime. Interface strings (section names, labels, 404 copy, SEO title and description) come from `t(locale, key)` in `src/i18n/index.ts`; components hold no hardcoded copy and no `locale === "en" ? … : …` ternaries.
+The data layer is pure functions with no side effects after initial load, making it fully testable without Astro runtime. Interface strings (section names, labels, 404 copy, SEO title and description) come from `t(locale, key)` in `src/i18n/index.ts`; components hold no hardcoded copy and no `locale === "en" ? … : …` ternaries (the other locale comes from `otherLocale(locale)`).
 
 ## Component Tree
 
 ```
 Layout.astro                    -- <html lang>, skip link, header, <main id="main">, footer
-├── BaseHead.astro              -- <head>: preloads, meta, canonical, hreflang, OG/Twitter, JSON-LD
+├── BaseHead.astro              -- <head>: preloads, meta, manifest, canonical, hreflang, OG/Twitter,
+│                                  JSON-LD (ProfilePage with url, inLanguage, image; Person as mainEntity)
 │                                  (`noindex` prop: robots noindex, no canonical/hreflang/JSON-LD)
 ├── SiteHeader.astro
 │   ├── SergioMark.astro        -- "S■M" monogram, letters in currentColor, square in --mark
@@ -44,15 +45,16 @@ Layout.astro                    -- <html lang>, skip link, header, <main id="mai
 │   └── <slot />
 │       └── HomePage.astro
 │           ├── sections/Intro.astro       -- front of the card: h1 name, tagline, statement, contact block
+│           │                                 (EmailLink)
 │           ├── sections/About.astro       -- summary in serif
 │           ├── sections/Projects.astro    -- featured project + index of the rest + GitHub link
 │           └── sections/Experience.astro  -- roles grouped by company (current open, earlier in <details>)
 │                                             + certifications
-└── SiteFooter.astro            -- back of the card (outside <main>): teal flood, email, channels,
-                                   LanguageSwitcher, copyright
+└── SiteFooter.astro            -- back of the card (outside <main>): teal flood, email (EmailLink),
+                                   channels, LanguageSwitcher, copyright
 ```
 
-`sections/` holds the home-page content sections; the top level of `components/` holds the shared pieces (`BaseHead`, `SiteHeader`, `SiteFooter`, `LanguageSwitcher`, `SergioMark`, `HomePage`). There are no client scripts: the only `<script>` in the output is the JSON-LD block.
+`sections/` holds the home-page content sections; the top level of `components/` holds the shared pieces (`BaseHead`, `SiteHeader`, `SiteFooter`, `LanguageSwitcher`, `SergioMark`, `EmailLink`, `HomePage`). There are no client scripts: the only `<script>` in the output is the JSON-LD block.
 
 ### Heading outline
 
@@ -94,7 +96,7 @@ Defined in `src/styles/global.css` under `:root`, redefined for dark under `@med
 - Inks: `--paper`, `--ink`, `--ink-2`, `--teal` (identity), `--accent` / `--accent-strong` (state only: hover, focus, active, email underline), `--mark` (monogram square only, never text or focus), `--rule`
 - Flood (footer, same in both schemes): `--flood`, `--flood-ink`, `--flood-ink-2`, `--flood-accent`. `SiteFooter` re-points `--ink`, `--ink-2` and `--accent` at the flood tokens, so every state inside it re-inks without extra rules.
 - Type: `--font-sans` (Space Grotesk), `--font-serif` (Instrument Serif), fluid steps `--step--1` … `--step-4`, line heights, tracking, `--measure: 62ch`
-- Space: 8px module (`--s-1` … `--s-12`), `--section`, `--gutter`, `--container: 72rem`
+- Space: 8px module (`--s-1` … `--s-8`), `--section`, `--gutter`, `--container: 72rem`
 - Shape and motion: `--radius: 0`, `--step-motion: 90ms steps(2, jump-none)`
 
 ### Fonts
@@ -103,7 +105,7 @@ Two files in `public/fonts/` (Space Grotesk variable, Instrument Serif 400; lati
 
 ### Layout
 
-`.container` centers the page at `--container` with `--gutter` side padding. From `56rem`, `.grid-12` is a 12-column grid; sections hang their heading in columns 1-3 (`position: sticky`) and put content in 4-12. Below `56rem` everything stacks in one column.
+`.container` centers the page at `--container` with `--gutter` side padding. From `56rem`, `.grid-12` is a 12-column grid; sections hang their heading in columns 1-3 (`position: sticky`) and put content in 4-12. Rules and item rows (project index, roles, certifications, footer) run to the right edge of column 12; only running text is held to `--measure`. The intro (front of the card) puts the name on top, the statement under the tagline on the left and the contact block on the bottom edge on the right, closed by a 1px `--rule` line. Below `56rem` everything stacks in one column.
 
 ### CSS Reset
 
@@ -111,7 +113,7 @@ Two files in `public/fonts/` (Space Grotesk variable, Instrument Serif 400; lati
 
 ### Scoped Styles
 
-Each `.astro` component uses `<style>` blocks for component-specific styles. Global styles (tokens, fonts, base type, links, focus, selection, reduced motion, `.sr-only`, `.container`, the section grid) live in `global.css`.
+Each `.astro` component uses `<style>` blocks for component-specific styles. Global styles (tokens, fonts, base type, links, focus, selection, reduced motion, `.display` (the name and the 404 code), `.container`, the section grid) live in `global.css`.
 
 ### Brand assets
 
@@ -159,7 +161,7 @@ When a test needs to narrow an optional value, define a local `assertDefined<T>(
 ### Production (Cloudflare Pages)
 
 - Builds from `main` branch using pnpm (`pnpm-lock.yaml` is the only lockfile)
-- `public/_headers` sets the security headers and immutable cache-control for `/_astro/*` and `/fonts/*`
+- `public/_headers` sets the security headers and immutable cache-control for `/fonts/*` (the build emits no `/_astro/` assets: CSS is inlined and there is no client JS)
 - `"prepare": "husky || true"` prevents CI failure from missing git hooks
 
 ### Pre-commit Hooks

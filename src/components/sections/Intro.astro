@@ -1,6 +1,7 @@
 ---
 import { type CvData, getChannels } from "../../data/cv";
 import { type Locale, t } from "../../i18n/index";
+import EmailLink from "../EmailLink.astro";
 
 interface Props {
 	cv: CvData;
@@ -10,19 +11,17 @@ interface Props {
 const { cv, locale } = Astro.props;
 const { basics } = cv;
 const channels = getChannels(cv);
-// Break opportunity after "@" so a narrow column never splits the domain
-const [emailUser, emailDomain] = basics.email.split("@");
 ---
 
 <section class="intro container grid-12" aria-labelledby="intro-name">
-  <h1 id="intro-name" class="intro__name">{basics.name}</h1>
+  <h1 id="intro-name" class="intro__name display">{basics.name}</h1>
   <p class="intro__tagline">{basics.tagline}</p>
   {basics.headline && <p class="intro__statement">{basics.headline}</p>}
 
   <ul class="contact" aria-label={t(locale, "intro.contactLabel")}>
     <li class="contact__row contact__row--email">
       <span class="contact__label">{t(locale, "intro.emailLabel")}</span>
-      <a class="contact__email" href={`mailto:${basics.email}`}>{emailUser}@<wbr />{emailDomain}</a>
+      <EmailLink email={basics.email} />
     </li>
     {
       channels.map((channel) => (
@@ -41,14 +40,6 @@ const [emailUser, emailDomain] = basics.email.split("@");
 <style>
   .intro {
     padding-top: var(--s-6);
-  }
-
-  .intro__name {
-    font-size: var(--step-4);
-    font-weight: 700;
-    line-height: var(--lh-display);
-    letter-spacing: var(--track-display);
-    color: var(--teal);
   }
 
   .intro__tagline {
@@ -94,7 +85,7 @@ const [emailUser, emailDomain] = basics.email.split("@");
     color: var(--ink-2);
   }
 
-  .contact__email {
+  .contact__row--email :global(a) {
     display: inline-block;
     font-size: var(--step-1);
     font-weight: 600;
@@ -105,12 +96,12 @@ const [emailUser, emailDomain] = basics.email.split("@");
     overflow-wrap: anywhere;
   }
 
-  .contact__email:hover,
-  .contact__email:focus-visible {
+  .contact__row--email :global(a:hover),
+  .contact__row--email :global(a:focus-visible) {
     color: var(--accent);
   }
 
-  .contact__email:active {
+  .contact__row--email :global(a:active) {
     color: var(--accent-strong);
   }
 
@@ -128,9 +119,17 @@ const [emailUser, emailDomain] = basics.email.split("@");
   @media (min-width: 56rem) {
     .intro {
       min-height: min(calc(100svh - var(--s-8)), 52rem);
-      grid-template-rows: auto auto 1fr;
+      grid-template-rows: auto auto 1fr auto;
       padding-top: var(--s-4);
-      padding-bottom: var(--s-4);
+    }
+
+    /* The card edge: a 1px rule closes the front across the twelve columns */
+    .intro::after {
+      content: "";
+      grid-column: 1 / 13;
+      grid-row: 4;
+      margin-top: var(--s-6);
+      border-top: 1px solid var(--rule);
     }
 
     .intro__name,
@@ -143,6 +142,8 @@ const [emailUser, emailDomain] = basics.email.split("@");
       grid-column: 1 / 9;
     }
 
+    /* Name, statement and contact run on a diagonal: the statement hangs
+       under the tagline, the contact block sits on the card's bottom edge. */
     .intro__statement {
       grid-column: 1 / 7;
       grid-row: 3;

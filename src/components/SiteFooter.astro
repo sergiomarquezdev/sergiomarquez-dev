@@ -1,6 +1,7 @@
 ---
 import { getChannels, getCv } from "../data/cv";
 import { getLocale, t } from "../i18n/index";
+import EmailLink from "./EmailLink.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const locale = getLocale(Astro.currentLocale);
@@ -8,7 +9,6 @@ const cv = getCv(locale);
 const { basics } = cv;
 const channels = getChannels(cv);
 const year = new Date().getFullYear();
-const [emailUser, emailDomain] = basics.email.split("@");
 ---
 
 <footer class="site-footer" aria-labelledby="footer-title">
@@ -16,9 +16,7 @@ const [emailUser, emailDomain] = basics.email.split("@");
     <h2 id="footer-title" class="section__head">{t(locale, "footer.title")}</h2>
     <div class="section__body">
       <p class="site-footer__line">{t(locale, "footer.line")}</p>
-      <p class="site-footer__email">
-        <a href={`mailto:${basics.email}`}>{emailUser}@<wbr />{emailDomain}</a>
-      </p>
+      <p class="site-footer__email"><EmailLink email={basics.email} /></p>
       <ul class="site-footer__channels" aria-label={t(locale, "footer.channelsLabel")}>
         {channels.map((channel) => (
           <li><a href={channel.href}>{channel.label}</a></li>
@@ -58,14 +56,16 @@ const [emailUser, emailDomain] = basics.email.split("@");
 
   .site-footer__email {
     margin-top: var(--s-2);
-    font-size: clamp(var(--step-1), 4.6vw, var(--step-3));
+    /* The closing action stays the largest thing in the panel, even at 390px:
+       above the --step-2 heading, wrapping after "@" before it overflows */
+    font-size: clamp(var(--step-1), 8vw, var(--step-3));
     font-weight: 600;
     line-height: var(--lh-tight);
     letter-spacing: var(--track-head);
     overflow-wrap: anywhere;
   }
 
-  .site-footer__email a {
+  .site-footer__email :global(a) {
     text-decoration-color: var(--accent);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.15em;

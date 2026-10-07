@@ -83,7 +83,8 @@ sergiomarquez-dev/
 │   └── robots.txt
 ├── src/
 │   ├── components/
-│   │   ├── BaseHead.astro       # Meta tags, preloads, hreflang, JSON-LD (noindex mode for 404)
+│   │   ├── BaseHead.astro       # Meta tags, preloads, manifest, hreflang, JSON-LD (noindex mode for 404)
+│   │   ├── EmailLink.astro      # mailto link with a break opportunity after "@"
 │   │   ├── HomePage.astro       # Section composition
 │   │   ├── LanguageSwitcher.astro # Plain link to the other locale
 │   │   ├── SergioMark.astro     # Path-based "S■M" monogram
