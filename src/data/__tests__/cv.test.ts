@@ -67,9 +67,9 @@ describe("cv data loader", () => {
 		expect(esData.projects.length).toBe(enData.projects.length);
 		expect(esData.certifications.length).toBe(enData.certifications.length);
 		// Verify highlight counts match per experience entry
-		for (let i = 0; i < esData.experience.length; i++) {
-			expect(esData.experience[i].highlights.length).toBe(enData.experience[i].highlights.length);
-		}
+		esData.experience.forEach((entry, i) => {
+			expect(entry.highlights.length).toBe(enData.experience[i]?.highlights.length);
+		});
 	});
 
 	it("optional brand fields exist in both locales when present", () => {
@@ -115,7 +115,7 @@ describe("cv data validation", () => {
 			for (const key of REQUIRED_URLS) {
 				const url = urls[key];
 				expect(url, `${locale}: basics.urls.${key} missing`).toBeDefined();
-				expect(url.startsWith("https://"), `${locale}: basics.urls.${key} = ${url}`).toBe(true);
+				expect(url?.startsWith("https://"), `${locale}: basics.urls.${key} = ${url}`).toBe(true);
 			}
 		}
 	});

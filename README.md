@@ -106,7 +106,6 @@ sergiomarquez-dev/
 │       ├── global.css           # Tokens, @font-face, base type, links, focus, section grid
 │       └── reset.css            # Preflight-style CSS reset (no framework)
 ├── astro.config.mjs
-├── vitest.config.ts
 ├── biome.json
 ├── pnpm-workspace.yaml          # pnpm build-script approvals (esbuild, sharp)
 ├── CLAUDE.md                    # Agent instructions (AGENTS.md is a synced copy)

@@ -92,6 +92,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Tooling
 
+- TypeScript config extends `astro/tsconfigs/strictest` (2026-10-07); the only fix needed was an indexed access in the locale parity test. Removed the empty `vitest.config.ts` (Vitest defaults apply).
+- Enabled Dependabot security updates on the repository (2026-10-07), so advisories that would fail the `pnpm audit` gate arrive as PRs.
 - Updated Biome 2.5.4 → 2.5.7, lint-staged 17.0.8 → 17.3.0, lightningcss 1.32 → 1.33, Fontsource packages 5.2.8 → 5.3.0.
 - Renamed the seven `biome-ignore lint/complexity/noImportant` suppressions in `src/styles/global.css` to `noImportantStyles`; Biome 2.5.7 no longer accepts the old category name and failed the whole lint run with `suppressions/parse` errors. Bumped `biome.json`'s `$schema` to 2.5.7.
 
