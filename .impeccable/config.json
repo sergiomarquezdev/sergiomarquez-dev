@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-10-07T10:30:11.642Z",
+        "reason": "orchestrator decision: brand face shared with One dAIly Blog; owner asked for a light design like the blog"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-10-07T10:30:11.837Z",
+        "reason": "orchestrator decision: brand serif shared with One dAIly Blog; owner asked for a light design like the blog"
+      }
+    ]
+  }
+}

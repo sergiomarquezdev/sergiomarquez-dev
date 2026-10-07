@@ -103,6 +103,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Documentation
 
+- `PRODUCT.md` (product context) and `DESIGN.md` + `.impeccable/design.json` (design system recorded from the shipped build) for design work with the impeccable skill (2026-10-07). `.impeccable/config.json` keeps the detector exceptions: Space Grotesk and Instrument Serif are the brand faces shared with the blog.
 - Realigned README.md with the shipped site: hybrid AI Engineer + builder intro and contact tagline, complete `public/` and `src/` structure trees (`_headers`, `fonts/`, PWA icons, `404.astro`, `/instagram` and `/tiktok` redirects, `SergioMark`), full dependency list (`@astrojs/sitemap`, Fontsource packages), Node 22 prerequisite and consistent Lighthouse 99/100 figures.
 - Refreshed CLAUDE.md and AGENTS.md (now synced copies): current gotchas (doc-only pushes skip CI/deploy, `html.js` gate, `[hidden]` reset rule, i18n import-depth nuance) and the `pnpm-workspace.yaml` tracking rule.
 - Updated `docs/ARCHITECTURE.md` data flow and component tree to the Agentic Console composition (Hero, ImpactBar, Cases, Projects, Writing, MobileNav, CommandPalette); redirect page count corrected 7 → 9.

@@ -112,6 +112,8 @@ sergiomarquez-dev/
 ├── CLAUDE.md                    # Agent instructions (AGENTS.md is a synced copy)
 ├── AGENTS.md
 ├── CHANGELOG.md
+├── PRODUCT.md                   # Product context for design work (impeccable)
+├── DESIGN.md                    # Design system derived from the build (sidecar: .impeccable/design.json)
 ├── SECURITY.md                  # Vulnerability reporting policy
 └── package.json
 ```
