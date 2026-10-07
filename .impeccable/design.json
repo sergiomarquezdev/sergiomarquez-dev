@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T10:52:19+00:00",
+  "title": "Design System: sergiomarquez.dev",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#fafaf9",
+        "cssVar": "--paper",
+        "scheme": "light",
+        "oklch": "oklch(98.5% 0.001 106.4)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#a5a5a4",
+          "#c9c9c8",
+          "#eeeeed"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1c1917",
+        "cssVar": "--ink",
+        "scheme": "light",
+        "oklch": "oklch(21.6% 0.006 56.0)",
+        "tonalRamp": [
+          "#0d0b09",
+          "#272422",
+          "#45413f",
+          "#64605e",
+          "#85817f",
+          "#a8a4a1",
+          "#ccc8c5",
+          "#f2edeb"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#57534e",
+        "cssVar": "--ink-2",
+        "scheme": "light",
+        "oklch": "oklch(44.4% 0.010 73.6)",
+        "tonalRamp": [
+          "#0e0b07",
+          "#282420",
+          "#45413c",
+          "#65605b",
+          "#86827c",
+          "#a9a49f",
+          "#cdc8c2",
+          "#f2eee8"
+        ]
+      },
+      "identity-teal": {
+        "role": "primary",
+        "displayName": "Identity Teal",
+        "canonical": "#0d4b4d",
+        "cssVar": "--teal",
+        "scheme": "light",
+        "oklch": "oklch(37.7% 0.059 198.3)",
+        "tonalRamp": [
+          "#040d0e",
+          "#13292a",
+          "#26494a",
+          "#3a6b6c",
+          "#5b8c8e",
+          "#88adae",
+          "#b5cfd0",
+          "#e3f2f2"
+        ]
+      },
+      "state-coral": {
+        "role": "secondary",
+        "displayName": "State Coral",
+        "canonical": "#c2410c",
+        "cssVar": "--accent",
+        "scheme": "light",
+        "oklch": "oklch(55.3% 0.174 38.4)",
+        "tonalRamp": [
+          "#1b0300",
+          "#451101",
+          "#742303",
+          "#a63607",
+          "#cd5a34",
+          "#e5896c",
+          "#fab7a2",
+          "#ffe4d8"
+        ]
+      },
+      "state-coral-pressed": {
+        "role": "secondary",
+        "displayName": "Pressed Coral",
+        "canonical": "#9a3412",
+        "cssVar": "--accent-strong",
+        "scheme": "light",
+        "oklch": "oklch(47.0% 0.143 37.3)",
+        "tonalRamp": [
+          "#180502",
+          "#40160a",
+          "#6c2b17",
+          "#9c4126",
+          "#c26347",
+          "#db8f78",
+          "#f2baaa",
+          "#ffe6dc"
+        ]
+      },
+      "mark-orange": {
+        "role": "secondary",
+        "displayName": "Mark Orange",
+        "canonical": "#f97316",
+        "cssVar": "--mark",
+        "scheme": "both",
+        "oklch": "oklch(70.5% 0.187 47.6)",
+        "tonalRamp": [
+          "#1b0300",
+          "#451100",
+          "#752300",
+          "#a83600",
+          "#cf5b00",
+          "#e68a5a",
+          "#fab897",
+          "#ffe5d2"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#d6d3d1",
+        "cssVar": "--rule",
+        "scheme": "light",
+        "oklch": "oklch(86.9% 0.004 56.4)",
+        "tonalRamp": [
+          "#0d0b09",
+          "#272523",
+          "#444140",
+          "#63615f",
+          "#848280",
+          "#a7a4a2",
+          "#cbc8c6",
+          "#f1eeec"
+        ]
+      },
+      "flood-teal": {
+        "role": "primary",
+        "displayName": "Flood Teal",
+        "canonical": "#0d4b4d",
+        "cssVar": "--flood",
+        "scheme": "both",
+        "oklch": "oklch(37.7% 0.059 198.3)",
+        "tonalRamp": [
+          "#040d0e",
+          "#13292a",
+          "#26494a",
+          "#3a6b6c",
+          "#5b8c8e",
+          "#88adae",
+          "#b5cfd0",
+          "#e3f2f2"
+        ]
+      },
+      "flood-ink": {
+        "role": "neutral",
+        "displayName": "Flood Ink",
+        "canonical": "#fafaf9",
+        "cssVar": "--flood-ink",
+        "scheme": "both",
+        "oklch": "oklch(98.5% 0.001 106.4)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#a5a5a4",
+          "#c9c9c8",
+          "#eeeeed"
+        ]
+      },
+      "flood-ink-secondary": {
+        "role": "neutral",
+        "displayName": "Flood Secondary Ink",
+        "canonical": "#b9d3d0",
+        "cssVar": "--flood-ink-2",
+        "scheme": "both",
+        "oklch": "oklch(84.7% 0.028 188.2)",
+        "tonalRamp": [
+          "#070d0c",
+          "#1e2726",
+          "#374544",
+          "#516664",
+          "#728785",
+          "#98a9a7",
+          "#c0cccb",
+          "#e7f1f0"
+        ]
+      },
+      "flood-coral": {
+        "role": "secondary",
+        "displayName": "Flood Coral",
+        "canonical": "#fdba74",
+        "cssVar": "--flood-accent",
+        "scheme": "both",
+        "oklch": "oklch(83.7% 0.117 66.3)",
+        "tonalRamp": [
+          "#140800",
+          "#371f02",
+          "#5e3806",
+          "#88530d",
+          "#ac7537",
+          "#c89b6e",
+          "#e3c3a3",
+          "#feebd9"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Paper (dark scheme)",
+        "canonical": "#0c0a09",
+        "cssVar": "--paper",
+        "scheme": "dark",
+        "oklch": "oklch(14.7% 0.004 49.2)",
+        "tonalRamp": [
+          "#0d0b0a",
+          "#272423",
+          "#444140",
+          "#63605f",
+          "#848280",
+          "#a7a4a3",
+          "#cbc8c7",
+          "#f1eeec"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark scheme)",
+        "canonical": "#f5f5f4",
+        "cssVar": "--ink",
+        "scheme": "dark",
+        "oklch": "oklch(97.0% 0.001 106.4)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#a5a5a4",
+          "#c9c9c8",
+          "#eeeeed"
+        ]
+      },
+      "ink-secondary-dark": {
+        "role": "neutral",
+        "displayName": "Secondary Ink (dark scheme)",
+        "canonical": "#a8a29e",
+        "cssVar": "--ink-2",
+        "scheme": "dark",
+        "oklch": "oklch(71.6% 0.009 56.3)",
+        "tonalRamp": [
+          "#0e0a08",
+          "#292421",
+          "#46413d",
+          "#65605c",
+          "#87817d",
+          "#aaa4a0",
+          "#cec8c4",
+          "#f3ede9"
+        ]
+      },
+      "identity-teal-dark": {
+        "role": "primary",
+        "displayName": "Identity Teal (dark scheme)",
+        "canonical": "#70abab",
+        "cssVar": "--teal",
+        "scheme": "dark",
+        "oklch": "oklch(70.1% 0.061 195.8)",
+        "tonalRamp": [
+          "#040d0d",
+          "#122a2a",
+          "#244949",
+          "#386b6b",
+          "#5a8d8d",
+          "#87aeae",
+          "#b4d0cf",
+          "#e2f2f2"
+        ]
+      },
+      "state-coral-dark": {
+        "role": "secondary",
+        "displayName": "State Coral (dark scheme)",
+        "canonical": "#fb923c",
+        "cssVar": "--accent",
+        "scheme": "dark",
+        "oklch": "oklch(75.8% 0.159 55.9)",
+        "tonalRamp": [
+          "#180600",
+          "#401800",
+          "#6c2e00",
+          "#9b4500",
+          "#c16713",
+          "#d9925f",
+          "#f1bd99",
+          "#ffe8d3"
+        ]
+      },
+      "state-coral-pressed-dark": {
+        "role": "secondary",
+        "displayName": "Pressed Coral (dark scheme)",
+        "canonical": "#fdba74",
+        "cssVar": "--accent-strong",
+        "scheme": "dark",
+        "oklch": "oklch(83.7% 0.117 66.3)",
+        "tonalRamp": [
+          "#140800",
+          "#371f02",
+          "#5e3806",
+          "#88530d",
+          "#ac7537",
+          "#c89b6e",
+          "#e3c3a3",
+          "#feebd9"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Rule (dark scheme)",
+        "canonical": "#44403c",
+        "cssVar": "--rule",
+        "scheme": "dark",
+        "oklch": "oklch(37.4% 0.009 67.6)",
+        "tonalRamp": [
+          "#0e0a07",
+          "#282421",
+          "#45413d",
+          "#65605c",
+          "#86817d",
+          "#a9a49f",
+          "#cdc8c3",
+          "#f3ede8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name on the card front and the 404 code; teal, one per page."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "The serif presentation sentence on the card front, max 18em."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Hanging sticky section heads and the footer head."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Serif About summary, featured project headline, 404 message."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Featured project name and the primary email link."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text at one size, max 62ch."
+      },
+      "body-strong": {
+        "displayName": "Body Strong",
+        "purpose": "Project and role names in rows, company and certification heads."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Contact labels, language switch, disclosure summaries."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Stacks, periods, channel descriptions; secondary ink."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "step-motion",
+        "value": "90ms steps(2, jump-none)",
+        "purpose": "Two-frame overprint for color and underline state changes; removed under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow",
+        "value": "35.99rem",
+        "purpose": "max-width: email row drops its label column."
+      },
+      {
+        "name": "grid",
+        "value": "56rem",
+        "purpose": "min-width: twelve-column grid, sticky margin heads, diagonal card front."
+      }
+    ],
+    "focusRing": {
+      "value": "2px solid var(--accent); outline-offset: 3px; border-radius: 0",
+      "purpose": "Most visible element on the page while it exists."
+    },
+    "schemes": {
+      "light": "default :root token block",
+      "dark": "prefers-color-scheme: dark swaps paper, ink, ink-2, teal, accent, accent-strong, rule; mark and flood tokens are unchanged"
+    }
+  },
+  "components": [
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "text-link",
+      "description": "Every link: 1px underline at rest, overprints to 2px coral in two frames on hover and focus.",
+      "html": "<p class=\"ds-p\">Read the <a class=\"ds-link\" href=\"#\">daily blog</a> or the code on <a class=\"ds-link\" href=\"#\">GitHub</a>.</p>",
+      "css": ".ds-p { margin: 0; font: 400 var(--step-0)/var(--lh-body) var(--font-sans); color: var(--ink); } .ds-link { color: var(--ink); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: currentColor; transition: color var(--step-motion), text-decoration-color var(--step-motion); } .ds-link:hover, .ds-link:focus-visible { color: var(--accent); text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 0; } .ds-link:active { color: var(--accent-strong); }"
+    },
+    {
+      "name": "Primary Email",
+      "kind": "button",
+      "refersTo": "email-primary",
+      "description": "The page's main action: the address itself, teal, with a permanent 2px coral underline.",
+      "html": "<a class=\"ds-email\" href=\"#\">contacto@<wbr>sergiomarquez.dev</a>",
+      "css": ".ds-email { display: inline-block; font: 600 var(--step-1)/var(--lh-lede) var(--font-sans); color: var(--teal); text-decoration: underline 2px var(--accent); text-underline-offset: 0.2em; overflow-wrap: anywhere; transition: color var(--step-motion); } .ds-email:hover, .ds-email:focus-visible { color: var(--accent); } .ds-email:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-email:active { color: var(--accent-strong); }"
+    },
+    {
+      "name": "Contact Row",
+      "kind": "custom",
+      "refersTo": "contact-row",
+      "description": "Label column plus handle link and description; channels named in text, never icons.",
+      "html": "<ul class=\"ds-contact\"><li class=\"ds-row\"><span class=\"ds-label\">Blog</span><div><a class=\"ds-link\" href=\"#\">blog.sergiomarquez.dev</a><p class=\"ds-desc\">A technical article a day</p></div></li><li class=\"ds-row\"><span class=\"ds-label\">GitHub</span><div><a class=\"ds-link\" href=\"#\">sergiomarquezdev</a><p class=\"ds-desc\">Code of my open projects</p></div></li></ul>",
+      "css": ".ds-contact { display: grid; gap: var(--s-2); list-style: none; margin: 0; padding: 0; font: 400 var(--step-0)/var(--lh-body) var(--font-sans); color: var(--ink); } .ds-row { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: baseline; } .ds-label { font-size: var(--step--1); font-weight: 600; color: var(--ink-2); } .ds-desc { margin: 0; font-size: var(--step--1); line-height: 1.5; color: var(--ink-2); } .ds-link { color: var(--ink); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: currentColor; transition: color var(--step-motion), text-decoration-color var(--step-motion); } .ds-link:hover, .ds-link:focus-visible { color: var(--accent); text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 0; } .ds-link:active { color: var(--accent-strong); }"
+    },
+    {
+      "name": "Section Head",
+      "kind": "custom",
+      "refersTo": "section-head",
+      "description": "Real h2 hung in the 3-of-12 margin column, sticky while its section passes.",
+      "html": "<section class=\"ds-section\"><h2 class=\"ds-head\">Projects</h2><div class=\"ds-body\"><p>Running text at one size, capped at 62ch.</p></div></section>",
+      "css": ".ds-section { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-3); font: 400 var(--step-0)/var(--lh-body) var(--font-sans); color: var(--ink); } .ds-head { grid-column: 1 / 4; position: sticky; top: var(--s-4); align-self: start; margin: 0; font-size: var(--step-2); font-weight: 600; line-height: var(--lh-tight); letter-spacing: var(--track-head); } .ds-body { grid-column: 4 / 13; max-width: var(--measure); } .ds-body p { margin: 0; }"
+    },
+    {
+      "name": "Project Index Row",
+      "kind": "card",
+      "refersTo": "index-row",
+      "description": "Rule-separated row, not a card: bold name, body headline, meta stack joined by middots.",
+      "html": "<ul class=\"ds-index\"><li class=\"ds-irow\"><h3 class=\"ds-iname\"><a class=\"ds-link\" href=\"#\">One Bad Wire</a></h3><div><p class=\"ds-ip\">A short puzzle game published on itch.io.</p><p class=\"ds-meta\">Godot · GDScript</p></div></li></ul>",
+      "css": ".ds-index { list-style: none; margin: 0; padding: 0; font: 400 var(--step-0)/var(--lh-body) var(--font-sans); color: var(--ink); } .ds-irow { display: grid; grid-template-columns: 1fr 2fr; column-gap: var(--s-3); padding-block: var(--s-3); border-top: 1px solid var(--rule); } .ds-iname { margin: 0; font-size: var(--step-0); font-weight: 600; line-height: var(--lh-lede); } .ds-ip { margin: 0; max-width: var(--measure); } .ds-meta { margin: var(--s-1) 0 0; font-size: var(--step--1); color: var(--ink-2); } .ds-link { color: var(--ink); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: currentColor; transition: color var(--step-motion), text-decoration-color var(--step-motion); } .ds-link:hover, .ds-link:focus-visible { color: var(--accent); text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 0; } .ds-link:active { color: var(--accent-strong); }"
+    },
+    {
+      "name": "Past Role Disclosure",
+      "kind": "custom",
+      "refersTo": "role-details",
+      "description": "Past roles in secondary ink with detail folded under a label-style summary and teal marker.",
+      "html": "<details class=\"ds-details\"><summary>Details</summary><ul class=\"ds-hl\"><li>Designed the ingestion pipeline.</li></ul></details>",
+      "css": ".ds-details { font: 400 var(--step-0)/var(--lh-body) var(--font-sans); color: var(--ink); } .ds-details summary { display: list-item; width: fit-content; cursor: pointer; font-size: var(--step--1); font-weight: 600; color: var(--ink-2); transition: color var(--step-motion); } .ds-details summary::marker { color: var(--teal); } .ds-details summary:hover, .ds-details summary:focus-visible { color: var(--accent); } .ds-details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-hl { margin: var(--s-2) 0 0; padding-left: var(--s-3); list-style: \"– \"; } .ds-hl li::marker { color: var(--teal); }"
+    },
+    {
+      "name": "Card Back Flood",
+      "kind": "card",
+      "refersTo": "card-back-flood",
+      "description": "The single full-bleed teal panel; re-maps ink and accent tokens so shared components re-ink.",
+      "html": "<footer class=\"ds-flood\"><h2 class=\"ds-fhead\">Contact</h2><p class=\"ds-fline\">Write to me.</p><p class=\"ds-femail\"><a href=\"#\">contacto@<wbr>sergiomarquez.dev</a></p></footer>",
+      "css": ".ds-flood { --ink: var(--flood-ink); --ink-2: var(--flood-ink-2); --accent: var(--flood-accent); --accent-strong: var(--flood-accent); padding: var(--section) var(--gutter); background: var(--flood); color: var(--ink); font: 400 var(--step-0)/var(--lh-body) var(--font-sans); } .ds-fhead { margin: 0; font-size: var(--step-2); font-weight: 600; line-height: var(--lh-tight); letter-spacing: var(--track-head); } .ds-fline { margin: var(--s-3) 0 0; color: var(--ink-2); } .ds-femail { margin: var(--s-2) 0 0; font-size: clamp(var(--step-1), 8vw, var(--step-3)); font-weight: 600; line-height: var(--lh-tight); letter-spacing: var(--track-head); overflow-wrap: anywhere; } .ds-femail a { color: inherit; text-decoration: underline 2px var(--accent); text-underline-offset: 0.15em; transition: color var(--step-motion); } .ds-femail a:hover, .ds-femail a:focus-visible { color: var(--accent); } .ds-femail a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header Bar",
+      "kind": "nav",
+      "refersTo": "monogram",
+      "description": "4rem bar: monogram home link left, text language switch right. No menu.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-home\" href=\"#\" aria-label=\"Sergio Márquez\"><svg viewBox=\"0 0 72 40\" aria-hidden=\"true\"><rect x=\"25\" y=\"13\" width=\"16\" height=\"16\" fill=\"var(--mark)\"/><text x=\"0\" y=\"29\" font-family=\"Space Grotesk\" font-weight=\"700\" font-size=\"24\" fill=\"currentColor\">S</text><text x=\"42\" y=\"29\" font-family=\"Space Grotesk\" font-weight=\"700\" font-size=\"24\" fill=\"currentColor\">M</text></svg></a><a class=\"ds-lang\" href=\"#\" lang=\"en\" hreflang=\"en\">English</a></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; height: var(--s-8); font-family: var(--font-sans); color: var(--ink); } .ds-home { display: block; color: var(--ink); } .ds-home svg { width: 3.6rem; height: var(--s-4); display: block; } .ds-lang { font-size: var(--step--1); font-weight: 600; line-height: 1.6; color: var(--ink); text-decoration: underline 1px; text-underline-offset: 0.2em; transition: color var(--step-motion); } .ds-lang:hover, .ds-lang:focus-visible { color: var(--accent); text-decoration-thickness: 2px; } .ds-home:focus-visible, .ds-lang:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Two-Ink Personal Stationery",
+    "overview": "The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a serif statement on the left and a working contact block (email first, then six channels with handles) set on a diagonal at the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.\n\nTwo inks do the work, warm black for text and teal for identity, on uncoated warm-white paper. Coral is a third, state-only ink. Corners are square, nothing casts a shadow, there are no cards, chips or icons: type, weight, ink and a twelve-column grid carry all hierarchy. Density is calm and textual; every section head hangs in a left margin column and stays pinned while its section scrolls past.\n\nThe world is shared with One dAIly Blog (same faces, same warm-neutral base) without its mono kickers, accent italics or cream ground. Dark mode follows `prefers-color-scheme` only, by swapping the token block; no component carries its own colors.",
+    "keyCharacteristics": [
+      "Warm-white paper, warm-black ink, teal identity ink, coral state ink.",
+      "Space Grotesk for everything structural; Instrument Serif (regular, never italic) for statements and ledes only.",
+      "Square corners, flat surfaces, 1px rules as the only dividers.",
+      "Hanging, sticky section heads in a 3-of-12 margin column.",
+      "Two-step overprint motion (90ms, `steps(2)`), no easing curves.",
+      "One flood panel per page: the teal card back."
+    ],
+    "rules": [
+      {
+        "name": "The Third Ink Rule",
+        "body": "Coral marks state. At rest it appears only on the monogram square and the email underline; everything else turns coral only on hover, focus or press.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token Block Rule",
+        "body": "Colors and `prefers-color-scheme` live only in the `:root` token block of `global.css`. Components reference tokens; none declares a hex or a scheme query. The one exception is the pair of `theme-color` meta tags in the document head, which must mirror `paper` and `paper-dark` as literals.",
+        "section": "colors"
+      },
+      {
+        "name": "The Single Flood Rule",
+        "body": "One full-bleed teal panel per page, the footer. No other section gets a background.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Running Size Rule",
+        "body": "All running text (summaries, highlights, descriptions) is set at `--step-0` and capped at 62ch; hierarchy comes from weight, ink and position, not more sizes.",
+        "section": "typography"
+      },
+      {
+        "name": "The Upright Serif Rule",
+        "body": "Instrument Serif is regular weight and upright only, and only for statement and lede roles. No italic accents.",
+        "section": "typography"
+      },
+      {
+        "name": "The Printed Surface Rule",
+        "body": "Nothing floats above the paper: no shadows, no overlays, no blurred backdrops.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every color from the token block; let the footer's re-mapping re-ink shared components.",
+      "Do keep running text at `--step-0` with a 62ch measure and build hierarchy from weight, ink and position.",
+      "Do space in whole 8px units (`--s-1` to `--s-8`, `--section`).",
+      "Do hang section heads in columns 1 to 3 and keep them sticky on wide screens.",
+      "Do transition state with `--step-motion` only, and let `prefers-reduced-motion` remove it.",
+      "Do give the current item full ink and teal, and past items secondary ink with folded detail."
+    ],
+    "donts": [
+      "Don't use coral at rest outside the monogram square and the email underline.",
+      "Don't add shadows, rounded corners, cards, chips or pills; stacks are \" · \"-joined text.",
+      "Don't add icons; channels and actions are named in text. The monogram is the only graphic.",
+      "Don't add a second flood panel or tint a section background.",
+      "Don't set Instrument Serif in italic, or use it for headings, labels or body.",
+      "Don't add mono labels or small caps kickers above headings.",
+      "Don't write `prefers-color-scheme` or a hex value inside a component stylesheet (only the head `theme-color` metas mirror paper as literals)."
+    ]
+  }
+}

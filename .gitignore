@@ -51,3 +51,4 @@ temp
 
 # Impeccable review captures
 .impeccable/review/
+.impeccable/hook.cache.json
