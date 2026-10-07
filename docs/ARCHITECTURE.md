@@ -127,7 +127,7 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 - **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `pnpm run validate`.
 - **i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time.
-- **Redirect pages**: 8 trivial files that return 301 responses. Verified by build success.
+- **Vanity redirects**: declared in `astro.config.mjs`. Verified by build success.
 
 ### Test Utilities
 
@@ -170,9 +170,9 @@ Both modules are pure functions with clear inputs/outputs -- ideal for unit test
 
 Astro Content Collections are designed for Markdown/MDX content with frontmatter. The CV data is structured JSON served as static assets from `public/`. Using Content Collections would add unnecessary abstraction for a single JSON file per locale.
 
-### Why Manual Redirect Pages
+### Why Config Redirects
 
-There are 8 redirect pages (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`). `/instagram` was removed on 2026-09-24 together with that account and falls through to the 404 page; `/youtube` and `/yt` came back on 2026-10-04 with the new channel. Each is a trivial `.astro` file returning a 301. Generating them from data would save ~50 lines but add indirection. YAGNI -- the manual approach is readable and maintainable at this scale.
+The 8 vanity links (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`) live in the `redirects` map of `astro.config.mjs`, with destinations read from `basics.urls` in `cv.es.json`. With static output Astro emits the same page the old hand-written `.astro` stubs produced (meta refresh, `noindex`, canonical to the target), and the sitemap never lists redirects, so no filter is needed. A Cloudflare `_redirects` file would give a real HTTP 301, but it would duplicate the URLs outside the JSON and does not run in `astro dev`.
 
 ### Why CSS Custom Properties (and No Framework)
 

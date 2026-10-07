@@ -13,7 +13,6 @@ Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` thr
 ## Gotchas
 
 - **Doc-only pushes don't deploy**: CI has `paths-ignore` for `**.md`, `docs/**` and `.vscode/**` -- a push touching only docs never triggers build or Cloudflare Pages deploy
-- **`astro check` false positives for cv**: Reports `cv` as unused in redirect pages — the import IS used in frontmatter before an early `return`
 - **Windows `core.autocrlf` phantom files**: Biome enforces LF line endings. Git's `core.autocrlf` creates phantom "modified" files. Check actual changes with `git diff --ignore-cr-at-eol --name-only`
 - **lint-staged scoped to `src/`**: Avoids running Biome on root config files
 - **i18n route duplication**: `src/pages/index.astro` and `src/pages/en/index.astro` are intentionally the same file except for relative import depth (`../` vs `../../`) -- Astro injects different `currentLocale` per route

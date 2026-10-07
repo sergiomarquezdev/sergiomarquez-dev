@@ -19,6 +19,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Vanity redirects (2026-10-07): the 8 hand-written stubs under `src/pages/{blog,github,linkedin,tiktok,twitter,x,youtube,yt}/` become the `redirects` map in `astro.config.mjs`, fed by `basics.urls` of `cv.es.json` (the `/blog` stub hardcoded its URL). Same output: meta refresh, `noindex`, canonical to the target. The sitemap regex filter is gone because Astro never lists redirects.
+- Security headers (2026-10-07): the CSP now allows Cloudflare Web Analytics (`static.cloudflareinsights.com` in `script-src`, `cloudflareinsights.com` in `connect-src`). Cloudflare injects the beacon and the old policy blocked it, so analytics never ran and every visit logged a console error. Added `Cross-Origin-Opener-Policy: same-origin`.
+- CI (2026-10-07): `pnpm audit` runs right after install, so an advisory fails in seconds instead of after the build; the deploy hook call has `--max-time 30 --retry 2`.
+- Git hooks (2026-10-07): added the missing `.husky/pre-commit` (`pnpm exec lint-staged`); until now lint-staged never ran. Its two globs collapse into one.
+
 - Profile copy (2026-10-04), ES and EN: hero (role, headline, tagline, status, chips and proof line), summary, current-role experience, SEO title/description, OG alt text and footer CTA now describe the current work (LLM systems on Google Cloud, agents, RAG, data) and own projects without the closed studio. Location is Badajoz.
   - Work metrics removed: the `metrics` impact bar and the current-role KPIs are gone, and the highlights are qualitative.
   - Projects: added One Bad Wire, Pingufly (itch.io), the daily short AI videos and acestream-docker-home; the blog headline reflects the single daily post; the voice receptionist no longer claims real calls.
@@ -36,6 +41,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - The "also running Esem Projects" line is gone: the studio is closed and `esemprojects.es` is expiring.
 
 ### Dependencies
+
+- Refreshed the lockfile (2026-10-07) to clear `sharp` <0.35.5, `source-map-js` <1.2.2 (high) and `smol-toml` <=1.8.0 (moderate), which made `pnpm audit` fail in CI. Astro 7.3.5, Biome 2.5.15, Vitest 5.0.3, lint-staged 17.6.0.
+- Removed the five `pnpm-workspace.yaml` overrides (`nanoid`, `fast-uri`, `js-yaml`, `devalue`, `http-cache-semantics`) and the `minimumReleaseAgeExclude` entry: a clean resolution already picks patched versions.
+- Removed the direct `lightningcss` dependency and `cssMinify: "lightningcss"`: Vite 8 ships it and uses it as the default CSS minifier (identical `dist/index.html`, 116 818 bytes).
 
 - Upgraded **Astro 5.16 → 7.1** (Vite 8, Rust compiler now default). `src/data/cv.ts` resolves `public/cv.*.json` from `process.cwd()` instead of module-relative paths: Astro 7 executes prerender chunks from `dist/.prerender/chunks/`, so `import.meta.url`-relative resolution pointed inside `dist/`. Verified the `dist/` layout is unchanged (fonts under `/assets/`, scripts under `/_astro/`) and the top-level `vite.build.rollupOptions.output` override still applies to the prerender build.
 - Updated @astrojs/sitemap 3.6 → 3.7.3, @astrojs/check 0.9.5 → 0.9.9, Biome 2.3 → 2.5.4, lightningcss 1.30 → 1.32, Vitest 4.0 → 4.1.10, lint-staged 16.2 → 17.0.8.
