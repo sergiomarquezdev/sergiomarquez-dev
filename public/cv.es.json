@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Sergio Márquez",
-    "tagline": "Ingeniero backend e IA · Agentes, RAG y LLMs en producción",
+    "tagline": "Ingeniero backend e IA · Agentes, RAG y LLMs · Badajoz",
     "email": "contacto@sergiomarquez.dev",
     "urls": {
       "site": "https://sergiomarquez.dev",
@@ -12,7 +12,7 @@
       "tiktok": "https://www.tiktok.com/@sergio_marquezp",
       "blog": "https://blog.sergiomarquez.dev"
     },
-    "summary": "Ingeniero backend e IA en Badajoz. En VITALY diseño y llevo a producción sistemas con LLMs sobre Google Cloud: asistentes multi-agente con RAG y voz, validación de documentos con modelos multimodales, pipelines de datos y automatizaciones de negocio. Fuera del trabajo construyo proyectos propios: agentes de voz y de WhatsApp, pipelines de imagen y vídeo, un blog que se publica solo cada día y algún videojuego. Programo a diario con agentes desde 2024 (Claude Code y Codex) y reviso con varios modelos antes de cambios críticos.",
+    "summary": "En VITALY diseño y opero sistemas con LLMs sobre Google Cloud, de asistentes multi-agente con RAG y voz a validación de documentos y pipelines de datos. Vengo del backend y trato cada sistema con modelos como un servicio más: se diseña, se evalúa con datos y se opera con observabilidad. Programo con agentes a diario desde 2024.",
     "headline": "Construyo agentes y sistemas de IA que llegan a producción."
   },
   "experience": [
