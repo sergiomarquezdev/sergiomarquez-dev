@@ -43,8 +43,8 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 - **GitHub activity widget**: Latest commit fetched at build time from GitHub Events API.
 - **Custom 404**: Branded ES/EN error page with home CTA.
 - **Accessibility**: Skip links, ARIA labels, keyboard nav, `prefers-reduced-motion` support, focus-visible with lime outline.
-- **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap (social redirects excluded), PWA manifest.
-- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok` → external profiles.
+- **SEO**: Canonical URLs, hreflang alternates, JSON-LD `Person` schema, OG/Twitter cards, sitemap (redirects are never listed), PWA manifest.
+- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok` → external profiles, declared in `astro.config.mjs` (`redirects`) from `basics.urls` in `cv.es.json`.
 - **Performance**: PageSpeed mobile 99 / desktop 100, accessibility/best-practices/SEO 100. Fully inlined CSS, preloaded latin-subset fonts, immutable asset caching (`public/_headers`), zero client frameworks (~9 KB of inline vanilla JS).
 
 ---
@@ -56,7 +56,6 @@ All design tokens are CSS custom properties in [`src/styles/global.css`](./src/s
 - **Scoped vanilla CSS** -- design tokens in `global.css` + a preflight-style reset (`reset.css`); no CSS framework
 - **[TypeScript](https://www.typescriptlang.org/)** -- Type-safe JavaScript
 - **[Vitest](https://vitest.dev/) ^5.0.1** -- Unit testing framework
-- **[lightningcss](https://lightningcss.dev/)** -- CSS minification
 - **Fonts** -- [Geist Variable](https://vercel.com/font) self-hosted latin subset (`public/fonts/Geist-var-latin.woff2`); [JetBrains Mono Variable](https://fontsource.org/fonts/jetbrains-mono) and [Instrument Serif](https://fontsource.org/fonts/instrument-serif) via Fontsource
 - **[Biome](https://biomejs.dev/)** -- Fast linting and formatting
 - **[pnpm](https://pnpm.io/)** -- Package manager (local dev and Cloudflare Pages)
@@ -120,15 +119,7 @@ sergiomarquez-dev/
 │   ├── pages/
 │   │   ├── index.astro          # Home page (ES, default locale)
 │   │   ├── en/index.astro       # Home page (EN)
-│   │   ├── 404.astro            # Custom 404 (ES/EN)
-│   │   ├── linkedin/index.astro # Vanity redirect pages
-│   │   ├── github/index.astro
-│   │   ├── x/index.astro
-│   │   ├── twitter/index.astro
-│   │   ├── youtube/index.astro
-│   │   ├── yt/index.astro
-│   │   ├── blog/index.astro
-│   │   └── tiktok/index.astro
+│   │   └── 404.astro            # Custom 404 (ES/EN)
 │   ├── scripts/
 │   │   └── scrollSpy.ts         # Shared scroll-spy (sidebar nav + mobile nav)
 │   └── styles/
@@ -221,7 +212,7 @@ pnpm run validate       # type-check + lint + test + build
 ## Performance & SEO
 
 - **Lighthouse / PageSpeed**: 99 mobile / 100 desktop performance; 100 accessibility, best-practices and SEO
-- **Sitemap**: Generated automatically via `@astrojs/sitemap` with i18n support; social redirect stubs excluded
+- **Sitemap**: Generated automatically via `@astrojs/sitemap` with i18n support; redirects are never listed
 - **Hreflang**: `<link rel="alternate">` tags for ES, EN, and x-default
 - **Structured data**: JSON-LD Person schema via `BaseHead.astro`
 - **Canonical URLs**: Per-page canonical links
