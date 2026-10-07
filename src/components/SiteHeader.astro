@@ -1,0 +1,37 @@
+---
+import { getCv } from "../data/cv";
+import { getLocale, homePath } from "../i18n/index";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import SergioMark from "./SergioMark.astro";
+
+const locale = getLocale(Astro.currentLocale);
+const { basics } = getCv(locale);
+---
+
+<header class="site-header container">
+  <a href={homePath(locale)} class="site-header__home" aria-label={basics.name}>
+    <SergioMark />
+  </a>
+  <LanguageSwitcher />
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    height: var(--s-8);
+  }
+
+  .site-header__home {
+    display: block;
+    color: var(--ink);
+  }
+
+  /* 72:40 monogram at 2rem high */
+  .site-header__home :global(svg) {
+    width: 3.6rem;
+    height: var(--s-4);
+  }
+</style>

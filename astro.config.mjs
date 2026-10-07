@@ -34,7 +34,6 @@ export default defineConfig({
   // Build optimizations
   build: {
     // Default "directory" format keeps canonical/hreflang/sitemap URLs consistent (/en/)
-    assets: "_astro", // Clean asset organization
     inlineStylesheets: "always", // Single-page site: inlining removes render-blocking CSS requests
   },
 
@@ -52,18 +51,4 @@ export default defineConfig({
 
   // Compress HTML for better performance
   compressHTML: true,
-
-  // Vite optimizations
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          // Applies to the prerender build, which emits the font assets.
-          // Astro 6+ scopes CLIENT asset output to vite.environments.client;
-          // add it there too if client-emitted assets ever appear.
-          assetFileNames: "assets/[name].[hash][extname]",
-        },
-      },
-    },
-  },
 });

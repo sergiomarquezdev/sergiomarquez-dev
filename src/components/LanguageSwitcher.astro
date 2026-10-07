@@ -1,50 +1,24 @@
 ---
-import { getLocale, t } from "../i18n/index";
+import { getLocale, homePath, type Locale, t } from "../i18n/index";
 
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const targetHref = locale === "es" ? "/en/" : "/";
-const label = t(locale, "lang.switch");
-const ariaLabel = t(locale, "lang.switchLabel");
+const target: Locale = locale === "es" ? "en" : "es";
 ---
 
-<a href={targetHref} class="lang-switch" aria-label={ariaLabel} data-lang-switch>
-  {label}
+<a href={homePath(target)} class:list={["lang-switch", className]} lang={target} hreflang={target}>
+  {t(locale, "lang.switch")}
 </a>
-
-<script>
-  document.querySelectorAll('[data-lang-switch]').forEach(link => {
-    link.addEventListener('click', () => {
-      try {
-        const href = (link as HTMLAnchorElement).href;
-        const isEnglish = href.includes('/en');
-        localStorage.setItem('preferred-locale', isEnglish ? 'en' : 'es');
-      } catch { /* Private browsing or storage unavailable */ }
-    });
-  });
-</script>
 
 <style>
   .lang-switch {
-    position: relative;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
-    padding: 0.25rem 0.625rem;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: all 200ms ease;
-  }
-
-  /* Expand the touch target to ~44px without changing the visual size */
-  .lang-switch::after {
-    content: "";
-    position: absolute;
-    inset: -9px -4px;
-  }
-
-  .lang-switch:hover {
-    color: var(--accent);
-    border-color: var(--border-accent);
+    display: inline-block;
+    font-size: var(--step--1);
+    font-weight: 600;
+    line-height: 1.6;
   }
 </style>

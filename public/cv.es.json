@@ -13,20 +13,7 @@
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "Ingeniero backend e IA en Badajoz. En VITALY diseño y llevo a producción sistemas con LLMs sobre Google Cloud: asistentes multi-agente con RAG y voz, validación de documentos con modelos multimodales, pipelines de datos y automatizaciones de negocio. Fuera del trabajo construyo proyectos propios: agentes de voz y de WhatsApp, pipelines de imagen y vídeo, un blog que se publica solo cada día y algún videojuego. Programo a diario con agentes desde 2024 (Claude Code y Codex) y reviso con varios modelos antes de cambios críticos.",
-    "headline": "Construyo agentes y sistemas de IA que llegan a producción.",
-    "headlineAccent": "llegan a producción.",
-    "stackChips": [
-      "Agentes de IA",
-      "RAG",
-      "Python",
-      "TypeScript",
-      "GCP",
-      "Claude Code"
-    ],
-    "status": {
-      "available": true,
-      "label": "Agentes de IA y RAG en producción"
-    }
+    "headline": "Construyo agentes y sistemas de IA que llegan a producción."
   },
   "experience": [
     {
@@ -43,10 +30,25 @@
         "Agentes que convierten una llamada en datos estructurados (Whisper + Gemini) y extracción híbrida (reglas + LLM) de documentos PDF.",
         "Automatizaciones de negocio en producción y estándares de calidad para los repositorios del equipo (tests, SAST, CVEs y CI).",
         "GitOps en GKE multi-cluster, CI/CD en GitLab y observabilidad con OpenTelemetry y New Relic.",
-        "Desarrollo asistido por IA con Claude Code (agentes, skills) y revisión multi-modelo para cambios críticos.",
-        "Stack: Python, FastAPI, Google ADK, LiteLLM, Vertex AI, BigQuery, Dataform, Dataflow, MongoDB, PostgreSQL, Firestore, Oracle, GKE, GitLab CI/CD."
+        "Desarrollo asistido por IA con Claude Code (agentes, skills) y revisión multi-modelo para cambios críticos."
       ],
-      "headline": "IA aplicada de principio a fin: asistentes, documentos, datos y operación."
+      "headline": "IA aplicada de principio a fin: asistentes, documentos, datos y operación.",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Google ADK",
+        "LiteLLM",
+        "Vertex AI",
+        "BigQuery",
+        "Dataform",
+        "Dataflow",
+        "MongoDB",
+        "PostgreSQL",
+        "Firestore",
+        "Oracle",
+        "GKE",
+        "GitLab CI/CD"
+      ]
     },
     {
       "company": "VITALY",
@@ -57,19 +59,17 @@
         "APIs Middleware Estratégicas: Diseño y desarrollo de middleware basado en Spring para optimizar la comunicación entre frontend y servicios externos.",
         "Migración y Optimización a GKE: Lideré la migración a Google Kubernetes Engine, automatizando la entrega continua y optimizando despliegues.",
         "Integración de Datos Post-Fusión: Participación activa en la integración de datos tras la fusión Preving/Cualtis, realizando mapeo y adaptación de aplicaciones.",
-        "Experiencia Internacional (Dublín, 2022): 3 meses trabajando en remoto desde Irlanda, mejorando fluidez en inglés y adaptabilidad en entornos globales.",
-        "Stack: Java, Spring Framework, Angular, Docker, Kubernetes, GCP, GitLab CI/CD."
+        "Experiencia Internacional (Dublín, 2022): 3 meses trabajando en remoto desde Irlanda, mejorando fluidez en inglés y adaptabilidad en entornos globales."
       ],
       "headline": "Backend Java/Spring con liderazgo en migración a GKE y CI/CD.",
-      "kpis": [
-        {
-          "value": "GKE",
-          "label": "migración liderada"
-        },
-        {
-          "value": "3 meses",
-          "label": "Dublín 2022"
-        }
+      "stack": [
+        "Java",
+        "Spring Framework",
+        "Angular",
+        "Docker",
+        "Kubernetes",
+        "GCP",
+        "GitLab CI/CD"
       ]
     },
     {
@@ -97,11 +97,7 @@
       ],
       "url": "https://blog.sergiomarquez.dev",
       "private": true,
-      "featured": true,
-      "kpi": {
-        "value": "1/día",
-        "label": "post autónomo"
-      }
+      "featured": true
     },
     {
       "name": "One Bad Wire",
@@ -250,7 +246,6 @@
     }
   ],
   "writing": {
-    "blogUrl": "https://blog.sergiomarquez.dev",
     "channels": [
       {
         "platform": "blog",
@@ -276,6 +271,11 @@
         "platform": "tiktok",
         "handle": "@sergio_marquezp",
         "description": "Vídeos cortos de IA"
+      },
+      {
+        "platform": "github",
+        "handle": "sergiomarquezdev",
+        "description": "Código de mis proyectos abiertos"
       }
     ]
   },

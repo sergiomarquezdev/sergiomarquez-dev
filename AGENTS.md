@@ -7,7 +7,7 @@ Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` thr
 - MUST run `pnpm run validate` before considering any task complete (runs type-check + lint + test + build)
 - Uses pnpm. Run `pnpm install` after dependency changes. Cloudflare Pages is configured to use pnpm. Keep `pnpm-workspace.yaml` tracked -- it holds the build-script approvals (esbuild, sharp)
 - MUST keep `|| true` in `"prepare": "husky || true"`. Without it, CI environments fail
-- NEVER use `!` non-null assertions. Biome flags `noNonNullAssertion` (recommended preset). Use type narrowing or a local `assertDefined()` helper (see `src/data/__tests__/github.test.ts`)
+- NEVER use `!` non-null assertions. Biome flags `noNonNullAssertion` (recommended preset). Use type narrowing or an `assertDefined()` helper defined locally in the test file that needs it
 - MUST update documentation (README.md, CHANGELOG.md, docs/) when adding/removing features, changing data flow, or modifying project structure
 
 ## Gotchas
@@ -16,5 +16,4 @@ Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` thr
 - **Windows `core.autocrlf` phantom files**: Biome enforces LF line endings. Git's `core.autocrlf` creates phantom "modified" files. Check actual changes with `git diff --ignore-cr-at-eol --name-only`
 - **lint-staged scoped to `src/`**: Avoids running Biome on root config files
 - **i18n route duplication**: `src/pages/index.astro` and `src/pages/en/index.astro` are intentionally the same file except for relative import depth (`../` vs `../../`) -- Astro injects different `currentLocale` per route
-- **`html.js` gate**: below-the-fold sections start hidden only when the inline head script in `Layout.astro` adds `.js` to `<html>` -- content stays visible with JS disabled. Don't hide sections unconditionally and don't remove that script
-- **`[hidden]` must win in reset.css**: elements with an author `display` (e.g. ⌘K palette items with `display: flex`) rely on the reset's `[hidden]` `!important` rule -- without it the palette filter visually does nothing
+- **`[hidden]` must win in reset.css**: the reset's `[hidden]` `!important` rule keeps the attribute working on elements whose scoped styles set a `display` (grid/flex rows). Nothing uses `hidden` today; keep the rule so a future toggle doesn't silently fail

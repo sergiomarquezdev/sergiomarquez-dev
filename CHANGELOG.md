@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Redesign extras (2026-10-07): JSON-LD now wraps the `Person` in a `ProfilePage` (`mainEntity`, same fields, `sameAs` with the six profiles); `apple-touch-icon.png` (180x180); a GitHub channel at the end of `writing.channels` ("Código de mis proyectos abiertos" / "Code for my open projects", copy pending the owner's confirmation); `getChannels(cv)` in `src/data/cv.ts`, which builds each channel link from `basics.urls[platform]` and replaces the hardcoded URL map.
 - YouTube is back with the new channel `@sergio_marquezp` (2026-10-04). The old `@sergiomarquezp` was deleted on 2026-09-24; the new URL is `https://www.youtube.com/@sergio_marquezp`.
   - Restored `basics.urls.youtube` and the "Writing & Presence" channel (short AI videos) in `cv.es.json`/`cv.en.json`, the `CvData` types and the data tests, `SocialLinks`, `Writing`, `YouTubeIcon`, the `/youtube` and `/yt` redirect pages and their sitemap exclusions.
   - JSON-LD `sameAs` lists YouTube again alongside TikTok.
@@ -19,6 +20,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- **Redesign "two-ink stationery"** (2026-10-07). The dark terminal look (lime accent, Geist, JetBrains Mono, ⌘K palette, sidebar, cursor spotlight) is replaced by a light page in the One dAIly Blog family: warm paper, warm black ink, teal identity ink and coral only for state, square corners, no shadows, cards or icons, and a dark scheme by `prefers-color-scheme`. The page is the front of a business card (name, tagline, serif statement, email and the six channels in the first screen), a sheet with About, Projects (featured project + index) and Experience (current role open, earlier roles in `<details>`, certifications), and the back of the card as a teal footer outside `<main>`. Section headings hang in a sticky margin column; links overprint to coral in two frames. New components: `SiteHeader`, `SiteFooter`, `sections/{Intro,About,Projects,Experience}`; rewritten `Layout`, `BaseHead`, `HomePage`, `LanguageSwitcher` (plain link with `lang`/`hreflang`), `SergioMark` (one variant, `currentColor` + `--mark`) and `404`.
+  - Fonts: Space Grotesk (variable) and Instrument Serif 400, latin woff2 from Fontsource 5.3.0, self-hosted in `public/fonts/` with the version in the file name and metric-matched fallbacks. Two preloads, no monospace.
+  - The page ships no JavaScript of its own: the only `<script>` left is the JSON-LD.
+  - Copy: every interface string moves to `src/i18n/index.ts` (no more `locale === "en"` ternaries in components). `seo.title` and `seo.description` are shortened to 56 and 154/142 characters. `lang.switch` reads "English"/"Español".
+  - Data: `experience[].highlights` no longer ends with a "Stack: …" line; it moves to `experience[].stack: string[]` (same content, both locales).
+  - 404: one static bilingual page (Cloudflare serves a single `404.html`), `noindex`, without canonical, hreflang or JSON-LD (new `noindex` prop on `Layout`/`BaseHead`).
+  - Brand assets with the new palette: `favicon.svg`/`.ico`, `icon-192.{svg,png}`, `icon-512.png`, `apple-touch-icon.png`, `manifest.webmanifest` colors and `og-image.{svg,png}` (1200x630: monogram, name, ES headline, domain; the old "con métricas, no demos" line is gone). Provenance: generated with a temporary Node script (not kept) that outlines the text with `opentype.js` from `@fontsource/space-grotesk@5.3.0` (700 and 500 `.woff`) and `@fontsource/instrument-serif@5.3.0` (400 `.woff`) and rasterizes with `sharp`; the favicon ICO embeds 16/32/48 PNGs.
+  - `astro.config.mjs`: dropped the `vite.build.rollupOptions` asset naming (the build no longer emits `dist/assets/`) and `build.assets: "_astro"` (Astro's default). `public/_headers` loses the `/assets/*` rule.
 - Vanity redirects (2026-10-07): the 8 hand-written stubs under `src/pages/{blog,github,linkedin,tiktok,twitter,x,youtube,yt}/` become the `redirects` map in `astro.config.mjs`, fed by `basics.urls` of `cv.es.json` (the `/blog` stub hardcoded its URL). Same output: meta refresh, `noindex`, canonical to the target. The sitemap regex filter is gone because Astro never lists redirects.
 - Security headers (2026-10-07): the CSP now allows Cloudflare Web Analytics (`static.cloudflareinsights.com` in `script-src`, `cloudflareinsights.com` in `connect-src`). Cloudflare injects the beacon and the old policy blocked it, so analytics never ran and every visit logged a console error. Added `Cross-Origin-Opener-Policy: same-origin`.
 - CI (2026-10-07): `pnpm audit` runs right after install, so an advisory fails in seconds instead of after the build; the deploy hook call has `--max-time 30 --retry 2`.
@@ -34,6 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+- Redesign cleanup (2026-10-07): the automatic redirect to `/en/` by browser language and its `localStorage` preference (it also sent Googlebot to `/en/`; Google advises against language redirects), the `html.js` gate and fade-in on scroll, `CommandPalette`, `Spotlight`, `GitHubActivity` with `src/data/github.ts` and its tests (three GitHub API calls per build for a widget that no longer rendered), `layout/`, `ui/`, `icons/`, the old `sections/`, `About`, `Certifications`, `src/scripts/scrollSpy.ts`, `public/fonts/Geist-var-latin.woff2`, and the compat `cv` export of `src/data/cv.ts`. Unused data fields go too: `basics.headlineAccent`, `basics.stackChips`, `basics.status`, `experience[].kpis`, `projects[].kpi`, `writing.blogUrl`, and the `metrics`/`alsoRunning`/`image` types.
 - Deleted channels and ventures (2026-09-24). The YouTube channel (`@sergiomarquezp`) and the Instagram account (`@sergiomarquezp_`) no longer exist.
   - Both leave `basics.urls` and the "Writing & Presence" channels in `cv.es.json`/`cv.en.json`, the `CvData` types and the data tests, `SocialLinks` and `Writing`.
   - Also removed: the `/youtube`, `/yt` and `/instagram` redirect pages, their sitemap exclusions and the now-unused `YouTubeIcon`/`InstagramIcon`.
@@ -42,6 +52,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Dependencies
 
+- Removed `@fontsource/instrument-serif` and `@fontsource-variable/jetbrains-mono` (2026-10-07): the two font files now live in `public/fonts/`.
 - Refreshed the lockfile (2026-10-07) to clear `sharp` <0.35.5, `source-map-js` <1.2.2 (high) and `smol-toml` <=1.8.0 (moderate), which made `pnpm audit` fail in CI. Astro 7.3.5, Biome 2.5.15, Vitest 5.0.3, lint-staged 17.6.0.
 - Removed the five `pnpm-workspace.yaml` overrides (`nanoid`, `fast-uri`, `js-yaml`, `devalue`, `http-cache-semantics`) and the `minimumReleaseAgeExclude` entry: a clean resolution already picks patched versions.
 - Removed the direct `lightningcss` dependency and `cssMinify: "lightningcss"`: Vite 8 ships it and uses it as the default CSS minifier (identical `dist/index.html`, 116 818 bytes).

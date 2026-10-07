@@ -1,0 +1,29 @@
+---
+import type { CvData } from "../../data/cv";
+import { type Locale, t } from "../../i18n/index";
+
+interface Props {
+	basics: CvData["basics"];
+	locale: Locale;
+}
+
+const { basics, locale } = Astro.props;
+---
+
+<section class="section" aria-labelledby="about-title">
+  <div class="container grid-12">
+    <h2 id="about-title" class="section__head">{t(locale, "section.about")}</h2>
+    <div class="section__body">
+      <p class="about__summary">{basics.summary}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__summary {
+    max-width: 34em;
+    font-family: var(--font-serif);
+    font-size: var(--step-lede);
+    line-height: var(--lh-lede);
+  }
+</style>

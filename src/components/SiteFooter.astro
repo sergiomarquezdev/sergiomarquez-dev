@@ -1,0 +1,93 @@
+---
+import { getChannels, getCv } from "../data/cv";
+import { getLocale, t } from "../i18n/index";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const locale = getLocale(Astro.currentLocale);
+const cv = getCv(locale);
+const { basics } = cv;
+const channels = getChannels(cv);
+const year = new Date().getFullYear();
+const [emailUser, emailDomain] = basics.email.split("@");
+---
+
+<footer class="site-footer" aria-labelledby="footer-title">
+  <div class="container grid-12">
+    <h2 id="footer-title" class="section__head">{t(locale, "footer.title")}</h2>
+    <div class="section__body">
+      <p class="site-footer__line">{t(locale, "footer.line")}</p>
+      <p class="site-footer__email">
+        <a href={`mailto:${basics.email}`}>{emailUser}@<wbr />{emailDomain}</a>
+      </p>
+      <ul class="site-footer__channels" aria-label={t(locale, "footer.channelsLabel")}>
+        {channels.map((channel) => (
+          <li><a href={channel.href}>{channel.label}</a></li>
+        ))}
+      </ul>
+      <div class="site-footer__colophon">
+        <LanguageSwitcher />
+        <p>&copy; {year} {basics.name}</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* The reverse of the card: one flood panel that re-inks every state */
+  .site-footer {
+    --ink: var(--flood-ink);
+    --ink-2: var(--flood-ink-2);
+    --accent: var(--flood-accent);
+    --accent-strong: var(--flood-accent);
+
+    margin-top: var(--section);
+    padding-block: var(--section);
+    background: var(--flood);
+    color: var(--ink);
+  }
+
+  .site-footer ::selection {
+    background: var(--flood-ink);
+    color: var(--flood);
+  }
+
+  .site-footer__line {
+    max-width: var(--measure);
+    color: var(--ink-2);
+  }
+
+  .site-footer__email {
+    margin-top: var(--s-2);
+    font-size: clamp(var(--step-1), 4.6vw, var(--step-3));
+    font-weight: 600;
+    line-height: var(--lh-tight);
+    letter-spacing: var(--track-head);
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer__email a {
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+  }
+
+  .site-footer__channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-3);
+    margin-top: var(--s-6);
+    font-weight: 600;
+  }
+
+  .site-footer__colophon {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-1) var(--s-3);
+    margin-top: var(--s-6);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--ink-2);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+</style>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type CvData, cv, getCv } from "../cv";
+import { type CvData, getChannels, getCv } from "../cv";
 
 function validateCvStructure(data: CvData) {
 	expect(data).toBeDefined();
@@ -40,10 +40,6 @@ function validateCvStructure(data: CvData) {
 }
 
 describe("cv data loader", () => {
-	it("loads default cv (es) successfully", () => {
-		validateCvStructure(cv);
-	});
-
 	it("loads Spanish cv via getCv", () => {
 		const esData = getCv("es");
 		validateCvStructure(esData);
@@ -52,12 +48,6 @@ describe("cv data loader", () => {
 	it("loads English cv via getCv", () => {
 		const enData = getCv("en");
 		validateCvStructure(enData);
-	});
-
-	it("returns same data for default cv and getCv('es')", () => {
-		const esData = getCv("es");
-		expect(cv.basics.name).toBe(esData.basics.name);
-		expect(cv.basics.email).toBe(esData.basics.email);
 	});
 
 	it("has different content between locales", () => {
@@ -85,14 +75,8 @@ describe("cv data loader", () => {
 	it("optional brand fields exist in both locales when present", () => {
 		const es = getCv("es");
 		const en = getCv("en");
-		expect(!!es.metrics).toBe(!!en.metrics);
 		expect(!!es.writing).toBe(!!en.writing);
 		expect(!!es.basics.headline).toBe(!!en.basics.headline);
-		expect(!!es.basics.stackChips).toBe(!!en.basics.stackChips);
-		expect(!!es.basics.status).toBe(!!en.basics.status);
-		if (es.metrics && en.metrics) {
-			expect(es.metrics.length).toBe(en.metrics.length);
-		}
 		if (es.writing && en.writing) {
 			expect(es.writing.channels.length).toBe(en.writing.channels.length);
 		}
@@ -102,7 +86,7 @@ describe("cv data loader", () => {
 // The loader trusts JSON.parse (no runtime schema), so these tests are the
 // safety net that catches typos in cv.es.json / cv.en.json before the build.
 describe("cv data validation", () => {
-	const VALID_PLATFORMS = ["blog", "youtube", "linkedin", "x", "tiktok"];
+	const VALID_PLATFORMS = ["blog", "youtube", "linkedin", "x", "tiktok", "github"];
 	const REQUIRED_URLS = ["site", "linkedin", "github", "x", "youtube", "tiktok"] as const;
 
 	/** Collects every key path recursively, including array indices */
@@ -144,6 +128,28 @@ describe("cv data validation", () => {
 				expect(VALID_PLATFORMS, `${locale}: platform ${channel.platform}`).toContain(
 					channel.platform,
 				);
+			}
+		}
+	});
+
+	it("resolves every channel to an https link with a label", () => {
+		for (const locale of ["es", "en"] as const) {
+			const cv = getCv(locale);
+			const channels = getChannels(cv);
+			expect(channels.length).toBe(cv.writing?.channels.length);
+			for (const channel of channels) {
+				expect(channel.href.startsWith("https://"), `${locale}: ${channel.platform}`).toBe(true);
+				expect(channel.label.length, `${locale}: ${channel.platform} label`).toBeGreaterThan(0);
+			}
+		}
+	});
+
+	it("keeps the stack out of highlights", () => {
+		for (const locale of ["es", "en"] as const) {
+			for (const entry of getCv(locale).experience) {
+				for (const highlight of entry.highlights) {
+					expect(highlight.startsWith("Stack:"), `${locale}: ${entry.role}`).toBe(false);
+				}
 			}
 		}
 	});

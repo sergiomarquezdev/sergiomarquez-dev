@@ -1,81 +1,20 @@
 ---
 import type { CvData } from "../data/cv";
-import { getLocale } from "../i18n";
-import About from "./About.astro";
-import Certifications from "./Certifications.astro";
-import Footer from "./layout/Footer.astro";
-import CasesGrid from "./sections/CasesGrid.astro";
-import Hero from "./sections/Hero.astro";
-import ImpactBar from "./sections/ImpactBar.astro";
-import ProjectsSection from "./sections/ProjectsSection.astro";
-import Writing from "./sections/Writing.astro";
+import { getLocale } from "../i18n/index";
+import About from "./sections/About.astro";
+import Experience from "./sections/Experience.astro";
+import Intro from "./sections/Intro.astro";
+import Projects from "./sections/Projects.astro";
 
 interface Props {
 	cv: CvData;
 }
+
 const { cv } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const { basics, experience, projects, certifications, metrics, writing } = cv;
 ---
-<div class="home">
-  <Hero basics={basics} locale={locale} />
-  {metrics && metrics.length > 0 && <ImpactBar metrics={metrics} locale={locale} />}
-  <section id="about" class="home__about" data-observe>
-    <About basics={basics} />
-  </section>
-  <section id="cases-section" data-observe>
-    <CasesGrid experience={experience} locale={locale} />
-  </section>
-  <section id="projects-section" data-observe>
-    <ProjectsSection projects={projects} locale={locale} />
-  </section>
-  {writing && (
-    <section id="writing-section" data-observe>
-      <Writing writing={writing} locale={locale} />
-    </section>
-  )}
-  <section id="certifications" data-observe>
-    <Certifications certifications={certifications} />
-  </section>
-  <Footer email={basics.email} name={basics.name} urls={basics.urls} />
-</div>
 
-<script>
-  // Reuse existing fade-up observer
-  const items = document.querySelectorAll<HTMLElement>("[data-observe]");
-  if (items.length && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          e.target.classList.add("is-visible");
-          io.unobserve(e.target);
-        }
-      }
-    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
-    items.forEach((el) => io.observe(el));
-  } else {
-    items.forEach((el) => el.classList.add("is-visible"));
-  }
-</script>
-
-<style>
-  .home {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  /* Hide-until-observed only when JS runs (html.js set in the inline head
-     script), so content stays visible if JS is disabled or fails */
-  :global(html.js) [data-observe] {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 600ms ease, transform 600ms ease;
-  }
-  :global(html.js) [data-observe].is-visible {
-    opacity: 1;
-    transform: none;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    [data-observe] { opacity: 1; transform: none; transition: none; }
-  }
-</style>
+<Intro cv={cv} locale={locale} />
+<About basics={cv.basics} locale={locale} />
+<Projects projects={cv.projects} githubUrl={cv.basics.urls.github} locale={locale} />
+<Experience experience={cv.experience} certifications={cv.certifications} locale={locale} />
