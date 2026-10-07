@@ -50,6 +50,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check for vulnerabilities
+        # No ignores: accept a real advisory only with a dated rationale.
+        run: pnpm audit --audit-level=moderate --ignore-registry-errors
+
       - name: Lint
         run: pnpm run lint
 
@@ -61,10 +65,6 @@ jobs:
 
       - name: Build
         run: pnpm run build
-
-      - name: Check for vulnerabilities
-        # No ignores: accept a real advisory only with a dated rationale.
-        run: pnpm audit --audit-level=moderate --ignore-registry-errors
 
   deploy:
     needs: ci
@@ -78,7 +78,7 @@ jobs:
         env:
           DEPLOY_HOOK_URL: ${{ secrets.CF_PAGES_DEPLOY_HOOK_URL }}
         run: |
-          http_code=$(curl -sS -o /tmp/deploy_response.txt -w "%{http_code}" -X POST "$DEPLOY_HOOK_URL")
+          http_code=$(curl -sS --max-time 30 --retry 2 -o /tmp/deploy_response.txt -w "%{http_code}" -X POST "$DEPLOY_HOOK_URL")
           echo "Cloudflare response: HTTP $http_code"
           if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
             echo "Deploy hook failed:"
