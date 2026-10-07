@@ -13,20 +13,7 @@
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "Backend & AI engineer based in Badajoz, Spain. At VITALY I design and ship LLM systems on Google Cloud: multi-agent assistants with RAG and voice, document validation with multimodal models, data pipelines and business automations. Outside work I build my own projects: voice and WhatsApp agents, image and video pipelines, a blog that publishes itself every day and the odd video game. I have coded with agents every day since 2024 (Claude Code and Codex) and I review with several models before critical changes.",
-    "headline": "I build AI agents and systems that make it to production.",
-    "headlineAccent": "make it to production.",
-    "stackChips": [
-      "AI agents",
-      "RAG",
-      "Python",
-      "TypeScript",
-      "GCP",
-      "Claude Code"
-    ],
-    "status": {
-      "available": true,
-      "label": "AI agents and RAG in production"
-    }
+    "headline": "I build AI agents and systems that make it to production."
   },
   "experience": [
     {
@@ -43,10 +30,25 @@
         "Agents that turn a phone call into structured data (Whisper + Gemini) and hybrid (rules + LLM) PDF extraction.",
         "Business automations in production and quality standards for the team's repositories (tests, SAST, CVEs and CI).",
         "GitOps on multi-cluster GKE, GitLab CI/CD and observability with OpenTelemetry and New Relic.",
-        "AI-assisted development with Claude Code (agents, skills) and multi-model review before critical changes.",
-        "Stack: Python, FastAPI, Google ADK, LiteLLM, Vertex AI, BigQuery, Dataform, Dataflow, MongoDB, PostgreSQL, Firestore, Oracle, GKE, GitLab CI/CD."
+        "AI-assisted development with Claude Code (agents, skills) and multi-model review before critical changes."
       ],
-      "headline": "Applied AI end to end: assistants, documents, data and operations."
+      "headline": "Applied AI end to end: assistants, documents, data and operations.",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Google ADK",
+        "LiteLLM",
+        "Vertex AI",
+        "BigQuery",
+        "Dataform",
+        "Dataflow",
+        "MongoDB",
+        "PostgreSQL",
+        "Firestore",
+        "Oracle",
+        "GKE",
+        "GitLab CI/CD"
+      ]
     },
     {
       "company": "VITALY",
@@ -57,19 +59,17 @@
         "Strategic Middleware APIs: Designed and developed Spring-based middleware to optimize frontend/external services communication.",
         "GKE Migration & Optimization: Led the migration to Google Kubernetes Engine, automating continuous delivery and optimizing deployments.",
         "Post-Merger Data Integration: Actively participated in the data integration after the Preving/Cualtis merger, performing mapping and application adaptation.",
-        "International Experience (Dublin, 2022): Spent 3 months working remotely from Ireland, improving English fluency and adaptability in global environments.",
-        "Stack: Java, Spring Framework, Angular, Docker, Kubernetes, GCP, GitLab CI/CD."
+        "International Experience (Dublin, 2022): Spent 3 months working remotely from Ireland, improving English fluency and adaptability in global environments."
       ],
       "headline": "Java/Spring backend leading GKE migration and CI/CD.",
-      "kpis": [
-        {
-          "value": "GKE",
-          "label": "led migration"
-        },
-        {
-          "value": "3 months",
-          "label": "Dublin 2022"
-        }
+      "stack": [
+        "Java",
+        "Spring Framework",
+        "Angular",
+        "Docker",
+        "Kubernetes",
+        "GCP",
+        "GitLab CI/CD"
       ]
     },
     {
@@ -97,11 +97,7 @@
       ],
       "url": "https://blog.sergiomarquez.dev",
       "private": true,
-      "featured": true,
-      "kpi": {
-        "value": "1/day",
-        "label": "autonomous post"
-      }
+      "featured": true
     },
     {
       "name": "One Bad Wire",
@@ -250,7 +246,6 @@
     }
   ],
   "writing": {
-    "blogUrl": "https://blog.sergiomarquez.dev",
     "channels": [
       {
         "platform": "blog",
@@ -276,6 +271,11 @@
         "platform": "tiktok",
         "handle": "@sergio_marquezp",
         "description": "Short AI videos"
+      },
+      {
+        "platform": "github",
+        "handle": "sergiomarquezdev",
+        "description": "Code for my open projects"
       }
     ]
   },

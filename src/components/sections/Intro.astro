@@ -1,0 +1,158 @@
+---
+import { type CvData, getChannels } from "../../data/cv";
+import { type Locale, t } from "../../i18n/index";
+
+interface Props {
+	cv: CvData;
+	locale: Locale;
+}
+
+const { cv, locale } = Astro.props;
+const { basics } = cv;
+const channels = getChannels(cv);
+// Break opportunity after "@" so a narrow column never splits the domain
+const [emailUser, emailDomain] = basics.email.split("@");
+---
+
+<section class="intro container grid-12" aria-labelledby="intro-name">
+  <h1 id="intro-name" class="intro__name">{basics.name}</h1>
+  <p class="intro__tagline">{basics.tagline}</p>
+  {basics.headline && <p class="intro__statement">{basics.headline}</p>}
+
+  <ul class="contact" aria-label={t(locale, "intro.contactLabel")}>
+    <li class="contact__row contact__row--email">
+      <span class="contact__label">{t(locale, "intro.emailLabel")}</span>
+      <a class="contact__email" href={`mailto:${basics.email}`}>{emailUser}@<wbr />{emailDomain}</a>
+    </li>
+    {
+      channels.map((channel) => (
+        <li class="contact__row">
+          <span class="contact__label">{channel.label}</span>
+          <div class="contact__value">
+            <a class="contact__handle" href={channel.href}>{channel.handle}</a>
+            <p class="contact__description">{channel.description}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .intro {
+    padding-top: var(--s-6);
+  }
+
+  .intro__name {
+    font-size: var(--step-4);
+    font-weight: 700;
+    line-height: var(--lh-display);
+    letter-spacing: var(--track-display);
+    color: var(--teal);
+  }
+
+  .intro__tagline {
+    margin-top: var(--s-2);
+    color: var(--ink-2);
+  }
+
+  .intro__statement {
+    margin-top: var(--s-6);
+    max-width: 18em;
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    line-height: var(--lh-tight);
+    text-wrap: balance;
+  }
+
+  .contact {
+    display: grid;
+    gap: var(--s-2);
+    margin-top: var(--s-6);
+  }
+
+  .contact__row {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .contact__row--email {
+    padding-bottom: var(--s-1);
+  }
+
+  /* Narrow screens: the email takes the full row under its label */
+  @media (max-width: 35.99rem) {
+    .contact__row--email {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .contact__label {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  .contact__email {
+    display: inline-block;
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: var(--lh-lede);
+    color: var(--teal);
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .contact__email:hover,
+  .contact__email:focus-visible {
+    color: var(--accent);
+  }
+
+  .contact__email:active {
+    color: var(--accent-strong);
+  }
+
+  .contact__handle {
+    display: inline-block;
+    overflow-wrap: anywhere;
+  }
+
+  .contact__description {
+    font-size: var(--step--1);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+
+  @media (min-width: 56rem) {
+    .intro {
+      min-height: min(calc(100svh - var(--s-8)), 52rem);
+      grid-template-rows: auto auto 1fr;
+      padding-top: var(--s-4);
+      padding-bottom: var(--s-4);
+    }
+
+    .intro__name,
+    .intro__tagline,
+    .intro__statement {
+      grid-column: 1 / 13;
+    }
+
+    .intro__tagline {
+      grid-column: 1 / 9;
+    }
+
+    .intro__statement {
+      grid-column: 1 / 7;
+      grid-row: 3;
+      align-self: start;
+    }
+
+    .contact {
+      grid-column: 7 / 13;
+      grid-row: 3;
+      align-self: end;
+    }
+  }
+</style>

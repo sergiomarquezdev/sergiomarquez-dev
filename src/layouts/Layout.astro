@@ -1,227 +1,50 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import CommandPalette from "../components/CommandPalette.astro";
-import LanguageSwitcher from "../components/LanguageSwitcher.astro";
-import MainContent from "../components/layout/MainContent.astro";
-import MobileNav from "../components/layout/MobileNav.astro";
-import SidebarLeft from "../components/layout/SidebarLeft.astro";
-import SocialLinks from "../components/layout/SocialLinks.astro";
-import SergioMark from "../components/SergioMark.astro";
-import Spotlight from "../components/Spotlight.astro";
-import { getCv } from "../data/cv";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import { getLocale, t } from "../i18n/index";
 import "../styles/global.css";
 
 interface Props {
 	title: string;
 	description: string;
+	/** Error pages: robots noindex, no canonical, hreflang or JSON-LD */
+	noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const { basics } = getCv(locale);
-const homeHref = locale === "en" ? "/en/" : "/";
 ---
 
 <!doctype html>
-<html lang={locale} style="color-scheme: dark">
+<html lang={locale}>
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} noindex={noindex} />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <!-- Language detection: redirect English speakers on first visit -->
-    <script is:inline>
-      (function() {
-        // Mark JS as available so CSS can gate JS-dependent hiding (fade-up)
-        document.documentElement.classList.add('js');
-        try {
-          var KEY = 'preferred-locale';
-          if (localStorage.getItem(KEY)) return;
-          var path = window.location.pathname;
-          var isEn = path.startsWith('/en');
-          var lang = navigator.language || '';
-          if (lang.startsWith('en') && !isEn) {
-            localStorage.setItem(KEY, 'en');
-            window.location.replace('/en/');
-          } else {
-            localStorage.setItem(KEY, isEn ? 'en' : 'es');
-          }
-        } catch (e) { /* Private browsing or storage unavailable */ }
-      })();
-    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">{t(locale, "skip.main")}</a>
-    <Spotlight />
-
-    <!-- Mobile/Tablet Header (visible < 1024px) -->
-    <header class="mobile-header">
-      <div class="mobile-header-content">
-        <div class="mobile-header-top">
-          <div class="mobile-name-row">
-            <a href={homeHref} class="mobile-logo-link" aria-hidden="true" tabindex="-1">
-              <SergioMark variant="square" class="mobile-logo-mark" width={36} height={36} />
-            </a>
-            <p class="mobile-name">
-              <a href={homeHref}>{basics.name}</a>
-            </p>
-          </div>
-          <div class="mobile-header-actions">
-            <div class="tablet-social">
-              <SocialLinks urls={basics.urls} />
-            </div>
-            <LanguageSwitcher />
-          </div>
-        </div>
-        <p class="mobile-tagline">{basics.tagline}</p>
-      </div>
-    </header>
-
-    <div class="layout-container">
-      <div class="layout-wrapper">
-        <SidebarLeft basics={basics} />
-        <MainContent>
-          <slot />
-        </MainContent>
-      </div>
-    </div>
-
-    <MobileNav />
-    <CommandPalette basics={basics} />
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
 
     <style>
       .skip-link {
         position: absolute;
-        top: -40px;
-        left: 0;
-        padding: 0.5rem 1rem;
-        background: var(--accent);
-        color: var(--bg);
+        top: var(--s-1);
+        left: var(--s-1);
+        z-index: 1;
+        padding: var(--s-1) var(--s-2);
+        background: var(--paper);
+        color: var(--teal);
         font-weight: 600;
-        z-index: 100;
-        transition: top 0.2s ease-in-out;
+        transform: translateY(-200%);
       }
 
       .skip-link:focus {
-        top: 0;
-      }
-
-      .layout-container {
-        width: 100%;
-        min-height: 100vh;
-      }
-
-      .layout-wrapper {
-        display: block;
-        max-width: 1280px;
-        margin: 0 auto;
-        /* No horizontal padding on mobile/tablet — MainContent already
-           applies its own padding. Adding it here caused double horizontal
-           padding (visible as a "shifted right" footer with cropped right
-           edge). Desktop reintroduces padding because the sidebar lives
-           inside the wrapper and needs breathing room from the viewport. */
-      }
-
-      @media (min-width: 1024px) {
-        .layout-wrapper {
-          display: flex;
-          gap: 1rem;
-          padding: 0 3rem;
-        }
-      }
-
-      @media (min-width: 1280px) {
-        .layout-wrapper {
-          padding: 0 4rem;
-        }
-      }
-
-      @media (min-width: 1536px) {
-        .layout-wrapper {
-          padding: 0 6rem;
-        }
-      }
-
-      .mobile-header {
-        display: block;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border);
-      }
-
-      @media (min-width: 1024px) {
-        .mobile-header {
-          display: none;
-        }
-      }
-
-      .mobile-header-content {
-        max-width: 768px;
-        margin: 0 auto;
-      }
-
-      .mobile-header-actions {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .tablet-social {
-        display: none;
-      }
-
-      @media (min-width: 768px) {
-        .tablet-social {
-          display: block;
-        }
-      }
-
-      .mobile-header-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-      }
-
-      .mobile-name-row {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .mobile-logo-link {
-        display: flex;
-        flex-shrink: 0;
-      }
-
-      .mobile-logo-mark {
-        display: block;
-        width: 36px;
-        height: 36px;
-        border-radius: 0.5rem;
-        border: 1px solid var(--border);
-        background-color: var(--bg);
-        flex-shrink: 0;
-      }
-
-      .mobile-name {
-        margin: 0;
-        font-family: var(--font-serif);
-        font-size: 1.5rem;
-        font-weight: 400;
-        letter-spacing: -0.02em;
-      }
-
-      .mobile-name a {
-        color: var(--text-primary);
-      }
-
-      .mobile-name a:hover {
-        color: var(--accent);
-      }
-
-      .mobile-tagline {
-        margin: 0.25rem 0 0 0;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
+        transform: none;
       }
     </style>
   </body>

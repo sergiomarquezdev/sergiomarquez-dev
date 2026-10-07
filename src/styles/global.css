@@ -1,146 +1,208 @@
 @import "./reset.css";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
-@import "@fontsource-variable/jetbrains-mono";
+
+/* Self-hosted fonts (public/fonts, served immutable: version in the file name) */
+@font-face {
+	font-family: "Space Grotesk";
+	src: url("/fonts/space-grotesk-latin-wght-normal-v5.3.0.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 300 700;
+	font-display: swap;
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+		U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @font-face {
-	font-family: "Geist Variable";
-	src: url("/fonts/Geist-var-latin.woff2") format("woff2");
-	font-weight: 100 900;
+	font-family: "Instrument Serif";
+	src: url("/fonts/instrument-serif-latin-400-normal-v5.3.0.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 400;
 	font-display: swap;
-	font-synthesis: none;
 	unicode-range:
-		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-		U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD;
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+		U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/*
-  Design System - Dark theme with lime accent
-*/
+/* Metric-matched fallbacks (measured for the blog, which shares these faces):
+   they keep the line box stable while the web fonts swap in. */
+@font-face {
+	font-family: "Space Grotesk Fallback";
+	src: local("Arial"), local("Helvetica"), local("Roboto");
+	font-style: normal;
+	font-weight: 400 500;
+	size-adjust: 108.5%;
+	ascent-override: 90.69%;
+	descent-override: 26.91%;
+	line-gap-override: 0%;
+}
 
+@font-face {
+	font-family: "Space Grotesk Fallback";
+	src: local("Arial Bold"), local("Arial-BoldMT"), local("Arial");
+	font-style: normal;
+	font-weight: 600 700;
+	size-adjust: 101.15%;
+	ascent-override: 97.29%;
+	descent-override: 28.87%;
+	line-gap-override: 0%;
+}
+
+@font-face {
+	font-family: "Instrument Serif Fallback";
+	src: local("Georgia");
+	font-style: normal;
+	font-weight: 400;
+	size-adjust: 76.5%;
+	ascent-override: 129.41%;
+	descent-override: 40.52%;
+	line-gap-override: 0%;
+}
+
+/* Tokens: the only place where colors and color schemes are defined */
 :root {
-	/* Backgrounds */
-	--bg: #0a0a0b;
-	--bg-elevated: #111113;
-	--bg-subtle: #1a1a1d;
-	--bg-overlay: rgba(10, 10, 11, 0.8);
+	color-scheme: light dark;
 
-	/* Text */
-	--text-primary: #f5f5f7;
-	--text-secondary: #a1a1aa;
-	--text-tertiary: #85858f;
+	/* Paper and inks (light) */
+	--paper: #fafaf9;
+	--ink: #1c1917;
+	--ink-2: #57534e;
+	--teal: #0d4b4d;
+	--accent: #c2410c;
+	--accent-strong: #9a3412;
+	--mark: #f97316;
+	--rule: #d6d3d1;
 
-	/* Borders */
-	--border: rgba(255, 255, 255, 0.08);
-	--border-strong: rgba(255, 255, 255, 0.16);
-	--border-accent: rgba(163, 230, 53, 0.4);
+	/* Flood: the reverse of the card, same in both schemes */
+	--flood: #0d4b4d;
+	--flood-ink: #fafaf9;
+	--flood-ink-2: #b9d3d0;
+	--flood-accent: #fdba74;
 
-	/* Accent (lime) */
-	--accent: #a3e635;
-	--accent-hover: #bef264;
-	--accent-muted: rgba(163, 230, 53, 0.1);
-	--accent-glow: rgba(163, 230, 53, 0.18);
-	--accent-text: #bef264;
+	/* Type */
+	--font-sans: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+	--font-serif: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+	--step--1: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+	--step-0: clamp(1.0625rem, 1.01rem + 0.22vw, 1.1875rem);
+	--step-1: clamp(1.25rem, 1.13rem + 0.5vw, 1.5rem);
+	--step-lede: clamp(1.375rem, 1.16rem + 0.9vw, 1.875rem);
+	--step-2: clamp(1.625rem, 1.34rem + 1.2vw, 2.25rem);
+	--step-3: clamp(2rem, 1.5rem + 2.1vw, 3.25rem);
+	--step-4: clamp(3rem, 1.7rem + 5.6vw, 6rem);
+	--lh-body: 1.6;
+	--lh-lede: 1.3;
+	--lh-tight: 1.1;
+	--lh-display: 0.95;
+	--track-display: -0.035em;
+	--track-head: -0.02em;
+	--measure: 62ch;
 
-	/* Typography families */
-	--font-sans: "Geist Variable", system-ui, sans-serif;
-	--font-serif: "Instrument Serif", "Times New Roman", serif;
-	--font-mono: "JetBrains Mono Variable", "SF Mono", Menlo, monospace;
+	/* Space: 8px module, whole units only */
+	--s-1: 0.5rem;
+	--s-2: 1rem;
+	--s-3: 1.5rem;
+	--s-4: 2rem;
+	--s-6: 3rem;
+	--s-8: 4rem;
+	--s-12: 6rem;
+	--section: clamp(4rem, 2.5rem + 6vw, 8rem);
+	--gutter: clamp(1rem, 0.5rem + 2.5vw, 3rem);
+	--container: 72rem;
 
-	/* Type scale (Major Third 1.25) — sin cambios estructurales */
-	--text-xs: 0.75rem;
-	--text-sm: 0.875rem;
-	--text-base: 1rem;
-	--text-lg: 1.125rem;
-	--text-xl: 1.25rem;
-	--text-2xl: 1.5rem;
-	--text-3xl: 1.875rem;
-	--text-4xl: 2.25rem;
-	--text-5xl: 3rem;
-	--text-display: 4.5rem;
-
-	/* Rhythm */
-	--base-lh: 1.55;
-	--rhythm: calc(1rem * var(--base-lh));
+	/* Shape and motion */
+	--radius: 0;
+	--step-motion: 90ms steps(2, jump-none);
 }
 
-html,
-body {
-	background-color: var(--bg);
-	color: var(--text-primary);
+@media (prefers-color-scheme: dark) {
+	:root {
+		--paper: #0c0a09;
+		--ink: #f5f5f4;
+		--ink-2: #a8a29e;
+		--teal: #2dd4bf;
+		--accent: #fb923c;
+		--accent-strong: #fdba74;
+		--mark: #f97316;
+		--rule: #292524;
+	}
 }
 
+/* Base */
 html {
-	scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
-	}
-
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-	}
+	scrollbar-color: var(--ink-2) var(--paper);
+	accent-color: var(--teal);
+	scroll-padding-top: var(--s-4);
 }
 
 body {
-	font-family: var(--font-sans);
-	margin: 0;
-	line-height: var(--base-lh);
-	font-kerning: auto;
-	font-variant-ligatures: common-ligatures;
+	background: var(--paper);
+	color: var(--ink);
+	font: 400 var(--step-0) / var(--lh-body) var(--font-sans);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 }
 
-a {
-	color: inherit;
-	text-decoration: none;
-	transition: color 0.2s ease-in-out;
+::selection {
+	background: var(--teal);
+	color: var(--paper);
 }
 
-/* Selection */
-::selection {
-	background-color: var(--accent-muted);
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+}
+
+p,
+li {
+	text-wrap: pretty;
+}
+
+/* Links: a 1px underline that overprints to 2px coral in two frames */
+a {
+	color: inherit;
+	text-decoration-line: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+	text-decoration-color: currentColor;
+	transition:
+		color var(--step-motion),
+		text-decoration-color var(--step-motion);
+}
+
+a:hover,
+a:focus-visible {
+	color: var(--accent);
+	text-decoration-thickness: 2px;
+}
+
+a:active {
+	color: var(--accent-strong);
+}
+
+/* Focus: the most visible thing on the page while it exists */
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: var(--radius);
+}
+
+summary {
+	cursor: pointer;
+	transition: color var(--step-motion);
+}
+
+summary:hover,
+summary:focus-visible {
 	color: var(--accent);
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-	width: 8px;
+time,
+.tabular {
+	font-variant-numeric: tabular-nums;
 }
 
-::-webkit-scrollbar-track {
-	background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-	background: var(--bg-subtle);
-	border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: var(--text-tertiary);
-}
-
-/* Animation keyframes */
-@keyframes pulse {
-	0%,
-	100% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0.5;
-	}
-}
-
-/* Visually hidden but accessible to screen readers */
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -148,236 +210,63 @@ a {
 	padding: 0;
 	margin: -1px;
 	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
 	white-space: nowrap;
-	border-width: 0;
+	border: 0;
 }
 
-/* Focus styles for accessibility */
-:focus-visible {
-	outline: 2px solid var(--accent);
-	outline-offset: 2px;
-	border-radius: 2px;
+.container {
+	width: 100%;
+	max-width: var(--container);
+	margin-inline: auto;
+	padding-inline: var(--gutter);
 }
 
-/* Typography utilities per baseline UI guidelines */
-h1,
-h2,
-h3 {
-	text-wrap: balance;
-	font-variant-numeric: lining-nums;
+/* Shared section grid: head hung in the margin column, content on the right */
+.section {
+	margin-top: var(--section);
 }
 
-p {
-	text-wrap: pretty;
-	hanging-punctuation: first allow-end;
+.section__head {
+	margin-bottom: var(--s-3);
+	font-size: var(--step-2);
+	font-weight: 600;
+	line-height: var(--lh-tight);
+	letter-spacing: var(--track-head);
 }
 
-/* Tabular lining numbers for dates and numeric data */
-.tabular-nums {
-	font-variant-numeric: lining-nums tabular-nums;
+.meta {
+	font-size: var(--step--1);
+	color: var(--ink-2);
 }
 
-/*
-  Terminal layer — "Agentic Console" redesign
-  Shared primitives for the terminal aesthetic. Skin-deep only: never a
-  navigation requirement (see spec 2026-05-30-rediseno-consola-agentic).
-  Respects brand effects rules: no glassmorphism, no drop shadows, no
-  gradients > 15% opacity.
-*/
-
-/* Window chrome — a terminal-styled frame */
-.term-window {
-	border: 1px solid var(--border);
-	border-radius: 10px;
-	background-color: var(--bg-elevated);
-	overflow: hidden;
-}
-
-.term-titlebar {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-	padding: 0.6rem 0.9rem;
-	border-bottom: 1px solid var(--border);
-	background-color: var(--bg-subtle);
-}
-
-.term-dots {
-	display: inline-flex;
-	gap: 0.4rem;
-	flex-shrink: 0;
-}
-
-.term-dots span {
-	width: 11px;
-	height: 11px;
-	border-radius: 50%;
-	background-color: var(--border-strong);
-}
-
-.term-dots span:last-child {
-	background-color: var(--accent);
-	opacity: 0.55;
-}
-
-.term-title {
-	font-family: var(--font-mono);
-	font-size: 0.8125rem;
-	color: var(--text-tertiary);
-	letter-spacing: 0.01em;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-/* Prompt + token primitives */
-.term-line {
-	font-family: var(--font-mono);
-	font-size: 0.9rem;
-	line-height: 1.7;
-	color: var(--text-secondary);
-}
-
-.tok-prompt {
-	color: var(--accent);
-	user-select: none;
-}
-
-.tok-path {
-	color: var(--accent-text);
-}
-
-.tok-comment {
-	color: var(--text-tertiary);
-}
-
-/* Blinking caret */
-.caret {
-	display: inline-block;
-	width: 0.6ch;
-	height: 1.05em;
-	margin-left: 0.15ch;
-	translate: 0 0.16em;
-	background-color: var(--accent);
-}
-
-.caret--blink {
-	animation: blink 1.05s steps(1) infinite;
-}
-
-@keyframes blink {
-	0%,
-	50% {
-		opacity: 1;
+@media (min-width: 56rem) {
+	.grid-12 {
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		column-gap: var(--s-3);
 	}
-	50.01%,
-	100% {
-		opacity: 0;
+
+	.section__head {
+		grid-column: 1 / 4;
+		align-self: start;
+		position: sticky;
+		top: var(--s-4);
+		margin-bottom: 0;
+	}
+
+	.section__body {
+		grid-column: 4 / 13;
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.caret--blink {
-		animation: none;
-	}
-}
-
-/* Key chip */
-.kbd {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.15rem;
-	padding: 0.1rem 0.4rem;
-	font-family: var(--font-mono);
-	font-size: 0.75rem;
-	line-height: 1;
-	color: var(--text-secondary);
-	background-color: var(--bg-subtle);
-	border: 1px solid var(--border-strong);
-	border-radius: 5px;
-}
-
-/* Terminal-styled button */
-.term-btn {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.4rem;
-	padding: 0.55rem 0.95rem;
-	font-family: var(--font-mono);
-	font-size: 0.875rem;
-	color: var(--text-primary);
-	background-color: var(--bg-elevated);
-	border: 1px solid var(--border-strong);
-	border-radius: 7px;
-	cursor: pointer;
-	transition:
-		border-color 180ms ease,
-		background-color 180ms ease,
-		color 180ms ease;
-}
-
-.term-btn:hover {
-	border-color: var(--border-accent);
-	color: var(--accent);
-}
-
-.term-btn--accent {
-	background-color: var(--accent);
-	color: #0a0a0b;
-	border-color: var(--accent);
-}
-
-.term-btn--accent:hover {
-	background-color: var(--accent-hover);
-	border-color: var(--accent-hover);
-	color: #0a0a0b;
-}
-
-/* Print styles */
-@media print {
-	header,
-	footer,
-	nav,
-	.sidebar-left {
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		display: none !important;
-	}
-
-	body {
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		background-color: white !important;
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		color: black !important;
-		font-size: 12pt;
-		line-height: 1.4;
-	}
-
-	a {
-		text-decoration: underline;
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		color: black !important;
-	}
-
-	main {
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		max-width: 100% !important;
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		margin: 0 !important;
-		/* biome-ignore lint/complexity/noImportantStyles: Print styles require overrides */
-		padding: 0 !important;
-	}
-
-	p {
-		widows: 3;
-		orphans: 3;
-	}
-
-	article,
-	section,
-	h2,
-	h3 {
-		break-inside: avoid;
-		page-break-after: avoid;
+	*,
+	*::before,
+	*::after {
+		/* biome-ignore lint/complexity/noImportantStyles: reduced motion must beat every component rule */
+		transition: none !important;
+		/* biome-ignore lint/complexity/noImportantStyles: reduced motion must beat every component rule */
+		animation: none !important;
 	}
 }

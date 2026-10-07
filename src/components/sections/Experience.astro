@@ -1,0 +1,214 @@
+---
+import type { CvData } from "../../data/cv";
+import { formatDate, type Locale, t } from "../../i18n/index";
+
+interface Props {
+	experience: CvData["experience"];
+	certifications: CvData["certifications"];
+	locale: Locale;
+}
+
+type Role = CvData["experience"][number] & { current: boolean };
+
+const { experience, certifications, locale } = Astro.props;
+
+// Consecutive roles at the same company share one company heading.
+// The first entry is the current role.
+const groups: Array<{ company: string; roles: Role[] }> = [];
+experience.forEach((entry, index) => {
+	const role: Role = { ...entry, current: index === 0 };
+	const last = groups.at(-1);
+	if (last && last.company === entry.company) last.roles.push(role);
+	else groups.push({ company: entry.company, roles: [role] });
+});
+---
+
+{
+  experience.length > 0 && (
+    <section class="section" aria-labelledby="experience-title">
+      <div class="container grid-12">
+        <h2 id="experience-title" class="section__head">{t(locale, "section.experience")}</h2>
+        <div class="section__body">
+          {groups.map((group) => (
+            <div class="company">
+              <h3 class="company__name">{group.company}</h3>
+              {group.roles.map((role) => {
+                const stack = role.stack && role.stack.length > 0 && (
+                  <p class="meta role__stack">
+                    <span class="role__stack-label">{t(locale, "experience.stack")}</span>{" "}
+                    {role.stack.join(" · ")}
+                  </p>
+                );
+                const highlights = role.highlights.length > 0 && (
+                  <ul class="role__highlights">
+                    {role.highlights.map((item) => <li>{item}</li>)}
+                  </ul>
+                );
+                return (
+                  <article class:list={["role", { "role--current": role.current }]}>
+                    <div class="role__head">
+                      <h4 class="role__title">{role.role}</h4>
+                      <p class="meta role__period tabular">{role.period}</p>
+                    </div>
+                    <p class="role__headline">{role.headline ?? role.summary}</p>
+                    {role.current ? (
+                      <Fragment>
+                        {highlights}
+                        {stack}
+                      </Fragment>
+                    ) : (
+                      (highlights || stack) && (
+                        <details class="role__details">
+                          <summary>{t(locale, "experience.details")}</summary>
+                          {highlights}
+                          {stack}
+                        </details>
+                      )
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          ))}
+
+          {certifications.length > 0 && (
+            <div class="certs">
+              <h3 class="certs__title">{t(locale, "section.certifications")}</h3>
+              <ul class="certs__list">
+                {certifications.map((cert) => (
+                  <li>
+                    {cert.url ? <a href={cert.url}>{cert.name}</a> : cert.name}
+                    <span class="certs__meta">
+                      {" · "}
+                      {cert.issuer}
+                      {" · "}
+                      <time class="tabular" datetime={cert.date}>
+                        {formatDate(cert.date, locale)}
+                      </time>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .company__name {
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  .role {
+    max-width: var(--measure);
+    padding-block: var(--s-3);
+    border-top: 1px solid var(--rule);
+  }
+
+  .company__name + .role {
+    margin-top: var(--s-2);
+  }
+
+  .role__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: var(--s-3);
+  }
+
+  .role__title {
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: var(--lh-lede);
+  }
+
+  .role--current .role__title {
+    color: var(--teal);
+  }
+
+  .role__headline {
+    margin-top: var(--s-1);
+    color: var(--ink-2);
+  }
+
+  .role--current .role__headline {
+    color: var(--ink);
+  }
+
+  .role__highlights {
+    display: grid;
+    gap: var(--s-1);
+    margin-top: var(--s-2);
+    padding-left: var(--s-3);
+    list-style: "– ";
+  }
+
+  .role__highlights li::marker {
+    color: var(--teal);
+  }
+
+  .role__stack {
+    margin-top: var(--s-2);
+  }
+
+  .role__stack-label {
+    font-weight: 600;
+  }
+
+  .role__details {
+    margin-top: var(--s-2);
+  }
+
+  .role__details summary {
+    display: list-item;
+    width: fit-content;
+    font-size: var(--step--1);
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .role__details summary::marker {
+    color: var(--teal);
+  }
+
+  .role__details summary:hover,
+  .role__details summary:focus-visible {
+    color: var(--accent);
+  }
+
+  .certs {
+    margin-top: var(--s-6);
+  }
+
+  .certs__title {
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  .certs__list {
+    display: grid;
+    gap: var(--s-2);
+    max-width: var(--measure);
+    margin-top: var(--s-2);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--rule);
+  }
+
+  .certs__meta {
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 55.99rem) {
+    .role__head {
+      flex-direction: column;
+    }
+  }
+</style>

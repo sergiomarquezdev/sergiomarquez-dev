@@ -1,37 +1,16 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { defaultLocale, type Locale, locales } from "../i18n/index";
+import { type Locale, locales } from "../i18n/index";
 
-export interface CvMetric {
-	value: string;
-	label: string;
-	context?: string;
-}
-
-export interface CvKpi {
-	value: string;
-	label: string;
-}
-
-export interface CvStatus {
-	available: boolean;
-	label: string;
-}
+export type CvPlatform = "blog" | "linkedin" | "x" | "youtube" | "tiktok" | "github";
 
 export interface CvWritingChannel {
-	platform: "blog" | "youtube" | "linkedin" | "x" | "tiktok";
+	platform: CvPlatform;
 	handle: string;
 	description: string;
 }
 
-export interface CvAlsoRunning {
-	name: string;
-	url: string;
-	description: string;
-}
-
 export interface CvWriting {
-	blogUrl: string;
 	channels: CvWritingChannel[];
 }
 
@@ -51,10 +30,6 @@ export type CvData = {
 		};
 		summary: string;
 		headline?: string;
-		headlineAccent?: string;
-		stackChips?: string[];
-		status?: CvStatus;
-		alsoRunning?: CvAlsoRunning;
 	};
 	experience: Array<{
 		company: string;
@@ -63,7 +38,7 @@ export type CvData = {
 		summary: string;
 		highlights: string[];
 		headline?: string;
-		kpis?: CvKpi[];
+		stack?: string[];
 	}>;
 	projects: Array<{
 		name: string;
@@ -72,9 +47,7 @@ export type CvData = {
 		url?: string;
 		github?: string[];
 		private?: boolean;
-		image?: string;
 		featured?: boolean;
-		kpi?: CvKpi;
 	}>;
 	certifications: Array<{
 		name: string;
@@ -82,9 +55,43 @@ export type CvData = {
 		date: string;
 		url?: string;
 	}>;
-	metrics?: CvMetric[];
 	writing?: CvWriting;
 };
+
+export interface CvChannel {
+	platform: CvPlatform;
+	label: string;
+	href: string;
+	handle: string;
+	description: string;
+}
+
+const PLATFORM_LABELS: Record<CvPlatform, string> = {
+	blog: "Blog",
+	linkedin: "LinkedIn",
+	x: "X",
+	youtube: "YouTube",
+	tiktok: "TikTok",
+	github: "GitHub",
+};
+
+/** Channels in `writing.channels` order, with their URL taken from `basics.urls`. */
+export function getChannels(cv: CvData): CvChannel[] {
+	const channels = cv.writing?.channels ?? [];
+	return channels.flatMap((channel) => {
+		const href = cv.basics.urls[channel.platform];
+		if (!href) return [];
+		return [
+			{
+				platform: channel.platform,
+				label: PLATFORM_LABELS[channel.platform],
+				href,
+				handle: channel.handle,
+				description: channel.description,
+			},
+		];
+	});
+}
 
 function loadCv(locale: Locale): CvData {
 	// Resolve from project root: module-relative paths break in Astro 7,
@@ -102,6 +109,3 @@ const cvCache = Object.fromEntries(locales.map((locale) => [locale, loadCv(local
 export function getCv(locale: Locale): CvData {
 	return cvCache[locale];
 }
-
-// Default export for backward compatibility (redirect pages, tests)
-export const cv: CvData = cvCache[defaultLocale];
