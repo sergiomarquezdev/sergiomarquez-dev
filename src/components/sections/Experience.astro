@@ -104,8 +104,9 @@ experience.forEach((entry, index) => {
     color: var(--ink-2);
   }
 
+  /* Rules and role rows run to the right edge of the column like the project
+     index; only running text keeps the measure */
   .role {
-    max-width: var(--measure);
     padding-block: var(--s-3);
     border-top: 1px solid var(--rule);
   }
@@ -130,6 +131,12 @@ experience.forEach((entry, index) => {
 
   .role--current .role__title {
     color: var(--teal);
+  }
+
+  .role__headline,
+  .role__highlights,
+  .role__stack {
+    max-width: var(--measure);
   }
 
   .role__headline {
@@ -196,7 +203,6 @@ experience.forEach((entry, index) => {
   .certs__list {
     display: grid;
     gap: var(--s-2);
-    max-width: var(--measure);
     margin-top: var(--s-2);
     padding-top: var(--s-3);
     border-top: 1px solid var(--rule);

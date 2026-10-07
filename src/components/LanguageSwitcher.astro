@@ -1,16 +1,11 @@
 ---
-import { getLocale, homePath, type Locale, t } from "../i18n/index";
+import { getLocale, homePath, otherLocale, t } from "../i18n/index";
 
-interface Props {
-	class?: string;
-}
-
-const { class: className } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
-const target: Locale = locale === "es" ? "en" : "es";
+const target = otherLocale(locale);
 ---
 
-<a href={homePath(target)} class:list={["lang-switch", className]} lang={target} hreflang={target}>
+<a href={homePath(target)} class="lang-switch" lang={target} hreflang={target}>
   {t(locale, "lang.switch")}
 </a>
 

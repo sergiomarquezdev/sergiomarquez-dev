@@ -70,6 +70,11 @@ export function getLocale(astroLocale: string | undefined): Locale {
 	return defaultLocale;
 }
 
+/** The other site locale (the site has exactly two). */
+export function otherLocale(locale: Locale): Locale {
+	return locales.find((l) => l !== locale) ?? defaultLocale;
+}
+
 /** Root path of a locale: "/" for the default one, "/en/" otherwise. */
 export function homePath(locale: Locale): string {
 	return locale === defaultLocale ? "/" : `/${locale}/`;

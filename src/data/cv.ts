@@ -26,7 +26,7 @@ export type CvData = {
 			x: string;
 			youtube: string;
 			tiktok: string;
-			blog?: string;
+			blog: string;
 		};
 		summary: string;
 		headline?: string;

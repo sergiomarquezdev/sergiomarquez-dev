@@ -87,7 +87,7 @@ describe("cv data loader", () => {
 // safety net that catches typos in cv.es.json / cv.en.json before the build.
 describe("cv data validation", () => {
 	const VALID_PLATFORMS = ["blog", "youtube", "linkedin", "x", "tiktok", "github"];
-	const REQUIRED_URLS = ["site", "linkedin", "github", "x", "youtube", "tiktok"] as const;
+	const REQUIRED_URLS = ["site", "linkedin", "github", "x", "youtube", "tiktok", "blog"] as const;
 
 	/** Collects every key path recursively, including array indices */
 	function keyPaths(value: unknown, prefix = ""): string[] {

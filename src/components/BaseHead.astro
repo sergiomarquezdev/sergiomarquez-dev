@@ -1,6 +1,6 @@
 ---
 import { getCv } from "../data/cv";
-import { getLocale, homePath, t } from "../i18n/index";
+import { getLocale, homePath, otherLocale, t } from "../i18n/index";
 
 interface Props {
 	title: string;
@@ -11,9 +11,9 @@ interface Props {
 const { title, description, noindex = false } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const cv = getCv(locale);
+// `site` is set in astro.config.mjs, so every absolute URL resolves against it
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/og-image.png", Astro.site);
-const siteURL = Astro.site ?? new URL("https://sergiomarquez.dev");
 const currentRole = cv.experience[0];
 
 const person = {
@@ -41,6 +41,9 @@ const person = {
 const structuredData = {
 	"@context": "https://schema.org",
 	"@type": "ProfilePage",
+	url: canonicalURL.href,
+	inLanguage: locale,
+	image: socialImageURL.href,
 	mainEntity: person,
 };
 ---
@@ -58,15 +61,16 @@ const structuredData = {
 <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 <link rel='icon' type='image/x-icon' href='/favicon.ico' />
 <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+<link rel='manifest' href='/manifest.webmanifest' />
 <meta name='generator' content={Astro.generator} />
 
 {
 	!noindex && (
 		<Fragment>
 			<link rel='canonical' href={canonicalURL} />
-			<link rel='alternate' hreflang='es' href={new URL(homePath("es"), siteURL)} />
-			<link rel='alternate' hreflang='en' href={new URL(homePath("en"), siteURL)} />
-			<link rel='alternate' hreflang='x-default' href={new URL(homePath("es"), siteURL)} />
+			<link rel='alternate' hreflang='es' href={new URL(homePath("es"), Astro.site)} />
+			<link rel='alternate' hreflang='en' href={new URL(homePath("en"), Astro.site)} />
+			<link rel='alternate' hreflang='x-default' href={new URL(homePath("es"), Astro.site)} />
 		</Fragment>
 	)
 }
@@ -84,7 +88,7 @@ const structuredData = {
 <meta property='og:image:height' content='630' />
 <meta property='og:image:alt' content={t(locale, "og.imageAlt")} />
 <meta property='og:locale' content={t(locale, "og.locale")} />
-<meta property='og:locale:alternate' content={locale === "es" ? "en_US" : "es_ES"} />
+<meta property='og:locale:alternate' content={t(otherLocale(locale), "og.locale")} />
 <meta property='og:site_name' content='Sergio Márquez' />
 
 <!-- Twitter -->

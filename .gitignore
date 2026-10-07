@@ -48,3 +48,6 @@ nul
 test-*.png
 *-fullpage.png
 temp
+
+# Impeccable review captures
+.impeccable/review/

@@ -1,0 +1,15 @@
+---
+// mailto link whose text is the address, with a break opportunity after "@"
+// so a narrow column wraps before the domain instead of splitting it.
+// Unstyled: each parent styles it through its own wrapper.
+interface Props {
+	email: string;
+}
+
+const { email } = Astro.props;
+const at = email.indexOf("@");
+const user = email.slice(0, at + 1);
+const domain = email.slice(at + 1);
+---
+
+<a href={`mailto:${email}`}>{user}<wbr />{domain}</a>
