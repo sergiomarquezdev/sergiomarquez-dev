@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Unit tests for the view helpers and i18n (2026-10-13): `src/i18n/__tests__/i18n.test.ts` (`getLocale`, `otherLocale`, `homePath`, `formatDate`) and `groupByCompany` / `projectHref` / `displayUrl` cases in `cv.test.ts`. 10 → 28 tests.
 - Redesign extras (2026-10-07): JSON-LD now wraps the `Person` in a `ProfilePage` (`mainEntity`, same fields, `sameAs` with the six profiles); `apple-touch-icon.png` (180x180); a GitHub channel at the end of `writing.channels` ("Código de mis proyectos abiertos" / "Code for my open projects", copy pending the owner's confirmation); `getChannels(cv)` in `src/data/cv.ts`, which builds each channel link from `basics.urls[platform]` and replaces the hardcoded URL map.
 - Redesign review (2026-10-07): JSON-LD `ProfilePage` gains `url` (the page canonical), `inLanguage` and `image` (absolute og-image URL). New `EmailLink.astro` (mailto with a break after "@", shared by the front and the back of the card), global `.display` class (the name and the 404 code) and `otherLocale()` in `src/i18n/index.ts`.
 - YouTube is back with the new channel `@sergio_marquezp` (2026-10-04). The old `@sergiomarquezp` was deleted on 2026-09-24; the new URL is `https://www.youtube.com/@sergio_marquezp`.
@@ -17,10 +18,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- `formatDate` (2026-10-13) formats in UTC. ISO dates parse as UTC midnight, so a certification dated on the 1st of a month (`2024-02-01`) printed the previous month ("enero de 2024") on a build machine west of UTC. No change in the current output (CI and Cloudflare build in UTC, and no date falls on the 1st).
 - TikTok profile link (2026-10-04): the account is `@sergio_marquezp`, not `@sergiomarquezp_` (that handle does not exist on TikTok). Fixed in `basics.urls.tiktok` and the "Writing & Presence" handle of `cv.es.json`/`cv.en.json`, the `Writing` URL map and the README. X stays `@sergiomarquezp_`.
 
 ### Changed
 
+- Code audit (2026-10-13), no visible change (the built HTML is identical except for one whitespace and one redundant CSS declaration):
+  - `groupByCompany()` (from `Experience.astro`), `projectHref()` and `displayUrl()` (from `Projects.astro`) move to `src/data/cv.ts` as pure, tested functions; the components keep only rendering.
+  - `formatDate` builds one `Intl.DateTimeFormat` per locale at module load instead of one per call, and maps locales through a `Record<Locale, …>` instead of a ternary.
+  - `getLocale` validates against `locales` with a type guard instead of hardcoding `"en"`.
+  - `BaseHead` derives the `hreflang` alternates from `locales` and `x-default` from `defaultLocale` (same tags, same order).
+  - `Experience.astro` drops `display: list-item` on `<summary>` (already set by `reset.css`).
+  - The data tests iterate `locales` instead of repeating `["es", "en"]`.
 - Intro and About copy (2026-10-07), ES and EN: the tagline drops "en producción" / "in production" (the statement right below already says it) and carries the location instead; the summary no longer repeats the project list or the Claude Code line from Projects and Experience, and states the working method instead. The Person JSON-LD description follows the summary.
 - **Redesign "two-ink stationery"** (2026-10-07). The dark terminal look (lime accent, Geist, JetBrains Mono, ⌘K palette, sidebar, cursor spotlight) is replaced by a light page in the One dAIly Blog family: warm paper, warm black ink, teal identity ink and coral only for state, square corners, no shadows, cards or icons, and a dark scheme by `prefers-color-scheme`. The page is the front of a business card (name, tagline, serif statement, email and the six channels in the first screen), a sheet with About, Projects (featured project + index) and Experience (current role open, earlier roles in `<details>`, certifications), and the back of the card as a teal footer outside `<main>`. Section headings hang in a sticky margin column; links overprint to coral in two frames. New components: `SiteHeader`, `SiteFooter`, `sections/{Intro,About,Projects,Experience}`; rewritten `Layout`, `BaseHead`, `HomePage`, `LanguageSwitcher` (plain link with `lang`/`hreflang`), `SergioMark` (one variant, `currentColor` + `--mark`) and `404`.
   - Fonts: Space Grotesk (variable) and Instrument Serif 400, latin woff2 from Fontsource 5.3.0, self-hosted in `public/fonts/` with the version in the file name and metric-matched fallbacks. Two preloads, no monospace.

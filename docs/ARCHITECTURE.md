@@ -14,6 +14,9 @@ src/data/cv.ts
   getCv(locale): CvData   -- returns cached data for a locale
   getChannels(cv)         -- writing.channels in order, href from basics.urls[platform],
                              label from a constant map (Blog, LinkedIn, X, YouTube, TikTok, GitHub)
+  groupByCompany(exp)     -- consecutive roles at one company under one heading; first role is current
+  projectHref(project)    -- public url, else first repo unless private
+  displayUrl(href)        -- URL without scheme or trailing slash, for running text
         |
         v
 src/pages/{index,en/index}.astro
@@ -29,7 +32,7 @@ sections/Intro / sections/About / sections/Projects / sections/Experience
   (SiteHeader and SiteFooter read getCv(locale) themselves from Layout)
 ```
 
-The data layer is pure functions with no side effects after initial load, making it fully testable without Astro runtime. Interface strings (section names, labels, 404 copy, SEO title and description) come from `t(locale, key)` in `src/i18n/index.ts`; components hold no hardcoded copy and no `locale === "en" ? … : …` ternaries (the other locale comes from `otherLocale(locale)`).
+The data layer is pure functions with no side effects after initial load, making it fully testable without Astro runtime. Logic that shapes the data for a section (grouping, link choice) lives here, not in the `.astro` frontmatter, so it is covered by unit tests; components only render. Interface strings (section names, labels, 404 copy, SEO title and description) come from `t(locale, key)` in `src/i18n/index.ts`; components hold no hardcoded copy and no `locale === "en" ? … : …` ternaries (the other locale comes from `otherLocale(locale)`).
 
 ## Component Tree
 
@@ -124,6 +127,8 @@ Each `.astro` component uses `<style>` blocks for component-specific styles. Glo
 ### What is Tested
 
 - **cv.ts** (`src/data/__tests__/cv.test.ts`): structure across locales, structural and recursive key parity between ES and EN, https URLs, known channel platforms, `getChannels()` resolving every channel to an https link with a label, and no `Stack:` line left inside `highlights`.
+- **cv.ts helpers** (same file): `groupByCompany()` (grouping, only the first role current, a returning company opens a new group, input not mutated), `projectHref()` (url wins, private repos never link) and `displayUrl()`.
+- **i18n** (`src/i18n/__tests__/i18n.test.ts`): `getLocale()` fallback, `otherLocale()`, `homePath()`, and `formatDate()` (year-only and invalid dates kept as-is, month names per locale, and the first day of a month formatted in UTC so the build machine's time zone cannot shift it back a month).
 
 ### Why These
 
@@ -132,7 +137,7 @@ The loader trusts `JSON.parse` (no runtime schema), so these tests are the safet
 ### What is Not Tested (and Why)
 
 - **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `pnpm run validate`.
-- **i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time.
+- **The `ui` dictionary in i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time (the helpers next to it are tested, see above).
 - **Vanity redirects**: declared in `astro.config.mjs`. Verified by build success.
 
 ### Test Utilities
