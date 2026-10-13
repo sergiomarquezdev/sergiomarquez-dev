@@ -1,5 +1,5 @@
 ---
-import type { CvData } from "../../data/cv";
+import { type CvData, groupByCompany } from "../../data/cv";
 import { formatDate, type Locale, t } from "../../i18n/index";
 
 interface Props {
@@ -8,19 +8,8 @@ interface Props {
 	locale: Locale;
 }
 
-type Role = CvData["experience"][number] & { current: boolean };
-
 const { experience, certifications, locale } = Astro.props;
-
-// Consecutive roles at the same company share one company heading.
-// The first entry is the current role.
-const groups: Array<{ company: string; roles: Role[] }> = [];
-experience.forEach((entry, index) => {
-	const role: Role = { ...entry, current: index === 0 };
-	const last = groups.at(-1);
-	if (last && last.company === entry.company) last.roles.push(role);
-	else groups.push({ company: entry.company, roles: [role] });
-});
+const groups = groupByCompany(experience);
 ---
 
 {

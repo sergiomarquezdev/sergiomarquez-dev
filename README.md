@@ -92,10 +92,11 @@ sergiomarquez-dev/
 │   │   ├── SiteFooter.astro     # Back of the card: teal flood with email and channels
 │   │   └── sections/            # Intro (front of the card), About, Projects, Experience
 │   ├── data/
-│   │   ├── cv.ts                # Typed loader + locale cache for cv JSON, getChannels()
-│   │   └── __tests__/           # Unit tests (cv data)
+│   │   ├── cv.ts                # Typed loader + locale cache for cv JSON, pure view helpers
+│   │   └── __tests__/           # Unit tests (cv data and helpers)
 │   ├── i18n/
-│   │   └── index.ts             # Locale config, translation dict, helpers
+│   │   ├── index.ts             # Locale config, translation dict, helpers
+│   │   └── __tests__/           # Unit tests (locale helpers, date formatting)
 │   ├── layouts/
 │   │   └── Layout.astro         # Skip link, header, <main>, footer
 │   ├── pages/

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { type CvData, getChannels, getCv } from "../cv";
+import { locales } from "../../i18n/index";
+import { type CvData, displayUrl, getChannels, getCv, groupByCompany, projectHref } from "../cv";
 
 function validateCvStructure(data: CvData) {
 	expect(data).toBeDefined();
@@ -110,7 +111,7 @@ describe("cv data validation", () => {
 	});
 
 	it("has all required urls as https links", () => {
-		for (const locale of ["es", "en"] as const) {
+		for (const locale of locales) {
 			const { urls } = getCv(locale).basics;
 			for (const key of REQUIRED_URLS) {
 				const url = urls[key];
@@ -121,7 +122,7 @@ describe("cv data validation", () => {
 	});
 
 	it("uses only known writing platforms", () => {
-		for (const locale of ["es", "en"] as const) {
+		for (const locale of locales) {
 			const channels = getCv(locale).writing?.channels ?? [];
 			expect(channels.length).toBeGreaterThan(0);
 			for (const channel of channels) {
@@ -133,7 +134,7 @@ describe("cv data validation", () => {
 	});
 
 	it("resolves every channel to an https link with a label", () => {
-		for (const locale of ["es", "en"] as const) {
+		for (const locale of locales) {
 			const cv = getCv(locale);
 			const channels = getChannels(cv);
 			expect(channels.length).toBe(cv.writing?.channels.length);
@@ -145,12 +146,88 @@ describe("cv data validation", () => {
 	});
 
 	it("keeps the stack out of highlights", () => {
-		for (const locale of ["es", "en"] as const) {
+		for (const locale of locales) {
 			for (const entry of getCv(locale).experience) {
 				for (const highlight of entry.highlights) {
 					expect(highlight.startsWith("Stack:"), `${locale}: ${entry.role}`).toBe(false);
 				}
 			}
 		}
+	});
+});
+
+describe("groupByCompany", () => {
+	const role = (company: string, title: string): CvData["experience"][number] => ({
+		company,
+		role: title,
+		period: "2020",
+		summary: "",
+		highlights: [],
+	});
+
+	it("returns no groups for no experience", () => {
+		expect(groupByCompany([])).toEqual([]);
+	});
+
+	it("groups consecutive roles at the same company and marks only the first as current", () => {
+		const groups = groupByCompany([role("A", "Lead"), role("A", "Senior"), role("B", "Junior")]);
+		expect(groups.map((group) => group.company)).toEqual(["A", "B"]);
+		expect(groups.map((group) => group.roles.map((r) => [r.role, r.current]))).toEqual([
+			[
+				["Lead", true],
+				["Senior", false],
+			],
+			[["Junior", false]],
+		]);
+	});
+
+	it("starts a new group when a company comes back after another one", () => {
+		const groups = groupByCompany([role("A", "1"), role("B", "2"), role("A", "3")]);
+		expect(groups.map((group) => group.company)).toEqual(["A", "B", "A"]);
+	});
+
+	it("does not mutate its input", () => {
+		const experience = [role("A", "Lead")];
+		groupByCompany(experience);
+		expect(experience[0]).not.toHaveProperty("current");
+	});
+});
+
+describe("projectHref", () => {
+	const project = (extra: Partial<CvData["projects"][number]>): CvData["projects"][number] => ({
+		name: "P",
+		headline: "",
+		stack: [],
+		...extra,
+	});
+
+	it("prefers the public url, even for a private repo", () => {
+		expect(
+			projectHref(project({ url: "https://a.dev", private: true, github: ["https://g"] })),
+		).toBe("https://a.dev");
+	});
+
+	it("falls back to the first repo when the project is not private", () => {
+		expect(projectHref(project({ github: ["https://g/1", "https://g/2"] }))).toBe("https://g/1");
+		expect(projectHref(project({ private: false, github: ["https://g/1"] }))).toBe("https://g/1");
+	});
+
+	it("never links a private repo", () => {
+		expect(projectHref(project({ private: true, github: ["https://g/1"] }))).toBeUndefined();
+	});
+
+	it("has no link without url or repos", () => {
+		expect(projectHref(project({}))).toBeUndefined();
+	});
+});
+
+describe("displayUrl", () => {
+	it("drops the scheme and the trailing slash", () => {
+		expect(displayUrl("https://example.dev/")).toBe("example.dev");
+		expect(displayUrl("http://example.dev/path/")).toBe("example.dev/path");
+	});
+
+	it("leaves a bare host untouched", () => {
+		expect(displayUrl("example.dev")).toBe("example.dev");
 	});
 });
