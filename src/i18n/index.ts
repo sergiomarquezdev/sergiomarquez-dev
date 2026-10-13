@@ -65,9 +65,12 @@ export function t(locale: Locale, key: TranslationKey): string {
 	return ui[locale][key];
 }
 
+function isLocale(value: string | undefined): value is Locale {
+	return locales.some((locale) => locale === value);
+}
+
 export function getLocale(astroLocale: string | undefined): Locale {
-	if (astroLocale === "en") return "en";
-	return defaultLocale;
+	return isLocale(astroLocale) ? astroLocale : defaultLocale;
 }
 
 /** The other site locale (the site has exactly two). */
@@ -80,13 +83,19 @@ export function homePath(locale: Locale): string {
 	return locale === defaultLocale ? "/" : `/${locale}/`;
 }
 
+// One formatter per locale, built once instead of on every call. Date-only ISO
+// strings ("2024-02-01") parse as UTC midnight, so formatting in UTC keeps the
+// month from slipping back one when the build machine runs west of Greenwich.
+// A date-time without an offset parses as local time; the cv data has none.
+const monthYearFormat: Record<Locale, Intl.DateTimeFormat> = {
+	es: new Intl.DateTimeFormat("es-ES", { year: "numeric", month: "long", timeZone: "UTC" }),
+	en: new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", timeZone: "UTC" }),
+};
+
 export function formatDate(dateStr: string, locale: Locale): string {
 	// Dates like "2023" (year only) stay as-is
 	if (/^\d{4}$/.test(dateStr)) return dateStr;
 	const date = new Date(dateStr);
 	if (Number.isNaN(date.getTime())) return dateStr;
-	return new Intl.DateTimeFormat(locale === "es" ? "es-ES" : "en-US", {
-		year: "numeric",
-		month: "long",
-	}).format(date);
+	return monthYearFormat[locale].format(date);
 }

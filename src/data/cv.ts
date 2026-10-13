@@ -93,6 +93,38 @@ export function getChannels(cv: CvData): CvChannel[] {
 	});
 }
 
+export type CvRole = CvData["experience"][number] & { current: boolean };
+
+export interface CvCompanyGroup {
+	company: string;
+	roles: CvRole[];
+}
+
+/**
+ * Consecutive roles at the same company share one company heading.
+ * The first entry is the current role.
+ */
+export function groupByCompany(experience: CvData["experience"]): CvCompanyGroup[] {
+	const groups: CvCompanyGroup[] = [];
+	experience.forEach((entry, index) => {
+		const role: CvRole = { ...entry, current: index === 0 };
+		const last = groups.at(-1);
+		if (last && last.company === entry.company) last.roles.push(role);
+		else groups.push({ company: entry.company, roles: [role] });
+	});
+	return groups;
+}
+
+/** Link target of a project: private repos never link to their code; a public URL still wins. */
+export function projectHref(project: CvData["projects"][number]): string | undefined {
+	return project.url ?? (project.private ? undefined : project.github?.[0]);
+}
+
+/** A URL as shown in running text: no scheme, no trailing slash. */
+export function displayUrl(href: string): string {
+	return href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
 function loadCv(locale: Locale): CvData {
 	// Resolve from project root: module-relative paths break in Astro 7,
 	// whose prerender chunks execute from dist/.prerender/chunks/

@@ -1,5 +1,5 @@
 ---
-import type { CvData } from "../../data/cv";
+import { type CvData, displayUrl, projectHref } from "../../data/cv";
 import { type Locale, t } from "../../i18n/index";
 
 interface Props {
@@ -8,18 +8,11 @@ interface Props {
 	locale: Locale;
 }
 
-type Project = CvData["projects"][number];
-
 const { projects, githubUrl, locale } = Astro.props;
-
-// Private repos never link to their code; a public URL still wins
-const hrefOf = (project: Project) =>
-	project.url ?? (project.private ? undefined : project.github?.[0]);
-const displayUrl = (href: string) => href.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 const featured = projects.find((project) => project.featured) ?? projects[0];
 const rest = projects.filter((project) => project !== featured);
-const featuredHref = featured ? hrefOf(featured) : undefined;
+const featuredHref = featured ? projectHref(featured) : undefined;
 ---
 
 {
@@ -44,7 +37,7 @@ const featuredHref = featured ? hrefOf(featured) : undefined;
           {rest.length > 0 && (
             <ul class="index">
               {rest.map((project) => {
-                const href = hrefOf(project);
+                const href = projectHref(project);
                 return (
                   <li class="index__row">
                     <div class="index__name">
