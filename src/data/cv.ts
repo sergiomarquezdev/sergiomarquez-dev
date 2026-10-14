@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { type Locale, locales } from "../i18n/index";
 
-export type CvPlatform = "blog" | "linkedin" | "x" | "youtube" | "tiktok" | "github";
+export type CvPlatform = "blog" | "linkedin" | "x" | "youtube" | "tiktok" | "instagram" | "github";
 
 export interface CvWritingChannel {
 	platform: CvPlatform;
@@ -26,6 +26,7 @@ export type CvData = {
 			x: string;
 			youtube: string;
 			tiktok: string;
+			instagram: string;
 			blog: string;
 		};
 		summary: string;
@@ -72,6 +73,7 @@ const PLATFORM_LABELS: Record<CvPlatform, string> = {
 	x: "X",
 	youtube: "YouTube",
 	tiktok: "TikTok",
+	instagram: "Instagram",
 	github: "GitHub",
 };
 

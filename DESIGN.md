@@ -119,7 +119,7 @@ components:
 
 **Creative North Star: "Two-Ink Personal Stationery"**
 
-The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a serif statement on the left and a working contact block (email first, then six channels with handles) set on a diagonal at the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.
+The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a serif statement on the left and a working contact block (email first, then seven channels with handles) set on a diagonal at the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.
 
 Two inks do the work, warm black for text and teal for identity, on uncoated warm-white paper. Coral is a third, state-only ink. Corners are square, nothing casts a shadow, there are no cards, chips or icons: type, weight, ink and a twelve-column grid carry all hierarchy. Density is calm and textual; every section head hangs in a left margin column and stays pinned while its section scrolls past.
 

@@ -10,6 +10,7 @@
       "x": "https://x.com/sergiomarquezp_",
       "youtube": "https://www.youtube.com/@sergio_marquezp",
       "tiktok": "https://www.tiktok.com/@sergio_marquezp",
+      "instagram": "https://www.instagram.com/sergiomarquezp_/",
       "blog": "https://blog.sergiomarquez.dev"
     },
     "summary": "At VITALY I design and run LLM systems on Google Cloud, from multi-agent assistants with RAG and voice to document validation and data pipelines. I come from backend engineering and treat every model-backed system as one more service: designed, evaluated against data and operated with observability. I have coded with agents every day since 2024.",
@@ -270,6 +271,11 @@
       {
         "platform": "tiktok",
         "handle": "@sergio_marquezp",
+        "description": "Short AI videos"
+      },
+      {
+        "platform": "instagram",
+        "handle": "@sergiomarquezp_",
         "description": "Short AI videos"
       },
       {

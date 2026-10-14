@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Instagram restored (2026-10-14): `basics.urls.instagram` (`@sergiomarquezp_`) in both CVs, an Instagram entry in `writing.channels`, the `instagram` platform in `src/data/cv.ts`, the JSON-LD `sameAs` list, the data tests and an `/instagram` vanity redirect in `astro.config.mjs`.
 - Unit tests for the view helpers and i18n (2026-10-13): `src/i18n/__tests__/i18n.test.ts` (`getLocale`, `otherLocale`, `homePath`, `formatDate`) and `groupByCompany` / `projectHref` / `displayUrl` cases in `cv.test.ts`. 10 → 28 tests.
 - Redesign extras (2026-10-07): JSON-LD now wraps the `Person` in a `ProfilePage` (`mainEntity`, same fields, `sameAs` with the six profiles); `apple-touch-icon.png` (180x180); a GitHub channel at the end of `writing.channels` ("Código de mis proyectos abiertos" / "Code for my open projects", copy pending the owner's confirmation); `getChannels(cv)` in `src/data/cv.ts`, which builds each channel link from `basics.urls[platform]` and replaces the hardcoded URL map.
 - Redesign review (2026-10-07): JSON-LD `ProfilePage` gains `url` (the page canonical), `inLanguage` and `image` (absolute og-image URL). New `EmailLink.astro` (mailto with a break after "@", shared by the front and the back of the card), global `.display` class (the name and the 404 code) and `otherLocale()` in `src/i18n/index.ts`.

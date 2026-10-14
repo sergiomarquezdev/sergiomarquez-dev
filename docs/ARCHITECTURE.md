@@ -13,7 +13,7 @@ src/data/cv.ts
   cvCache                 -- pre-loads all locales into a Record<Locale, CvData>
   getCv(locale): CvData   -- returns cached data for a locale
   getChannels(cv)         -- writing.channels in order, href from basics.urls[platform],
-                             label from a constant map (Blog, LinkedIn, X, YouTube, TikTok, GitHub)
+                             label from a constant map (Blog, LinkedIn, X, YouTube, TikTok, Instagram, GitHub)
   groupByCompany(exp)     -- consecutive roles at one company under one heading; first role is current
   projectHref(project)    -- public url, else first repo unless private
   displayUrl(href)        -- URL without scheme or trailing slash, for running text
@@ -183,7 +183,7 @@ Astro Content Collections are designed for Markdown/MDX content with frontmatter
 
 ### Why Config Redirects
 
-The 8 vanity links (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`) live in the `redirects` map of `astro.config.mjs`, with destinations read from `basics.urls` in `cv.es.json`. With static output Astro emits a meta refresh page (not an HTTP 301) with `noindex` and a canonical to the target, the same page the old hand-written `.astro` stubs produced, and the sitemap never lists redirects, so no filter is needed. A Cloudflare `_redirects` file would give a real HTTP 301, but it would duplicate the URLs outside the JSON and does not run in `astro dev`.
+The 9 vanity links (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram`) live in the `redirects` map of `astro.config.mjs`, with destinations read from `basics.urls` in `cv.es.json`. With static output Astro emits a meta refresh page (not an HTTP 301) with `noindex` and a canonical to the target, the same page the old hand-written `.astro` stubs produced, and the sitemap never lists redirects, so no filter is needed. A Cloudflare `_redirects` file would give a real HTTP 301, but it would duplicate the URLs outside the JSON and does not run in `astro dev`.
 
 ### Why CSS Custom Properties (and No Framework)
 

@@ -10,6 +10,7 @@ const socialRedirects = {
   "/github": urls.github,
   "/linkedin": urls.linkedin,
   "/tiktok": urls.tiktok,
+  "/instagram": urls.instagram,
   "/x": urls.x,
   "/twitter": urls.x,
   "/youtube": urls.youtube,

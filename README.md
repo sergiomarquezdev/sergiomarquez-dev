@@ -31,14 +31,14 @@ All tokens (inks, type steps, 8px spacing module, motion) are CSS custom propert
 
 - **Bilingual (i18n)**: ES at `/`, EN at `/en/`, language switcher as a plain link with `lang`/`hreflang`, and hreflang alternates. No automatic redirect by browser language.
 - **Data-driven content**: every section renders from `public/cv.{es,en}.json`; interface strings live in `src/i18n/index.ts`. Key parity between locales is enforced by tests.
-- **Front of the card** (first screen): name at display size, tagline, serif statement, and the contact block with the email as the main action plus the six channels (blog, LinkedIn, X, YouTube, TikTok, GitHub) with handle and description. Links work from the first viewport.
+- **Front of the card** (first screen): name at display size, tagline, serif statement, and the contact block with the email as the main action plus the seven channels (blog, LinkedIn, X, YouTube, TikTok, Instagram, GitHub) with handle and description. Links work from the first viewport.
 - **About, Projects, Experience**: headings hang in a margin column and stay pinned (`position: sticky`) while their section scrolls. One featured project, then an index of the rest. The current role shows all its highlights; earlier roles fold theirs into a native `<details>`. Certifications close the Experience section.
 - **Back of the card** (footer, outside `<main>`): full-bleed teal flood with the email, the channel names and the language switch.
 - **Links overprint**: on hover and focus a link turns coral and its underline goes from 1px to 2px in a two-frame step (`steps(2)`, 90 ms). No other motion; `prefers-reduced-motion` removes it.
 - **Bilingual 404**: one static `404.html` (Cloudflare serves it for any path) with the message in Spanish and English, `noindex`, no canonical, hreflang or JSON-LD.
 - **Accessibility**: skip link, landmarks, no heading skips, 2px coral focus ring, links at least 24px tall, content fully visible without JavaScript.
 - **SEO**: canonical, hreflang (es, en, x-default), JSON-LD `ProfilePage` with `Person` as `mainEntity`, OG/Twitter cards, sitemap (redirects are never listed), PWA manifest and `apple-touch-icon`.
-- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok` → external profiles, declared in `astro.config.mjs` (`redirects`) from `basics.urls` in `cv.es.json`. Static output emits a meta refresh page with `noindex` for each.
+- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram` → external profiles, declared in `astro.config.mjs` (`redirects`) from `basics.urls` in `cv.es.json`. Static output emits a meta refresh page with `noindex` for each.
 - **Performance**: inlined CSS, two preloaded font files, no client JavaScript, no build-time network calls, immutable caching for fonts (`public/_headers`).
 
 ---
