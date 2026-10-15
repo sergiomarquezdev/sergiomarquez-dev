@@ -37,8 +37,8 @@ All tokens (inks, type steps, 8px spacing module, motion) are CSS custom propert
 - **Links overprint**: on hover and focus a link turns coral and its underline goes from 1px to 2px in a two-frame step (`steps(2)`, 90 ms). No other motion; `prefers-reduced-motion` removes it.
 - **Bilingual 404**: one static `404.html` (Cloudflare serves it for any path) with the message in Spanish and English, `noindex`, no canonical, hreflang or JSON-LD.
 - **Accessibility**: skip link, landmarks, no heading skips, 2px coral focus ring, links at least 24px tall, content fully visible without JavaScript.
-- **SEO**: canonical, hreflang (es, en, x-default), JSON-LD `ProfilePage` with `Person` as `mainEntity`, OG/Twitter cards, sitemap (redirects are never listed), PWA manifest and `apple-touch-icon`.
-- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram` → external profiles, declared in `astro.config.mjs` (`redirects`) from `basics.urls` in `cv.es.json`. Static output emits a meta refresh page with `noindex` for each.
+- **SEO**: canonical, hreflang (es, en, x-default), JSON-LD `ProfilePage` with `Person` as `mainEntity` (with `homeLocation` from `basics.location`), OG/Twitter cards, sitemap (redirects are never listed), PWA manifest and `apple-touch-icon`.
+- **Vanity redirects**: `/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram` → external profiles, declared in `astro.config.mjs` (`redirects`) from `basics.urls` in `cv.es.json`. The build also writes `dist/_redirects` from the same map, so Cloudflare Pages answers each one with a single HTTP 302; the meta refresh pages with `noindex` stay as the fallback and serve `astro dev`.
 - **Performance**: inlined CSS, two preloaded font files, no client JavaScript, no build-time network calls, immutable caching for fonts (`public/_headers`).
 
 ---

@@ -141,7 +141,7 @@ The loader trusts `JSON.parse` (no runtime schema), so these tests are the safet
 
 - **Astro components**: Require browser/DOM environment. Astro's rendering pipeline is covered by the build step in `pnpm run validate`.
 - **The `ui` dictionary in i18n/index.ts**: Pure lookup table with TypeScript enforcement. Type errors catch missing keys at compile time (the helpers next to it are tested, see above).
-- **Vanity redirects**: declared in `astro.config.mjs`. Verified by build success.
+- **Vanity redirects**: declared in `astro.config.mjs`; `dist/_redirects` is generated from the same map. Verified by build success and, after deploy, by `curl -sI https://sergiomarquez.dev/yt` (expect `302` with the YouTube `location`).
 
 ### Test Utilities
 
@@ -186,7 +186,7 @@ Astro Content Collections are designed for Markdown/MDX content with frontmatter
 
 ### Why Config Redirects
 
-The 9 vanity links (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram`) live in the `redirects` map of `astro.config.mjs`, with destinations read from `basics.urls` in `cv.es.json`. With static output Astro emits a meta refresh page (not an HTTP 301) with `noindex` and a canonical to the target, the same page the old hand-written `.astro` stubs produced, and the sitemap never lists redirects, so no filter is needed. A Cloudflare `_redirects` file would give a real HTTP 301, but it would duplicate the URLs outside the JSON and does not run in `astro dev`.
+The 9 vanity links (`/linkedin`, `/github`, `/x`, `/twitter`, `/youtube`, `/yt`, `/blog`, `/tiktok`, `/instagram`) live in the `redirects` map of `astro.config.mjs`, with destinations read from `basics.urls` in `cv.es.json`. With static output Astro emits a meta refresh page with `noindex` and a canonical to the target, and the sitemap never lists redirects, so no filter is needed. On top of that, the `cloudflare-redirects` integration in the same file writes `dist/_redirects` at `astro:build:done` from the same map (each path with and without trailing slash, status 302): Cloudflare Pages answers a short link with one real redirect before any asset is served, instead of 308 to the trailing slash plus the meta refresh page. The URLs still live only in the JSON; the meta refresh pages remain the fallback and are what `astro dev` serves. 302, not 301, because the destinations follow the JSON and may change.
 
 ### Why CSS Custom Properties (and No Framework)
 

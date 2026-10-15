@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Follow-ups of the design audit (2026-10-15):
+  - Vanity links answer with one HTTP 302: the `cloudflare-redirects` integration in `astro.config.mjs` writes `dist/_redirects` from the same `socialRedirects` map (with and without trailing slash). Before, `/yt` cost a 308 to `/yt/` plus a meta refresh page, which stays as the fallback.
+  - `basics.location` in both CVs ("Badajoz, España" / "Badajoz, Spain"), used as `homeLocation` in the JSON-LD `Person`.
+  - Print stylesheet: white paper and black ink, footer flood on paper, folded highlights open, no skip link or language switch.
+  - `id` in `manifest.webmanifest`.
+
 ### Changed
 
 - Design audit (2026-10-15), from three audits (impeccable, taste-skill, Vercel web interface guidelines) and a GPT review of the plan:

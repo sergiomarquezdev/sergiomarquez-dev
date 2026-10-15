@@ -284,6 +284,43 @@ time,
 	}
 }
 
+/* Print: the page becomes a plain two-ink sheet. The footer flood keeps its
+   layout but prints on paper, every fold opens, sticky heads sit in flow. */
+@media print {
+	:root {
+		--paper: #fff;
+		--ink: #000;
+		--ink-2: #44403c;
+		--teal: #0d4b4d;
+		--flood: #fff;
+		--flood-ink: #000;
+		--flood-ink-2: #44403c;
+		--flood-accent: #000;
+	}
+
+	.skip-link,
+	.lang-switch {
+		/* biome-ignore lint/complexity/noImportantStyles: must beat the components' scoped display */
+		display: none !important;
+	}
+
+	.section__head {
+		position: static;
+	}
+
+	.role,
+	.index__row,
+	.featured {
+		break-inside: avoid;
+	}
+
+	/* Folded highlights print too (Chromium; elsewhere the fold stays closed) */
+	details::details-content {
+		content-visibility: visible;
+		display: contents;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
