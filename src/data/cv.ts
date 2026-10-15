@@ -148,9 +148,15 @@ export interface CvProjectSection {
 
 /**
  * Projects bucketed by `group` in PROJECT_GROUPS order, JSON order inside each
- * group. The featured project leads its group.
+ * group. The featured project leads its group. A project whose group is not in
+ * PROJECT_GROUPS fails the build instead of silently dropping off the page.
  */
 export function groupProjects(projects: CvProject[]): CvProjectSection[] {
+	const unplaced = projects.filter((project) => !PROJECT_GROUPS.includes(project.group));
+	if (unplaced.length > 0) {
+		const names = unplaced.map((project) => `${project.name} (${String(project.group)})`);
+		throw new Error(`Projects with an unknown group: ${names.join(", ")}`);
+	}
 	return PROJECT_GROUPS.flatMap((group) => {
 		const members = projects.filter((project) => project.group === group);
 		if (members.length === 0) return [];

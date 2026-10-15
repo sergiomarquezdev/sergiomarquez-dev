@@ -13,7 +13,11 @@ const description = locales.map((locale) => t(locale, "notFound.description")).j
 <Layout title={title} description={description} noindex>
   <section class="not-found container" aria-labelledby="not-found-title">
     <h1 id="not-found-title" class="not-found__code display">
-      404<span class="visually-hidden"> · {t("es", "notFound.description")}</span>
+      404{
+        locales.map((locale) => (
+          <span class="visually-hidden" lang={locale}> · {t(locale, "notFound.description")}</span>
+        ))
+      }
     </h1>
     {
       locales.map((locale) => (

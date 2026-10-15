@@ -275,6 +275,11 @@ describe("project groups", () => {
 		}
 	});
 
+	it("fails loudly on a project with an unknown group", () => {
+		const stray = { name: "stray", group: "misc", headline: "", stack: [] };
+		expect(() => groupProjects([stray as unknown as CvProject])).toThrow(/stray \(misc\)/);
+	});
+
 	it("follows PROJECT_GROUPS order and keeps JSON order inside a group", () => {
 		const p = (name: string, group: CvProject["group"], featured = false): CvProject => ({
 			name,
