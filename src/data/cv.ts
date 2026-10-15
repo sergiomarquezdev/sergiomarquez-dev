@@ -4,6 +4,11 @@ import { type Locale, locales } from "../i18n/index";
 
 export type CvPlatform = "blog" | "linkedin" | "x" | "youtube" | "tiktok" | "instagram" | "github";
 
+export type CvProjectGroup = "publishing" | "agents" | "tools" | "games";
+
+/** Order in which project groups are shown. */
+export const PROJECT_GROUPS: readonly CvProjectGroup[] = ["publishing", "agents", "tools", "games"];
+
 export interface CvWritingChannel {
 	platform: CvPlatform;
 	handle: string;
@@ -43,6 +48,7 @@ export type CvData = {
 	}>;
 	projects: Array<{
 		name: string;
+		group: CvProjectGroup;
 		headline: string;
 		stack: string[];
 		url?: string;
@@ -95,6 +101,71 @@ export function getChannels(cv: CvData): CvChannel[] {
 	});
 }
 
+export type CvChannelGroupKey = "blog" | "video" | "profiles";
+
+const CHANNEL_GROUP: Record<CvPlatform, CvChannelGroupKey> = {
+	blog: "blog",
+	youtube: "video",
+	tiktok: "video",
+	instagram: "video",
+	linkedin: "profiles",
+	x: "profiles",
+	github: "profiles",
+};
+
+const CHANNEL_GROUP_ORDER: readonly CvChannelGroupKey[] = ["blog", "video", "profiles"];
+
+export interface CvChannelGroup {
+	key: CvChannelGroupKey;
+	channels: CvChannel[];
+	/** Shared description, only when every channel in the group has the same one. */
+	description?: string;
+}
+
+/**
+ * Channels grouped by what they publish (blog, short videos, profiles), keeping
+ * `writing.channels` order inside each group. Empty groups are dropped.
+ */
+export function getChannelGroups(cv: CvData): CvChannelGroup[] {
+	const channels = getChannels(cv);
+	return CHANNEL_GROUP_ORDER.flatMap((key) => {
+		const members = channels.filter((channel) => CHANNEL_GROUP[channel.platform] === key);
+		const first = members[0];
+		if (!first) return [];
+		const shared = members.every((channel) => channel.description === first.description);
+		const group: CvChannelGroup = { key, channels: members };
+		if (shared) group.description = first.description;
+		return [group];
+	});
+}
+
+export type CvProject = CvData["projects"][number];
+
+export interface CvProjectSection {
+	group: CvProjectGroup;
+	projects: CvProject[];
+}
+
+/**
+ * Projects bucketed by `group` in PROJECT_GROUPS order, JSON order inside each
+ * group. The featured project leads its group. A project whose group is not in
+ * PROJECT_GROUPS fails the build instead of silently dropping off the page.
+ */
+export function groupProjects(projects: CvProject[]): CvProjectSection[] {
+	const unplaced = projects.filter((project) => !PROJECT_GROUPS.includes(project.group));
+	if (unplaced.length > 0) {
+		const names = unplaced.map((project) => `${project.name} (${String(project.group)})`);
+		throw new Error(`Projects with an unknown group: ${names.join(", ")}`);
+	}
+	return PROJECT_GROUPS.flatMap((group) => {
+		const members = projects.filter((project) => project.group === group);
+		if (members.length === 0) return [];
+		const featured = members.filter((project) => project.featured);
+		const rest = members.filter((project) => !project.featured);
+		return [{ group, projects: [...featured, ...rest] }];
+	});
+}
+
 export type CvRole = CvData["experience"][number] & { current: boolean };
 
 export interface CvCompanyGroup {
@@ -118,7 +189,7 @@ export function groupByCompany(experience: CvData["experience"]): CvCompanyGroup
 }
 
 /** Link target of a project: private repos never link to their code; a public URL still wins. */
-export function projectHref(project: CvData["projects"][number]): string | undefined {
+export function projectHref(project: CvProject): string | undefined {
 	return project.url ?? (project.private ? undefined : project.github?.[0]);
 }
 

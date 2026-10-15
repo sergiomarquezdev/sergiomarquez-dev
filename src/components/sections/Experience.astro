@@ -10,6 +10,9 @@ interface Props {
 
 const { experience, certifications, locale } = Astro.props;
 const groups = groupByCompany(experience);
+
+// The current role shows its strongest highlights; the rest fold like past roles
+const VISIBLE_HIGHLIGHTS = 4;
 ---
 
 {
@@ -20,7 +23,7 @@ const groups = groupByCompany(experience);
         <div class="section__body">
           {groups.map((group) => (
             <div class="company">
-              <h3 class="company__name">{group.company}</h3>
+              <h3 class="company__name" translate="no">{group.company}</h3>
               {group.roles.map((role) => {
                 const stack = role.stack && role.stack.length > 0 && (
                   <p class="meta role__stack">
@@ -28,11 +31,15 @@ const groups = groupByCompany(experience);
                     {role.stack.join(" · ")}
                   </p>
                 );
-                const highlights = role.highlights.length > 0 && (
-                  <ul class="role__highlights">
-                    {role.highlights.map((item) => <li>{item}</li>)}
-                  </ul>
-                );
+                const list = (items: string[]) =>
+                  items.length > 0 && (
+                    <ul class="role__highlights">
+                      {items.map((item) => <li>{item}</li>)}
+                    </ul>
+                  );
+                const shown = role.current ? role.highlights.slice(0, VISIBLE_HIGHLIGHTS) : [];
+                const folded = role.current ? role.highlights.slice(VISIBLE_HIGHLIGHTS) : role.highlights;
+                const summary = role.current ? t(locale, "experience.more") : t(locale, "experience.details");
                 return (
                   <article class:list={["role", { "role--current": role.current }]}>
                     <div class="role__head">
@@ -40,19 +47,16 @@ const groups = groupByCompany(experience);
                       <p class="meta role__period tabular">{role.period}</p>
                     </div>
                     <p class="role__headline">{role.headline ?? role.summary}</p>
-                    {role.current ? (
-                      <Fragment>
-                        {highlights}
+                    {list(shown)}
+                    {(folded.length > 0 || stack) && (
+                      <details class="role__details">
+                        <summary>
+                          {summary}
+                          <span class="visually-hidden">: {role.role}</span>
+                        </summary>
+                        {list(folded)}
                         {stack}
-                      </Fragment>
-                    ) : (
-                      (highlights || stack) && (
-                        <details class="role__details">
-                          <summary>{t(locale, "experience.details")}</summary>
-                          {highlights}
-                          {stack}
-                        </details>
-                      )
+                      </details>
                     )}
                   </article>
                 );
@@ -63,7 +67,7 @@ const groups = groupByCompany(experience);
           {certifications.length > 0 && (
             <div class="certs">
               <h3 class="certs__title">{t(locale, "section.certifications")}</h3>
-              <ul class="certs__list">
+              <ul class="certs__list" role="list">
                 {certifications.map((cert) => (
                   <li>
                     {cert.url ? <a href={cert.url}>{cert.name}</a> : cert.name}
@@ -158,12 +162,14 @@ const groups = groupByCompany(experience);
   }
 
   .role__details {
-    margin-top: var(--s-2);
+    margin-top: var(--s-1);
   }
 
+  /* Padding makes the disclosure a comfortable tap target without moving text */
   .role__details summary {
     display: list-item;
     width: fit-content;
+    padding-block: var(--s-1);
     font-size: var(--step--1);
     font-weight: 600;
     line-height: 1.6;
@@ -174,9 +180,18 @@ const groups = groupByCompany(experience);
     color: var(--teal);
   }
 
-  .role__details summary:hover,
   .role__details summary:focus-visible {
     color: var(--accent);
+  }
+
+  .role__details summary:active {
+    color: var(--accent-strong);
+  }
+
+  @media (hover: hover) {
+    .role__details summary:hover {
+      color: var(--accent);
+    }
   }
 
   .certs {

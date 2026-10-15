@@ -25,12 +25,12 @@
       "highlights": [
         "End-to-end owner of a multi-tenant conversational assistant in production, with a multi-agent architecture (Google ADK + LiteLLM), RAG, multi-provider model routing and voice (STT/TTS).",
         "Automated RAG quality evaluation (LLM-as-judge) with dataset generation at ingestion.",
-        "Document validation with multimodal models and ongoing provider comparison (Gemini, Claude and GPT).",
         "GCP data platform (BigQuery, Dataform, Dataflow) with cost-controlled backfills and alerting, plus the API that serves that context, encrypted, to the assistants.",
-        "Internal app to govern AI use cases, with LLM pre-assessment, from architecture to demos with the business.",
-        "Agents that turn a phone call into structured data (Whisper + Gemini) and hybrid (rules + LLM) PDF extraction.",
-        "Business automations in production and quality standards for the team's repositories (tests, SAST, CVEs and CI).",
         "GitOps on multi-cluster GKE, GitLab CI/CD and observability with OpenTelemetry and New Relic.",
+        "Document validation with multimodal models and ongoing provider comparison (Gemini, Claude and GPT).",
+        "Agents that turn a phone call into structured data (Whisper + Gemini) and hybrid (rules + LLM) PDF extraction.",
+        "Internal app to govern AI use cases, with LLM pre-assessment, from architecture to demos with the business.",
+        "Business automations in production and quality standards for the team's repositories (tests, SAST, CVEs and CI).",
         "AI-assisted development with Claude Code (agents, skills) and multi-model review before critical changes."
       ],
       "headline": "Applied AI end to end: assistants, documents, data and operations.",
@@ -87,6 +87,7 @@
   "projects": [
     {
       "name": "One dAIly Blog",
+      "group": "publishing",
       "headline": "Autonomous blog: an AI pipeline researches, writes, illustrates and publishes a technical article every day, with no manual review.",
       "stack": [
         "Claude",
@@ -102,6 +103,7 @@
     },
     {
       "name": "One Bad Wire",
+      "group": "games",
       "headline": "Puzzle game: fix the wiring of a telephone exchange before everything fails. Built with Godot, with an online leaderboard and a web build.",
       "stack": [
         "Godot",
@@ -113,6 +115,7 @@
     },
     {
       "name": "Pingufly",
+      "group": "games",
       "headline": "Launch a penguin as far as you can. A tribute to Yeti Sports, rebuilt in 3D with Godot and AI-generated models.",
       "stack": [
         "Godot",
@@ -124,6 +127,7 @@
     },
     {
       "name": "Short AI videos",
+      "group": "publishing",
       "headline": "A daily series of vertical videos explaining AI concepts, produced by my own pipeline: script, voice, animation and captions.",
       "stack": [
         "TypeScript",
@@ -135,6 +139,7 @@
     },
     {
       "name": "WhatsApp AI Agent",
+      "group": "agents",
       "headline": "Self-hosted WhatsApp agent: hot-swappable LLM, Whisper voice-note transcription, at-least-once delivery, and multi-arch Docker deployment.",
       "stack": [
         "TypeScript",
@@ -148,6 +153,7 @@
     },
     {
       "name": "AI Voice Receptionist 24/7",
+      "group": "agents",
       "headline": "Conversational phone agent (ASR + LLM + TTS loop) that answers calls, handles questions and manages appointments by voice, integrated with telephony and scheduling.",
       "stack": [
         "ElevenLabs Conversational AI",
@@ -160,6 +166,7 @@
     },
     {
       "name": "AI Video Ad Generator",
+      "group": "publishing",
       "headline": "From a text brief to a complete 9:16 vertical video ad: Gemini script, ElevenLabs voice, CLIP-reranked b-roll, and ffmpeg render. Fully automated.",
       "stack": [
         "Gemini 2.5 Flash",
@@ -173,6 +180,7 @@
     },
     {
       "name": "acestream-docker-home",
+      "group": "tools",
       "headline": "One-click Acestream on Windows, Linux and macOS via Docker, with a bilingual (EN/ES) web player.",
       "stack": [
         "Docker",
@@ -187,6 +195,7 @@
     },
     {
       "name": "Multimodal Vector Search",
+      "group": "tools",
       "headline": "Semantic search over text, image, PDF with OCR, audio, and video using gemini-embedding-2 on Vertex AI and MongoDB Atlas.",
       "stack": [
         "Python",
@@ -203,6 +212,7 @@
     },
     {
       "name": "AI Photo Transformer",
+      "group": "publishing",
       "headline": "AI portrait transformation: Gemini classifies and enhances the prompt and Seedream 4 generates the 4K image, with streaming progress (SSE).",
       "stack": [
         "FastAPI",
@@ -216,6 +226,7 @@
     },
     {
       "name": "Personal AI Agent (Google ADK)",
+      "group": "agents",
       "headline": "Multi-agent system with Google ADK (orchestrator and specialists) that answers about my CV and searches my blog with real tool use.",
       "stack": [
         "Python",
@@ -232,6 +243,7 @@
     },
     {
       "name": "Video Transcriber & AI Summarizer",
+      "group": "tools",
       "headline": "CLI for CUDA-accelerated transcription with Whisper, multi-provider AI summaries, and LinkedIn/Twitter content generation.",
       "stack": [
         "Python",

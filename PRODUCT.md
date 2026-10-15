@@ -32,7 +32,7 @@ Sergio no solo trabaja con IA: sus propios canales son sistemas que él ha const
 
 ## Capabilities and Constraints
 
-- Contenido: identidad y resumen (`basics`), tres etapas de experiencia en VITALY, doce proyectos (uno destacado: One dAIly Blog), seis canales de publicación (`writing.channels`, con GitHub), dos certificaciones.
+- Contenido: identidad y resumen (`basics`), tres etapas de experiencia en VITALY, doce proyectos en cuatro grupos (`group`: publicación y generación, agentes conversacionales, herramientas, juegos; uno destacado: One dAIly Blog), siete canales (`writing.channels`, con GitHub; en el anverso se agrupan en blog, vídeos y perfiles), dos certificaciones.
 - i18n ES/EN con `hreflang` y canonical; el visitante cambia de idioma con un enlace visible (sin redirección automática por idioma).
 - SEO: `Person` en JSON-LD, Open Graph y Twitter cards, sitemap con alternates.
 - CSP estricta en `public/_headers`: fuentes, imágenes y scripts solo desde el propio origen.

@@ -1,5 +1,5 @@
 ---
-import { type CvData, displayUrl, projectHref } from "../../data/cv";
+import { type CvData, displayUrl, groupProjects, projectHref } from "../../data/cv";
 import { type Locale, t } from "../../i18n/index";
 
 interface Props {
@@ -9,54 +9,57 @@ interface Props {
 }
 
 const { projects, githubUrl, locale } = Astro.props;
-
-const featured = projects.find((project) => project.featured) ?? projects[0];
-const rest = projects.filter((project) => project !== featured);
-const featuredHref = featured ? projectHref(featured) : undefined;
+const sections = groupProjects(projects);
 ---
 
 {
-  featured && (
+  sections.length > 0 && (
     <section class="section" aria-labelledby="projects-title">
       <div class="container grid-12">
         <h2 id="projects-title" class="section__head">{t(locale, "section.projects")}</h2>
         <div class="section__body">
-          <article class="featured">
-            <h3 class="featured__name">
-              {featuredHref ? <a href={featuredHref}>{featured.name}</a> : featured.name}
-            </h3>
-            <p class="featured__headline">{featured.headline}</p>
-            <p class="meta featured__stack">{featured.stack.join(" · ")}</p>
-            {featuredHref && (
-              <p class="featured__url">
-                <a href={featuredHref}>{displayUrl(featuredHref)}</a>
-              </p>
-            )}
-          </article>
-
-          {rest.length > 0 && (
-            <ul class="index">
-              {rest.map((project) => {
-                const href = projectHref(project);
-                return (
-                  <li class="index__row">
-                    <div class="index__name">
-                      <h3 class="index__title">
-                        {href ? <a href={href}>{project.name}</a> : project.name}
-                      </h3>
-                      {project.private === false && (
-                        <p class="meta">{t(locale, "projects.openSource")}</p>
-                      )}
-                    </div>
-                    <div class="index__detail">
-                      <p>{project.headline}</p>
-                      <p class="meta">{project.stack.join(" · ")}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          {sections.map((section) => (
+            <div class="group">
+              <h3 class="group__name">{t(locale, `projects.group.${section.group}` as const)}</h3>
+              <ul class="index" role="list">
+                {section.projects.map((project) => {
+                  const href = projectHref(project);
+                  if (project.featured) {
+                    return (
+                      <li class="featured">
+                        <h4 class="featured__name" translate="no">
+                          {href ? <a href={href}>{project.name}</a> : project.name}
+                        </h4>
+                        <p class="featured__headline">{project.headline}</p>
+                        <p class="meta featured__stack">{project.stack.join(" · ")}</p>
+                        {href && (
+                          <p class="featured__url">
+                            <a href={href}>{displayUrl(href)}</a>
+                          </p>
+                        )}
+                      </li>
+                    );
+                  }
+                  return (
+                    <li class="index__row">
+                      <div class="index__name">
+                        <h4 class="index__title">
+                          {href ? <a href={href}>{project.name}</a> : project.name}
+                        </h4>
+                        {project.private === false && (
+                          <p class="meta">{t(locale, "projects.openSource")}</p>
+                        )}
+                      </div>
+                      <div class="index__detail">
+                        <p>{project.headline}</p>
+                        <p class="meta index__stack">{project.stack.join(" · ")}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
 
           <p class="projects__more">
             <a href={githubUrl}>{t(locale, "projects.more")}</a>
@@ -68,19 +71,41 @@ const featuredHref = featured ? projectHref(featured) : undefined;
 }
 
 <style>
+  .group + .group {
+    margin-top: var(--s-6);
+  }
+
+  /* Same voice as the company head in Experience: a quiet label, not a kicker */
+  .group__name {
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  .index {
+    margin-top: var(--s-2);
+  }
+
+  .featured,
+  .index__row {
+    border-top: 1px solid var(--rule);
+  }
+
+  /* The featured project opens its group at the scale of a second headline */
   .featured {
-    max-width: var(--measure);
-    padding-bottom: var(--s-6);
+    padding-block: var(--s-3) var(--s-4);
   }
 
   .featured__name {
-    font-size: var(--step-1);
+    font-size: var(--step-3);
     font-weight: 600;
     line-height: var(--lh-tight);
+    letter-spacing: var(--track-head);
     color: var(--teal);
   }
 
   .featured__headline {
+    max-width: 34em;
     margin-top: var(--s-2);
     font-family: var(--font-serif);
     font-size: var(--step-lede);
@@ -100,7 +125,6 @@ const featuredHref = featured ? projectHref(featured) : undefined;
     display: grid;
     gap: var(--s-1);
     padding-block: var(--s-3);
-    border-top: 1px solid var(--rule);
   }
 
   .index__title {
@@ -113,14 +137,22 @@ const featuredHref = featured ? projectHref(featured) : undefined;
     max-width: var(--measure);
   }
 
-  .index__detail .meta {
+  .index__stack {
     margin-top: var(--s-1);
   }
 
   .projects__more {
+    margin-top: var(--s-6);
     padding-top: var(--s-3);
     border-top: 1px solid var(--rule);
     font-weight: 600;
+  }
+
+  /* On phones the stack line is supporting detail: the headline says what it does */
+  @media (max-width: 55.99rem) {
+    .index__stack {
+      display: none;
+    }
   }
 
   @media (min-width: 56rem) {

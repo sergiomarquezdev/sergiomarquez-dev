@@ -1,6 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { locales } from "../../i18n/index";
-import { type CvData, displayUrl, getChannels, getCv, groupByCompany, projectHref } from "../cv";
+import {
+	type CvData,
+	type CvProject,
+	displayUrl,
+	getChannelGroups,
+	getChannels,
+	getCv,
+	groupByCompany,
+	groupProjects,
+	PROJECT_GROUPS,
+	projectHref,
+} from "../cv";
 
 function validateCvStructure(data: CvData) {
 	expect(data).toBeDefined();
@@ -203,8 +214,9 @@ describe("groupByCompany", () => {
 });
 
 describe("projectHref", () => {
-	const project = (extra: Partial<CvData["projects"][number]>): CvData["projects"][number] => ({
+	const project = (extra: Partial<CvProject>): CvProject => ({
 		name: "P",
+		group: "tools",
 		headline: "",
 		stack: [],
 		...extra,
@@ -238,5 +250,94 @@ describe("displayUrl", () => {
 
 	it("leaves a bare host untouched", () => {
 		expect(displayUrl("example.dev")).toBe("example.dev");
+	});
+});
+
+describe("project groups", () => {
+	it("gives every project a known group, the same one in both locales", () => {
+		const es = getCv("es").projects;
+		const en = getCv("en").projects;
+		es.forEach((project, i) => {
+			expect(PROJECT_GROUPS, `es: ${project.name}`).toContain(project.group);
+			expect(en[i]?.group, `en[${i}] group`).toBe(project.group);
+		});
+	});
+
+	it("places every project exactly once, featured first in its group", () => {
+		const projects = getCv("es").projects;
+		const sections = groupProjects(projects);
+		const placed = sections.flatMap((section) => section.projects);
+		expect(placed).toHaveLength(projects.length);
+		expect(new Set(placed).size).toBe(projects.length);
+		for (const section of sections) {
+			const featuredIndex = section.projects.findIndex((project) => project.featured);
+			expect(featuredIndex).toBeLessThanOrEqual(0);
+		}
+	});
+
+	it("fails loudly on a project with an unknown group", () => {
+		const stray = { name: "stray", group: "misc", headline: "", stack: [] };
+		expect(() => groupProjects([stray as unknown as CvProject])).toThrow(/stray \(misc\)/);
+	});
+
+	it("follows PROJECT_GROUPS order and keeps JSON order inside a group", () => {
+		const p = (name: string, group: CvProject["group"], featured = false): CvProject => ({
+			name,
+			group,
+			headline: "",
+			stack: [],
+			featured,
+		});
+		const sections = groupProjects([
+			p("game", "games"),
+			p("tool-a", "tools"),
+			p("tool-b", "tools"),
+			p("star", "tools", true),
+		]);
+		expect(sections.map((section) => section.group)).toEqual(["tools", "games"]);
+		expect(sections[0]?.projects.map((project) => project.name)).toEqual([
+			"star",
+			"tool-a",
+			"tool-b",
+		]);
+	});
+});
+
+describe("getChannelGroups", () => {
+	it("covers every channel once, with the same groups in both locales", () => {
+		for (const locale of locales) {
+			const cv = getCv(locale);
+			const grouped = getChannelGroups(cv).flatMap((group) => group.channels);
+			expect(grouped.map((c) => c.platform).sort()).toEqual(
+				getChannels(cv)
+					.map((c) => c.platform)
+					.sort(),
+			);
+		}
+		const keys = (locale: (typeof locales)[number]) =>
+			getChannelGroups(getCv(locale)).map((group) => [
+				group.key,
+				group.channels.map((c) => c.platform),
+			]);
+		expect(keys("en")).toEqual(keys("es"));
+	});
+
+	it("shares a description only when every channel in the group has it", () => {
+		const base = getCv("es");
+		const cv: CvData = {
+			...base,
+			writing: {
+				channels: [
+					{ platform: "youtube", handle: "@a", description: "Clips" },
+					{ platform: "tiktok", handle: "@a", description: "Clips" },
+					{ platform: "linkedin", handle: "in/a", description: "Posts" },
+					{ platform: "x", handle: "@a", description: "Notes" },
+				],
+			},
+		};
+		const groups = getChannelGroups(cv);
+		expect(groups.map((group) => group.key)).toEqual(["video", "profiles"]);
+		expect(groups[0]?.description).toBe("Clips");
+		expect(groups[1]?.description).toBeUndefined();
 	});
 });
