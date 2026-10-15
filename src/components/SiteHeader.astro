@@ -1,6 +1,6 @@
 ---
 import { getCv } from "../data/cv";
-import { getLocale, homePath } from "../i18n/index";
+import { getLocale, homePath, t } from "../i18n/index";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import SergioMark from "./SergioMark.astro";
 
@@ -9,7 +9,7 @@ const { basics } = getCv(locale);
 ---
 
 <header class="site-header container">
-  <a href={homePath(locale)} class="site-header__home" aria-label={basics.name}>
+  <a href={homePath(locale)} class="site-header__home" aria-label={`${basics.name}, ${t(locale, "nav.home")}`}>
     <SergioMark />
   </a>
   <LanguageSwitcher />

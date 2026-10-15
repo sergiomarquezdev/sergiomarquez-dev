@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Design audit (2026-10-15), from three audits (impeccable, taste-skill, Vercel web interface guidelines) and a GPT review of the plan:
+  - Front of the card: the name grows to `--step-4` up to 9rem and the statement to the new `--step-statement` (up to 4.5rem). The contact block goes from eight rows to four (Email, Blog, Videos, Profiles) via `getChannelGroups()`; grouped channels are named by network, so no two links share a text. The card is as tall as its content (no forced viewport height), so About starts in the first screen. Mobile page height 6943 to 6133 px at 390px.
+  - Projects carry a `group` field (`publishing`, `agents`, `tools`, `games`) in both CVs and render as four groups with `groupProjects()`; the featured project leads its group at `--step-3`. Below 56rem the stack line of non-featured rows is hidden.
+  - Experience: the current role shows its first four highlights (reordered in both CVs so GitOps, CI/CD and observability stay visible) and folds the rest and the stack into "Más sobre este puesto" / "More about this role".
+  - 404: ES and EN messages side by side from 56rem; the `h1` carries the message for assistive technology.
+  - `--step--1` minimum from 14px to 15px.
+
+### Fixed
+
+- Accessibility pass (2026-10-15): `role="list"` on the unstyled lists (Safari/VoiceOver drops list semantics with `list-style: none`); hover styles only under `@media (hover: hover)` (no sticky coral after a tap), with an `:active` state on summaries; summaries get a unique accessible name (visually hidden role title) and a ~40px tap target, as does the language switch; the logo is named "Sergio Márquez, inicio/home"; `translate="no"` on the name, company and channel names; new `.visually-hidden` utility. CSP drops the unused `data:` from `font-src` and `img-src`. The footer year uses UTC.
+
 ### Added
 
 - Instagram restored (2026-10-14): `basics.urls.instagram` (`@sergiomarquezp_`) in both CVs, an Instagram entry in `writing.channels`, the `instagram` platform in `src/data/cv.ts`, the JSON-LD `sameAs` list, the data tests and an `/instagram` vanity redirect in `astro.config.mjs`.

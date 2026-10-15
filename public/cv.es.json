@@ -25,12 +25,12 @@
       "highlights": [
         "Owner end-to-end de un asistente conversacional multi-tenant en producción, con arquitectura multi-agente (Google ADK + LiteLLM), RAG, enrutado multi-proveedor de modelos y voz (STT/TTS).",
         "Evaluación automática de calidad RAG (LLM-as-judge) con generación de datasets en la ingesta.",
-        "Validación documental con modelos multimodales y comparativa continua de proveedores (Gemini, Claude y GPT).",
         "Plataforma de datos en GCP (BigQuery, Dataform, Dataflow) con backfills controlados en coste y alertas, y la API que sirve ese contexto, cifrado, a los asistentes.",
-        "Aplicación interna de gobierno de casos de uso de IA, con prevaloración por LLM, de la arquitectura a las demos con negocio.",
-        "Agentes que convierten una llamada en datos estructurados (Whisper + Gemini) y extracción híbrida (reglas + LLM) de documentos PDF.",
-        "Automatizaciones de negocio en producción y estándares de calidad para los repositorios del equipo (tests, SAST, CVEs y CI).",
         "GitOps en GKE multi-cluster, CI/CD en GitLab y observabilidad con OpenTelemetry y New Relic.",
+        "Validación documental con modelos multimodales y comparativa continua de proveedores (Gemini, Claude y GPT).",
+        "Agentes que convierten una llamada en datos estructurados (Whisper + Gemini) y extracción híbrida (reglas + LLM) de documentos PDF.",
+        "Aplicación interna de gobierno de casos de uso de IA, con prevaloración por LLM, de la arquitectura a las demos con negocio.",
+        "Automatizaciones de negocio en producción y estándares de calidad para los repositorios del equipo (tests, SAST, CVEs y CI).",
         "Desarrollo asistido por IA con Claude Code (agentes, skills) y revisión multi-modelo para cambios críticos."
       ],
       "headline": "IA aplicada de principio a fin: asistentes, documentos, datos y operación.",
@@ -87,6 +87,7 @@
   "projects": [
     {
       "name": "One dAIly Blog",
+      "group": "publishing",
       "headline": "Blog autónomo: un pipeline con IA investiga, escribe, ilustra y publica un artículo técnico cada día, sin revisión manual.",
       "stack": [
         "Claude",
@@ -102,6 +103,7 @@
     },
     {
       "name": "One Bad Wire",
+      "group": "games",
       "headline": "Juego de puzles: repara el cableado de una centralita antes de que todo falle. Hecho con Godot, con ranking online y versión web.",
       "stack": [
         "Godot",
@@ -113,6 +115,7 @@
     },
     {
       "name": "Pingufly",
+      "group": "games",
       "headline": "Lanza un pingüino lo más lejos posible. Homenaje a Yeti Sports, rehecho en 3D con Godot y modelos generados con IA.",
       "stack": [
         "Godot",
@@ -124,6 +127,7 @@
     },
     {
       "name": "Vídeos cortos de IA",
+      "group": "publishing",
       "headline": "Serie diaria de vídeos verticales que explican conceptos de IA, generados por un pipeline propio: guion, voz, animación y subtítulos.",
       "stack": [
         "TypeScript",
@@ -135,6 +139,7 @@
     },
     {
       "name": "Agente de WhatsApp IA",
+      "group": "agents",
       "headline": "Agente de WhatsApp self-hosted: LLM intercambiable en caliente, transcripción de notas de voz con Whisper, entrega at-least-once y despliegue Docker multi-arquitectura.",
       "stack": [
         "TypeScript",
@@ -148,6 +153,7 @@
     },
     {
       "name": "Recepcionista de voz IA 24/7",
+      "group": "agents",
       "headline": "Agente telefónico conversacional (ASR + LLM + TTS en bucle) que atiende llamadas, responde dudas y gestiona citas por voz, integrado con telefonía y agenda.",
       "stack": [
         "ElevenLabs Conversational AI",
@@ -160,6 +166,7 @@
     },
     {
       "name": "Generador de anuncios de vídeo IA",
+      "group": "publishing",
       "headline": "De un brief de texto a un anuncio vertical 9:16 completo: guion con Gemini, voz con ElevenLabs, b-roll re-rankeado por CLIP y render con ffmpeg, todo automático.",
       "stack": [
         "Gemini 2.5 Flash",
@@ -173,6 +180,7 @@
     },
     {
       "name": "acestream-docker-home",
+      "group": "tools",
       "headline": "Acestream con un clic en Windows, Linux y macOS gracias a Docker, con reproductor web en castellano e inglés.",
       "stack": [
         "Docker",
@@ -187,6 +195,7 @@
     },
     {
       "name": "Búsqueda vectorial multimodal",
+      "group": "tools",
       "headline": "Búsqueda semántica sobre texto, imagen, PDF con OCR, audio y vídeo usando gemini-embedding-2 en Vertex AI y MongoDB Atlas.",
       "stack": [
         "Python",
@@ -203,6 +212,7 @@
     },
     {
       "name": "AI Photo Transformer",
+      "group": "publishing",
       "headline": "Transformación de retratos con IA: Gemini clasifica y mejora el prompt y Seedream 4 genera la imagen en 4K, con progreso en streaming (SSE).",
       "stack": [
         "FastAPI",
@@ -216,6 +226,7 @@
     },
     {
       "name": "Agente personal con Google ADK",
+      "group": "agents",
       "headline": "Sistema multi-agente con Google ADK (orquestador y especialistas) que responde sobre mi CV y busca en mi blog con tool-use real.",
       "stack": [
         "Python",
@@ -232,6 +243,7 @@
     },
     {
       "name": "Video Transcriber & AI Summarizer",
+      "group": "tools",
       "headline": "CLI para transcripción acelerada por CUDA con Whisper, resúmenes IA multi-proveedor y generación de contenido para LinkedIn/Twitter.",
       "stack": [
         "Python",

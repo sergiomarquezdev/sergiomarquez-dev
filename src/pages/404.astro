@@ -12,7 +12,9 @@ const description = locales.map((locale) => t(locale, "notFound.description")).j
 
 <Layout title={title} description={description} noindex>
   <section class="not-found container" aria-labelledby="not-found-title">
-    <h1 id="not-found-title" class="display">404</h1>
+    <h1 id="not-found-title" class="not-found__code display">
+      404<span class="visually-hidden"> · {t("es", "notFound.description")}</span>
+    </h1>
     {
       locales.map((locale) => (
         <div class="not-found__block" lang={locale}>
@@ -40,6 +42,25 @@ const description = locales.map((locale) => t(locale, "notFound.description")).j
     margin-top: var(--s-4);
     padding-top: var(--s-4);
     border-top: 1px solid var(--rule);
+  }
+
+  /* Both languages side by side: the bilingual page reads as one card */
+  @media (min-width: 56rem) {
+    .not-found {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--s-6);
+    }
+
+    .not-found__code {
+      grid-column: 1 / -1;
+    }
+
+    .not-found__block + .not-found__block {
+      margin-top: var(--s-6);
+      padding-top: 0;
+      border-top: 0;
+    }
   }
 
   .not-found__message {

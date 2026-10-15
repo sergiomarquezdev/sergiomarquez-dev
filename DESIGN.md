@@ -24,13 +24,13 @@ colors:
 typography:
   display:
     fontFamily: "Space Grotesk, Space Grotesk Fallback, system-ui, sans-serif"
-    fontSize: "clamp(3rem, 1.7rem + 5.6vw, 6rem)"
+    fontSize: "clamp(3.25rem, 1rem + 9vw, 9rem)"
     fontWeight: 700
     lineHeight: 0.95
     letterSpacing: "-0.035em"
   statement:
     fontFamily: "Instrument Serif, Instrument Serif Fallback, Georgia, serif"
-    fontSize: "clamp(2rem, 1.5rem + 2.1vw, 3.25rem)"
+    fontSize: "clamp(2rem, 1rem + 3.6vw, 4.5rem)"
     fontWeight: 400
     lineHeight: 1.1
   headline:
@@ -61,12 +61,12 @@ typography:
     lineHeight: 1.3
   label:
     fontFamily: "Space Grotesk, Space Grotesk Fallback, system-ui, sans-serif"
-    fontSize: "clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem)"
+    fontSize: "clamp(0.9375rem, 0.9rem + 0.15vw, 1rem)"
     fontWeight: 600
     lineHeight: 1.6
   meta:
     fontFamily: "Space Grotesk, Space Grotesk Fallback, system-ui, sans-serif"
-    fontSize: "clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem)"
+    fontSize: "clamp(0.9375rem, 0.9rem + 0.15vw, 1rem)"
     fontWeight: 400
     lineHeight: 1.6
 rounded:
@@ -119,7 +119,7 @@ components:
 
 **Creative North Star: "Two-Ink Personal Stationery"**
 
-The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a serif statement on the left and a working contact block (email first, then seven channels with handles) set on a diagonal at the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.
+The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a large serif statement on the left and a working contact block (email first, then the channels grouped as blog, videos and profiles) on the right, both sitting on the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.
 
 Two inks do the work, warm black for text and teal for identity, on uncoated warm-white paper. Coral is a third, state-only ink. Corners are square, nothing casts a shadow, there are no cards, chips or icons: type, weight, ink and a twelve-column grid carry all hierarchy. Density is calm and textual; every section head hangs in a left margin column and stays pinned while its section scrolls past.
 
@@ -168,8 +168,8 @@ A restrained two-ink palette on warm neutrals, with one state ink held in reserv
 **Character:** A geometric grotesk with a slight engineering edge sets the name, structure and data; a narrow, high-contrast serif speaks in the first person. Both are self-hosted, latin subset, `font-display: swap`, with size-adjusted fallbacks so the line box does not shift.
 
 ### Hierarchy
-- **Display** (700, `--step-4`, 0.95, -0.035em, teal): the name on the card front and the 404 code. One per page.
-- **Statement** (serif 400, `--step-3`, 1.1, max 18em): the presentation sentence on the card front.
+- **Display** (700, `--step-4`, up to 9rem, 0.95, -0.035em, teal): the name on the card front and the 404 code, near the full container width on desktop. One per page.
+- **Statement** (serif 400, `--step-statement`, up to 4.5rem, 1.1, max 18em): the presentation sentence on the card front, the second voice after the name.
 - **Headline** (600, `--step-2`, 1.1, -0.02em): section heads and the footer head.
 - **Lede** (serif 400, `--step-lede`, 1.3): About summary (max 34em), featured project headline, 404 message.
 - **Title** (600, `--step-1`, 1.1 to 1.3): featured project name, primary email link.
@@ -187,9 +187,9 @@ Dates and periods use tabular numerals.
 
 ## Layout
 
-A centered container (`--container` 72rem, fluid `--gutter` padding). From 56rem up, sections use a twelve-column grid with a `--s-3` column gap: the section head occupies columns 1 to 3, is `position: sticky` at `top: --s-4`, and the body runs columns 4 to 12. Project index rows split their nine body columns 3 + 6 (name, then headline and stack). Below 56rem everything stacks in one column and heads sit above their body with a `--s-3` gap.
+A centered container (`--container` 72rem, fluid `--gutter` padding). From 56rem up, sections use a twelve-column grid with a `--s-3` column gap: the section head occupies columns 1 to 3, is `position: sticky` at `top: --s-4`, and the body runs columns 4 to 12. Project index rows split their nine body columns 3 + 6 (name, then headline and stack); below 56rem the stack line of non-featured rows is hidden. Below 56rem everything stacks in one column and heads sit above their body with a `--s-3` gap.
 
-The card front (Intro) fills `min(100svh - 4rem, 52rem)` on desktop: name and tagline across the top, statement in columns 1 to 6 and the contact block in 7 to 12 aligned to the bottom, then a full-width 1px rule as the card edge. Contact rows are a 5.5rem label column plus value; under 36rem the email row drops its label column so the address gets the full width.
+The card front (Intro) is as tall as its content (forcing it to the viewport left a band of empty paper once the contact block shrank to four rows): name and tagline across the top, statement in columns 1 to 6 and the contact block in 7 to 12, both aligned to the bottom, then a full-width 1px rule as the card edge. At 1440x900 the start of About shows below the rule. Contact rows are a 5.5rem label column plus value; under 36rem the email row drops its label column so the address gets the full width.
 
 Vertical rhythm: sections are separated by `--section` (4 to 8rem fluid). All spacing is a whole multiple of the 8px module (`--s-1` to `--s-8`); no loose values. The header is a 4rem bar: monogram left, language link right.
 
@@ -207,22 +207,22 @@ Square corners throughout (`--radius: 0`, also applied to the focus outline). Di
 ## Components
 
 ### Links
-Every link is underlined text. Rest: inherits text color, 1px underline in `currentColor`. Hover and focus: `state-coral` and a 2px underline, transitioned with `--step-motion` (90ms, `steps(2, jump-none)`) so the change prints in two frames. Active: `state-coral-pressed`. Focus also draws a 2px coral outline at 3px offset, the most visible thing on the page while it exists.
+Every link is underlined text. Rest: inherits text color, 1px underline in `currentColor`. Hover and focus: `state-coral` and a 2px underline, transitioned with `--step-motion` (90ms, `steps(2, jump-none)`) so the change prints in two frames. Hover lives under `@media (hover: hover)` so it never sticks after a tap; focus and active apply everywhere. Active: `state-coral-pressed` (summaries too). Focus also draws a 2px coral outline at 3px offset, the most visible thing on the page while it exists.
 
 ### Email Link (signature)
 A `mailto:` whose visible text is the address, with a `<wbr>` after "@" so narrow columns break before the domain. Unstyled itself; each context sets it. On the card front: Title size, teal, 2px coral underline. On the card back: the largest text in the panel, `clamp(--step-1, 8vw, --step-3)` 600, tight leading, 2px flood-coral underline.
 
 ### Contact Block
-A list of label/value rows on a 5.5rem label grid: Label-style secondary-ink name, then a handle link with a Meta description beneath. The email row comes first and larger. Channels are named in text, never with icons.
+Four label/value rows on a 5.5rem label grid: Email, Blog, Videos, Profiles. The email row comes first and larger. A group with one channel shows its address (the blog domain); a group with several names each network as a link in a wrapping row (YouTube, TikTok, Instagram; LinkedIn, X, GitHub). A Meta description sits beneath only when every channel in the group shares it. Grouping is derived from the platform in `getChannelGroups()`, not stored in the JSON. Channels are named in text, never with icons.
 
 ### Section Head
 Headline style, hung in the margin column and sticky on wide screens. It is the real section title (an `h2`), not a decorative label above one.
 
 ### Project Index
-The featured project leads: teal Title name, serif Lede headline, Meta stack joined by " · ", then its bare URL. The rest form rule-separated rows (`--s-3` block padding): name in Body Strong, optional "open source" Meta, then Body headline and Meta stack. Closed by a ruled "more on GitHub" link.
+Projects are bucketed by the `group` field of the JSON, in a fixed order: publishing and generation, conversational agents, tools, games. Each group opens with a secondary-ink Body Strong head (the same voice as the company head in Experience, not a kicker). The featured project leads its group at `--step-3` in teal, with a serif Lede headline, Meta stack joined by " · " and its bare URL. The rest form rule-separated rows (`--s-3` block padding): name in Body Strong, optional "open source" Meta, then Body headline and Meta stack. Closed by a ruled "more on GitHub" link.
 
 ### Experience Rows
-Roles grouped under a secondary-ink company head. The current role is in full ink with a teal title and all highlights and stack shown; past roles use secondary-ink headlines and fold their detail into a `<details>` with a Label-style summary and teal marker.
+Roles grouped under a secondary-ink company head. The current role is in full ink with a teal title and its first four highlights shown (the JSON orders them strongest first); the remaining highlights and the stack fold into a `<details>` ("More about this role"); past roles use secondary-ink headlines and fold their detail into a `<details>` with a Label-style summary and teal marker.
 
 ### Card Back (Footer)
 The teal flood with section-grid head, a secondary line, the large email, a wrapping row of channel links in 600, and a colophon (language switch and copyright) above a 1px secondary rule.

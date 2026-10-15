@@ -14,6 +14,9 @@ src/data/cv.ts
   getCv(locale): CvData   -- returns cached data for a locale
   getChannels(cv)         -- writing.channels in order, href from basics.urls[platform],
                              label from a constant map (Blog, LinkedIn, X, YouTube, TikTok, Instagram, GitHub)
+  getChannelGroups(cv)    -- channels bucketed by platform into blog / video / profiles (fixed order),
+                             with a shared description only when every member has the same one
+  groupProjects(projects) -- projects bucketed by their `group` (PROJECT_GROUPS order), featured first
   groupByCompany(exp)     -- consecutive roles at one company under one heading; first role is current
   projectHref(project)    -- public url, else first repo unless private
   displayUrl(href)        -- URL without scheme or trailing slash, for running text
@@ -50,7 +53,7 @@ Layout.astro                    -- <html lang>, skip link, header, <main id="mai
 │           ├── sections/Intro.astro       -- front of the card: h1 name, tagline, statement, contact block
 │           │                                 (EmailLink)
 │           ├── sections/About.astro       -- summary in serif
-│           ├── sections/Projects.astro    -- featured project + index of the rest + GitHub link
+│           ├── sections/Projects.astro    -- projects by group, featured leading its group + GitHub link
 │           └── sections/Experience.astro  -- roles grouped by company (current open, earlier in <details>)
 │                                             + certifications
 └── SiteFooter.astro            -- back of the card (outside <main>): teal flood, email (EmailLink),
@@ -61,7 +64,7 @@ Layout.astro                    -- <html lang>, skip link, header, <main id="mai
 
 ### Heading outline
 
-`h1` = name (404: "404"). `h2` = About, Projects, Experience, and the footer "Contact". Projects use `h3` for every project name; Experience uses `h3` for the company and for "Certifications", `h4` for each role.
+`h1` = name (404: "404"). `h2` = About, Projects, Experience, and the footer "Contact". Projects use `h3` for each group head and `h4` for every project name; Experience uses `h3` for the company and for "Certifications", `h4` for each role.
 
 ## i18n Strategy
 
@@ -108,7 +111,7 @@ Two files in `public/fonts/` (Space Grotesk variable, Instrument Serif 400; lati
 
 ### Layout
 
-`.container` centers the page at `--container` with `--gutter` side padding. From `56rem`, `.grid-12` is a 12-column grid; sections hang their heading in columns 1-3 (`position: sticky`) and put content in 4-12. Rules and item rows (project index, roles, certifications, footer) run to the right edge of column 12; only running text is held to `--measure`. The intro (front of the card) puts the name on top, the statement under the tagline on the left and the contact block on the bottom edge on the right, closed by a 1px `--rule` line. Below `56rem` everything stacks in one column.
+`.container` centers the page at `--container` with `--gutter` side padding. From `56rem`, `.grid-12` is a 12-column grid; sections hang their heading in columns 1-3 (`position: sticky`) and put content in 4-12. Rules and item rows (project index, roles, certifications, footer) run to the right edge of column 12; only running text is held to `--measure`. The intro (front of the card) is as tall as its content: the name on top, then the statement on the left and the grouped contact block on the right, both on the bottom edge, closed by a 1px `--rule` line. Below `56rem` everything stacks in one column.
 
 ### CSS Reset
 
@@ -127,7 +130,7 @@ Each `.astro` component uses `<style>` blocks for component-specific styles. Glo
 ### What is Tested
 
 - **cv.ts** (`src/data/__tests__/cv.test.ts`): structure across locales, structural and recursive key parity between ES and EN, https URLs, known channel platforms, `getChannels()` resolving every channel to an https link with a label, and no `Stack:` line left inside `highlights`.
-- **cv.ts helpers** (same file): `groupByCompany()` (grouping, only the first role current, a returning company opens a new group, input not mutated), `projectHref()` (url wins, private repos never link) and `displayUrl()`.
+- **cv.ts helpers** (same file): `getChannelGroups()` (every channel once, same groups in ES and EN, shared description only when identical), `groupProjects()` (every project once, featured first, group order), project `group` valid and equal in both locales, `groupByCompany()` (grouping, only the first role current, a returning company opens a new group, input not mutated), `projectHref()` (url wins, private repos never link) and `displayUrl()`.
 - **i18n** (`src/i18n/__tests__/i18n.test.ts`): `getLocale()` fallback, `otherLocale()`, `homePath()`, and `formatDate()` (year-only and invalid dates kept as-is, month names per locale, and the first day of a month formatted in UTC so the build machine's time zone cannot shift it back a month; that test sets `process.env.TZ` west of UTC itself, so it catches the regression on CI and on any local machine).
 
 ### Why These
