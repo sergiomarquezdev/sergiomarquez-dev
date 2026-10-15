@@ -230,6 +230,10 @@ The teal flood with section-grid head, a secondary line, the large email, a wrap
 ### Navigation
 No nav menu. The header holds only the S■M monogram (72:40 SVG, letters in `currentColor`, square in `mark-orange`, 3.6 x 2rem, links home) and a text language switch ("English" / "Español") with `lang` and `hreflang`.
 
+## Print
+
+Printing yields a plain two-ink sheet: tokens re-map to white paper and black ink (teal kept for identity), the footer flood prints on paper, sticky heads sit in flow, the skip link and language switch disappear, rows avoid page breaks, and folded `<details>` content prints open where `::details-content` is supported.
+
 ## Do's and Don'ts
 
 ### Do:

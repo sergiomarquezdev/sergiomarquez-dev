@@ -22,6 +22,8 @@ export interface CvWriting {
 export type CvData = {
 	basics: {
 		name: string;
+		/** Public location, for structured data (the tagline carries its own wording). */
+		location: string;
 		tagline: string;
 		email: string;
 		urls: {

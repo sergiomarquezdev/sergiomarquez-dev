@@ -26,7 +26,7 @@ Sergio no solo trabaja con IA: sus propios canales son sistemas que él ha const
 
 - Una página por idioma (`/` ES, `/en/` EN), estática (Astro 7, Cloudflare Pages), sin backend.
 - Todo el contenido vive en `public/cv.es.json` y `public/cv.en.json` (paridad de claves ES/EN impuesta por tests); los textos de interfaz en `src/i18n/index.ts`.
-- Atajos de redirección que Sergio comparte en bios y vídeos: `/blog`, `/github`, `/linkedin`, `/tiktok`, `/twitter`, `/x`, `/youtube`, `/yt` (páginas de redirección con meta refresh hacia la URL del JSON, no un 301, con `noindex` y fuera del sitemap).
+- Atajos de redirección que Sergio comparte en bios y vídeos: `/blog`, `/github`, `/linkedin`, `/tiktok`, `/twitter`, `/x`, `/youtube`, `/yt` (302 de Cloudflare generado en el build desde la URL del JSON, con páginas de meta refresh `noindex` de respaldo; fuera del sitemap).
 - Contacto por `mailto:` a `contacto@sergiomarquez.dev`. No hay formulario.
 - El blog vive en `blog.sergiomarquez.dev` (otro repositorio, `one-daily-blog`), con identidad editorial propia en claro.
 

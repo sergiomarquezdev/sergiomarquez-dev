@@ -22,6 +22,7 @@ const person = {
 	jobTitle: currentRole?.role,
 	description: cv.basics.summary,
 	url: cv.basics.urls.site,
+	homeLocation: { "@type": "Place", name: cv.basics.location },
 	email: cv.basics.email,
 	sameAs: [
 		cv.basics.urls.github,
