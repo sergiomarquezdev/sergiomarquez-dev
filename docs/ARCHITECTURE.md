@@ -64,7 +64,7 @@ Layout.astro                    -- <html lang>, skip link, header, <main id="mai
 
 ### Heading outline
 
-`h1` = name (404: "404"). `h2` = About, Projects, Experience, and the footer "Contact". Projects use `h3` for each group head and `h4` for every project name; Experience uses `h3` for the company and for "Certifications", `h4` for each role.
+`h1` = name (404: "404", plus a visually hidden message in both languages). `h2` = About, Projects, Experience, and the footer "Contact". Projects use `h3` for each group head and `h4` for every project name; Experience uses `h3` for the company and for "Certifications", `h4` for each role.
 
 ## i18n Strategy
 
