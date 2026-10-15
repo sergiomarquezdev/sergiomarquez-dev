@@ -366,7 +366,7 @@
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Featured project name and the primary email link."
+        "purpose": "The primary email link on the card front."
       },
       "body": {
         "displayName": "Body",
@@ -402,7 +402,7 @@
       {
         "name": "grid",
         "value": "56rem",
-        "purpose": "min-width: twelve-column grid, sticky margin heads, diagonal card front."
+        "purpose": "min-width: twelve-column grid, sticky margin heads, statement and contact side by side on the card front."
       }
     ],
     "focusRing": {
@@ -435,8 +435,8 @@
       "name": "Contact Row",
       "kind": "custom",
       "refersTo": "contact-row",
-      "description": "Label column plus handle link and description; channels named in text, never icons.",
-      "html": "<ul class=\"ds-contact\"><li class=\"ds-row\"><span class=\"ds-label\">Blog</span><div><a class=\"ds-link\" href=\"#\">blog.sergiomarquez.dev</a><p class=\"ds-desc\">A technical article a day</p></div></li><li class=\"ds-row\"><span class=\"ds-label\">GitHub</span><div><a class=\"ds-link\" href=\"#\">sergiomarquezdev</a><p class=\"ds-desc\">Code of my open projects</p></div></li></ul>",
+      "description": "Label column plus value: a lone channel shows its address, a group names each network as a link; a description only when the whole group shares it. Channels named in text, never icons.",
+      "html": "<ul class=\"ds-contact\"><li class=\"ds-row\"><span class=\"ds-label\">Blog</span><div><a class=\"ds-link\" href=\"#\">blog.sergiomarquez.dev</a><p class=\"ds-desc\">A technical article a day</p></div></li><li class=\"ds-row\"><span class=\"ds-label\">Videos</span><div><a class=\"ds-link\" href=\"#\">YouTube</a> <a class=\"ds-link\" href=\"#\">TikTok</a> <a class=\"ds-link\" href=\"#\">Instagram</a><p class=\"ds-desc\">Short AI videos</p></div></li></ul>",
       "css": ".ds-contact { display: grid; gap: var(--s-2); list-style: none; margin: 0; padding: 0; font: 400 var(--step-0)/var(--lh-body) var(--font-sans); color: var(--ink); } .ds-row { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: baseline; } .ds-label { font-size: var(--step--1); font-weight: 600; color: var(--ink-2); } .ds-desc { margin: 0; font-size: var(--step--1); line-height: 1.5; color: var(--ink-2); } .ds-link { color: var(--ink); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: currentColor; transition: color var(--step-motion), text-decoration-color var(--step-motion); } .ds-link:hover, .ds-link:focus-visible { color: var(--accent); text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 0; } .ds-link:active { color: var(--accent-strong); }"
     },
     {
@@ -482,7 +482,7 @@
   ],
   "narrative": {
     "northStar": "Two-Ink Personal Stationery",
-    "overview": "The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a serif statement on the left and a working contact block (email first, then six channels with handles) set on a diagonal at the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.\n\nTwo inks do the work, warm black for text and teal for identity, on uncoated warm-white paper. Coral is a third, state-only ink. Corners are square, nothing casts a shadow, there are no cards, chips or icons: type, weight, ink and a twelve-column grid carry all hierarchy. Density is calm and textual; every section head hangs in a left margin column and stays pinned while its section scrolls past.\n\nThe world is shared with One dAIly Blog (same faces, same warm-neutral base) without its mono kickers, accent italics or cream ground. Dark mode follows `prefers-color-scheme` only, by swapping the token block; no component carries its own colors.",
+    "overview": "The site is Sergio's printed stationery at screen scale. The first viewport is the front of a business card: the name at full width in teal ink, the tagline in secondary ink, a large serif statement on the left and a working contact block (email first, then the channels grouped as blog, videos and profiles) on the right, both sitting on the card's bottom edge, closed by a 1px rule. Below it runs the letter sheet (About, Projects, Experience), and the page ends on the card's reverse: a single full-bleed teal flood carrying the email again.\n\nTwo inks do the work, warm black for text and teal for identity, on uncoated warm-white paper. Coral is a third, state-only ink. Corners are square, nothing casts a shadow, there are no cards, chips or icons: type, weight, ink and a twelve-column grid carry all hierarchy. Density is calm and textual; every section head hangs in a left margin column and stays pinned while its section scrolls past.\n\nThe world is shared with One dAIly Blog (same faces, same warm-neutral base) without its mono kickers, accent italics or cream ground. Dark mode follows `prefers-color-scheme` only, by swapping the token block; no component carries its own colors.",
     "keyCharacteristics": [
       "Warm-white paper, warm-black ink, teal identity ink, coral state ink.",
       "Space Grotesk for everything structural; Instrument Serif (regular, never italic) for statements and ledes only.",

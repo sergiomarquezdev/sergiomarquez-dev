@@ -16,4 +16,6 @@ Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` thr
 - **Windows `core.autocrlf` phantom files**: Biome enforces LF line endings. Git's `core.autocrlf` creates phantom "modified" files. Check actual changes with `git diff --ignore-cr-at-eol --name-only`
 - **lint-staged scoped to `src/`**: Avoids running Biome on root config files
 - **i18n route duplication**: `src/pages/index.astro` and `src/pages/en/index.astro` are intentionally the same file except for relative import depth (`../` vs `../../`) -- Astro injects different `currentLocale` per route
+- **Vanity redirects differ between dev and production**: production answers `/yt`, `/github`... with a 302 from `dist/_redirects` (generated at build by the `cloudflare-redirects` integration in `astro.config.mjs`); `astro dev` and `astro preview` serve the meta refresh fallback pages instead. Verify redirects on a Cloudflare preview or production, never locally
+- **`astro dev` can serve stale scoped CSS** (seen on `404.astro`): judge layout changes on `pnpm build` + `astro preview`
 - **`[hidden]` must win in reset.css**: the reset's `[hidden]` `!important` rule keeps the attribute working on elements whose scoped styles set a `display` (grid/flex rows). Nothing uses `hidden` today; keep the rule so a future toggle doesn't silently fail

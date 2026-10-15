@@ -79,7 +79,7 @@ sergiomarquez-dev/
 │   ├── icon-192.{png,svg} / icon-512.png  # PWA icons
 │   ├── manifest.webmanifest     # PWA manifest
 │   ├── og-image.png / og-image.svg
-│   ├── Profile.pdf              # Downloadable resume
+│   ├── Profile.pdf              # Resume PDF (not linked from the page)
 │   └── robots.txt
 ├── src/
 │   ├── components/
@@ -104,11 +104,12 @@ sergiomarquez-dev/
 │   │   ├── en/index.astro       # Home page (EN)
 │   │   └── 404.astro            # Static bilingual 404 (noindex)
 │   └── styles/
-│       ├── global.css           # Tokens, @font-face, base type, links, focus, section grid
+│       ├── global.css           # Tokens, @font-face, base type, links, focus, section grid, print
 │       └── reset.css            # Preflight-style CSS reset (no framework)
 ├── astro.config.mjs
 ├── biome.json
 ├── pnpm-workspace.yaml          # pnpm build-script approvals (esbuild, sharp)
+├── skills-lock.json             # Project agent skills (taste, web-design-guidelines); restore with `npx skills experimental_install`
 ├── CLAUDE.md                    # Agent instructions (AGENTS.md is a synced copy)
 ├── AGENTS.md
 ├── CHANGELOG.md

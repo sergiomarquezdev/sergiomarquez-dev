@@ -172,7 +172,7 @@ A restrained two-ink palette on warm neutrals, with one state ink held in reserv
 - **Statement** (serif 400, `--step-statement`, up to 4.5rem, 1.1, max 18em): the presentation sentence on the card front, the second voice after the name.
 - **Headline** (600, `--step-2`, 1.1, -0.02em): section heads and the footer head.
 - **Lede** (serif 400, `--step-lede`, 1.3): About summary (max 34em), featured project headline, 404 message.
-- **Title** (600, `--step-1`, 1.1 to 1.3): featured project name, primary email link.
+- **Title** (600, `--step-1`, 1.1 to 1.3): primary email link on the card front. The featured project name uses `--step-3` at the same weight.
 - **Body** (400, `--step-0`, 1.6, max `--measure`): all running text, one size.
 - **Body Strong** (600, `--step-0`, 1.3): project and role names in index rows, company and certification heads.
 - **Label** (600, `--step--1`): contact labels, language switch, disclosure summaries.
