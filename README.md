@@ -61,7 +61,8 @@ All tokens (inks, type steps, 8px spacing module, motion) are CSS custom propert
 
 ```
 sergiomarquez-dev/
-├── .github/workflows/ci.yml     # GitHub Actions CI pipeline + CF Pages deploy hook
+├── .github/workflows/ci.yml     # GitHub Actions CI pipeline + CF Pages deploy hook + production check
+├── .github/workflows/audit.yml  # Weekly pnpm audit (no deploy)
 ├── .github/dependabot.yml       # Monthly grouped GitHub Actions updates
 ├── .husky/                      # Git hooks (pre-commit via lint-staged)
 ├── .vscode/                     # Shared VS Code settings & extensions
@@ -186,7 +187,7 @@ pnpm run validate       # type-check + lint + test + build
 2. Test locally with `pnpm run dev` -- check both `/` (ES) and `/en/` (EN).
 3. Run `pnpm run validate` to ensure everything passes.
 4. Commit changes (pre-commit hook runs lint-staged on `src/`).
-5. Push to `main` -- CI runs lint/type-check/test/build, then triggers the Cloudflare Pages deploy hook.
+5. Push to `main` -- CI runs lint/type-check/test/build, then triggers the Cloudflare Pages deploy hook and waits until production serves the pushed commit (`/build.txt`) before smoke-testing it.
 
 > Note: pushes touching only Markdown, `docs/` or `.vscode/` skip CI and deploy (`paths-ignore` in `ci.yml`).
 

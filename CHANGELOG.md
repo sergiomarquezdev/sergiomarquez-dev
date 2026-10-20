@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - 404: ES and EN messages side by side from 56rem; the `h1` carries the message for assistive technology.
   - `--step--1` minimum from 14px to 15px.
 - Toolchain refresh (2026-10-20):
-  - **Node 24.18.0 → 26.12.0** (`.nvmrc`): Node 26 becomes LTS on 2026-10-28 (EOL April 2029). Node 26 no longer bundles corepack, so Cloudflare Pages takes pnpm from the `PNPM_VERSION` build variable, which must match `packageManager`.
+  - **Node 24.18.0 → 26.12.0** (`.nvmrc`): Node 26 becomes LTS on 2026-10-28 (EOL April 2029). Cloudflare Pages (build image v3) detects both tools from `.nvmrc` and `packageManager` (`Detected the following tools from environment: nodejs@26.12.0, pnpm@12.14.0`) and needs no `PNPM_VERSION` variable, verified on the branch preview build.
   - **pnpm 11.6.0 → 12.14.0** (`packageManager`): same commands, settings and lockfile format (`9.0`). On Windows, install it globally outside the repo with `npm i -g pnpm@12.14.0 --allow-scripts=pnpm`: the repo `.npmrc` (`ignore-scripts=true`) and npm's blocked global install scripts leave a placeholder bin, and nested `pnpm run` calls (`validate`) fail with "is not recognized".
   - Astro 7.3.5 → 7.4.0, Vitest 5.0.3 → 5.0.5, lockfile refreshed within ranges (`pnpm update`); `pnpm audit` clean.
   - CI: `actions/setup-node` v7.0.0 → v7.1.0 (pinned by SHA). `actions/checkout` v7.0.1 and `pnpm/action-setup` v6.1.0 (pnpm 12 support) are already the latest; runner stays on `ubuntu-24.04` (still `ubuntu-latest`).
@@ -35,7 +35,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - `package.json` is `"private": true`. `src/env.d.ts` removed: `astro/tsconfigs/base` already includes `.astro/types.d.ts`.
   - `astro.config.mjs`: removed sitemap `changefreq`/`priority` (Google ignores them); `compressHTML: true` stays on purpose, since the Astro 7 default is `"jsx"`.
   - `.vscode`: removed Tailwind leftovers (extension, `*.css` association, class regex) and replaced the deprecated `quickfix.biome` with `source.fixAll.biome`.
-  - Kept `script-src 'unsafe-inline'` in `_headers`: Cloudflare injects an inline challenge-platform script into production HTML.
+  - Kept `script-src 'unsafe-inline'` in `_headers`: Cloudflare injects an inline challenge-platform script into production HTML. The `cloudflareinsights` sources stay too: the account has a zone-level Web Analytics site for `sergiomarquez.dev` with automatic setup, which can inject the beacon.
+- Deploy pipeline (2026-10-20), debated with GPT 6.1 Sol:
+  - The `deploy` job now waits until production serves the pushed commit (`/build.txt`, written by the new `build-marker` integration from `CF_PAGES_COMMIT_SHA`) and smoke-tests `/`, `/en/`, `/yt` and a 404. Before, a 2xx from the hook (build queued) counted as a deploy. Job timeout 2 → 10 minutes.
+  - New `.github/workflows/audit.yml`: weekly `pnpm audit` against the lockfile, never deploys.
+  - Cloudflare Pages build command `pnpm install --frozen-lockfile && pnpm run build` → `pnpm run build`: the build image already runs a frozen install (`CI=true`), the second one was a no-op.
+  - Considered and skipped: Cloudflare build cache (saves seconds on a ~1 minute build, can carry stale `.astro` output across branches), `NODE_VERSION`/`PNPM_VERSION` variables (duplicate `.nvmrc` and `packageManager`), restricting previews (the branch preview is what proved Node 26 + pnpm 12 on Cloudflare).
 
 ### Fixed
 

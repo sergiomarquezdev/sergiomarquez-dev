@@ -160,15 +160,18 @@ When a test needs to narrow an optional value, define a local `assertDefined<T>(
 `.github/workflows/ci.yml` runs on push/PR to `main`:
 1. Checkout + setup Node (`.nvmrc`) + setup pnpm
 2. `pnpm install --frozen-lockfile`
-3. `pnpm run lint` (Biome CLI)
-4. `pnpm run type-check`
-5. `pnpm run test`
-6. `pnpm run build`
-7. On `main`: trigger the Cloudflare Pages deploy hook
+3. `pnpm audit --audit-level=moderate` (fail-open on registry errors)
+4. `biome ci src/ --error-on-warnings` (PR annotations)
+5. `pnpm run type-check`
+6. `pnpm run test`
+7. `pnpm run build`
+8. On `main`: trigger the Cloudflare Pages deploy hook, then wait (up to 7 minutes) until `https://sergiomarquez.dev/build.txt` serves the pushed commit and smoke-test `/`, `/en/`, `/yt` (302) and a 404. `build.txt` is written at build time by the `build-marker` integration in `astro.config.mjs` from `CF_PAGES_COMMIT_SHA`; the check exists because a deploy hook builds the branch head, and a 2xx from the hook only means the build was queued.
+
+`.github/workflows/audit.yml` runs `pnpm audit` against the lockfile every Monday (and on demand), so advisories published while the repo is idle still surface. It never deploys.
 
 ### Production (Cloudflare Pages)
 
-- Builds `main` when the CI deploy hook fires (automatic git deploys are disabled), with Node from `.nvmrc` and pnpm from the `PNPM_VERSION` build variable, kept equal to `packageManager` (Node 26 ships no corepack). `pnpm-lock.yaml` is the only lockfile
+- Builds `main` when the CI deploy hook fires (automatic git deploys are disabled), with Node from `.nvmrc` and pnpm from `packageManager` (the v3 build image detects both; no `NODE_VERSION`/`PNPM_VERSION` variables are set). Non-production branches get public preview deployments (`noindex`). `pnpm-lock.yaml` is the only lockfile
 - `public/_headers` sets the security headers and immutable cache-control for `/fonts/*` (the build emits no `/_astro/` assets: CSS is inlined and there is no client JS)
 - `"prepare": "husky || true"` prevents CI failure from missing git hooks
 

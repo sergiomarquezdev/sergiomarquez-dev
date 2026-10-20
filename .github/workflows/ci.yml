@@ -71,7 +71,7 @@ jobs:
     needs: ci
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 10
     permissions: {}
 
     steps:
@@ -87,3 +87,31 @@ jobs:
             exit 1
           fi
           echo "Deploy hook triggered successfully"
+
+      # The hook only queues a build of the branch head: wait until production
+      # serves this commit (build.txt, written by astro.config.mjs), then smoke
+      # test it. A newer push cancels this run (concurrency group), so a
+      # mismatch after the deadline means the deploy failed or is stuck.
+      - name: Verify production deploy
+        env:
+          SITE: https://sergiomarquez.dev
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          deadline=$((SECONDS + 420))
+          until [ "$(curl -sS --max-time 10 "$SITE/build.txt?t=$SECONDS" | tr -d '[:space:]')" = "$EXPECTED_SHA" ]; do
+            if [ "$SECONDS" -ge "$deadline" ]; then
+              echo "Production still does not serve $EXPECTED_SHA after 7 minutes"
+              exit 1
+            fi
+            sleep 15
+          done
+          echo "Production serves $EXPECTED_SHA"
+          check() {
+            got=$(curl -sS --max-time 10 -o /dev/null -w "%{http_code}" "$SITE$1")
+            echo "$1 -> $got"
+            [ "$got" = "$2" ]
+          }
+          check / 200
+          check /en/ 200
+          check /yt 302
+          check /this-page-does-not-exist 404
