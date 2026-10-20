@@ -2,17 +2,11 @@
 	"editor.defaultFormatter": "biomejs.biome",
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"quickfix.biome": "explicit",
+		"source.fixAll.biome": "explicit",
 		"source.organizeImports.biome": "explicit"
 	},
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode"
 	},
-	"files.eol": "\n",
-	"files.associations": {
-		"*.css": "tailwindcss"
-	},
-	"tailwindCSS.experimental.classRegex": [
-		["class\\s*=\\s*\"([^\"]*)\""]
-	]
+	"files.eol": "\n"
 }

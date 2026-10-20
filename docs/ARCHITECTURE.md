@@ -168,7 +168,7 @@ When a test needs to narrow an optional value, define a local `assertDefined<T>(
 
 ### Production (Cloudflare Pages)
 
-- Builds from `main` branch using pnpm (`pnpm-lock.yaml` is the only lockfile)
+- Builds `main` when the CI deploy hook fires (automatic git deploys are disabled), with Node from `.nvmrc` and pnpm from the `PNPM_VERSION` build variable, kept equal to `packageManager` (Node 26 ships no corepack). `pnpm-lock.yaml` is the only lockfile
 - `public/_headers` sets the security headers and immutable cache-control for `/fonts/*` (the build emits no `/_astro/` assets: CSS is inlined and there is no client JS)
 - `"prepare": "husky || true"` prevents CI failure from missing git hooks
 

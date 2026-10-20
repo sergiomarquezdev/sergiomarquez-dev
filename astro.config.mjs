@@ -61,8 +61,6 @@ export default defineConfig({
   integrations: [
     cloudflareRedirects,
     sitemap({
-      changefreq: "monthly",
-      priority: 0.7,
       i18n: {
         defaultLocale: "es",
         locales: { es: "es", en: "en" },
@@ -70,6 +68,7 @@ export default defineConfig({
     }),
   ],
 
-  // Compress HTML for better performance
+  // Lossless whitespace collapsing (the pre-7 behavior). Astro 7 defaults to
+  // "jsx", which drops whitespace between inline elements at line breaks.
   compressHTML: true,
 });

@@ -108,7 +108,7 @@ sergiomarquez-dev/
 │       └── reset.css            # Preflight-style CSS reset (no framework)
 ├── astro.config.mjs
 ├── biome.json
-├── pnpm-workspace.yaml          # pnpm build-script approvals (esbuild, sharp)
+├── pnpm-workspace.yaml          # pnpm build-script approvals (esbuild)
 ├── skills-lock.json             # Project agent skills (taste, web-design-guidelines); restore with `npx skills experimental_install`
 ├── CLAUDE.md                    # Agent instructions (AGENTS.md is a synced copy)
 ├── AGENTS.md
@@ -125,8 +125,8 @@ sergiomarquez-dev/
 
 ### Prerequisites
 
-- **Node.js 24** (`.nvmrc` pins 24.18.0)
-- **[pnpm](https://pnpm.io/)** (the project lockfile is `pnpm-lock.yaml`)
+- **Node.js 26** (`.nvmrc` pins 26.12.0)
+- **[pnpm](https://pnpm.io/) 12** (`packageManager` pins 12.14.0; the project lockfile is `pnpm-lock.yaml`)
 
 ### Installation
 

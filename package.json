@@ -1,8 +1,9 @@
 {
 	"name": "sergiomarquez-web",
+	"private": true,
 	"type": "module",
 	"version": "1.0.0",
-	"packageManager": "pnpm@11.6.0",
+	"packageManager": "pnpm@12.14.0",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -21,7 +22,7 @@
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.4",
-		"astro": "^7.3.5"
+		"astro": "^7.4.0"
 	},
 	"lint-staged": {
 		"src/**/*.{ts,js,json,css,astro}": "biome check --write --no-errors-on-unmatched"
@@ -32,6 +33,6 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^17.6.0",
 		"typescript": "^6.0.3",
-		"vitest": "^5.0.3"
+		"vitest": "^5.0.5"
 	}
 }
