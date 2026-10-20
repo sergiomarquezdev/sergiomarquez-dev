@@ -22,6 +22,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Experience: the current role shows its first four highlights (reordered in both CVs so GitOps, CI/CD and observability stay visible) and folds the rest and the stack into "Más sobre este puesto" / "More about this role".
   - 404: ES and EN messages side by side from 56rem; the `h1` carries the message for assistive technology.
   - `--step--1` minimum from 14px to 15px.
+- Toolchain refresh (2026-10-20):
+  - **Node 24.18.0 → 26.12.0** (`.nvmrc`): Node 26 becomes LTS on 2026-10-28 (EOL April 2029). Cloudflare Pages (build image v3) detects both tools from `.nvmrc` and `packageManager` (`Detected the following tools from environment: nodejs@26.12.0, pnpm@12.14.0`) and needs no `PNPM_VERSION` variable, verified on the branch preview build.
+  - **pnpm 11.6.0 → 12.14.0** (`packageManager`): same commands, settings and lockfile format (`9.0`). On Windows, install it globally outside the repo with `npm i -g pnpm@12.14.0 --allow-scripts=pnpm`: the repo `.npmrc` (`ignore-scripts=true`) and npm's blocked global install scripts leave a placeholder bin, and nested `pnpm run` calls (`validate`) fail with "is not recognized".
+  - Astro 7.3.5 → 7.4.0, Vitest 5.0.3 → 5.0.5, lockfile refreshed within ranges (`pnpm update`); `pnpm audit` clean.
+  - CI: `actions/setup-node` v7.0.0 → v7.1.0 (pinned by SHA). `actions/checkout` v7.0.1 and `pnpm/action-setup` v6.1.0 (pnpm 12 support) are already the latest; runner stays on `ubuntu-24.04` (still `ubuntu-latest`).
+  - TypeScript stays at ^6.0.3: `@astrojs/check` 0.9.10 still declares `^5.0.0 || ^6.0.0`, and TS 7 does not support `.astro` files (withastro/astro#17268).
+- Config review (2026-10-20), cross-checked by a Claude subagent and GPT 6.1 Sol:
+  - `biome.json`: `biome migrate` (`rules.preset` replaces the deprecated `recommended` field), `$schema` points at the installed package so it never drifts, and the dead `global.css` linter override is gone (the stylesheet lints clean).
+  - CI lint step runs `biome ci src/ --error-on-warnings`: inline PR annotations, and warnings fail CI.
+  - `pnpm-workspace.yaml`: dropped the `sharp` build approval (sharp 0.35 has no install script). `.npmrc` documents that only npm reads it: pnpm 11+ ignores non-auth settings there, so `ignore-scripts=true` never applied to pnpm; `allowBuilds` is the real gate.
+  - `package.json` is `"private": true`. `src/env.d.ts` removed: `astro/tsconfigs/base` already includes `.astro/types.d.ts`.
+  - `astro.config.mjs`: removed sitemap `changefreq`/`priority` (Google ignores them); `compressHTML: true` stays on purpose, since the Astro 7 default is `"jsx"`.
+  - `.vscode`: removed Tailwind leftovers (extension, `*.css` association, class regex) and replaced the deprecated `quickfix.biome` with `source.fixAll.biome`.
+  - Kept `script-src 'unsafe-inline'` in `_headers`: Cloudflare injects an inline challenge-platform script into production HTML. The `cloudflareinsights` sources stay too: the account has a zone-level Web Analytics site for `sergiomarquez.dev` with automatic setup, which can inject the beacon.
+- Deploy pipeline (2026-10-20), debated with GPT 6.1 Sol:
+  - The `deploy` job now waits until production serves the pushed commit (`/build.txt`, written by the new `build-marker` integration from `CF_PAGES_COMMIT_SHA`) and smoke-tests `/`, `/en/`, `/yt` and a 404. Before, a 2xx from the hook (build queued) counted as a deploy. Job timeout 2 → 10 minutes.
+  - New `.github/workflows/audit.yml`: weekly `pnpm audit` against the lockfile, never deploys.
+  - Cloudflare Pages build command `pnpm install --frozen-lockfile && pnpm run build` → `pnpm run build`: the build image already runs a frozen install (`CI=true`), the second one was a no-op.
+  - Considered and skipped: Cloudflare build cache (saves seconds on a ~1 minute build, can carry stale `.astro` output across branches), `NODE_VERSION`/`PNPM_VERSION` variables (duplicate `.nvmrc` and `packageManager`), restricting previews (the branch preview is what proved Node 26 + pnpm 12 on Cloudflare).
 
 ### Fixed
 

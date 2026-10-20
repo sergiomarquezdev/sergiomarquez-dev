@@ -36,6 +36,19 @@ const cloudflareRedirects = {
   },
 };
 
+// /build.txt holds the commit the build came from, so the CI deploy job can
+// wait until production serves the exact commit it tested (deploy hooks build
+// the branch head, not a given SHA). Cloudflare Pages sets CF_PAGES_COMMIT_SHA.
+const buildMarker = {
+  name: "build-marker",
+  hooks: {
+    "astro:build:done": async ({ dir }) => {
+      const sha = process.env.CF_PAGES_COMMIT_SHA ?? process.env.GITHUB_SHA ?? "local";
+      await writeFile(new URL("build.txt", dir), `${sha}\n`);
+    },
+  },
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://sergiomarquez.dev",
@@ -60,9 +73,8 @@ export default defineConfig({
   // Integrations with optimized configuration
   integrations: [
     cloudflareRedirects,
+    buildMarker,
     sitemap({
-      changefreq: "monthly",
-      priority: 0.7,
       i18n: {
         defaultLocale: "es",
         locales: { es: "es", en: "en" },
@@ -70,6 +82,7 @@ export default defineConfig({
     }),
   ],
 
-  // Compress HTML for better performance
+  // Lossless whitespace collapsing (the pre-7 behavior). Astro 7 defaults to
+  // "jsx", which drops whitespace between inline elements at line breaks.
   compressHTML: true,
 });

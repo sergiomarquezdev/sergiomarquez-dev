@@ -5,7 +5,7 @@ Personal portfolio site (ES/EN) -- data-driven from `public/cv.{es,en}.json` thr
 ## Rules
 
 - MUST run `pnpm run validate` before considering any task complete (runs type-check + lint + test + build)
-- Uses pnpm. Run `pnpm install` after dependency changes. Cloudflare Pages is configured to use pnpm. Keep `pnpm-workspace.yaml` tracked -- it holds the build-script approvals (esbuild, sharp)
+- Uses pnpm. Run `pnpm install` after dependency changes. Cloudflare Pages is configured to use pnpm. Keep `pnpm-workspace.yaml` tracked -- it holds the build-script approvals (`allowBuilds`: esbuild). pnpm ignores `.npmrc` beyond auth; it is kept for npm only
 - MUST keep `|| true` in `"prepare": "husky || true"`. Without it, CI environments fail
 - NEVER use `!` non-null assertions. Biome flags `noNonNullAssertion` (recommended preset). Use type narrowing or an `assertDefined()` helper defined locally in the test file that needs it
 - MUST update documentation (README.md, CHANGELOG.md, docs/) when adding/removing features, changing data flow, or modifying project structure
