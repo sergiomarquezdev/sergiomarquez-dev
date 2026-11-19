@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"version": "1.0.0",
-	"packageManager": "pnpm@12.14.0",
+	"packageManager": "pnpm@12.21.0",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -21,18 +21,18 @@
 		"prepare": "husky || true"
 	},
 	"dependencies": {
-		"@astrojs/sitemap": "^3.7.4",
-		"astro": "^7.4.0"
+		"@astrojs/sitemap": "^3.7.5",
+		"astro": "^7.4.12"
 	},
 	"lint-staged": {
 		"src/**/*.{ts,js,json,css,astro}": "biome check --write --no-errors-on-unmatched"
 	},
 	"devDependencies": {
-		"@astrojs/check": "^0.9.10",
-		"@biomejs/biome": "^2.5.15",
+		"@astrojs/check": "^0.9.12",
+		"@biomejs/biome": "^2.6.8",
 		"husky": "^9.1.7",
-		"lint-staged": "^17.6.0",
+		"lint-staged": "^17.6.1",
 		"typescript": "^6.0.3",
-		"vitest": "^5.0.5"
+		"vitest": "^5.1.1"
 	}
 }
