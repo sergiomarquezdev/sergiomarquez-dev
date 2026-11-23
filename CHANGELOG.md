@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Dependencies (2026-11-23): `astro` 7.4.12 → 7.4.13, `@astrojs/sitemap` 3.7.5 → 3.7.6, `lint-staged` 17.6.1 → 17.6.2; pnpm 12.21.0 → 12.23.0 (`packageManager`). `typescript` stays on 6.0.3 (`@astrojs/check` 0.9.12 still declares `typescript ^5 || ^6`).
 - Dependencies (2026-11-19): `astro` 7.4.0 → 7.4.12, `@astrojs/sitemap` 3.7.5, `@astrojs/check` 0.9.12, `@biomejs/biome` 2.6.8, `vitest` 5.1.1, `lint-staged` 17.6.1; Node 26.13.1 (`.nvmrc`), pnpm 12.21.0 (`packageManager`), `pnpm/action-setup` v6.1.1 in CI. `typescript` stays on 6.0.3: `@astrojs/check` declares `typescript ^5 || ^6` as peer, so 7 would break `astro check`.
 - Design audit (2026-10-15), from three audits (impeccable, taste-skill, Vercel web interface guidelines) and a GPT review of the plan:
   - Front of the card: the name grows to `--step-4` up to 9rem and the statement to the new `--step-statement` (up to 4.5rem). The contact block goes from eight rows to four (Email, Blog, Videos, Profiles) via `getChannelGroups()`; grouped channels are named by network, so no two links share a text. The card is as tall as its content (no forced viewport height), so About starts in the first screen. Mobile page height 6943 to 6133 px at 390px.
